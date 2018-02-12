@@ -170,14 +170,14 @@ The wave is assumed to propagate from left to right with speed
 \end_inset
 
 , and in the reference frame attached to the lead shock, the governing equations
- are written as 
+ are written as (see 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "kasimov2004dynamics"
+LatexCommand citet
+key "KasimovStewart2004"
 
 \end_inset
 
-: 
+):
 \begin_inset Formula 
 \begin{align}
 \rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:mass}\\
@@ -285,8 +285,8 @@ reference "eq:reaction"
  which is present explicitly in the equations.
  For this purpose, we use the equation derived in 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "Taylor-Kasimov-Stewart-CTM09"
+LatexCommand citet
+key "TaylorKasimovStewart2009"
 
 \end_inset
 
@@ -393,8 +393,17 @@ ZND solution
 \end_layout
 
 \begin_layout Standard
-The base steady-state traveling wave is the ZND solution given in terms
- of 
+The base steady-state traveling wave is the ZND solution that can be computed
+ in several different ways.
+ Here we use formulation from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "KasimovStewart2005"
+
+\end_inset
+
+.
+ In this formulation, the ZND solutions is given in terms of 
 \begin_inset Formula $\bar{\lambda}$
 \end_inset
 
@@ -402,14 +411,7 @@ The base steady-state traveling wave is the ZND solution given in terms
 \begin_inset Formula $\bar{D}$
 \end_inset
 
- by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Taylor-Kasimov-Stewart-CTM09"
-
-\end_inset
-
-: 
+ by: 
 \begin_inset Formula 
 \begin{equation}
 \bar{v}=\frac{\gamma}{\gamma+1}\frac{\bar{P}}{\bar{M}^{2}}(1-\delta),\quad\bar{p}=\bar{P}-\bar{M}^{2}\bar{v},\quad\bar{U}=\bar{M}\bar{v},\label{eq:steady-state}
@@ -501,14 +503,14 @@ reference "eq:Arrhenius"
 \begin_inset Formula $\lambda=1$
 \end_inset
 
- 
+ (
 \begin_inset CommandInset citation
-LatexCommand cite
-key "Kasimov-phd,KasimovStewart05"
+LatexCommand citealt
+key "Kasimov2004,KasimovStewart2005"
 
 \end_inset
 
-, and it follows that 
+), and it follows that 
 \begin_inset Formula $\bar{D}=D_{\mathrm{CJ}}$
 \end_inset
 
@@ -546,7 +548,7 @@ Linearization
 
 \begin_layout Standard
 Next, we introduce the vector of state variables 
-\begin_inset Formula $z={(\rho,u,p,\lambda)}^{\mathrm{T}}$
+\begin_inset Formula $z=(\rho,u,p,\lambda)^{\mathrm{T}}$
 \end_inset
 
  and linearize it as well as the shock speed as 
@@ -887,8 +889,8 @@ reference "eq:dlambda_dx"
 
 ) via the numerical integrator VODE 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "brown1989vode"
+LatexCommand citet
+key "Brown1989"
 
 \end_inset
 
@@ -1122,8 +1124,8 @@ reference "eq:numalg:z_x-N"
 
  were first used for detonation simulations in 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "HenrickAslamPowers2006"
+LatexCommand citet
+key "HenrickEtAl2006"
 
 \end_inset
 
@@ -1162,7 +1164,7 @@ where
  over the numerical grid, 
 \begin_inset Formula 
 \begin{equation}
-\alpha=\max_{i=0,\ldots,N}{\{\bar{u}-\bar{c},\bar{u},\bar{u}+\bar{c}\}|_{x=x_{i}}}.
+\alpha=\max_{i=0,\ldots,N}\{\bar{u}-\bar{c},\bar{u},\bar{u}+\bar{c}\}|_{x=x_{i}}.
 \end{equation}
 
 \end_inset
@@ -1227,8 +1229,8 @@ reference "eq:numalg:sheveq"
 
 ) is evolved in time using the adaptive-step time integrator DOPRI5 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "hairer1993solving"
+LatexCommand citet
+key "HairerEtAl1993"
 
 \end_inset
 
@@ -1392,14 +1394,14 @@ reference "RH-conditions-linearized"
 .
  At the downstream end, no boundary condition should be specified for the
  system, however, boundary treatment is necessary for the finite-difference
- computations 
+ computations (
 \begin_inset CommandInset citation
-LatexCommand cite
-key "laney1998"
+LatexCommand citet
+key "Laney1998"
 
 \end_inset
 
-.
+).
  This is done by the zeroth-order extrapolation: 
 \begin_inset Formula 
 \[
@@ -1487,8 +1489,8 @@ To process such a time series, an efficient and robust algorithm is required
  such that the stability spectrum is computed as accurately as possible.
  The DMD algorithm 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "schmid2010dynamic"
+LatexCommand citet
+key "Schmid2010"
 
 \end_inset
 
@@ -1809,13 +1811,12 @@ with
  being a rectangular matrix containing exact DMD modes as was introduced
  in 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "tu2014dynamic"
+LatexCommand citet
+key "TuEtAl2014"
 
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -1915,8 +1916,8 @@ Application of DMD to the time series of detonation velocity
 \begin_layout Standard
 The DMD as it was introduced in 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "schmid2010dynamic"
+LatexCommand citet
+key "Schmid2010"
 
 \end_inset
 
@@ -1946,9 +1947,9 @@ reference "eq:algorithm:postproc:time-series"
 .
  As pointed out in 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citet
 after "pp. 401--402"
-key "tu2014dynamic"
+key "TuEtAl2014"
 
 \end_inset
 
@@ -1985,14 +1986,14 @@ which stacks time-shifted values of
 
 .
  This approach is commonly used in other methods of time-series analysis
- such as Singular Spectral Analysis 
+ such as Singular Spectral Analysis (
 \begin_inset CommandInset citation
-LatexCommand cite
-key "golyandina2013singular"
+LatexCommand citealt
+key "GolyandinaZhigljavsky2013"
 
 \end_inset
 
-.
+).
  Number 
 \begin_inset Formula $L$
 \end_inset
@@ -2006,7 +2007,7 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 
  defines the upper bound on the number of modes that we can extract from
  the time series.
- In this paper, 
+ In this work, 
 \begin_inset Formula $L=1000$
 \end_inset
 
@@ -2095,7 +2096,7 @@ a priori
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:results"
+reference "sec:e1d:results"
 
 \end_inset
 
@@ -2616,6 +2617,13 @@ ng input-output operations.
 
 \begin_layout Section
 Results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:e1d:results"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2637,14 +2645,14 @@ The reaction rate is given by the Arrhenius form,
 \begin_inset Formula $\gamma$
 \end_inset
 
- 
+ (
 \begin_inset CommandInset citation
-LatexCommand cite
-key "Erpenbeck64,LeeStewart90"
+LatexCommand citealt
+key "Erpenbeck1964,LeeStewart1990"
 
 \end_inset
 
-.
+).
  Generally, increasing 
 \begin_inset Formula $E$
 \end_inset
@@ -2840,14 +2848,14 @@ Now we analyze the time series of the perturbation of detonation velocity,
 \end_inset
 
 .
- Linear stability analysis 
+ Linear stability analysis (
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citealt
+key "Sharpe1997"
 
 \end_inset
 
- predicts that both of these cases have several unstable modes.
+) predicts that both of these cases have several unstable modes.
  In addition, the fundamental mode for the second case is purely exponential
  and has two branches.
 \end_layout
@@ -2915,8 +2923,8 @@ reference "tab:51-2017-04-09:raw-data-modes"
 
 , the number of modes found is the same as shown on figure 6 of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citet
+key "Sharpe1997"
 
 \end_inset
 
@@ -2924,8 +2932,8 @@ key "sharpe1997linear"
  The fundamental mode is purely exponential and is split in two branches
  in agreement with 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citet
+key "Sharpe1997"
 
 \end_inset
 
@@ -2937,15 +2945,15 @@ key "sharpe1997linear"
  The growth rate of the upper branch of the fundamental mode is 1.008 in
  our calculations while it is 1.021 in 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citet
+key "Sharpe1997"
 
 \end_inset
 
  (extracted from figure 6 of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citet
+key "Sharpe1997"
 
 \end_inset
 
@@ -3274,8 +3282,8 @@ reference "tab:results:comparison-with-normal-modes"
  The normal-mode results are borrowed from the work of different researchers:
  
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citet
+key "Sharpe1997"
 
 \end_inset
 
@@ -3289,8 +3297,8 @@ key "sharpe1997linear"
 
 , from 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "HenrickAslamPowers2006"
+LatexCommand citet
+key "HenrickEtAl2006"
 
 \end_inset
 
@@ -3300,8 +3308,8 @@ key "HenrickAslamPowers2006"
 
 , and from 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "LeeStewart90"
+LatexCommand citet
+key "LeeStewart1990"
 
 \end_inset
 
@@ -3393,10 +3401,10 @@ key "AbouseifToong82"
 \end_inset
 
 , the numerical value of this factor is 0.938749.
- Conversion of results of 
+ Conversion of the results of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "HenrickAslamPowers2006"
+LatexCommand citet
+key "HenrickEtAl2006"
 
 \end_inset
 
@@ -3508,9 +3516,9 @@ Comparison of the unstable spectra between the present work and the normal-mode
 
 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citet
 after "p. 2617"
-key "sharpe1997linear"
+key "Sharpe1997"
 
 \end_inset
 
@@ -3520,9 +3528,9 @@ key "sharpe1997linear"
 
 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citet
 after "p. 321"
-key "HenrickAslamPowers2006"
+key "HenrickEtAl2006"
 
 \end_inset
 
@@ -3532,17 +3540,17 @@ key "HenrickAslamPowers2006"
 
 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citet
 after "p. 127"
-key "LeeStewart90"
+key "LeeStewart1990"
 
 \end_inset
 
  except mode 0.0 which is extracted from 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citep
 after "figure 6"
-key "short1998cellular"
+key "ShortStewart1998"
 
 \end_inset
 
@@ -3681,9 +3689,9 @@ centering
 The neutral stability boundary computed with the present method (solid line)
  and its comparison with the normal-mode result of Lee and Stewart 
 \begin_inset CommandInset citation
-LatexCommand cite
+LatexCommand citet
 after "figure 7"
-key "LeeStewart90"
+key "LeeStewart1990"
 
 \end_inset
 
@@ -3717,8 +3725,8 @@ reference "fig:LS-comparison"
 
  displays the comparison between our results and those of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "LeeStewart90"
+LatexCommand citet
+key "LeeStewart1990"
 
 \end_inset
 
