@@ -1,0 +1,4081 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\master ../../thesis.lyx
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "utopia" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing double
+\use_hyperref true
+\pdf_title "Fickett model"
+\pdf_author "Dmitry Kabanov kabanovdmitry@gmail.com"
+\pdf_keywords "detonation; linear stability; numerics"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, linkcolor=blue"
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Reactive Euler equations with one-step chemistry
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:e1d"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Mathematical model 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:e1d:model"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our analysis of detonation stability is based on the one-dimensional reactive
+ Euler equations for a perfect gas that has a constant ratio of specific
+ heats and reacts following either a single-step Arrhenius law or a two-step
+ mechanism of the type 
+\begin_inset Formula $\text{A}\to\text{B}\to\text{C}$
+\end_inset
+
+.
+ The steady traveling-wave solutions for these two cases are investigated
+ for linear stability by means of direct numerical integration of the linearized
+ Euler equations with a subsequent analysis of the resultant time series
+ of the shock speed using the DMD algorithm.
+ In this section, we introduce the governing equations, their steady-state
+ solutions and linearization about the steady state.
+\end_layout
+
+\begin_layout Standard
+First, we present the governing equations for the case of one-step irreversible
+ reaction 
+\begin_inset Formula 
+\begin{equation}
+\text{A}\to\text{B}.
+\end{equation}
+
+\end_inset
+
+The progress of this reaction is followed by a variable 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ such that the mass fraction of 
+\begin_inset Formula $\text{A}$
+\end_inset
+
+ is 
+\begin_inset Formula $1-\lambda$
+\end_inset
+
+ and that of 
+\begin_inset Formula $\text{B}$
+\end_inset
+
+ is 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The wave is assumed to propagate from left to right with speed 
+\begin_inset Formula $D$
+\end_inset
+
+, and in the reference frame attached to the lead shock, the governing equations
+ are written as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kasimov2004dynamics"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{align}
+\rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:mass}\\
+\left(\rho u\right)_{t}+\left(\rho u\left(u-D\right)+p\right)_{x} & =0,\label{eq:momentum}\\
+\left(\rho e\right)_{t}+\left(\rho\left(u-D\right)e+pu\right)_{x} & =0,\label{eq:energy}\\
+\left(\rho\lambda\right)_{t}+\left(\rho\left(u-D\right)\lambda\right)_{x} & =\rho\omega.\label{eq:reaction}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho$
+\end_inset
+
+, 
+\begin_inset Formula $u$
+\end_inset
+
+, 
+\begin_inset Formula $p$
+\end_inset
+
+, 
+\begin_inset Formula $e$
+\end_inset
+
+, 
+\begin_inset Formula $\omega$
+\end_inset
+
+ are density, flow velocity, pressure, total specific energy, and reaction
+ rate, respectively.
+ The specific energy is 
+\begin_inset Formula $e=e_{\text{i}}+u^{2}/2$
+\end_inset
+
+ with constitutive relations of a calorically perfect gas: 
+\begin_inset Formula 
+\begin{equation}
+e_{\text{i}}=\frac{pv}{\gamma-1}-Q\lambda,\qquad pv=RT,\label{eq:e_i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the polytropic index, 
+\begin_inset Formula $v=1/\rho$
+\end_inset
+
+ specific volume, 
+\begin_inset Formula $Q$
+\end_inset
+
+ chemical heat release, 
+\begin_inset Formula $R$
+\end_inset
+
+ gas constant, 
+\begin_inset Formula $T$
+\end_inset
+
+ temperature.
+ The reaction rate is taken here to follow simple-depletion Arrhenius law:
+ 
+\begin_inset Formula 
+\begin{equation}
+\omega=k\left(1-\lambda\right)\exp\left(-\frac{E\rho}{p}\right),\label{eq:Arrhenius}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the rate constant and 
+\begin_inset Formula $E$
+\end_inset
+
+ the activation energy.
+\end_layout
+
+\begin_layout Standard
+The numerical solution of the governing equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:reaction"
+
+\end_inset
+
+) in the shock-attached frame requires an evolution equation for 
+\begin_inset Formula $D$
+\end_inset
+
+ which is present explicitly in the equations.
+ For this purpose, we use the equation derived in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Taylor-Kasimov-Stewart-CTM09"
+
+\end_inset
+
+ by specializing it to one dimension: 
+\begin_inset Formula 
+\begin{equation}
+\frac{dM}{dt}=s,\label{eq:shock-change}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $M=-\rho_{\text{a}}D$
+\end_inset
+
+ is the normal mass flux into the shock, 
+\begin_inset Formula $\rho_{\text{a}}$
+\end_inset
+
+ is the upstream density, and 
+\begin_inset Formula 
+\begin{align}
+s & =\frac{1}{A_{0}}\left(R_{\text{s}}-A_{\text{s}}\right), & A_{0} & =\frac{2}{\gamma+1}Mv_{\text{a}}\left(3+\frac{\gamma p_{\text{a}}\rho_{\text{a}}}{M^{2}}\right),\label{eq:s-A0}\\
+R_{\text{s}} & =Q(\gamma-1)\rho_{\text{s}}\omega_{\text{s}}, & A_{\text{s}} & =\rho_{\text{s}}(c_{\text{s}}^{2}-U_{\text{s}}^{2})u_{x}|_{\text{s}},\label{eq:Rs-As}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $c=\sqrt{\gamma p/\rho}$
+\end_inset
+
+ is the sound speed, 
+\begin_inset Formula $U=u-D$
+\end_inset
+
+ is the flow velocity in the shock-attached frame, subscript 
+\begin_inset Quotes eld
+\end_inset
+
+s
+\begin_inset Quotes erd
+\end_inset
+
+ denotes the shock state and subscript 
+\begin_inset Quotes eld
+\end_inset
+
+a
+\begin_inset Quotes erd
+\end_inset
+
+ the ambient (upstream) state.
+ Note that in (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:s-A0"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Rs-As"
+
+\end_inset
+
+) everything depends on the shock state through the Rankine-Hugoniot conditions
+ except for the velocity gradient 
+\begin_inset Formula $u_{x}|_{\text{s}}$
+\end_inset
+
+ at the shock, which must be determined numerically by solving for the flow
+ downstream.
+\end_layout
+
+\begin_layout Standard
+The Rankine–Hugoniot conditions at 
+\begin_inset Formula $x=0$
+\end_inset
+
+ give all the state variables in terms of the mass flux (or, equivalently,
+ the shock speed): 
+\begin_inset Formula 
+\begin{align}
+p_{\text{s}} & =-\frac{\gamma-1}{\gamma+1}p_{\text{a}}+\frac{2v_{\text{a}}}{\gamma+1}M^{2}, & v_{\text{s}} & =\frac{\gamma-1}{\gamma+1}v_{\text{a}}+\frac{2}{\gamma+1}\frac{\gamma p_{\text{a}}}{M^{2}}, & U_{\text{s}} & =Mv_{\text{s}},\label{RH-conditions}
+\end{align}
+
+\end_inset
+
+and 
+\begin_inset Formula $\lambda_{\text{s}}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\rho_{\text{s}}=1/v_{\text{s}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+ZND solution
+\end_layout
+
+\begin_layout Standard
+The base steady-state traveling wave is the ZND solution given in terms
+ of 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Taylor-Kasimov-Stewart-CTM09"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\bar{v}=\frac{\gamma}{\gamma+1}\frac{\bar{P}}{\bar{M}^{2}}(1-\delta),\quad\bar{p}=\bar{P}-\bar{M}^{2}\bar{v},\quad\bar{U}=\bar{M}\bar{v},\label{eq:steady-state}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{equation}
+\delta=\sqrt{1-\frac{h\bar{M}^{2}}{\bar{P}^{2}}\left(\bar{H}+Q\bar{\lambda}\right)},\quad h=\frac{2(\gamma^{2}-1)}{\gamma^{2}},\label{eq:delta}
+\end{equation}
+
+\end_inset
+
+and 
+\begin_inset Formula $\bar{P}=p_{\text{a}}+\rho_{\text{a}}\bar{D}^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{H}=e_{\text{a}}+p_{\text{a}}/\rho_{\text{a}}+\bar{D}^{2}/2$
+\end_inset
+
+.
+ To obtain the solution in terms of 
+\begin_inset Formula $x$
+\end_inset
+
+, the steady-state rate equation 
+\begin_inset Formula 
+\begin{equation}
+\frac{d\bar{\lambda}}{dx}=\frac{\bar{\omega}}{\bar{U}}\label{eq:dlambda_dx}
+\end{equation}
+
+\end_inset
+
+is integrated starting at the shock with the initial condition 
+\begin_inset Formula $\bar{\lambda}_{\text{s}}=0$
+\end_inset
+
+ and auxiliary relations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:steady-state"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:delta"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For self-sustained detonations with the Arrhenius kinetics
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Arrhenius"
+
+\end_inset
+
+ the flow becomes sonic relative to the shock at the end of the reaction
+ zone 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+, which is located at 
+\begin_inset Formula $x\to-\infty$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ at 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kasimov-phd,KasimovStewart05"
+
+\end_inset
+
+, and it follows that 
+\begin_inset Formula $\bar{D}=D_{\mathrm{CJ}}$
+\end_inset
+
+ where 
+\begin_inset Formula 
+\begin{equation}
+D_{\mathrm{CJ}}=\sqrt{c_{\text{a}}^{2}+q}+\sqrt{q},\qquad q=\frac{(\gamma^{2}-1)Q}{2},\qquad c_{\text{a}}^{2}=\frac{\gamma p_{\text{a}}}{\rho_{\text{a}}}.\label{eq:D_CJ}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The pre-exponential factor 
+\begin_inset Formula $k$
+\end_inset
+
+ defines the length scale and is chosen following the standard practice
+ such that the half-reaction length is unity: 
+\begin_inset Formula 
+\begin{equation}
+k=\int_{0}^{1/2}\frac{\bar{U}}{\left(1-\bar{\lambda}\right)\exp\left(-E\bar{\rho}/\bar{p}\right)}\,d\bar{\lambda}.\label{eq:k}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Linearization
+\end_layout
+
+\begin_layout Standard
+Next, we introduce the vector of state variables 
+\begin_inset Formula $z={(\rho,u,p,\lambda)}^{\mathrm{T}}$
+\end_inset
+
+ and linearize it as well as the shock speed as 
+\begin_inset Formula $z(x,t)=\bar{z}(x)+\epsilon z'(x,t)$
+\end_inset
+
+, 
+\begin_inset Formula $D(t)=\bar{D}+\epsilon\psi'(t)$
+\end_inset
+
+, with 
+\begin_inset Formula $0<\epsilon\ll1$
+\end_inset
+
+, the bar denoting the steady-state, and the prime denoting the perturbation
+ amplitudes.
+ Upon linearization of the governing equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:reaction"
+
+\end_inset
+
+), we obtain 
+\begin_inset Formula 
+\begin{equation}
+z'_{t}+A(\bar{z})z'_{x}+B(\bar{z})z'-\frac{d\bar{z}}{dx}\psi'=0,\label{linearized-system}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{equation}
+A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0\\
+0 & \bar{U} & 1/\bar{\rho} & 0\\
+0 & \gamma\bar{p} & \bar{U} & 0\\
+0 & 0 & 0 & \bar{U}
+\end{bmatrix},\quad B=\begin{bmatrix}\frac{d\bar{u}}{dx} & \frac{d\bar{\rho}}{dx} & 0 & 0\\[0.3em]
+-\frac{1}{\bar{\rho}^{2}}\frac{d\bar{p}}{dx} & \frac{d\bar{u}}{dx} & 0 & 0\\[0.3em]
+C(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}) & \frac{d\bar{p}}{dx} & \gamma\frac{d\bar{u}}{dx}+C\bar{\rho}\bar{\omega}_{p} & C\bar{\rho}\bar{\omega}_{\lambda}\\[0.3em]
+-\bar{\omega}_{\rho} & \frac{d\bar{\lambda}}{dx} & -\bar{\omega}_{p} & -\bar{\omega}_{\lambda}
+\end{bmatrix},\label{eq:AB}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula $C=-(\gamma-1)Q$
+\end_inset
+
+, and subscripts 
+\begin_inset Formula $\rho$
+\end_inset
+
+, 
+\begin_inset Formula $p$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ denote partial derivatives.
+\end_layout
+
+\begin_layout Standard
+The linearization of the Rankine–Hugoniot conditions and the shock-evolution
+ equation yields: 
+\begin_inset Formula 
+\begin{equation}
+p'_{\text{s}}=\frac{4v_{\text{a}}\bar{M}}{\gamma+1}M',\quad v'_{\text{s}}=-\frac{4\gamma p_{\text{a}}}{\left(\gamma+1\right)\bar{M}^{3}}M',\quad U'_{\text{s}}=\bar{M}v_{\text{s}}'+\bar{v}_{\text{s}}M',\quad\rho_{\text{s}}'=-\frac{v'_{\text{s}}}{\bar{v}_{\text{s}}^{2}},\quad\lambda_{\text{s}}'=0,\label{RH-conditions-linearized}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\frac{dM'}{dt}=s',\label{shock-evolution-equation}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula 
+\begin{equation}
+s'=\frac{1}{\bar{A}_{0}}(R_{\text{s}}'-A_{\text{s}}')-\frac{A_{0}'}{\bar{A}_{0}^{2}}(\bar{R}_{\text{s}}-\bar{A}_{\text{s}}),
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+A_{0}'=\frac{2}{\gamma+1}\frac{3v_{\text{a}}\bar{M}^{2}-\gamma p_{\text{a}}}{\bar{M}^{2}}M',\quad R_{\text{s}}'=Q(\gamma-1)\left.\left[\left(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}_{\text{}}\right)\rho'+\bar{\rho}\bar{\omega}_{p}p_{\text{}}'\right]\right|_{\text{s}},
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+A_{\text{s}}'=\left.\left[\rho\frac{d\bar{u}}{dx}\left(\gamma\left(\bar{p}v'+\bar{v}p'\right)-2\bar{U}U'\right)+\left(\bar{c}^{2}-\bar{U}^{2}\right)\frac{d\bar{u}}{dx}\rho'+\bar{\rho}\left(\bar{c}^{2}-\bar{U}^{2}\right)u'_{x}\right]\right|_{\text{s}}
+\end{equation}
+
+\end_inset
+
+with all the spatially-dependent quantities on the right-hand sides of 
+\begin_inset Formula $R'_{\text{s}}$
+\end_inset
+
+ and 
+\begin_inset Formula $A'_{\text{s}}$
+\end_inset
+
+ evaluated at the shock.
+\end_layout
+
+\begin_layout Section
+Numerical algorithms
+\end_layout
+
+\begin_layout Subsection
+Computational domain and integration of ZND solution
+\end_layout
+
+\begin_layout Standard
+To determine stability properties of self-sustained detonations for any
+ particular set of physical parameters 
+\begin_inset Formula $Q$
+\end_inset
+
+, 
+\begin_inset Formula $E$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, we solve an initial boundary value problem for (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "linearized-system"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "shock-evolution-equation"
+
+\end_inset
+
+) numerically to see if its solution grows or decays in time.
+ In each simulation, after an initialization stage consisting of grid partitioni
+ng and the evaluation of ZND quantities on the grid, the linear system is
+ integrated in time with simultaneous recording of the time series of the
+ perturbation of detonation velocity, 
+\begin_inset Formula $\psi'$
+\end_inset
+
+, and then the time series are post-processed using DMD to extract a stability
+ spectrum.
+ Each of these stages is described in detail below.
+\end_layout
+
+\begin_layout Standard
+With the rate function 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Arrhenius"
+
+\end_inset
+
+, the reaction zone is formally infinite.
+ For numerical simulations, this length must be truncated to some finite
+ value 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+.
+ We determine 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ by the closeness of the reaction progress variable of the ZND solution
+ 
+\begin_inset Formula $\lambdaZnd$
+\end_inset
+
+ to unity at the end of the reaction zone as measured by some tolerance
+ 
+\begin_inset Formula $\tolLambda$
+\end_inset
+
+.
+ Once 
+\begin_inset Formula $\tolLambda$
+\end_inset
+
+ is specified, we compute 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ using 
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}=\lceil I\rceil\text{ with }I=\int_{0}^{1-\tolLambda}\frac{\UZnd}{k\left(1-\lambdaZnd\right)\exp\left(-\rhoZnd E/\pZnd\right)}\dd\lambdaZnd,
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is computed from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:k"
+
+\end_inset
+
+.
+ The computational domain is then discretized using a uniform grid 
+\begin_inset Formula $\left\{ x_{i}\right\} $
+\end_inset
+
+, 
+\begin_inset Formula $i=0,\dots,N$
+\end_inset
+
+ with 
+\begin_inset Formula $N=\Nhrz\mathcal{L}$
+\end_inset
+
+; 
+\begin_inset Formula $x_{0}=-\mathcal{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{N}=0$
+\end_inset
+
+ being left and right boundary points, respectively.
+ Here 
+\begin_inset Formula $\Nhrz$
+\end_inset
+
+ denotes the number of grid points per unit length (to remind, the unit
+ length is the distance from the shock to the point where 
+\begin_inset Formula $\lambda=1/2$
+\end_inset
+
+, hence the index 
+\begin_inset Formula $1/2$
+\end_inset
+
+).
+ The spatial step of the grid is 
+\begin_inset Formula $\DeltaX=1/\Nhrz$
+\end_inset
+
+.
+ Schematically, the grid is shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:algorithm:grid"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/grid.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schematics of the numerical grid.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:algorithm:grid"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The steady-state ZND profiles are computed on the grid using (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:steady-state"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:dlambda_dx"
+
+\end_inset
+
+) via the numerical integrator VODE 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "brown1989vode"
+
+\end_inset
+
+ with the BDF method of fifth order with absolute and relative tolerances
+ set to 
+\begin_inset Formula $10^{-15}$
+\end_inset
+
+.
+ Also, all other ZND quantities that enter matrices 
+\begin_inset Formula $A(\bar{z})$
+\end_inset
+
+ and 
+\begin_inset Formula $B(\bar{z})$
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:AB"
+
+\end_inset
+
+ are computed.
+\end_layout
+
+\begin_layout Subsection
+Integration of the linearized system
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:linearized-system"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After the initialization stage, an unsteady solution of the linearized system
+ is computed by the method of lines.
+ At each time step, the spatial derivatives are first approximated on the
+ numerical grid thereby converting the system of PDEs (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "linearized-system"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "shock-evolution-equation"
+
+\end_inset
+
+) to a system of ODEs: 
+\begin_inset Formula 
+\begin{align}
+\frac{dz'_{i}}{dt} & =-\widehat{L}(\bar{z},z'),\quad i=1,\dots,N-1,\label{eq:numalg:gov}\\
+\frac{dM'}{dt} & =\widehat{s}\left(\bar{z},z'\right),\label{eq:numalg:sheveq}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\widehat{L}(\bar{z},z',z'_{x})$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{s}(\bar{z},z')$
+\end_inset
+
+ are approximations of 
+\begin_inset Formula $L(\bar{z},z',z'_{x})=A(\bar{z})z'_{x}+B(\bar{z})z'-\frac{d\bar{z}}{dx}\psi'$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "linearized-system"
+
+\end_inset
+
+ and 
+\begin_inset Formula $s(\bar{z},z',z'_{x})$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "shock-evolution-equation"
+
+\end_inset
+
+, respectively.
+ In these expressions, the spatial derivatives are evaluated using finite-differ
+ence formulas as given below, and then the system is evolved in time over
+ one time step 
+\begin_inset Formula $\DeltaT$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The spatial derivatives are calculated in the following four steps.
+\end_layout
+
+\begin_layout Standard
+1.
+ Approximation at points 
+\begin_inset Formula $i=0,\dots,N-3$
+\end_inset
+
+.
+ We compute left- and right-biased approximations of 
+\begin_inset Formula $z'_{x}$
+\end_inset
+
+ based on the upwind method of fifth order: 
+\begin_inset Formula 
+\begin{align}
+\left.z_{x}^{-}\right|_{i} & =\frac{-2z_{i-3}+15u_{i-2}-60z_{i-1}+20z_{i}+30z_{i+1}-3z_{i+2}}{60\DeltaX},\label{eq:numal:upwind5-left}\\
+\left.z_{x}^{+}\right|_{i} & =\frac{3z_{i-2}-30z_{i-1}-20z_{i}+60z_{i+1}-15z_{i+2}+2z_{i+3}}{60\DeltaX},\label{eq:numalg:upwind5-right}
+\end{align}
+
+\end_inset
+
+where subscripts 
+\begin_inset Quotes eld
+\end_inset
+
+-
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
++
+\begin_inset Quotes erd
+\end_inset
+
+ denote left- and right-biased approximations, respectively.
+\end_layout
+
+\begin_layout Standard
+2.
+ Approximation at 
+\begin_inset Formula $i=N-2$
+\end_inset
+
+.
+ At this grid point, the Taylor expansion gives a fifth-order formula 
+\begin_inset Formula 
+\begin{equation}
+\left.z'_{x}\right|_{N-2}=\frac{-2z_{N-5}+15z_{N-4}-60z_{N-3}+20z_{N-2}+30z_{N-1}-3z_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N-2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+3.
+ Approximation at 
+\begin_inset Formula $i=N-1$
+\end_inset
+
+.
+ At this point, spatial derivatives are approximated using the fourth-order
+ formula 
+\begin_inset Formula 
+\begin{equation}
+\left.z'_{x}\right|_{N-1}=\frac{-z_{N-4}+6z_{N-3}-18z_{N-2}+10z_{N-1}+3z_{N}}{12\DeltaX}.\label{eq:numalg:z_x-N-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+4.
+ Approximation at 
+\begin_inset Formula $i=N$
+\end_inset
+
+.
+ At this point, only 
+\begin_inset Formula $u'_{x}$
+\end_inset
+
+ must be approximated because it appears in the shock-evolution equation
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:numalg:sheveq"
+
+\end_inset
+
+.
+ The approximation formula is 
+\begin_inset Formula 
+\begin{equation}
+\left.u'_{x}\right|_{N}=\frac{-12u_{N-5}+75u_{N-4}-200u_{N-3}+300u_{N-2}-300u_{N-1}+137u_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Expressions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:numalg:z_x-N-2"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:numalg:z_x-N"
+
+\end_inset
+
+ were first used for detonation simulations in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HenrickAslamPowers2006"
+
+\end_inset
+
+ in a shock-fitting algorithm.
+\end_layout
+
+\begin_layout Standard
+Once the spatial derivatives are approximated, 
+\begin_inset Formula $\widehat{L}$
+\end_inset
+
+ is found using the global Lax–Friedrichs flux: 
+\begin_inset Formula 
+\begin{equation}
+\widehat{L}(\bar{z},z')=L\left(\bar{z},z',\frac{z_{x}^{'-}+z_{x}^{'+}}{2}\right)-\alpha\frac{z_{x}^{'+}-z_{x}^{'-}}{2},\label{eq:algorithm:lf-flux}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $z_{x}^{'-}=z_{x}^{'+}=z'_{x}$
+\end_inset
+
+ for grid points 
+\begin_inset Formula $i=\{N-2,N-1,N\}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is the largest eigenvalue of 
+\begin_inset Formula $A\left(\bar{z}\right)$
+\end_inset
+
+ over the numerical grid, 
+\begin_inset Formula 
+\begin{equation}
+\alpha=\max_{i=0,\ldots,N}{\{\bar{u}-\bar{c},\bar{u},\bar{u}+\bar{c}\}|_{x=x_{i}}}.
+\end{equation}
+
+\end_inset
+
+We found that a simple evaluation of 
+\begin_inset Formula $L$
+\end_inset
+
+ was not enough to guarantee numerical stability of simulations, hence the
+ use of the Lax–Friedrichs flux in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:lf-flux"
+
+\end_inset
+
+.
+ After evaluation of 
+\begin_inset Formula $L$
+\end_inset
+
+, 
+\begin_inset Formula $\widehat{s}(\bar{z},z')$
+\end_inset
+
+ is found using the approximation of 
+\begin_inset Formula $u_{x}|_{\text{s}}$
+\end_inset
+
+ given by 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:numalg:z_x-N"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Once 
+\begin_inset Formula $\widehat{L}(\bar{z},z')$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{s}(\bar{z},z')$
+\end_inset
+
+ are evaluated on the whole grid, system (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:gov"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:sheveq"
+
+\end_inset
+
+) is evolved in time using the adaptive-step time integrator DOPRI5 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hairer1993solving"
+
+\end_inset
+
+, which is an embedded pair of explicit Runge–Kutta methods of orders 5
+ and 4 used to estimate a local error.
+ We set both absolute and relative tolerances of the time integrator to
+ 
+\begin_inset Formula $10^{-14}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Simulation proceeds to the final time 
+\begin_inset Formula $\TFinal$
+\end_inset
+
+, where typically 
+\begin_inset Formula $\TFinal=10$
+\end_inset
+
+ is used.
+ While computing the solution, we record the time series of the perturbation
+ of detonation velocity 
+\begin_inset Formula $\psi'(t)$
+\end_inset
+
+ at uniform time intervals 
+\begin_inset Formula $\DeltaT=0.005$
+\end_inset
+
+.
+ When simulation reaches 
+\begin_inset Formula $\TFinal$
+\end_inset
+
+, the solver computes the ratio of 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+-norms of the time series for 
+\begin_inset Formula $\TFinal/2\leq t\leq\TFinal$
+\end_inset
+
+ and 
+\begin_inset Formula $0\leq t\leq\TFinal/2$
+\end_inset
+
+, and if this ratio is smaller than three, then 
+\begin_inset Formula $\TFinal$
+\end_inset
+
+ is increased to 100, as we found it necessary to record longer time series
+ when the flow is not sufficiently unstable.
+ The analysis of the resulting time series of the perturbation of detonation
+ velocity allows us to extract growth rates and frequencies of unstable
+ modes by a post-processing method described below in Subsection 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:algorithm:postproc"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We also need to provide initial conditions for 
+\begin_inset Formula $z'$
+\end_inset
+
+ and 
+\begin_inset Formula $M'$
+\end_inset
+
+.
+ First, the perturbation of the detonation velocity by a small value 
+\begin_inset Formula $A_{0}$
+\end_inset
+
+=
+\begin_inset Formula $10^{-10}$
+\end_inset
+
+ is specified.
+ Then, the initial value of 
+\begin_inset Formula $M'$
+\end_inset
+
+ is computed using 
+\begin_inset Formula $M'=-\rhoA A_{0}$
+\end_inset
+
+.
+ The Rankine–Hugoniot conditions are then used to find 
+\begin_inset Formula $\rhoS'$
+\end_inset
+
+, 
+\begin_inset Formula $\uS'$
+\end_inset
+
+, 
+\begin_inset Formula $\pS'$
+\end_inset
+
+ from 
+\begin_inset Formula $M'$
+\end_inset
+
+.
+ Subsequently, initial conditions for perturbations over the whole grid
+ are computed using 
+\begin_inset Formula 
+\begin{equation}
+\rho'_{0}(x)=\frac{\rhoS'}{\rhoSZnd}\rhoZnd(x),\quad u'_{0}(x)=\frac{\uS'}{\uSZnd}\uZnd(x),\quad p'_{0}(x)=\frac{\pS'}{\pSZnd}\pZnd(x),\quad\lambda'_{0}(x)=A_{0}\lambdaZnd(x).\label{eq:algorithm:ic}
+\end{equation}
+
+\end_inset
+
+As can be seen from these formulas, the initial conditions for perturbations
+ are specified as a multiple of the ZND solution.
+ We found that such an initial condition minimizes the transient behavior
+ in the time series of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ at early times.
+ The beginning of the time series is cut off before the post-processing
+ in order to eliminate the initial numerical transients from the signal.
+\end_layout
+
+\begin_layout Standard
+Whenever the time integrator evaluates the right-hand side of system (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:gov"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:sheveq"
+
+\end_inset
+
+), boundary conditions are imposed as follows.
+ At the shock (grid point 
+\begin_inset Formula $i=N$
+\end_inset
+
+), boundary conditions are specified using 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "RH-conditions-linearized"
+
+\end_inset
+
+.
+ At the downstream end, no boundary condition should be specified for the
+ system, however, boundary treatment is necessary for the finite-difference
+ computations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "laney1998"
+
+\end_inset
+
+.
+ This is done by the zeroth-order extrapolation: 
+\begin_inset Formula 
+\[
+z_{i}'=z_{0}'\text{ for }i\in\{-3,-2,-1\},
+\]
+
+\end_inset
+
+where negative indices are used for the ghost grid points to the left of
+ the computational domain.
+ For the fifth-order upwind method (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numal:upwind5-left"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:upwind5-right"
+
+\end_inset
+
+) three ghost points are needed.
+\end_layout
+
+\begin_layout Standard
+The algorithm was verified to be fifth order in space and time either by
+ measuring the convergence rate to the steady-state solution (in stable
+ cases) or by a self-convergence test (in unstable cases).
+\end_layout
+
+\begin_layout Subsection
+DMD analysis of the numerical results
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:algorithm:postproc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the postprocessing step, our goal is to extract growth rates and frequencies
+ of unstable modes (discrete stability spectrum) from the time series of
+ detonation velocity 
+\begin_inset Formula 
+\begin{equation}
+\psi'(t)=\left[\psi'_{0},\psi'_{1},\dots,\psi'_{n}\right]^{\T},\label{eq:algorithm:postproc:time-series}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the index of the last time step and values 
+\begin_inset Formula $\psi'_{k}$
+\end_inset
+
+ are defined at times 
+\begin_inset Formula $t_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $k=0,\dots,n$
+\end_inset
+
+ such that 
+\begin_inset Formula $t_{k}-t_{k-1}=\DeltaT=\text{const}$
+\end_inset
+
+ for all 
+\begin_inset Formula $k=1,\dots,n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To process such a time series, an efficient and robust algorithm is required
+ such that the stability spectrum is computed as accurately as possible.
+ The DMD algorithm 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "schmid2010dynamic"
+
+\end_inset
+
+ is at the heart of our postprocessing.
+ We note however, that the DMD algorithm does not necessarily answer the
+ question of what the rank of low-dimensional approximation should be.
+ Hence, we need a way to determine the best approximation with the ultimate
+ goal being to find all modes that can also be found by normal-mode analysis.
+\end_layout
+
+\begin_layout Standard
+The remainder of this section proceeds as follows.
+ First, for completeness, we present a brief generic description of the
+ DMD algorithm.
+ Then, we describe how we form input data for the DMD algorithm from the
+ time series 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:time-series"
+
+\end_inset
+
+, and explain how we determine the best low-rank approximation.
+ Finally, we apply the algorithm to synthetic data to assess its performance.
+\end_layout
+
+\begin_layout Subsubsection
+Description of the DMD algorithm
+\end_layout
+
+\begin_layout Standard
+Suppose that we have a time series of the snapshots of the state of some
+ dynamical system: 
+\begin_inset Formula 
+\begin{equation}
+x=[x_{0},\dots,x_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $x_{i}\in\R^{m}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=0,\dots,n$
+\end_inset
+
+, and 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ being a snapshot of the system state.
+ Assume also that snapshots are taken at uniform time intervals 
+\begin_inset Formula $\DeltaT$
+\end_inset
+
+.
+ Our purpose is to find an eigendecomposition of a linear operator 
+\begin_inset Formula $A$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+x_{k}=Ax_{k-1}
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $k=1,\dots,n$
+\end_inset
+
+ at least in the least-squares sense.
+ The eigenvalues of 
+\begin_inset Formula $A$
+\end_inset
+
+ contain the information on the growth/decay rates and frequencies of oscillatio
+ns that, when combined, represent the time evolution of the dynamical system.
+\end_layout
+
+\begin_layout Standard
+To proceed, we define matrices 
+\begin_inset Formula 
+\begin{equation}
+X=[x_{0},\dots,x_{n-1}]^{\T},\quad Y=[x_{1},\dots,x_{n}]^{\T}\label{eq:algorithm:postproc:input-matrices}
+\end{equation}
+
+\end_inset
+
+such that 
+\begin_inset Formula $Y=AX$
+\end_inset
+
+ and thus 
+\begin_inset Formula $A=YX^{\dagger}$
+\end_inset
+
+, where 
+\begin_inset Formula $X^{\dagger}$
+\end_inset
+
+ is a Moore–Penrose pseudoinverse of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Although the problem is formally solved now, we cannot just do the eigendecompo
+sition of 
+\begin_inset Formula $A$
+\end_inset
+
+ because 
+\begin_inset Formula $A\in\R^{m\times m}$
+\end_inset
+
+ with 
+\begin_inset Formula $m$
+\end_inset
+
+ generally being large.
+ Instead, a low-rank approximation matrix 
+\begin_inset Formula $\tilde{A}$
+\end_inset
+
+ and its eigendecomposition are found.
+ With given inputs
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:input-matrices"
+
+\end_inset
+
+, the DMD algorithm proceeds as follows: 
+\end_layout
+
+\begin_layout Enumerate
+Compute reduced singular value decomposition (SVD) of 
+\begin_inset Formula $X$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+X=U\Sigma V^{\T},\label{eq:algorithm:postproc:svd}
+\end{equation}
+
+\end_inset
+
+with matrices 
+\begin_inset Formula $U$
+\end_inset
+
+ and 
+\begin_inset Formula $V$
+\end_inset
+
+ having orthonormal columns and 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ being diagonal with singular values 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=1,\dots,\min(m,n)$
+\end_inset
+
+, on the diagonal.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Truncate 
+\begin_inset Formula $U$
+\end_inset
+
+, 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, and 
+\begin_inset Formula $V$
+\end_inset
+
+ to rank 
+\begin_inset Formula $r$
+\end_inset
+
+, which yields matrices 
+\begin_inset Formula $U_{r}$
+\end_inset
+
+, 
+\begin_inset Formula $\Sigma_{r}$
+\end_inset
+
+, and 
+\begin_inset Formula $V_{r}$
+\end_inset
+
+.
+ Truncation is necessary, for example, because all singular values 
+\begin_inset Formula $\sigma_{i}$
+\end_inset
+
+ in 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+ with 
+\begin_inset Formula $i>r$
+\end_inset
+
+ are due to the noise in matrix 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Compute auxiliary matrix 
+\begin_inset Formula $\tilde{A}\in\R^{r\times r}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\tilde{A}=U_{r}^{\T}AU_{r}=U_{r}^{\T}YX^{\dagger}U_{r}=U_{r}^{\T}YV_{r}\Sigma_{r}^{-1}U_{r}^{\T}U_{r}=U_{r}^{\T}YV_{r}\Sigma_{r}^{-1}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Find eigendecomposition of 
+\begin_inset Formula $\tilde{A}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\tilde{A}W=W\Lambda,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Lambda=\diag(\lambda_{1},\dots,\lambda_{r})$
+\end_inset
+
+ is the matrix of eigenvalues, 
+\begin_inset Formula $W$
+\end_inset
+
+ the matrix of eigenvectors.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Find truncated eigendecomposition of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ All eigenvalues of 
+\begin_inset Formula $\tilde{A}$
+\end_inset
+
+ are the eigenvalues of 
+\begin_inset Formula $A$
+\end_inset
+
+ as well (the opposite is not necessarily true as 
+\begin_inset Formula $\tilde{A}\in\R^{r\times r}$
+\end_inset
+
+ while 
+\begin_inset Formula $A\in\R^{m\times m}$
+\end_inset
+
+ with 
+\begin_inset Formula $r\leq m$
+\end_inset
+
+).
+ Matrix of eigenvectors 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+ can be found using 
+\begin_inset Formula 
+\[
+\Phi=YV_{r}\Sigma_{r}^{-1}W\Lambda^{-1},
+\]
+
+\end_inset
+
+with 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ being a rectangular matrix containing exact DMD modes as was introduced
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "tu2014dynamic"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Knowing the eigenvalues 
+\begin_inset Formula $\Lambda$
+\end_inset
+
+ and eigenvectors 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ of 
+\begin_inset Formula $A$
+\end_inset
+
+, we can reconstruct the time series 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:given-time-series"
+
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\widehat{x}_{k}=Ax_{k-1}=A^{k}x_{0}=\Phi\Lambda^{k}b,\label{eq:algorithm:postproc:reconstr}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $b=\Phi^{\dagger}x_{0}$
+\end_inset
+
+ is the vector of the initial amplitudes of DMD modes.
+ Hence, DMD provides modes which are separated in terms of frequencies (that
+ is, imaginary parts of 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+To measure the quality of low-rank approximation, the relative error 
+\begin_inset Formula $e_{\text{DMD}}$
+\end_inset
+
+ and residual error 
+\begin_inset Formula $e_{\text{resid}}$
+\end_inset
+
+ are computed: 
+\begin_inset Formula 
+\begin{equation}
+e_{\text{DMD}}=\frac{\norm{\widehat{x}-x}_{2}}{\norm x_{2}},\quad e_{\text{resid}}=\norm{Y-\Phi\Lambda\Phi^{\dagger}X}_{2}.\label{eq:algorithm:postproc:errors}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We also convert discrete-time eigenvalues 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ that imply stability when they are inside the unit disc in 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ to the continuous-time eigenvalues 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ that imply stability when they are in the left half-plane of 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+ as they are commonly used in normal-mode analysis.
+ The conversion formula is 
+\begin_inset Formula 
+\[
+\alpha_{i}=\frac{\log(\lambda_{i})}{\DeltaT},\quad i=1,\dots,r.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Application of DMD to the time series of detonation velocity
+\end_layout
+
+\begin_layout Standard
+The DMD as it was introduced in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "schmid2010dynamic"
+
+\end_inset
+
+ assumes that each snapshot in a time series is a high-dimensional vector
+ coming, for example, from a solution variable on a numerical grid at a
+ given time step in simulations or from a large number of flow sensors in
+ experiments.
+ The time series of perturbation of detonation velocity 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:time-series"
+
+\end_inset
+
+ that we record during our simulations are one-dimensional, that is, 
+\begin_inset Formula $\psi'_{k}\in\R$
+\end_inset
+
+, 
+\begin_inset Formula $k=0,\dots,n$
+\end_inset
+
+.
+ As pointed out in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 401--402"
+key "tu2014dynamic"
+
+\end_inset
+
+, one-dimensional time series yields the matrix 
+\begin_inset Formula $\tilde{A}$
+\end_inset
+
+ which is 
+\begin_inset Formula $1\times1$
+\end_inset
+
+, therefore it has only one real eigenvalue, which can only capture an exponenti
+al growth or decay, but not oscillations.
+ To overcome this rank-deficiency problem, we build an input Hankel matrix
+ 
+\begin_inset Formula $Z$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+Z=\begin{bmatrix}\psi'_{0} & \cdots & \psi'_{n-L}\\
+\psi'_{1} & \cdots & \psi'_{n-L+1}\\
+\vdots & \vdots & \vdots\\
+\psi'_{L-1} & \cdots & \psi'_{n}
+\end{bmatrix},\label{eq:algorithm:postproc:input-hankel-matrix}
+\end{equation}
+
+\end_inset
+
+which stacks time-shifted values of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+.
+ This approach is commonly used in other methods of time-series analysis
+ such as Singular Spectral Analysis 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "golyandina2013singular"
+
+\end_inset
+
+.
+ Number 
+\begin_inset Formula $L$
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:input-hankel-matrix"
+
+\end_inset
+
+ defines the upper bound on the number of modes that we can extract from
+ the time series.
+ In this paper, 
+\begin_inset Formula $L=1000$
+\end_inset
+
+ is used.
+ Then, the input matrices 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:input-matrices"
+
+\end_inset
+
+ are built from 
+\begin_inset Formula $Z$
+\end_inset
+
+ by excluding the last and first columns of 
+\begin_inset Formula $Z$
+\end_inset
+
+, respectively.
+\end_layout
+
+\begin_layout Standard
+As time series of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ inevitably contains noise induced by truncation and rounding errors of
+ the numerical computations, truncation of matrices 
+\begin_inset Formula $U,$
+\end_inset
+
+ 
+\begin_inset Formula $\Sigma$
+\end_inset
+
+, and 
+\begin_inset Formula $V$
+\end_inset
+
+ from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:svd"
+
+\end_inset
+
+ with a target rank 
+\begin_inset Formula $r$
+\end_inset
+
+ will yield a matrix 
+\begin_inset Formula $\tilde{A}\in\R^{r\times r}$
+\end_inset
+
+ whose eigenvalues are all physical only if 
+\begin_inset Formula $r$
+\end_inset
+
+ is known 
+\emph on
+a priori
+\emph default
+.
+ However, if the rank choice is done by a machine, there is always a possibility
+ that the value of 
+\begin_inset Formula $r$
+\end_inset
+
+ will be larger than the rank of the ideal low-rank approximation, hence,
+ the spurious eigenvalues will be present in the output of DMD (with even
+ more severe consequences if, for example, instead of a complex-conjugate
+ pair of eigenvalues only one real eigenvalue would be found).
+ As we aim to apply DMD in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:results"
+
+\end_inset
+
+ for parametric studies of detonation stability, an algorithm is needed
+ for choosing the target rank 
+\begin_inset Formula $r$
+\end_inset
+
+ automatically and as accurately as possible.
+ The details of the algorithm that we use are provided below.
+\end_layout
+
+\begin_layout Standard
+First, the beginning of the time series 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:time-series"
+
+\end_inset
+
+ must be cut off as it is necessary to exclude determining DMD modes from
+ nonmodal behavior occurring due to the relaxation of the perturbation solution
+ from volatile initial conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:ic"
+
+\end_inset
+
+ to a superposition of modes.
+ This cutoff time depends on the length of the time series.
+ Our simulations run by default to final time 
+\begin_inset Formula $\TFinal=10$
+\end_inset
+
+, however they can be prolonged as described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:linearized-system"
+
+\end_inset
+
+.
+ If the final time of the time series is larger than 10, then the cutoff
+ time is 10, otherwise it is 1.
+ Then, the input matrix 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:input-hankel-matrix"
+
+\end_inset
+
+ is built and separated into 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ After that, candidates for a possible rank of 
+\begin_inset Formula $X$
+\end_inset
+
+ are determined by the following procedure.
+ We consider all singular values 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $k=1,\dots,K$
+\end_inset
+
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+ normalized by 
+\begin_inset Formula $\sigma_{1}$
+\end_inset
+
+ with 
+\begin_inset Formula $K$
+\end_inset
+
+ being the smallest index corresponding to 
+\begin_inset Formula $\sigma_{K+1}<10^{-10}$
+\end_inset
+
+.
+ Then if 
+\begin_inset Formula $\sigma_{k+1}/\sigma_{k}<0.95$
+\end_inset
+
+ for some 
+\begin_inset Formula $k$
+\end_inset
+
+, then 
+\begin_inset Formula $k$
+\end_inset
+
+ is added to the list of possible ranks as there is a sufficient gap between
+ 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{k+1}$
+\end_inset
+
+, which indicates that 
+\begin_inset Formula $\sigma_{k+1}$
+\end_inset
+
+ is a spurious singular value.
+ For each rank from the list of all possible ranks we determine DMD decompositio
+n and compute the fit and residual errors 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:errors"
+
+\end_inset
+
+.
+ Then we consider two smallest fit errors 
+\begin_inset Formula $e_{\text{DMD},1}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{\text{DMD},2}$
+\end_inset
+
+, and if 
+\begin_inset Formula $0.5\leq e_{\text{DMD},1}/e_{\text{DMD},2}\leq1$
+\end_inset
+
+, then we also take into account corresponding residual errors, so that
+ the DMD decomposition corresponding to the smallest residual error is considere
+d the best.
+ Otherwise, the best one corresponds to the decomposition with the fit error
+ 
+\begin_inset Formula $e_{\text{DMD},1}$
+\end_inset
+
+.
+ Once the best-rank DMD is determined, its eigenvalues that have the real
+ part larger than 
+\begin_inset Formula $-1$
+\end_inset
+
+ and positive imaginary part are saved as an output of the postprocessing
+ algorithm sorted by the frequency and real part, so that the enumeration
+ of modes is the same as in the normal-mode analysis.
+\end_layout
+
+\begin_layout Subsubsection
+Testing the method with synthetic data
+\end_layout
+
+\begin_layout Standard
+Now we apply the postprocessing algorithm to two synthetic time series chosen
+ to represent typical unstable behavior of the solutions of system (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:gov"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:sheveq"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Example 1.
+
+\series default
+ Time series has a single exponentially growing and oscillating mode,
+\series bold
+ 
+\series default
+ 
+\begin_inset Formula 
+\begin{equation}
+y_{1}(t)=A\exp(\alpha_{\text{re}}t)\sin(\alpha_{\text{im}}t),\label{eq:algorithm:postproc:example-1}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha=\alpha_{\text{re}}+i\alpha_{\text{im}}=3+2i,$
+\end_inset
+
+ 
+\begin_inset Formula $i$
+\end_inset
+
+ being imaginary unit, 
+\begin_inset Formula $t\in[0;51]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Example 2.
+
+\series default
+ Time series is a superposition of five exponentially growing and oscillating
+ modes of different growth rates and frequencies, 
+\begin_inset Formula 
+\begin{equation}
+y_{2}(t)=\sum_{i=0}^{4}A\exp(\alpha_{\text{re},i}t)\sin(\alpha_{\text{im},i}t),\label{eq:algorithm:postproc:example-2}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha\in\{0.7+0.1i,0.8+1.57i,0.6+2.76i,0.5+3.88i,0.01+15.62i\}$
+\end_inset
+
+, 
+\begin_inset Formula $t\in[0;21]$
+\end_inset
+
+.
+ For both time series, the amplitude of each mode is taken as 
+\begin_inset Formula $A=10^{-10}$
+\end_inset
+
+, and the time step is 
+\begin_inset Formula $\DeltaT=0.01$
+\end_inset
+
+.
+ These time series are intentionally contaminated with a Gaussian noise
+ of amplitude 
+\begin_inset Formula $10^{-13}$
+\end_inset
+
+, mean zero, and variance one such that the noise is proportional to the
+ signal: 
+\begin_inset Formula 
+\begin{equation}
+y=y_{\text{clean}}(1+\text{noise}),
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $y_{\text{clean}}$
+\end_inset
+
+ is a noiseless time series (either 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:example-1"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:example-2"
+
+\end_inset
+
+).
+ The added noise is to mimic the noise due to numerical simulation errors.
+\end_layout
+
+\begin_layout Standard
+To assess the performance of the postprocessing algorithm, we measure relative
+ errors of extracted growth rates and frequencies.
+ For example, if one particular mode in a time series has an exact eigenvalue
+ 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ while the postprocessing algorithm finds a corresponding approximate eigenvalue
+ 
+\begin_inset Formula $\hat{\alpha}$
+\end_inset
+
+, then the errors are defined as 
+\begin_inset Formula 
+\begin{equation}
+e_{\text{re}}=\frac{\abs{\alpha_{\text{re}}-\hat{\alpha}_{\text{re}}}}{\alpha_{\text{re}}},\quad e_{\text{im}}=\frac{\abs{\alpha_{\text{im}}-\hat{\alpha}_{\text{im}}}}{\alpha_{\text{im}}}.\label{eq:algorithm:postproc:errors-example}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:algorithm:postproc:dmd-synthetic-data"
+
+\end_inset
+
+, we show the obtained modes along with the relative errors.
+ As can be seen, the algorithm was able to recover all the modes present
+ in the time series.
+ We find that in general 
+\begin_inset Formula $e_{\text{re}}$
+\end_inset
+
+ is at least one order of magnitude larger than 
+\begin_inset Formula $e_{\text{im}}$
+\end_inset
+
+.
+ Nevertheless, the algorithm was able to recover in the Example 2 the slowest
+ growing mode (with growth rate 
+\begin_inset Formula $0.01$
+\end_inset
+
+), albeit with a larger relative error than for the other modes, even though
+ the growth rate of this mode is 80 times smaller that the growth rate of
+ the dominant mode 
+\begin_inset Formula $\alpha=0.8+1.57i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results of applying the postprocessing algorithm to synthetic data 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:example-1"
+
+\end_inset
+
+ (Example 1) and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:example-2"
+
+\end_inset
+
+ (Example 2).
+ Columns 2 and 3 show found growth rates and frequencies, respectively;
+ columns 4 and 5 show the relative errors of growth rates and frequencies,
+ respectively, computed using 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:errors-example"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:algorithm:postproc:dmd-synthetic-data"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "figures/dmd-synthetic-data.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These examples demonstrate that the postprocessing algorithm we use is able
+ to extract stability spectra from time series consisting of several modes
+ of very different growth rates and frequencies.
+ That said, it must be clear that there are also limitations to the procedure:
+ the quality of the extracted spectrum in general depends on the quality
+ of the time series at hand (its sampling rate, length, noise level, etc.).
+\end_layout
+
+\begin_layout Standard
+As the Fourier transform and power spectra are frequently used in analysis
+ of oscillatory dynamics, here we contrast this traditional method with
+ the present approach.
+ Applying the fast Fourier transform (FFT) to the time series, one can determine
+ approximate values of frequencies of the modes via the power spectrum and
+ then use nonlinear least-squares solver to find growth rates of the modes.
+ However note that for exponentially growing or decaying oscillations, FFT
+ analysis may be too inaccurate.
+ To illustrate, Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Comparison-of-FFT-DMD"
+
+\end_inset
+
+ shows the time series 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:example-2"
+
+\end_inset
+
+ and its power spectra generated via FFT and DMD.
+ While the DMD spectrum is sparse and is in excellent agreement with the
+ time series, the FFT spectrum is seen to be essentially flat and dense
+ in the sense that it is hard to find the particular modes present in the
+ time series.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/dmd-synthetic-data-spectrum.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Comparison-of-FFT-DMD"
+
+\end_inset
+
+Comparison of FFT and DMD algorithms for analysis of time series 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:example-2"
+
+\end_inset
+
+: (a) the time series; (b) the power spectra by FFT (solid line; here the
+ frequencies are multiplied by 
+\begin_inset Formula $2\pi$
+\end_inset
+
+) and DMD (markers).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithm for extracting growth rates and frequencies of unstable modes
+ presented in this section requires multiple application of DMD to find
+ the best low-rank approximation.
+ However, the most expensive operation in the algorithm (SVD of 
+\begin_inset Formula $X$
+\end_inset
+
+) is carried out only once.
+ Our postprocessing code is based on the Intel Math Kernel Library, which
+ contains optimized routines for numerical linear algebra.
+ The time that it takes to postprocess our data varies as it is a function
+ of the length of the time series and the number of possible ranks.
+ The typical time on a workstation with a Xeon processor is on the order
+ of a minute.
+ Besides, as we process only one-dimensional time series 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:time-series"
+
+\end_inset
+
+, without having to save the full solution on the numerical grid for each
+ time step, there is a substantial saving in terms of disk space and correspondi
+ng input-output operations.
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+The reaction rate is given by the Arrhenius form, 
+\begin_inset Formula $\omega=k\left(1-\lambda\right)\exp\left(-E/RT\right)$
+\end_inset
+
+.
+ The stability of the steady-state self-sustained solutions for this model
+ depends on the values of 
+\begin_inset Formula $E$
+\end_inset
+
+, 
+\begin_inset Formula $Q$
+\end_inset
+
+, and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Erpenbeck64,LeeStewart90"
+
+\end_inset
+
+.
+ Generally, increasing 
+\begin_inset Formula $E$
+\end_inset
+
+ has the effect of making the solution more unstable.
+ The role of 
+\begin_inset Formula $Q$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is more complicated.
+ For example, both very large and very small 
+\begin_inset Formula $Q$
+\end_inset
+
+ correspond to stable detonations while there is an instability at intermediate
+ values of 
+\begin_inset Formula $Q$
+\end_inset
+
+ if 
+\begin_inset Formula $E$
+\end_inset
+
+ is large enough.
+\end_layout
+
+\begin_layout Subsection
+Steady-state solutions, eigenfunctions and eigenvalues
+\end_layout
+
+\begin_layout Standard
+The steady-state traveling-wave solutions of (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mass"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:reaction"
+
+\end_inset
+
+) are found by setting the time derivatives in the system to zero.
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:results:simple:znd-solutions"
+
+\end_inset
+
+, we show such ZND solution profiles computed with fixed parameters 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+ and 
+\begin_inset Formula $E=30$
+\end_inset
+
+, and for 
+\begin_inset Formula $Q=\{0.5,1,10,50,100\}$
+\end_inset
+
+.
+ For this particular value of 
+\begin_inset Formula $E$
+\end_inset
+
+, the case 
+\begin_inset Formula $Q=50$
+\end_inset
+
+ corresponds to a strongly unstable solution, while all other values of
+ 
+\begin_inset Formula $Q$
+\end_inset
+
+ correspond to stable or weakly unstable solutions.
+ As can be seen from the steady-state profiles, the strongly unstable case
+ occurs for the ZND solution approaching a square-wave shape with a spiky
+ heat-release zone, while all the other cases correspond to relatively smooth
+ profiles.
+ This effect of the steady-state solutions on their stability is well known.
+ The limiting case of a true square-wave detonation with instantaneous heat
+ release is known to possess a pathological spectrum with infinite number
+ of unstable eigenvalues with growth rates increasing unboundedly with the
+ mode number (or its frequency).
+ In other words, the square-wave stability problem is ill-posed.
+ However, with a finite-rate chemistry, the problem remains well-posed even
+ though the sharper the heat-release rate the larger the number of unstable
+ modes and the larger their growth rates and frequencies.
+ Computing the latter situations becomes a challenging problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/znd-solutions.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The steady solution with fixed 
+\begin_inset Formula $\gamma=1.2,$
+\end_inset
+
+ 
+\begin_inset Formula $E=30$
+\end_inset
+
+, and various values of heat release: 
+\begin_inset Formula $Q=0.5$
+\end_inset
+
+ - solid, 
+\begin_inset Formula $Q=1.0$
+\end_inset
+
+ - dashed, 
+\begin_inset Formula $Q=10$
+\end_inset
+
+ - dotted, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+ - solid with circles, 
+\begin_inset Formula $Q=100$
+\end_inset
+
+ - solid with stars.
+ Density, pressure, velocity in the laboratory frame, and temperature are
+ normalized by their respective values at the von Neumann (shock) state;
+ the reaction rate is normalized by its maximum value.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:results:simple:znd-solutions"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we analyze the time series of the perturbation of detonation velocity,
+ 
+\begin_inset Formula $\psi'$
+\end_inset
+
+, for two cases that differ by the complexity of their unstable spectra.
+ The parameters for these cases are 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, and 
+\begin_inset Formula $E=35$
+\end_inset
+
+ or 
+\begin_inset Formula $E=40$
+\end_inset
+
+.
+ Linear stability analysis 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+ predicts that both of these cases have several unstable modes.
+ In addition, the fundamental mode for the second case is purely exponential
+ and has two branches.
+\end_layout
+
+\begin_layout Standard
+Simulations are conducted with 
+\begin_inset Formula $\TFinal=50$
+\end_inset
+
+ for 
+\begin_inset Formula $E=35$
+\end_inset
+
+ and 
+\begin_inset Formula $\TFinal=40$
+\end_inset
+
+ for 
+\begin_inset Formula $E=40$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:51-2017-04-09:raw-data-examples"
+
+\end_inset
+
+ displays the computed time series, with insets showing the solution at
+ early times.
+ The plots suggest that for 
+\begin_inset Formula $E=35$
+\end_inset
+
+ all modes are oscillatory, while for 
+\begin_inset Formula $E=40$
+\end_inset
+
+ an exponential nonoscillatory growth is present.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:51-2017-04-09:raw-data-modes"
+
+\end_inset
+
+ shows the unstable spectra for both of these cases obtained with 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+ as well as relative errors calculated by comparing the modes found with
+ 
+\begin_inset Formula $\Nhrz=640$
+\end_inset
+
+ and 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+.
+ For the case 
+\begin_inset Formula $E=40$
+\end_inset
+
+, the number of modes found is the same as shown on figure 6 of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+.
+ The fundamental mode is purely exponential and is split in two branches
+ in agreement with 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+ where the author notes that the split occurs for 
+\begin_inset Formula $E\geq35.86$
+\end_inset
+
+.
+ The growth rate of the upper branch of the fundamental mode is 1.008 in
+ our calculations while it is 1.021 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+ (extracted from figure 6 of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+ and rescaled to the Erpenbeck scales).
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unstable spectra for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, and 
+\begin_inset Formula $E=35$
+\end_inset
+
+ or 
+\begin_inset Formula $E=40$
+\end_inset
+
+ obtained from simulations with 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $i$
+\end_inset
+
+ is the mode number; 
+\begin_inset Formula $\alpha_{\text{re}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{\text{im}}$
+\end_inset
+
+ are the growth rates and frequencies, respectively; 
+\begin_inset Formula $e_{\text{re}}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{\text{im}}$
+\end_inset
+
+ are the corresponding relative errors computed from the results with 
+\begin_inset Formula $\Nhrz=640$
+\end_inset
+
+ and 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:51-2017-04-09:raw-data-modes"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "figures/raw-data-modes.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/raw-data-examples.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Computed time series of the perturbation of detonation velocity 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, and (a) 
+\begin_inset Formula $E=35$
+\end_inset
+
+ or (b) 
+\begin_inset Formula $E=40$
+\end_inset
+
+.
+ Insets show the evolution of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ at early time of simulation.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:51-2017-04-09:raw-data-examples"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+During the integration of the linearized system (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "linearized-system"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "shock-evolution-equation"
+
+\end_inset
+
+) we obtain the spatial profiles of the perturbations that are superpositions
+ of the eigenfunctions of the problem.
+ Such profiles are shown in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:results:pert-profiles-vs-x"
+
+\end_inset
+
+ at 
+\begin_inset Formula $E=30$
+\end_inset
+
+ and at three values of 
+\begin_inset Formula $Q$
+\end_inset
+
+, two of which are near the neutral curve and one somewhere in the middle
+ of the unstable domain.
+ These are 
+\begin_inset Formula $Q=1$
+\end_inset
+
+ (stable), 
+\begin_inset Formula $Q=10$
+\end_inset
+
+ (strongly unstable), and 
+\begin_inset Formula $Q=50$
+\end_inset
+
+ (weakly unstable).
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/perturbations-vs-x.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Perturbation profiles versus 
+\begin_inset Formula $x$
+\end_inset
+
+ for 
+\begin_inset Formula $E=30$
+\end_inset
+
+ and (a-b) 
+\begin_inset Formula $Q=1$
+\end_inset
+
+, (c-d) 
+\begin_inset Formula $Q=10$
+\end_inset
+
+, (e-f) 
+\begin_inset Formula $Q=50$
+\end_inset
+
+.
+ Left column: 
+\begin_inset Formula $\rho'$
+\end_inset
+
+ (solid), 
+\begin_inset Formula $u'$
+\end_inset
+
+ (dashed), 
+\begin_inset Formula $p'$
+\end_inset
+
+ (dash-dotted); right column: 
+\begin_inset Formula $\lambda'$
+\end_inset
+
+ (solid), 
+\begin_inset Formula $T'$
+\end_inset
+
+ (dashed), 
+\begin_inset Formula $\omega'$
+\end_inset
+
+ (dash-dotted).
+ These solutions are plotted at a particular time, hence the scales are
+ arbitrary.
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:results:pert-profiles-vs-x"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Comparison with normal-mode results
+\end_layout
+
+\begin_layout Standard
+Here, we show a quantitative comparison with the normal-mode results found
+ in the literature.
+ As other researchers provide explicit values for unstable spectra for parameter
+s 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, we take these parameters as well and vary activation energy 
+\begin_inset Formula $E$
+\end_inset
+
+.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results:comparison-with-normal-modes"
+
+\end_inset
+
+ shows the results of the comparison.
+ Our results are in agreement with the normal-mode results to at least two
+ significant digits for all considered cases.
+ The normal-mode results are borrowed from the work of different researchers:
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+ for 
+\begin_inset Formula $E=25.26$
+\end_inset
+
+ and 
+\begin_inset Formula $E=31.05$
+\end_inset
+
+, from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HenrickAslamPowers2006"
+
+\end_inset
+
+ for 
+\begin_inset Formula $E=26$
+\end_inset
+
+, and from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeeStewart90"
+
+\end_inset
+
+ for 
+\begin_inset Formula $E=50$
+\end_inset
+
+.
+ These researchers all used different scales, which are converted here to
+ the same scales for comparison.
+ We choose to convert to the Erpenbeck scales used in the present work.
+ The conversion factors are as follows.
+ Conversion factor from the scales of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sharpe1997linear"
+
+\end_inset
+
+ to the Erpenbeck scales is nondimensional 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ in the Erpenbeck scales, which is 6.809475 for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+ and 
+\begin_inset Formula $Q=50$
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeeStewart90"
+
+\end_inset
+
+, the stability spectrum for 
+\begin_inset Formula $E=50$
+\end_inset
+
+ is given in scales of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AbouseifToong82"
+
+\end_inset
+
+, and the following conversion factor should be used: 
+\begin_inset Formula 
+\[
+\frac{k}{\int_{0}^{1/2}\left(1-\lambdaZnd\right)^{-1}\exp\left(\rhoZnd E/\pZnd\right)\dd\lambdaZnd},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the nondimensional Arrhenius rate constant computed using 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:k"
+
+\end_inset
+
+, and the integral in the denominator is the nondimensional Arrhenius rate
+ constant in the scales of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AbouseifToong82"
+
+\end_inset
+
+.
+ For 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, and 
+\begin_inset Formula $E=50$
+\end_inset
+
+, the numerical value of this factor is 0.938749.
+ Conversion of results of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HenrickAslamPowers2006"
+
+\end_inset
+
+ is not needed because they provide the stability spectrum in the same scales
+ as ours.
+\end_layout
+
+\begin_layout Standard
+To obtain the results shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results:comparison-with-normal-modes"
+
+\end_inset
+
+, we run the simulations to final time 
+\begin_inset Formula $\TFinal=30$
+\end_inset
+
+ for 
+\begin_inset Formula $E=25.26$
+\end_inset
+
+ and 
+\begin_inset Formula $E=26$
+\end_inset
+
+ and to 
+\begin_inset Formula $\TFinal=10$
+\end_inset
+
+ for 
+\begin_inset Formula $E=31.05$
+\end_inset
+
+ and 
+\begin_inset Formula $E=50$
+\end_inset
+
+.
+ The simulations are conducted with resolutions 
+\begin_inset Formula $\Nhrz=20,\dots,1280$
+\end_inset
+
+ with refinement factor 2 to verify the convergence of the obtained stability
+ spectra, which is observed as expected.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results:comparison-with-normal-modes"
+
+\end_inset
+
+ shows the spectra obtained with 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+.
+ The errors on growth rates and frequencies are also shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results:comparison-with-normal-modes"
+
+\end_inset
+
+.
+ They are computed using: 
+\begin_inset Formula 
+\[
+e_{\text{re}}=\abs{\frac{\alpha_{\text{re},1}-\alpha_{\text{re},2}}{\alpha_{\text{re},2}}},\quad e_{\text{im}}=\abs{\frac{\alpha_{\text{im},1}-\alpha_{\text{im},2}}{\alpha_{\text{im},2}}},
+\]
+
+\end_inset
+
+where subscripts 1 and 2 denote quantities obtained with 
+\begin_inset Formula $\Nhrz=640$
+\end_inset
+
+ and 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+, respectively.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of the unstable spectra between the present work and the normal-mode
+ results for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+ and 
+\begin_inset Formula $Q=50$
+\end_inset
+
+.
+ Sources for the normal-mode results: 
+\begin_inset Formula $^{*}$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 2617"
+key "sharpe1997linear"
+
+\end_inset
+
+; 
+\begin_inset Formula $^{**}$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 321"
+key "HenrickAslamPowers2006"
+
+\end_inset
+
+; 
+\begin_inset Formula $^{***}$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 127"
+key "LeeStewart90"
+
+\end_inset
+
+ except mode 0.0 which is extracted from 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "figure 6"
+key "short1998cellular"
+
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $i$
+\end_inset
+
+ is the mode number.
+ For 
+\begin_inset Formula $E=50$
+\end_inset
+
+ the fundamental mode has two branches, which we denote with 
+\begin_inset Formula $0.0$
+\end_inset
+
+ and 
+\begin_inset Formula $0.1$
+\end_inset
+
+.
+ Eigenvalues 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ are in the scales used in the present work.
+ Notice that the errors are computed using grid refinement.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:results:comparison-with-normal-modes"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "figures/comparison-with-normal-modes.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Neutral stability curves
+\end_layout
+
+\begin_layout Standard
+Next, we use the present method to generate neutral stability curves in
+ 
+\begin_inset Formula $E$
+\end_inset
+
+–
+\begin_inset Formula $Q$
+\end_inset
+
+ plane for various 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ The corresponding algorithm is as follows.
+ Assuming that instability monotonically increases as 
+\begin_inset Formula $E$
+\end_inset
+
+ increases, the idea of bisection is used to find a critical value of 
+\begin_inset Formula $E$
+\end_inset
+
+ for each given 
+\begin_inset Formula $Q$
+\end_inset
+
+ such that the growth rate of a given mode is close to zero with tolerance
+ 
+\begin_inset Formula $10^{-4}$
+\end_inset
+
+.
+ Initial interval of search for 
+\begin_inset Formula $E$
+\end_inset
+
+ is taken 
+\begin_inset Formula $[10;140]$
+\end_inset
+
+ for all results shown in this section.
+ Grid resolution used here is 
+\begin_inset Formula $\Nhrz=40$
+\end_inset
+
+.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename figures/LeeStewart-comparison.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The neutral stability boundary computed with the present method (solid line)
+ and its comparison with the normal-mode result of Lee and Stewart 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "figure 7"
+key "LeeStewart90"
+
+\end_inset
+
+ (square markers).
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:LS-comparison"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LS-comparison"
+
+\end_inset
+
+ displays the comparison between our results and those of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeeStewart90"
+
+\end_inset
+
+ for the fundamental mode and 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+.
+ It can be seen that there is a good agreement between the results.
+ In Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:neutral-boundary-var-gamma"
+
+\end_inset
+
+(a), the neutral stability curves of mode 0 in 
+\begin_inset Formula $E$
+\end_inset
+
+–
+\begin_inset Formula $Q$
+\end_inset
+
+ plane are shown for various 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, while in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:neutral-boundary-var-gamma"
+
+\end_inset
+
+(b), the frequency of neutral oscillation is shown.
+ The smaller values of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ are seen to extend the range of unstable 
+\begin_inset Formula $E$
+\end_inset
+
+ to smaller 
+\begin_inset Formula $E$
+\end_inset
+
+ when 
+\begin_inset Formula $Q$
+\end_inset
+
+ is larger than about 
+\begin_inset Formula $4$
+\end_inset
+
+, and to reduce the unstable range towards larger values of 
+\begin_inset Formula $E$
+\end_inset
+
+ at 
+\begin_inset Formula $Q\lessapprox4$
+\end_inset
+
+.
+ At the same time, the frequency of neutral oscillation is seen to decrease
+ substantially with decreasing 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ at large 
+\begin_inset Formula $Q$
+\end_inset
+
+, while it is essentially independent of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ at small values of 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ However, for small 
+\begin_inset Formula $Q$
+\end_inset
+
+ frequency exhibits nonmonotonic behavior for all 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ except 
+\begin_inset Formula $\gamma=1.4$
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+ 
+\begin_inset Graphics
+	filename figures/neutral-stability.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Neutral stability for the fundamental mode at various 
+\begin_inset Formula $\gamma$
+\end_inset
+
+: (a)
+\begin_inset space ~
+\end_inset
+
+neutral stability curves in 
+\begin_inset Formula $\left(E,Q\right)$
+\end_inset
+
+ plane, (b)
+\begin_inset space ~
+\end_inset
+
+frequency of oscillation along the neutral stability curves.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:neutral-boundary-var-gamma"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "l"
+has_inner_box 1
+inner_pos "b"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/time-series-gamma=1.1.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example time series of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+, in which mode 0 is neutrally stable while mode 1 is unstable.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:time-series-for-gamma=00003D1.1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "l"
+has_inner_box 1
+inner_pos "b"
+use_parbox 0
+use_makebox 0
+width "49text%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/neutral-stability-gamma=1.1-two-modes.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Neutral stability curves for 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ for modes 0 (solid line) and 1 (dashed line).
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:neutral-curves-gamma=00003D1.1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $1.3$
+\end_inset
+
+, and 
+\begin_inset Formula $1.4$
+\end_inset
+
+ neutral stability curves shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:neutral-boundary-var-gamma"
+
+\end_inset
+
+(a) represent stability boundaries for corresponding 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, which separate stable ZND solutions from unstable ones.
+ However, the case 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ is more complicated as for 
+\begin_inset Formula $3.7\lessapprox Q\lessapprox36$
+\end_inset
+
+ mode 1 is more unstable than the fundamental mode.
+ A typical time series of the perturbation of detonation velocity 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ for such situation is shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:time-series-for-gamma=00003D1.1"
+
+\end_inset
+
+ for 
+\begin_inset Formula $Q=30.473$
+\end_inset
+
+ and 
+\begin_inset Formula $E=12.503$
+\end_inset
+
+, which corresponds to the mode 0 being neutrally stable (its growth rate
+ is about 
+\begin_inset Formula $-10^{-6}$
+\end_inset
+
+) while mode 1 grows with a rate about 
+\begin_inset Formula $0.03$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:neutral-curves-gamma=00003D1.1"
+
+\end_inset
+
+ shows neutral stability curves for both mode 0 and 1 for 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ on the same plot, where it can be clearly seen that the neutral stability
+ boundary is determined by a composition of the neutral stability curves
+ of these two modes.
+ This intersection of neutral curves at 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ was not mentioned before in the literature, to the best of our knowledge.
+\end_layout
+
+\end_body
+\end_document

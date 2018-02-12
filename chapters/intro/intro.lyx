@@ -1,0 +1,2019 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\master ../../thesis.lyx
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "utopia" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing double
+\use_hyperref true
+\pdf_title "Proposal; Introduction"
+\pdf_author "Dmitry I. Kabanov"
+\pdf_keywords "detonation; stability"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, linkcolor=blue, citecolor=blue"
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Introduction
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:intro"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The goal of the present work is to study the stability of ZND solutions
+ of detonation models by an approach that combines ideas from linear stability
+ analysis with direct numerical simulations.
+ Detonation model usually consist of a system of conservation laws of fluid
+ mechanics complemented by the relations connecting hydrodynamics to thermodynam
+ics and chemistry.
+ Mathematically, such a system admits ZND solution—solution which is a
+\begin_inset space ~
+\end_inset
+
+one-dimensional planar wave propagating with a constant velocity.
+ However, such solutions are unstable to small perturbations and almost
+ never observed in physical experiments.
+\end_layout
+
+\begin_layout Standard
+Why is it important to study detonation stability? During detonation, chemical
+ energy of an explosive is released after compression of the explosive by
+ a shock wave, so that the whole process occurs with significant increase
+ of pressure—typically, 20–60 bars for gaseous mixtures.
+ Deviation of detonation process from ZND regime can drastically change
+ the maximum pressure attained, therefore, it is important to know the stability
+ of ZND regime in engineering applications, such as construction of chemical
+ factories.
+\end_layout
+
+\begin_layout Standard
+Detonation phenomenon gained attention of the researchers at the end of
+ nineteenth century after the series of explosions happened in coal mines
+ in France.
+ Berthelot, Vieille, Mallard and Le
+\begin_inset space ~
+\end_inset
+
+Chatelier studied the detonation in glass tubes and found that detonation
+ distinguishes from combustion in that the speed of propagation is supersonic
+ with respect to the initial gaseous mixture.
+\end_layout
+
+\begin_layout Standard
+For
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+long time, it was believed that the detonation propagates as plane wave
+ with constant velocity.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chapman1899"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Jouguet1905"
+
+\end_inset
+
+ developed first successful theory based on the idea of instantaneous chemical
+ reaction occurring inside the detonation front.
+ Agreement of the detonation velocity obtained from this theory, with the
+ results of the physical experiments of that time, determined the longtime
+ success of the Chapman–Jouguet theory (in the following we use 
+\begin_inset Quotes eld
+\end_inset
+
+CJ theory
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Later, in 1940s, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Zeldovich1940"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Neumann1942"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Doering1943"
+
+\end_inset
+
+ independently of each other elaborated on the Chapman–Jouguet theory, and,
+ with an assumption of chemical reactions with finite rates, created a theory
+ (which is known now as ZND theory, after its creators) of detonation, in
+ which detonation wave is represented as a complex consisting of the shock
+ wave and following reaction zone, such that the length of the reaction
+ zone is constant.
+ Shock wave propagates into the initial gas mixture, compresses and ignites
+ the gas, so that the gas undergoes chemical transformations in the reaction
+ zone.
+ The end of the reaction zone moves at the same speed as the detonation
+ front, so that the thickness of the reaction zone is constant.
+\end_layout
+
+\begin_layout Standard
+However, new physical experiments conducted to confirm the ZND theory found
+ discrepancy between measurements and the theory 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "White1961,Voytsekhovskiy1963"
+
+\end_inset
+
+.
+ It turned out that detonation front has a complex three-dimensional structure
+ with new transverse shock waves appearing inside the reaction zone.
+ So, although ZND theory predicts one-dimensional steady wave solutions
+ which are mathematically feasible, these solutions are unstable and generally
+ not observable in practice.
+\end_layout
+
+\begin_layout Standard
+In Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:intro:cj-znd"
+
+\end_inset
+
+ we give an overview of the Chapman–Jouguet and Zel'dovich–von
+\begin_inset space ~
+\end_inset
+
+Neumann–Döring theories; in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:intro:literature-review"
+
+\end_inset
+
+ we give an overview of previous research on detonation instability; in
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:intro:overview"
+
+\end_inset
+
+ we give a high-level overview of our approach to study detonation instability;
+ in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:intro:outline"
+
+\end_inset
+
+ we give an outline of the following chapters.
+\end_layout
+
+\begin_layout Section
+CJ and ZND theories
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:intro:cj-znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+CJ theory
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:intro:cj-znd:cj"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+CJ theory developed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chapman1899"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Jouguet1905"
+
+\end_inset
+
+ was the first successful theory describing detonation phenomenon.
+ Its success was determined by the good agreement of the theoretical detonation
+ velocity and the velocity observed in the physical experiments.
+\end_layout
+
+\begin_layout Standard
+Main properties of this theory are:
+\end_layout
+
+\begin_layout Itemize
+detonation occurs in the motionless ambient mixture at uniform thermodynamic
+ state with no chemical reactions;
+\end_layout
+
+\begin_layout Itemize
+detonation wave is represented as a shock wave propagating into the mixture
+ with constant velocity;
+\end_layout
+
+\begin_layout Itemize
+detonation velocity is very fast, and the main driver of energy transfer
+ is convection, so the heat conduction and viscous dissipation are neglected;
+\end_layout
+
+\begin_layout Itemize
+detonation front is represented as a
+\begin_inset space ~
+\end_inset
+
+jump discontinuity;
+\end_layout
+
+\begin_layout Itemize
+chemical reaction is caused by compression in the detonation front;
+\end_layout
+
+\begin_layout Itemize
+chemical reaction is instantaneous, so that chemical equilibrium is attained
+ right behind the shock.
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:intro:cj-znd:cj:schema-cj-flow"
+
+\end_inset
+
+ shows the schema of the flow according to the CJ theory—top part of the
+ figure shows the flow in the laboratory reference frame, and bottom part
+ shows the flow in the reference frame attached to the detonation front
+ (we will call it shock-attached frame further).
+ In the laboratory reference frame an ambient mixture—mixture ahead of the
+ shock—is kept at rest, and no chemical reactions occur inside.
+ Right after the detonation front the burned mixture moves with speed 
+\begin_inset Formula $u_{\text{b}}$
+\end_inset
+
+.
+ In the shock-attached frame the detonation front stays at the same position
+ for all times, while ambient mixture flows into the front, and burned mixture
+ flows away from the front (see bottom part of Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:intro:cj-znd:cj:schema-cj-flow"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/illustrations/schematics-cj-detonation-in-channel.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schema of the flow in CJ theory.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:intro:cj-znd:cj:schema-cj-flow"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The hydrodynamic state right behind the front is defined by Rankine–Hugoniot
+ conditions, which express conservation of fluxes of mass, momentum and
+ total specific enthalpy across the detonation front:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:intro:cj-znd:cj:conservation}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\rho_{\text{b}}\left(u_{\text{b}}-D\right) & =-\rho_{\textrm{\text{\text{b}}}}D,\\
+p_{\text{b}}+\rho_{\text{b}}\left(u_{\text{b}}-D\right)^{2} & =p_{\text{a}}+\rho_{\text{a}}D^{2},\\
+e_{\text{b}}+\frac{p_{\text{b}}}{\rho_{\text{b}}}+\frac{\left(u_{\text{b}}-D\right)^{2}}{2} & =e_{\textrm{b}}+\frac{p_{\textrm{b}}}{\rho_{\textrm{b}}}+\frac{D^{2}}{2},
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho$
+\end_inset
+
+, 
+\begin_inset Formula $u$
+\end_inset
+
+, 
+\begin_inset Formula $p$
+\end_inset
+
+, 
+\begin_inset Formula $e$
+\end_inset
+
+ denote density, velocity, pressure, and internal energy, respectively;
+ 
+\begin_inset Formula $D$
+\end_inset
+
+ is the detonation velocity; subscript 
+\begin_inset Quotes eld
+\end_inset
+
+a
+\begin_inset Quotes erd
+\end_inset
+
+ denotes quantities in ambient mixture ahead of the detonation wave; subscript
+ 
+\begin_inset Quotes eld
+\end_inset
+
+b
+\begin_inset Quotes erd
+\end_inset
+
+ denotes quantities in burned mixture behind the detonation wave.
+ The ambient mixture is defined by known quantities 
+\begin_inset Formula $\rho_{\text{a}}$
+\end_inset
+
+, 
+\begin_inset Formula $p_{\text{a}}$
+\end_inset
+
+, 
+\begin_inset Formula $e_{\text{a}}$
+\end_inset
+
+.
+ Therefore, we have four unknowns (
+\begin_inset Formula $\rho_{\text{b}}$
+\end_inset
+
+, 
+\begin_inset Formula $u_{\text{b}}$
+\end_inset
+
+, 
+\begin_inset Formula $p_{\text{b}}$
+\end_inset
+
+, and 
+\begin_inset Formula $D$
+\end_inset
+
+) and only three equations (
+\begin_inset Formula $e_{\mathrm{b}}$
+\end_inset
+
+ is found using thermodynamic relation 
+\begin_inset Formula $e=e\left(p,\rho\right)$
+\end_inset
+
+), thus, the closure condition is required.
+ It appears in this theory as the hypothesis based on the following observation.
+ Detonation wave is stable, thus, the burned state is isolated from the
+ acoustic waves that can appear behind the wave due to the expansion of
+ reaction products.
+ Therefore, at the burned state local flow velocity relative to the detonation
+ wave must be sonic:
+\begin_inset Formula 
+\[
+u_{\mathrm{\text{b}}}-D=c_{\text{b}},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{\text{b}}$
+\end_inset
+
+ is the sound speed in burned mixture.
+ This condition coupled with conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:intro:cj-znd:cj:conservation}
+\end_layout
+
+\end_inset
+
+ allows to compute the burned state and detonation velocity.
+\end_layout
+
+\begin_layout Subsection
+ZND theory
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:intro:cj-znd:znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+CJ theory was successful in the first decades of 20th century, because of
+ the agreement between detonation velocity observed in the physical experiments
+ and theoretical minimal possible velocity.
+ However, assumption of the 
+\begin_inset Quotes eld
+\end_inset
+
+instantaneous
+\begin_inset Quotes erd
+\end_inset
+
+ chemical reaction inside the detonation front was weak under the following
+ consideration.
+ The thickness of the front is about several mean free paths, so that molecules
+ of a gas do not have much possibility to collide.
+ At the same time, chemical reactions need many thousands of collisions
+ of molecules to change chemical composition significantly, so that chemical
+ equilibrium can be attained only on the distances many times longer than
+ the front thickness.
+ This consideration led researchers to extend the CJ theory, and in 1940s
+ independently of each other 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Zeldovich1940"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Neumann1942"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Doering1943"
+
+\end_inset
+
+ developed the new theory, now known as the ZND theory.
+\end_layout
+
+\begin_layout Standard
+Main assumptions of this theory are:
+\end_layout
+
+\begin_layout Itemize
+detonation wave propagates into the motionless ambient mixture at uniform
+ thermodynamic state with no chemical reactions;
+\end_layout
+
+\begin_layout Itemize
+detonation wave propagates with constant velocity;
+\end_layout
+
+\begin_layout Itemize
+detonation velocity is very fast, and the main driver of energy transfer
+ is convection, so the heat conduction and viscous dissipation are neglected;
+\end_layout
+
+\begin_layout Itemize
+detonation front is represented as jump discontinuity;
+\end_layout
+
+\begin_layout Itemize
+chemical reaction is caused by compression in the detonation front;
+\end_layout
+
+\begin_layout Itemize
+the rate of chemical reaction is finite, such that chemical equilibrium
+ is attained at some distance behind the shock;
+\end_layout
+
+\begin_layout Itemize
+the whole process is steady in the reference frame attached to the front.
+\end_layout
+
+\begin_layout Standard
+So, in ZND theory, detonation wave is considered as a complex consisting
+ of a shock wave, which compresses the gas to the state in which chemical
+ reaction can occur, and a
+\begin_inset space ~
+\end_inset
+
+following reaction zone.
+ To continue with a concrete example, we, as previously, consider calorically
+ perfect gas, in which one forward unimolecular reaction 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\text{reactant}\to\text{product}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ occurs; the degree of completeness of the reaction is denoted by reaction
+ progress variable
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $\lambda$
+\end_inset
+
+: 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ in an ambient mixture and 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ in the end of the reaction zone.
+ The state right behind the shock (in the point known as von
+\begin_inset space ~
+\end_inset
+
+Neumann point in the ZND theory) is still unreacted and connected to the
+ ambient state by Rankine–Hugoniot conditions
+\begin_inset Formula 
+\begin{align*}
+\rho_{\text{s}}\left(u_{\text{s}}-D\right) & =-\rho_{\text{a}}D,\\
+p_{\text{s}}+\rho_{\text{s}}\left(u_{\text{s}}-D\right)^{2} & =p_{\text{a}}+\rho_{\text{a}}D^{2},\\
+e_{\textsc{s}}+\frac{p_{\textsc{s}}}{\rho_{\textsc{s}}}+\frac{\left(u_{\textsc{s}}-D\right)^{2}}{2} & =e_{\text{a}}+\frac{p_{\text{a}}}{\rho_{\textsc{\text{a}}}}+\frac{D^{2}}{2},\\
+\lambda_{\textsc{s}} & =0,
+\end{align*}
+
+\end_inset
+
+where subscript 
+\begin_inset Quotes eld
+\end_inset
+
+s
+\begin_inset Quotes erd
+\end_inset
+
+ denotes von
+\begin_inset space ~
+\end_inset
+
+Neumann point, and internal energy 
+\begin_inset Formula $e_{\mathrm{\text{s}}}$
+\end_inset
+
+ does not contain any chemical energy released.
+ Rankine–Hugoniot conditions consist of four relations but contain five
+ unknown quantities 
+\begin_inset Formula $\rho_{\text{s}}$
+\end_inset
+
+, 
+\begin_inset Formula $u_{\text{s}}$
+\end_inset
+
+, 
+\begin_inset Formula $p_{\text{s}}$
+\end_inset
+
+, 
+\begin_inset Formula $e_{\text{s}}$
+\end_inset
+
+, and 
+\begin_inset Formula $D$
+\end_inset
+
+; therefore, the closure condition is required to find these quantities.
+\end_layout
+
+\begin_layout Standard
+The flow in the reaction zone is described by steady reactive Euler equations
+ written in the reference frame attached to the shock:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:intro:cj-znd:znd:steady-euler-ode}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\od{\left(\rho\left(u-D\right)\right)}x & =0,\label{eq:intro:cj-znd:znd:steady-euler-ode-continuity}\\
+\od{\left(\rho\left(u-D\right)^{2}+p\right)}x & =0,\\
+\od{\left(\rho\left(u-D\right)\left(e+\frac{p}{\rho}+\frac{u^{2}}{2}\right)\right)}x & =0,\\
+\od{\left(\rho\left(u-D\right)\lambda\right)}x & =\omega\left(p,\rho,\lambda\right),
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $\omega\left(p,\rho,\lambda\right)$
+\end_inset
+
+ is the production rate of the product.
+ The first three equations can be easily integrated, while the last one
+ can be simplified by using product rule for differentiation and continuity
+ equation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:intro:cj-znd:znd:steady-euler-ode-continuity"
+
+\end_inset
+
+, which yields
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:intro:cj-znd:znd:euler}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{eqnarray}
+\rho\left(u-D\right) & = & \mbox{const}_{1},\label{eq:intro:cj-znd:euler-mass}\\
+\rho\left(u-D\right)^{2}+p & = & \mbox{const}_{2},\\
+e+\frac{p}{\rho}+\frac{u^{2}}{2} & = & \mbox{const}_{3},\\
+\od{\lambda}x & = & \frac{\omega\left(p,\rho,\lambda\right)}{u-D},
+\end{eqnarray}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+which can be integrated, and the flow state can be found once we know the
+ detonation velocity, as it enters the equations as a parameter.
+\end_layout
+
+\begin_layout Standard
+The first two equations from 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:intro:cj-znd:znd:euler}
+\end_layout
+
+\end_inset
+
+ can be manipulated to get an equation of the Rayleigh–Michelson line:
+\begin_inset Formula 
+\begin{equation}
+p-p_{\text{a}}=\rho_{\text{a}}^{2}D^{2}\left(v_{\text{a}}-v\right),\label{eq:intro:cj-znd:znd:rayleigh-line}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $v=1/\rho$
+\end_inset
+
+ is a specific volume.
+ The Rayleigh–Michelson line is straight line with a slope 
+\begin_inset Formula $-\rho_{\text{a}}^{2}D^{2}$
+\end_inset
+
+ in the 
+\begin_inset Formula $v$
+\end_inset
+
+–
+\begin_inset Formula $p$
+\end_inset
+
+ plane and depends on the parameter 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ Consequently, first three equations of the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{intro:cj-znd:znd:euler}
+\end_layout
+
+\end_inset
+
+ can be manipulated to exclude velocity 
+\begin_inset Formula $u$
+\end_inset
+
+ and obtain the equation for a
+\begin_inset space ~
+\end_inset
+
+family of Hugoniot curves
+\begin_inset Formula 
+\begin{equation}
+e\left(p,v,\lambda\right)-e_{\text{a}}(p,v,0)=\frac{1}{2}\left(p+p_{\text{a}}\right)\left(v_{\text{a}}-v\right),\label{eq:intro:cj-znd:znd:hugoniot-curve}
+\end{equation}
+
+\end_inset
+
+which depend on parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As both equations 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:intro:cj-znd:znd:rayleigh-line"
+
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:intro:cj-znd:znd:hugoniot-curve"
+
+\end_inset
+
+ follow from the same conservation laws, any given Rayleigh–Michelson line
+ must intersect with the whole family of Hugoniot curves for every 
+\begin_inset Formula $0\leq\lambda\leq1$
+\end_inset
+
+, otherwise the ZND detonation wave is not possible.
+ From the whole family of Hugoniot curves the most important one for intersectio
+n is the equilibrium Hugoniot curve, namely, the curve corresponding to
+ 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+.
+ Looking at the Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:intro:cj-znd:znd:znd-v-p-diagram"
+
+\end_inset
+
+, we can notice that the Rankine–Michelson line and equilibrium Hugoniot
+ curve has two possibilities to intersect:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $D=D_{\text{CJ}}$
+\end_inset
+
+.
+ In this case the gas state 
+\begin_inset Quotes eld
+\end_inset
+
+jumps
+\begin_inset Quotes erd
+\end_inset
+
+ abruptly from point
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $A$
+\end_inset
+
+ to point
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $N$
+\end_inset
+
+ and then continuously changes along the Rayleigh–Michelson line towards
+ point 
+\begin_inset Formula $C$
+\end_inset
+
+, where the Rayleigh–Michelson line and the equilibrium Hugoniot curve are
+ tangent to each other.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $D>D_{\text{CJ}}$
+\end_inset
+
+.
+ In this case the gas state 
+\begin_inset Quotes eld
+\end_inset
+
+jumps
+\begin_inset Quotes erd
+\end_inset
+
+ from point 
+\begin_inset Formula $A$
+\end_inset
+
+ to point 
+\begin_inset Formula $N$
+\end_inset
+
+ and then continuously changes along the Rayleigh–Michelson line towards
+ point 
+\begin_inset Formula $S$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+What is the significance of the case
+\begin_inset space ~
+\end_inset
+
+1, where 
+\begin_inset Formula $D=D_{\mathrm{CJ}}$
+\end_inset
+
+? The velocity 
+\begin_inset Formula $D_{\text{CJ}}$
+\end_inset
+
+ is the minimal velocity that makes steady self-sustained detonation wave
+ possible, at least theoretically.
+ It can be shown that in the end of the reaction zone products move with
+ a local sound speed 
+\begin_inset Formula $c_{\mathrm{CJ}}$
+\end_inset
+
+ relatively to the detonation front:
+\begin_inset Formula 
+\begin{equation}
+u_{\text{CJ}}-D_{\text{CJ}}=c_{\text{CJ}}.\label{eq:intro:cj-znd:znd:cj-condition}
+\end{equation}
+
+\end_inset
+
+The end of the reaction zone is called Chapman–Jouguet plane (point 
+\begin_inset Formula $\text{CJ}$
+\end_inset
+
+ on
+\begin_inset space ~
+\end_inset
+
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:intro:cj-znd:znd:znd-v-p-diagram"
+
+\end_inset
+
+, and the condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:intro:cj-znd:znd:cj-condition"
+
+\end_inset
+
+ is called Chapman–Jouguet condition.
+ The flow inside the reaction zone is subsonic relative to the shock, therefore
+ acoustic waves generated by released chemical energy can reach the detonation
+ front and support its strength.
+ The presence of the sonic plane exactly at the end of reaction zone isolates
+ the whole detonation wave from any rarefaction generated behind.
+ Therefore, these two factors—support of the front by chemical energy and
+ isolation from rarefaction waves—make self-sustained detonation waves possible.
+\end_layout
+
+\begin_layout Standard
+In contrast, when 
+\begin_inset Formula $D>D_{\text{CJ}}$
+\end_inset
+
+, the flow at the end of the reaction zone (point 
+\begin_inset Formula $S$
+\end_inset
+
+ on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:intro:cj-znd:znd:znd-v-p-diagram"
+
+\end_inset
+
+) is subsonic, therefore, detonation wave can be destroyed by a rarefaction
+ wave coming from the behind.
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:intro:cj-znd:znd:schema-znd-flow"
+
+\end_inset
+
+ shows the schema of the flow in a self-sustained detonation wave according
+ to the ZND theory.
+ The von
+\begin_inset space ~
+\end_inset
+
+Neumann spike is denoted on the figure right behind the shock, where the
+ ambient mixture is in shocked but unreacted state.
+ Then the chemical reaction progresses in the direction away from the shock
+ (arrow with the begin 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ and and 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+).
+ The length of the reaction zone is constant, and the whole flow inside
+ reaction zone is steady, that is, in the reference frame attached to the
+ detonation front all flow variables are function of only spatial coordinate,
+ not time.
+ The following flow can be unsteady and depends on the boundary condition
+ on the left.
+ The situation shown on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:intro:cj-znd:znd:schema-znd-flow"
+
+\end_inset
+
+ is when a rarefaction wave in the reaction products travels between the
+ left boundary and reaction zone to eliminate the differences between high
+ pressure in the products and low pressure on the left boundary.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/illustrations/znd-p-v-diagram.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagram of possible intersections of the Rayleigh–Michelson line and the
+ equilibrium Hugoniot curve.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:intro:cj-znd:znd:znd-v-p-diagram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/illustrations/schematics-znd-detonation-in-channel.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schema of the flow in a self-sustained detonation wave according to the
+ ZND theory.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:intro:cj-znd:znd:schema-znd-flow"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Literature review
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:intro:literature-review"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As soon as it was discovered experimentally
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "White1961,Voytsekhovskiy1963"
+
+\end_inset
+
+ that ZND detonation in gases was not stable, the question of the stability
+ analysis arose.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Shchelkin1959"
+
+\end_inset
+
+ formulated criterion of stability of ZND detonation based on a simplifying
+ assumption that the detonation front is followed by a region of constant
+ state coupled with infinitesimally thin reaction zone (square-wave detonation
+ model).
+ Consequent work on the detonation stability was focused mainly on three
+ branches: linear stability analysis, asymptotic analysis, and direct numerical
+ simulations.
+ Below we review some of the most important works of the first and third
+ branches for the one- and two-dimensional detonations.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Linear stability analysis.
+
+\series default
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Erpenbeck1962"
+
+\end_inset
+
+ formulated the problem of detonation stability as a hydrodynamic stability
+ problem for three-dimensional flow with several reactions and proposed
+ an approach for the solution, and applied his approach to the flow with
+ one-step irreversible Arrhenius-type reaction
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Erpenbeck1964"
+
+\end_inset
+
+.
+ Erpenbeck's technique consisted of linearization of the equations about
+ steady-state solution and application of the Laplace transform in time
+ to reduce the problem to a system of linear inhomogeneous ODEs and then
+ analysis of the poles of the transform function in a complex plane.
+ The extensive overview of the Erpenbeck's work, as well as of other early
+ studies, is provided in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Fickett2000"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Later, 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "LeeStewart1990"
+
+\end_inset
+
+ studied linear stability of one-dimensional detonation using normal-mode
+ approach and posing stability problem as a two-point eigenvalue problem
+ with linearized Rankine–Hugoniot conditions at the shock and with boundedness
+ condition in the end of the reaction zone.
+ The latter condition (also known as radiation condition) serves as a dispersion
+ relation and mathematically means that eigenfunctions remain bounded or,
+ from physical point of view, that no information propagates from the rear
+ end of the reaction zone to the lead shock.
+ To solve the boundary-value problem they used the shooting method coupled
+ with the 
+\begin_inset Quotes eld
+\end_inset
+
+carpet search
+\begin_inset Quotes erd
+\end_inset
+
+ to find the domain of attraction of the boundedness-condition function.
+ The authors obtained neutral stability curves in different parameter spaces.
+ In the space 
+\begin_inset Quotes eld
+\end_inset
+
+heat release–overdrive factor
+\begin_inset Quotes erd
+\end_inset
+
+ they found qualitative agreement with the results of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Erpenbeck1964"
+
+\end_inset
+
+.
+ Their main conclusion was that the increase of the degree of overdrive
+ stabilizes the ZND solutions, while the increase of activation energy destabili
+zes the ZND solution.
+ Later, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sharpe1997"
+
+\end_inset
+
+ modified the approach of Lee & Stewart by deriving asymptotic value of
+ flow state at the end of the reaction zone and consequently (using this
+ state as an initial value) integrating towards the shock.
+ As integration in the direction of the shock is better conditioned, it
+ allowed to consider not only the range of the parameters of Lee & Stewart
+ (where his results agrees with theirs), but also to extend the analysis
+ to the larger activation energy range, where he found pure exponential
+ growth of instability in contrast with the results of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Buckmaster1988"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Short1998"
+
+\end_inset
+
+ extended normal-mode analysis of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LeeStewart1990"
+
+\end_inset
+
+ to study two-dimensional instability.
+ The authors considered dependence of the degree of overdrive on the stability
+ spectrum and found that the number of unstable modes decreases when the
+ degree of overdrive increases.
+ They also investigated stability of detonation with large heat release
+ and varying activation energy.
+ Finally, they investigated how detonation stability depends on heat release
+ and found that the lower heat release is the more stable detonation becomes.
+ They also demonstrated that even in the cases when detonation is stable
+ to longitudinal perturbations, it can still be unstable to transverse perturbat
+ions.
+\end_layout
+
+\begin_layout Standard
+Several works also applied normal-mode analysis to models with several reactions.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Short1996"
+
+\end_inset
+
+ consider detonation in perfect gas with three-step chain-branching kinetics,
+ while 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gorchkov2007"
+
+\end_inset
+
+ formulated stability problem for detonations with arbitrary thermodynamic
+ and kinetic models.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sharpe1999"
+
+\end_inset
+
+ considered the case of pathological detonation, in which two reactions
+ occur consecutively and the second reaction is endothermic, and found that,
+ due to the embedded sonic point, the stability properties did not depend
+ on the part of the reaction zone behind this point.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Kasimov2002,Kasimov2004"
+
+\end_inset
+
+ applied normal-modes analysis to detonation in a circular tube of finite
+ diameter with one-step reaction.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Stewart2005"
+
+\end_inset
+
+ considered an extension of the theory of sonic locus of ZND detonations
+ to the case of multidimensional unsteady detonations and provided a reformulati
+on of the boundedness condition of the linear stability theory.
+ Tumin
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tumin2007Stability,Tumin2007Multidomain,Tumin2007IVP"
+
+\end_inset
+
+ employed multidomain spectral collocation methods to revisit Erpenbeck's
+ method and found agreement with normal-mode approach of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LeeStewart1990"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Numerical simulations.
+
+\series default
+ 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Fickett1966"
+
+\end_inset
+
+ employed model of Erpenbeck and studied the long-time behavior of shock
+ pressure using first-order explicit method of characteristics for several
+ cases of overdriven detonation which were analyzed previously by Erpenbeck.
+ Numerical solutions confirm the result of linear analysis by Erpenbeck.
+ Also, the authors studied the growth of instability by specifying approximately
+ steady piston motion which generated ZND wave and then allowing the truncation
+ error of the numerical method to perturb the wave.
+ They found that when they halved the grid step, the amplitude of oscillations
+ in the exponential growth stage is smaller, however, when the limit cycle
+ is obtained, the system no longer 
+\begin_inset Quotes eld
+\end_inset
+
+remembered
+\begin_inset Quotes erd
+\end_inset
+
+ the amplitude of these oscillations, that is, long-time behavior was the
+ same.
+ They also varied rear boundary condition using different piston motions
+ and found that, again, although initial transient behavior depended on
+ the piston movement, long-time behavior was the same.
+ In
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fickett1972"
+
+\end_inset
+
+ they extended their code to simulate simplified two-step branching kinetics.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Colella1986"
+
+\end_inset
+
+ applied fractional-step method to two models of detonation: simplified
+ Majda's model and reactive compressible Navier–Stokes equations and found
+ that for heat release values less than critical value or for fast reaction
+ rate, solution bifurcated and separated into two distinct waves: self-sustained
+ (weak) detonation wave in which reaction completed to equilibrium followed
+ by an inert shock wave, and this solution was stable in unsteady computations
+ with viscous effects included such that the distance between two waves
+ were increasing.
+ Also, the authors conducted unsteady simulations of the reactive Euler
+ equations and found that for coarse meshes similar pattern can be observed
+ in which the precursor moves with speed one computational cell per time
+ step.
+ The authors gave a theoretical explanation to this purely numerical phenomenon
+ as it disappeared with increased grid resolution.
+ The authors also emphasized an importance of the simplified models for
+ theoretical and numerical purposes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bourlioux1991"
+
+\end_inset
+
+ developed numerical method combining third-order piecewise-parabolic method
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Colella1984"
+
+\end_inset
+
+ with shock tracking and adaptive mesh refinement and applied it to the
+ Erpenbeck–Fickett–Wood problem
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fickett1966"
+
+\end_inset
+
+ pointing out that shock-capturing methods smear physical picture of detonation
+ dynamics if used on low-resolution grids.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Cai1996"
+
+\end_inset
+
+ used spectral methods with shock tracking and by employing Fourier transform
+ plotted neutral stability curve in the plane 
+\begin_inset Quotes eld
+\end_inset
+
+heat release–degree of overdrive
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Xu1997"
+
+\end_inset
+
+ developed code based on fifth-order WENO interpolation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "JiangShu1996WENO"
+
+\end_inset
+
+ and applied to a test problem of detonation initiation.
+ Several researchers investigated the required grid resolution for obtaining
+ convergent solutions for the model with one-step chemistry: 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sharpe2000,Sharpe2001,SharpeFalle1999"
+
+\end_inset
+
+ used second-order Godunov method with grid adaptation and concluded that
+ they had to use 2.5 times finer resolution than was reported previously
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bourlioux1991"
+
+\end_inset
+
+ to obtain a convergent solution for stable weakly unstable ZND solutions,
+ while 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hwang2000"
+
+\end_inset
+
+ used third-order ENO scheme
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Harten1987,Fedkiw1997"
+
+\end_inset
+
+ with local Lax–Friedrichs flux and concluded with similar needs for grid
+ resolution.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Short1999"
+
+\end_inset
+
+ studied the detonation dynamics with the model of three-step chemistry
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Short1996,Short1997"
+
+\end_inset
+
+ using adaptive Godunov method and gave an explanation of the interaction
+ of the lead shock with expansion and internal detonation waves; besides,
+ their model allowed them to demonstrate detonation quenching, in which
+ the shock decouples from the reaction zone completely.
+\end_layout
+
+\begin_layout Standard
+All of the previously described numerical simulations used either shock-capturin
+g or front-tracking methods to analyze detonation time series.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "Kasimov2004SAF"
+
+\end_inset
+
+ conducted analysis of detonation dynamics in the reference frame attached
+ to the lead shock, such that detonation velocity was explicitly computed
+ on each time step by first-order method of characteristics.
+ The authors also demonstrated by employing a model with finite length of
+ reaction zone that the sonic surface at the end of the reaction zone acts
+ as an interface between those acoustic waves that can reach the detonation
+ shock and those that cannot.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ng2005NonlinDynamics,Ng2005ChainBranching"
+
+\end_inset
+
+ tools of the theory of dynamic systems were used to construct bifurcation
+ diagram and point out the possibility of chaos in reactive Euler equations.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Henrick2006"
+
+\end_inset
+
+ improved the implementation of the shock-attached simulations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kasimov2004SAF"
+
+\end_inset
+
+ by simulating one-dimensional pulsating detonation with fifth-order method
+ and plotted detailed bifurcation diagram for a weakly unstable case.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Taylor2009"
+
+\end_inset
+
+ conducted shock-sttached simulations of two-dimensional weakly unstable
+ detonations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Stewart2006"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Lee2008"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Shepherd2009"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Ng2012"
+
+\end_inset
+
+ give overviews of the works on detonation instability based on linear stability
+ analysis and direct numerical simulations.
+\end_layout
+
+\begin_layout Section
+Overview of the present work
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:intro:overview"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the present work we aim to study the stability of ZND solutions—steady,
+ one-dimensional solutions—of different detonation models varying from Fickett's
+ detonation analog to models based on reactive Euler equations with realistic
+ thermochemistry.
+ The approach we use to reach our goal is based on combination of the features
+ of linear stability analysis via normal modes with direct numerical simulations.
+\end_layout
+
+\begin_layout Standard
+The high-level description of our approach is the following:
+\end_layout
+
+\begin_layout Enumerate
+Compute the ZND solution for the given model.
+ This step includes the problem of finding the CJ detonation velocity.
+\end_layout
+
+\begin_layout Enumerate
+Linearize the system about the ZND solution.
+ Linearize the Rankine–Hugoniot conditions.
+ The result is a linear system in which unknowns are perturbations of the
+ ZND solution.
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:intro:overview:linearize"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Pose the initial boundary-value problem consisting of the linear system
+ along with linearized Rankine–Hugoniot conditions as a boundary condition
+ on the upstream boundary and outflow boundary condition on the downstream
+ boundary.
+ Set initial condition using functions of magnitude much smaller than the
+ magnitude of ZND quantities.
+\end_layout
+
+\begin_layout Enumerate
+Solve the obtained linear initial boundary-value problem numerically.
+\end_layout
+
+\begin_layout Enumerate
+Postprocess the solution to extract the growth rates and frequencies of
+ the perturbations.
+\end_layout
+
+\begin_layout Standard
+This approach has several advantages over pure linear stability analysis
+ or direct numerical simulations:
+\end_layout
+
+\begin_layout Itemize
+Solution of linear hyperbolic problem allows to avoid any complications
+ connected with presence of secondary shocks in detonation wave;
+\end_layout
+
+\begin_layout Itemize
+solution of linear hyperbolic problem with smooth initial condition is smooth
+ as well, therefore, low-diffusion and low-dispersion numerical method can
+ be used to obtain it;
+\end_layout
+
+\begin_layout Itemize
+solution of linear stability problem numerically avoids imposing of radiation
+ boundary condition at the downstream boundary.
+\end_layout
+
+\begin_layout Standard
+Also, numerical computation of linearized problem can be used to verify
+ the result of direct numerical simulation of fully nonlinear problem.
+\end_layout
+
+\begin_layout Section
+Outline
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:intro:outline"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plan of the following text is as follows.
+ In Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:fsm"
+
+\end_inset
+
+ we study Fickett's detonation analog by applying the approach described
+ above.
+ Additionally, we verify our approach by linear stability analysis via normal
+ modes and also study nonlinear dynamics present in the model.
+ In Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:future"
+
+\end_inset
+
+ we describe the future work that we aim to do, such as application of our
+ approach to the detonation models based on reactive Euler equations with
+ different thermodynamics (perfect gas and ideal gas) and different types
+ of chemical kinetics (one and several reactions).
+\end_layout
+
+\end_body
+\end_document

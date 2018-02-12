@@ -1,0 +1,6246 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+\input{../preamble-child.tex}
+\end_preamble
+\use_default_options true
+\master ../../thesis.lyx
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "utopia" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing double
+\use_hyperref true
+\pdf_title "Fickett model"
+\pdf_author "Dmitry Kabanov kabanovdmitry@gmail.com"
+\pdf_keywords "detonation; linear stability; numerics"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, linkcolor=blue"
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Analysis of Fickett's detonation analog
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:fsm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+epigraphwidth}{0.618
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+epigraph{A toy problem can be useful in~learning about a~complicated property
+ of fluid motion if the simple toy problem describes that property, even
+ if it does not describe most other properties of the motion.}{P.
+\backslash
+ G.~
+\backslash
+citet{Drazin2002}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:intro"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this chapter, we consider a model that is much simpler that conventional
+ detonation models are, yet it is able to reproduce the unsteady dynamics
+ of these models in terms of the possibility of stable and unstable ZND
+ solutions.
+ There are several such models, for example, Fickett's model
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fickett1979"
+
+\end_inset
+
+, Majda's model
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Majda1981"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kasimov2013"
+
+\end_inset
+
+.
+ However, Majda's model contains diffusive term as it is based on the viscous
+ Burgers' equation, and thus the model is not hyperbolic, and the model
+ by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kasimov2013"
+
+\end_inset
+
+ contains nonlocal source term, which is very unusual feature for the convention
+al detonation models.
+ Therefore, we choose Fickett's model (called Fickett's detonation analog
+ in the following text) for testing our approach.
+\end_layout
+
+\begin_layout Standard
+Why do we apply our approach for studying detonation stability to a model
+ which is far from representing any detonation realistically? Using very
+ simple model—very similar in exhibited behavior to the realistic models
+ yet much simpler mathematically—is very advantageous.
+ Mathematical conciseness and simplicity of the model allows us to concentrate
+ on the algorithm development, debugging and testing, such that we can consider
+ more realistic detonation models further without significant changes to
+ the underlying (well-tested) solver, just by replacing the detonation model.
+\end_layout
+
+\begin_layout Standard
+Fickett's detonation analog was proposed by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fickett1979"
+
+\end_inset
+
+.
+ This model is not rigorously derived from equations of reactive fluid mechanics
+ using asymptotic analysis.
+ Instead, Fickett created his model by coupling inviscid Burgers' equation
+ with an equation of one-step reaction (here the flux in first equation
+ is taken to be in the form used by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fickett1984"
+
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align}
+u_{t}+\frac{1}{2}\left(u^{2}+q\lambda\right)_{x} & =0,\label{eq:fsm:eqn-of-motion}\\
+\lambda_{t} & =\omega,\label{eq:fsm:eqn-of-reaction}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $u$
+\end_inset
+
+ is the quantity analogous to the velocity or density in physical systems
+ (in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fickett1979"
+
+\end_inset
+
+ symbol 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is used); 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the reaction progress variable; 
+\begin_inset Formula $q$
+\end_inset
+
+ is the total heat release; 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is the reaction rate.
+\end_layout
+
+\begin_layout Standard
+Later, Fickett studied his model with different expressions for reaction
+ rate
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fickett1985Introduction"
+
+\end_inset
+
+, but for all cases he considered ZND solution was stable.
+ In
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Clarke1993"
+
+\end_inset
+
+ Fickett's model with very simple reaction rate expression and analytic
+ stable solution was used for assessment of numerical methods applied to
+ reactive flows.
+ It was understood that the instability in this model can be obtained by
+ changing chemistry.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Radulescu2011"
+
+\end_inset
+
+ considered Fickett's detonation analog in which the flow following the
+ shock is spatially divided in two distinct zones: induction zone with no
+ reaction and whose length depends on the strength of the shock, and reaction
+ zone itself with exothermic reaction.
+ By employing this model they obtained nonlinear dynamics with limit cycles
+ and period-doubling bifurcations with eventual onset of chaos similar to
+ the dynamics observed in reactive Euler equations.
+\end_layout
+
+\begin_layout Standard
+Here, we choose to use one-step chemistry with an expression for reaction
+ rate appearing in the derivation of the asymptotic model by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Faria2015Theory"
+
+\end_inset
+
+.
+ It was noted by them that their expression for reaction rate being supplied
+ to the Fickett's detonation analog gives rise to the spectrum of the solutions
+ including stable and unstable ZND solutions similar to observed in the
+ detonation models with one-step chemistry based on Euler equations.
+\end_layout
+
+\begin_layout Section
+Mathematical model
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:math-model"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this section we define the governing equations, ambient and Rankine–Hugoniot
+ conditions, and shock-evolution equation.
+\end_layout
+
+\begin_layout Subsection
+Governing equations in the laboratory frame
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:math-model:gov-eqn-lab"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Governing equations for the Fickett's detonation analog consist of equations
+ of motion and reaction:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:fsm:math-model:gov-eqn-lab:system}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+u_{t}+\frac{1}{2}\left(u^{2}+q\lambda\right)_{x} & =0,\label{eq:fsm:math-model:gov-eqn-lab:eqn-of-motion}\\
+\lambda_{t} & =\omega\left(u,\lambda\right),\label{eq:fsm:math-model:gov-eqn-lab:eqn-of-reaction}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $t$
+\end_inset
+
+ is the time, 
+\begin_inset Formula $x$
+\end_inset
+
+ the coordinate, 
+\begin_inset Formula $u$
+\end_inset
+
+ the velocity, 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the progress variable showing degree of completeness of chemical reaction
+ (
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+ points to no reaction state, 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ points to complete reaction state), 
+\begin_inset Formula $q$
+\end_inset
+
+ the heat release, 
+\begin_inset Formula $\omega$
+\end_inset
+
+ the reaction rate which is a function of state variables 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Reaction rate is defined by expression 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Faria2015Theory"
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\omega(u,\lambda)=k(1-\lambda)\exp\left(\theta\left(u+q\lambda\right)\right),\label{eq:fsm:math-model:gov-eqn-lab:production-rate}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the preexponent (constant defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:fsm:znd"
+
+\end_inset
+
+), 
+\begin_inset Formula $\theta$
+\end_inset
+
+ the activation energy, which is also constant.
+\end_layout
+
+\begin_layout Standard
+We also define thermicity coefficient which is used in the following text:
+\begin_inset Formula 
+\[
+\sigma=\frac{q}{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+All the quantities in this model are assumed to be nondimensional.
+\end_layout
+
+\begin_layout Subsection
+Governing equations in the shock-attached frame
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:math-model:gov-eqn-saf"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To do a numerical simulation of detonation, it is advantageous to transform
+ the governing equations into a reference frame attached to the leading
+ shock.
+ In this reference frame the shock is always at the same position and serves
+ as the upstream boundary of the reaction zone.
+ Once we switch to this reference frame, we can avoid smearing of the shock
+ due to numerical diffusion in simulations.
+ Another advantage is that in shock-attached calculations the unsteady detonatio
+n speed is known exactly (up to the numerical accuracy), because it appears
+ explicitly in the governing equations and computed on every time step.
+ The way to compute the detonation speed is the subject of Subsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:fsm:math-model:sheveq"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To transform the equations to the shock-attached frame, we assume that in
+ the laboratory reference frame detonation wave moves from left to right
+ with detonation speed 
+\begin_inset Formula $D=D(t^{\ell})>0$
+\end_inset
+
+, where 
+\begin_inset Formula $t^{\ell}$
+\end_inset
+
+ is time, from initial position 
+\begin_inset Formula $x_{0}^{\ell}=0$
+\end_inset
+
+ at time 
+\begin_inset Formula $t_{0}^{\ell}=0$
+\end_inset
+
+.
+ Then the transformation to the shock-attached frame is defined by equations
+\begin_inset Formula 
+\begin{align*}
+x & =x^{\ell}-x_{\mathrm{s}}^{\ell}=x^{\ell}-\int_{0}^{t^{\ell}}D(\tau)\,d\tau,\\
+t & =t^{\ell},
+\end{align*}
+
+\end_inset
+
+such that position of the shock in the shock-attached frame is 
+\begin_inset Formula $x_{\mathrm{s}}=0$
+\end_inset
+
+ for any time 
+\begin_inset Formula $t\geq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Therefore, governing equations in the shock-attached frame become
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+u_{t}+\frac{1}{2}\left(\left(u-2D\right)u+q\lambda\right)_{x} & =0,\\
+\lambda_{t}-D\lambda_{x} & =\omega.
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is useful to write the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+\end_layout
+
+\end_inset
+
+ in nonconservative form, which will be more convenient for linearization
+ in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:fsm:linearization"
+
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:fsm:math-model:gov-eqn-saf:system}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+u_{t}+\left(u-D\right)u_{x}+\sigma\lambda_{x} & =0,\label{eq:fsm:math-model:gov-eqn-saf:eqn-of-motion}\\
+\lambda_{t}-D\lambda_{x} & =\omega.\label{eq:fsm:math-model:gov-eqn-saf:eqn-of-reaction}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Ambient and Rankine–Hugoniot conditions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:math-model:ac-rhc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+\end_layout
+
+\end_inset
+
+ must be supplemented with ambient and boundary (Rankine–Hugoniot) conditions
+ for state variables 
+\begin_inset Formula $u$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ We use the following notation for this: to denote state variables right
+ ahead of the shock (at position 
+\begin_inset Formula $x_{\mathrm{s}}^{+}$
+\end_inset
+
+) we add subscript 
+\begin_inset Quotes eld
+\end_inset
+
+a
+\begin_inset Quotes erd
+\end_inset
+
+ to them; to denote state variables right behind the shock (at position
+ 
+\begin_inset Formula $x_{\mathrm{s}}^{-}$
+\end_inset
+
+) we use subscript 
+\begin_inset Quotes eld
+\end_inset
+
+s
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Ambient conditions are specified for the state ahead of the shock.
+ We assume trivial constant state:
+\begin_inset Formula 
+\begin{equation}
+u_{\mathrm{a}}=0,\quad\lambda_{\mathrm{a}}=0.\label{eq:fsm:math-model:ac-rhc:ac}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rankine–Hugoniot condition for 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ follows from the physical consideration.
+ We know that ahead of the shock 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+.
+ The shock per se is very thin, such that no chemical reaction occurs inside
+ it.
+ Therefore
+\begin_inset Formula 
+\begin{equation}
+\lambda_{\mathrm{s}}=0.\label{eq:fsm:math-model:ac-rhc:rh-lambda}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To derive Rankine–Hugoniot condition for 
+\begin_inset Formula $u$
+\end_inset
+
+ we rewrite
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:gov-eqn-saf:eqn-of-motion"
+
+\end_inset
+
+ in a conservative form:
+\begin_inset Formula 
+\[
+u_{t}+\left(\left(\frac{u}{2}-D\right)u+\sigma\lambda\right)_{x}=0,
+\]
+
+\end_inset
+
+and integrate over domain 
+\begin_inset Formula $(x_{1},x_{2})$
+\end_inset
+
+ containing shock: 
+\begin_inset Formula $x_{1}<x_{\mathrm{s}}<x_{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial}{\partial t}\left(\int_{x_{1}}^{x_{\mathrm{s}}}u\,dx+\int_{x_{\mathrm{s}}}^{x_{2}}u\,dx\right)=-\int_{x_{1}}^{x_{2}}\left(\left(\frac{u}{2}-D\right)u+\sigma\lambda\right)_{x}\,dx.\label{eq:fsm:math-model:ac-rhc:claw-integral-form}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $x_{\mathrm{s}}$
+\end_inset
+
+ do not depend on 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Therefore, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:ac-rhc:claw-integral-form"
+
+\end_inset
+
+ can be simplified to:
+\begin_inset Formula 
+\[
+\int_{x_{1}}^{x_{\mathrm{s}}}u_{t}\,dx+\int_{x_{\mathrm{s}}}^{x_{2}}u_{t}\,dx=-\left.\left(\left(\frac{u}{2}-D\right)u+\sigma\lambda\right)\right|_{x_{1}}^{x_{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we let 
+\begin_inset Formula $x_{1}\to x_{\mathrm{s}}^{-}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}\to x_{\mathrm{s}}^{+},$
+\end_inset
+
+ such that integrals on the left-hand side vanish, which yields
+\begin_inset Formula 
+\[
+\left.\left(\frac{u}{2}-D\right)u+\sigma\lambda\right|_{x_{1}}^{x_{2}}=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using ambient conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:ac-rhc:ac"
+
+\end_inset
+
+ and condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+
+\end_inset
+
+ we arrive at
+\begin_inset Formula 
+\[
+\left(\frac{u_{\mathrm{s}}}{2}-D\right)u_{\mathrm{s}}=0,
+\]
+
+\end_inset
+
+and Rankine–Hugoniot condition for 
+\begin_inset Formula $u$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{equation}
+u_{\mathrm{s}}=2D.\label{eq:fsm:math-model:ac-rhc:rh-u}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Shock-evolution equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:math-model:sheveq"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+\end_layout
+
+\end_inset
+
+ detonation speed 
+\begin_inset Formula $D$
+\end_inset
+
+ appears explicitly.
+ Therefore, we need a way to compute 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ In this subsection we derive the shock-evolution equation for this purpose.
+\end_layout
+
+\begin_layout Standard
+We want to find the rate of change of 
+\begin_inset Formula $u$
+\end_inset
+
+ on the shock path:
+\begin_inset Formula 
+\[
+\dot{u}|_{\mathrm{s}}=\left[u_{t}+Du_{x}\right]|_{\mathrm{s}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:gov-eqn-lab:eqn-of-motion"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+u_{t}=-uu_{x}-\sigma\lambda_{x},
+\]
+
+\end_inset
+
+we arrive at
+\begin_inset Formula 
+\[
+\dot{u}|_{\mathrm{s}}=\left[(D-u)u_{x}-\sigma\lambda_{x}\right]|_{\mathrm{s}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By noting that no chemical reaction occurs right behind the shock and using
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:gov-eqn-lab:eqn-of-reaction"
+
+\end_inset
+
+ we replace 
+\begin_inset Formula $\lambda_{x}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\dot{\lambda}|_{\mathrm{s}}=\lambda_{t}+D\lambda_{x}=0,
+\]
+
+\end_inset
+
+therefore,
+\begin_inset Formula 
+\[
+\lambda_{x}|_{\mathrm{s}}=\left.-\frac{\omega}{D}\right|_{\mathrm{s}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the relation
+\begin_inset Formula 
+\[
+\dot{u}|_{\mathrm{s}}=\od{u_{\text{s}}}t=2\od Dt,
+\]
+
+\end_inset
+
+which connects the evolution of 
+\begin_inset Formula $u$
+\end_inset
+
+ on the shock path with function 
+\begin_inset Formula $u_{\mathrm{s}}$
+\end_inset
+
+ defined by Rankine–Hugoniot condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:ac-rhc:rh-u"
+
+\end_inset
+
+, we find that the shock- evolution equation is
+\begin_inset Formula 
+\begin{equation}
+\od Dt=\frac{1}{2}\left.\left[(D-u)u_{x}+\frac{\sigma}{D}\omega\right]\right|_{\mathrm{s}}.\label{eq:fsm:math-model:sheveq}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The shock-evolution equation was first derived by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fickett1985Introduction"
+
+\end_inset
+
+ (with the name 
+\begin_inset Quotes eld
+\end_inset
+
+shock-change relation
+\begin_inset Quotes erd
+\end_inset
+
+).
+ The equation allows us to know detonation speed 
+\begin_inset Formula $D$
+\end_inset
+
+ at any time if initial condition for 
+\begin_inset Formula $D$
+\end_inset
+
+ is provided.
+\end_layout
+
+\begin_layout Section
+ZND solution
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+\end_layout
+
+\end_inset
+
+ admit the ZND solution—one-dimensional travelling-wave solution with constant
+ detonation velocity such that an observer moving at the same velocity sees
+ wave structure that does not change in time.
+ To denote steady quantities we use the 
+\begin_inset Quotes eld
+\end_inset
+
+bar
+\begin_inset Quotes erd
+\end_inset
+
+ symbol here and further.
+\end_layout
+
+\begin_layout Standard
+So, for constant speed 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ and vanishing time derivatives equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+\end_layout
+
+\end_inset
+
+ reduce to
+\begin_inset Formula 
+\begin{align}
+\od{}{}\left(\frac{\bar{u}^{2}}{2}-\bar{D}\bar{u}+\frac{q}{2}\bar{\lambda}\right) & =0,\label{eq:fsm:znd:eqn-of-motion}\\
+\od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}}.\label{eq:fsm:znd:eqn-of-reaction}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using ambient conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:ac"
+
+\end_inset
+
+ we obtain from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:eqn-of-motion"
+
+\end_inset
+
+ an
+\begin_inset space ~
+\end_inset
+
+algebraic relation
+\begin_inset Formula 
+\[
+\frac{\bar{u}^{2}}{2}-\bar{D}\bar{u}+\frac{q}{2}\bar{\lambda}=0,
+\]
+
+\end_inset
+
+which is a
+\begin_inset space ~
+\end_inset
+
+quadratic equation for 
+\begin_inset Formula $u(\lambda)$
+\end_inset
+
+ with roots:
+\begin_inset Formula 
+\[
+\bar{u}=\bar{D}\pm\sqrt{\bar{D}^{2}-q\bar{\lambda}},
+\]
+
+\end_inset
+
+and we take the largest root (in absolute value) to satisfy Rankine–Hugoniot
+ conditions
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-u"
+
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{equation}
+\bar{u}=\bar{D}+\sqrt{\bar{D}^{2}-q\bar{\lambda}}.\label{eq:fsm:znd:u-of-lambda}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, steady structure is defined by substituting 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:u-of-lambda"
+
+\end_inset
+
+ into
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:eqn-of-reaction"
+
+\end_inset
+
+ and integrating with Rankine–Hugoniot conditions as initial conditions
+ starting at the shock:
+\begin_inset Formula 
+\begin{equation}
+\bar{u}_{\mathrm{s}}=2\bar{D},\quad\bar{\lambda}_{\mathrm{s}}=0\label{eq:fsm:znd:ics}
+\end{equation}
+
+\end_inset
+
+towards the chemical equilibrium.
+\end_layout
+
+\begin_layout Standard
+From 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:u-of-lambda"
+
+\end_inset
+
+ it follows that the Chapman–Jouguet detonation velocity is defined by
+\begin_inset Formula 
+\begin{equation}
+D_{\mathrm{CJ}}=\sqrt{q}.\label{eq:fsm:znd:dcj}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We define preexponent 
+\begin_inset Formula $k$
+\end_inset
+
+ such that characteristic length scale is half-reaction length 
+\begin_inset Formula $l_{1/2}$
+\end_inset
+
+ of steady reaction zone, that is, 
+\begin_inset Formula $x=1$
+\end_inset
+
+ when 
+\begin_inset Formula $\lambda=1/2$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\int_{0}^{1/2}\frac{\bar{D}}{k\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda}=\int_{0}^{l_{1/2}}\,\dd x=1,
+\]
+
+\end_inset
+
+therefore,
+\begin_inset Formula 
+\begin{equation}
+k=\int_{0}^{1/2}\frac{\bar{D}}{\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda},\label{eq:fsm:znd:k}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\bar{u}$
+\end_inset
+
+ is defined by 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:u-of-lambda"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For further work we will need expressions for 
+\begin_inset Formula $\dd\bar{u}/\dd x$
+\end_inset
+
+ and 
+\begin_inset Formula $\dd\bar{\lambda}/\dd x$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+\od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}},\label{eq:fsm:znd:dlambda_dx}\\
+\od{\bar{u}}x & =\frac{1}{2}\frac{-q\od{\bar{\lambda}}x}{\sqrt{\bar{D}^{2}-q\bar{\lambda}}}=\frac{1}{2}\frac{q\bar{\omega}}{\bar{D}\sqrt{\bar{D}^{2}-q\bar{\lambda}}}.\label{eq:fsm:znd:du_dx}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Linearization
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:linearization"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this section we linearize equations (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{eq:fsm:math-model:gov-eqn-saf:system}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-u"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:sheveq"
+
+\end_inset
+
+) about the ZND solution defined in Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:fsm:znd"
+
+\end_inset
+
+.
+ We introduce a small parameter 
+\begin_inset Formula $\varepsilon\to0$
+\end_inset
+
+ determining the degree of deviation of detonation regime from a
+\begin_inset space ~
+\end_inset
+
+steady one.
+ Then we assume asymptotic expansions for 
+\begin_inset Formula $D$
+\end_inset
+
+, 
+\begin_inset Formula $u$
+\end_inset
+
+, and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:fsm:linearization:expansions}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+D & =\bar{D}+\varepsilon\psi'(t)\label{eq:fsm:linearization:expansion-d}\\
+u & =\bar{u}(x)+\varepsilon u'(x,t),\label{eq:fsm:linearization:expansion-u}\\
+\lambda & =\bar{\lambda}(x)+\varepsilon\lambda'(x,t),\label{eq:fsm:linearization:expansion-lambda}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{u}(x)$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\lambda}(x)$
+\end_inset
+
+ are steady quantities defined in section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:fsm:znd"
+
+\end_inset
+
+; 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ is the perturbation of the detonation speed; 
+\begin_inset Formula $u'(x,t)$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda'(x,t)$
+\end_inset
+
+ are the
+\begin_inset space ~
+\end_inset
+
+perturbations of the steady flow.
+\end_layout
+
+\begin_layout Standard
+Therefore, the location of unsteady shock in the laboratory frame is defined
+ by
+\begin_inset Formula 
+\[
+x_{\mathrm{s}}^{l}(t)=\bar{D}t+\varepsilon\int_{0}^{t}\psi'\,\dd t.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We substitute asymptotic expansions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:linearization:expansions}
+\end_layout
+
+\end_inset
+
+ into (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{eq:fsm:math-model:gov-eqn-saf:system}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-u"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:sheveq"
+
+\end_inset
+
+).
+ We drop 
+\begin_inset Formula $o(\varepsilon)$
+\end_inset
+
+ terms in these equations.
+ Steady terms (
+\begin_inset Formula $O(1)$
+\end_inset
+
+ terms) vanish.
+ Therefore, by linearization we obtain equations for perturbation (
+\begin_inset Formula $O(\varepsilon)$
+\end_inset
+
+) terms only.
+\end_layout
+
+\begin_layout Subsection
+Linearization of the governing equations
+\end_layout
+
+\begin_layout Standard
+We substitute asymptotic expansions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:linearization:expansions}
+\end_layout
+
+\end_inset
+
+ into equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-saf:system}
+\end_layout
+
+\end_inset
+
+ and arrive at
+\begin_inset Formula 
+\begin{align*}
+\left(\bar{u}+\varepsilon u'\right)_{t}+\left(\bar{u}+\varepsilon u'-\bar{D}-\varepsilon\psi'\right)\left(\bar{u}+\varepsilon u'\right)_{x}+\sigma\left(\bar{\lambda}+\varepsilon\lambda'\right)_{x} & =0,\\
+\left(\bar{\lambda}+\varepsilon\lambda'\right)_{t}-\left(\bar{D}+\varepsilon\psi'\right)\left(\bar{\lambda}+\varepsilon\lambda'\right)_{x} & =\omega\left(\bar{u}+\varepsilon u',\bar{\lambda}+\varepsilon\lambda'\right).
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By keeping only 
+\begin_inset Formula $O(\varepsilon)$
+\end_inset
+
+ terms from the first equation we obtain
+\begin_inset Formula 
+\begin{equation}
+u'_{t}+\left(\bar{u}-\bar{D}\right)u'_{x}+\sigma\lambda'_{x}+\od{\bar{u}}x\left(u'-\psi'\right)=0,\label{eq:fsm:linearization:eq-of-motion}
+\end{equation}
+
+\end_inset
+
+in which steady quantities are known, and perturbations 
+\begin_inset Formula $u'$
+\end_inset
+
+, 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ are unknowns.
+\end_layout
+
+\begin_layout Standard
+To linearize the second equation, we start with the linearization of 
+\begin_inset Formula $\omega$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\omega(\bar{u}+\varepsilon u',\bar{\lambda}+\varepsilon\lambda')=k(1-\bar{\lambda}-\varepsilon\lambda')\exp\left(\theta\left(\bar{u}+\varepsilon u'\right)\right)\exp\left(\theta q\left(\bar{\lambda}+\varepsilon\lambda'\right)\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Linearizing exponents using Taylor series:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(\theta\left(\bar{u}+\varepsilon u'\right)\right) & =\exp(\theta\bar{u})\exp(\theta\varepsilon u')=\exp(\theta\bar{u})\left(1+\theta\varepsilon u'\right),\\
+\exp\left(\theta q\left(\bar{\lambda}+\varepsilon\lambda'\right)\right) & =\exp(\theta q\bar{\lambda})\exp(\theta q\varepsilon\lambda')=\exp(\theta q\bar{\lambda})\left(1+\theta q\varepsilon\lambda'\right),
+\end{align*}
+
+\end_inset
+
+we obtain the following linearized expression for 
+\begin_inset Formula $\omega$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{multline*}
+\omega=k\left(1-\bar{\lambda}-\varepsilon\lambda'\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)\left(1+\theta\varepsilon u'\right)\left(1+\theta q\varepsilon\lambda'\right)=\\
+k\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)\left[\left(1-\bar{\lambda}\right)+\theta\left(1-\bar{\lambda}\right)\varepsilon u'+\theta q\left(1-\bar{\lambda}\right)\varepsilon\lambda'-\varepsilon\lambda'\right]=\\
+\bar{\omega}+\bar{\omega}_{u}\varepsilon u'+\bar{\omega}_{\lambda}\varepsilon\lambda',
+\end{multline*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\bar{\omega}_{u}=\theta\bar{\omega},\quad\bar{\omega}_{\lambda}=k\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)\,\left(\theta q(1-\bar{\lambda})-1\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then linearized reaction equation is
+\begin_inset Formula 
+\begin{equation}
+\lambda'_{t}-\bar{D}\lambda'_{x}-\bar{\omega}_{u}u'-\bar{\omega}_{\lambda}\lambda'-\od{\bar{\lambda}}x\psi'=0,\label{eq:fsm:linearization:eq-of-reaction}
+\end{equation}
+
+\end_inset
+
+in which steady quantities 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\omega}_{u}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\omega}_{\lambda}$
+\end_inset
+
+, 
+\begin_inset Formula $\dd\bar{\lambda}/\dd x$
+\end_inset
+
+ are known, and perturbations 
+\begin_inset Formula $u'$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda'$
+\end_inset
+
+, 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ are unknown.
+\end_layout
+
+\begin_layout Subsection
+Linearization of the Rankine–Hugoniot conditions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:linearization:rh"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Applying asymptotic expansions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:linearization:expansions}
+\end_layout
+
+\end_inset
+
+ to (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsm:math-model:ac-rhc:rh-u"
+
+\end_inset
+
+) we arrive at:
+\begin_inset Formula 
+\begin{align*}
+\bar{\lambda}+\varepsilon\lambda' & =0,\\
+\bar{u}_{\mathrm{s}}+\varepsilon u'_{\mathrm{s}} & =2(\bar{D}+\varepsilon\psi'),
+\end{align*}
+
+\end_inset
+
+and, by keeping only 
+\begin_inset Formula $\mathcal{O}(\varepsilon)$
+\end_inset
+
+ terms we get the Rankine–Hugoniot conditions for perturbations:
+\begin_inset Formula 
+\begin{equation}
+\lambda'_{\mathrm{s}}=0,\quad u'_{\mathrm{s}}=2\psi'.\label{eq:fsm:linearization:rh:conditions}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Linearization of the shock-evolution equation
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:linearization:sheveq"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We substitute asymptotic expansions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:linearization:expansions}
+\end_layout
+
+\end_inset
+
+ into 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:sheveq"
+
+\end_inset
+
+ which yields
+\begin_inset Formula 
+\[
+\od{\left(\bar{D}+\varepsilon\psi'\right)}t=\frac{1}{2}\left.\left[\left(\bar{D}+\varepsilon\psi'-\bar{u}-\varepsilon u'\right)\left(\bar{u}+\varepsilon u'\right)_{x}+\frac{\sigma\omega\left(\bar{u}+\varepsilon u',\bar{\lambda}+\varepsilon\lambda'\right)}{\bar{D}+\varepsilon\psi'}\right]\right|_{\mathrm{s}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After linearization we obtain:
+\begin_inset Formula 
+\[
+\od{\psi'}t=\frac{1}{2}\left.\left[\left(\bar{D}-\bar{u}\right)u'_{x}+\left(-\frac{d\bar{u}}{dx}+\frac{\sigma\bar{\omega}_{u}}{\bar{D}}\right)u'+\frac{\sigma\bar{\omega}_{\lambda}}{\bar{D}}\lambda'+\left(\frac{d\bar{u}}{dx}-\frac{\sigma\bar{\omega}}{\bar{D}^{2}}\right)\psi'\right]\right|_{\mathrm{s}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using Rankine–Hugoniot conditions and expression
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:du_dx"
+
+\end_inset
+
+ we arrive at the linearized shock-evolution equation:
+\begin_inset Formula 
+\begin{equation}
+\od{\psi'}t=\frac{1}{2}\left[\frac{qk\exp(2\theta\bar{D})(\theta\bar{D}-1)}{\bar{D}^{2}}\psi'-\bar{D}u'_{x}|_{\mathrm{s}}\right].\label{eq:fsm:linearization:sheveq:sheveq}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Shock-evolution equation contains velocity perturbation gradient 
+\begin_inset Formula $u'_{x}|_{\mathrm{s}}$
+\end_inset
+
+ which is unknown.
+ Therefore, in the solution process we have to approximate this gradient
+ using known values of 
+\begin_inset Formula $u'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Numerical method
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:numerical-method"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this section, we explain the algorithm that we use to integrate linearized
+ system
+\begin_inset Formula 
+\begin{eqnarray}
+\boldsymbol{z}'_{t} & = & -\boldsymbol{A}(x)\boldsymbol{z}'_{x}-\boldsymbol{B}(x)\boldsymbol{z}',\label{eq:fsm:numerical-method:system-in-vec-form}
+\end{eqnarray}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{equation}
+\vec{z}'=\left(u',\lambda',\psi'\right)^{\T},\quad\mat A=\left(\begin{array}{ccc}
+\bar{u}-\bar{D} & \sigma & 0\\
+0 & -\bar{D} & 0\\
+\frac{1}{2}\bar{D} & 0 & 0
+\end{array}\right),\quad\mat B=\left(\begin{array}{ccc}
+\frac{d\bar{u}}{dx} & 0 & -\frac{d\bar{u}}{dx}\\
+-\bar{\omega}_{u} & -\bar{\omega}_{\lambda} & -\frac{d\bar{\lambda}}{dx}\\
+0 & 0 & -\frac{qk\exp(2\theta\bar{D})(\theta\bar{D}-1)}{2\bar{D}^{2}}
+\end{array}\right).\label{eq:fsm:numerical-method:matrices}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The algorithm for numerical solution of the system is based on the algorithm
+ by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Henrick2006"
+
+\end_inset
+
+, although as we solve a linear hyperbolic system in a nonconservative form,
+ we replace WENO5M method with WENO5 for Hamilton–Jacobi equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Jiang2000"
+
+\end_inset
+
+.
+ We use the method of lines approach
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LeVeque2007"
+
+\end_inset
+
+.
+ First, we partition the computational domain into the discrete set of points.
+ See Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:numerical-method:grid"
+
+\end_inset
+
+.
+ We denote the number of internal points in the computational domain by
+ 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Hence, the total number of the grid points is 
+\begin_inset Formula $N+5$
+\end_inset
+
+ (with two points on the physical boundaries and three ghost points).
+ The grid step size 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ is constant and computed as
+\begin_inset Formula 
+\begin{equation}
+\Delta x=\frac{\mathcal{L}}{N+1},\label{eq:fsm:numerical-method:spatial-step}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+ is the length of the computational domain.
+ Then, assuming that we can approximate derivatives 
+\begin_inset Formula $\boldsymbol{z}'_{x}$
+\end_inset
+
+ at each grid points we arrive at the system
+\begin_inset Formula 
+\begin{equation}
+\od{\vec{z}}t=\vec{L}\left(\vec{z}\right),\label{eq:fsm:numerical-method:method-of-lines}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\vec{L}\left(\vec{z}\right)$
+\end_inset
+
+ represents the operator of the right-hand side.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/illustrations/grid.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The grid schema.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:numerical-method:grid"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Computation of the ZND solution
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:numerical-method:znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Computation of the ZND solution of the Fickett's detonation model consists
+ of several stages: finding the value of self-sustained detonation velocity,
+ finding the value of the preexponential factor 
+\begin_inset Formula $k$
+\end_inset
+
+, finding the length of the reaction zone, and integration of the solution
+ profiles and auxiliary quantities.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Self-sustained detonation velocity
+\series default
+.
+ The velocity of self-sustained detonation can be found by using formula
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:dcj"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Pre-exponential factor.
+
+\series default
+ Preexponential factor 
+\begin_inset Formula $k$
+\end_inset
+
+ is computed using formula
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:k"
+
+\end_inset
+
+ by numerical quadrature.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Length of the reaction zone.
+
+\series default
+ By integrating equation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:dlambda_dx"
+
+\end_inset
+
+ using separation of variables, we can find the length of partial reaction
+ zone with completeness of the reaction to the value 
+\begin_inset Formula $\bar{\lambda}=\lambda^{*}=1-\tau_{\lambda}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}\left(\lambda^{*}\right)=\int_{0}^{\lambda^{*}}\frac{\bar{D}}{k\left(1-\bar{\lambda}\right)\exp\left(\theta\bar{u}+q\bar{\lambda}\right)}\,\dd\bar{\lambda},\label{eq:fsm:numerical-method:znd:partial-length}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\bar{u}=\bar{u}\left(\bar{\lambda}\right)$
+\end_inset
+
+ is given by relation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:u-of-lambda"
+
+\end_inset
+
+ and 
+\begin_inset Formula $\tau_{\lambda}>0$
+\end_inset
+
+ is a tolerance describing the deviation of the practical final value of
+ 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ from the ideal value 
+\begin_inset Formula $\bar{\lambda}=1$
+\end_inset
+
+, because then the integral on the right-hand side is divergent due to the
+ factor 
+\begin_inset Formula $\left(1-\bar{\lambda}\right)$
+\end_inset
+
+ in the denominator of the integrand.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Integration of the solution profiles
+\series default
+.
+ To integrate the solution profiles we solve an initial value problem in
+ spatial coordinate 
+\begin_inset Formula $x$
+\end_inset
+
+ for the ODE
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:dlambda_dx"
+
+\end_inset
+
+ with initial condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:ics"
+
+\end_inset
+
+ and constitutive relation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:znd:u-of-lambda"
+
+\end_inset
+
+ for 
+\begin_inset Formula $0\leq x\leq\mathcal{L}$
+\end_inset
+
+.
+ After integration, auxiliary quantities 
+\begin_inset Formula $\omega$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{d\bar{u}}{dx}$
+\end_inset
+
+, and 
+\begin_inset Formula $\frac{d\bar{\lambda}}{dx}$
+\end_inset
+
+ are computed.
+ Finally, all spatially dependent quantities are reversed such that the
+ computational domain is 
+\begin_inset Formula $-\mathcal{L}\leq x\leq0$
+\end_inset
+
+.
+ The numerical integration is conducted by using VODE solver
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Brown1989"
+
+\end_inset
+
+ from package 
+\family typewriter
+scipy.integrate
+\family default
+ with BDF method of fifth order and relative and absolute tolerances set
+ to 
+\begin_inset Formula $10^{-15}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Check of the length of the computational domain.
+
+\series default
+ By integrating equation of the characteristic emanating from the downstream
+ boundary of the domain and propagating towards the shock, we check that
+ it does not reach the shock within time of computation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This idea was suggested by Luiz Faria
+\end_layout
+
+\end_inset
+
+.
+ Otherwise, simulation aborts.
+\end_layout
+
+\begin_layout Subsection
+Approximation of the right-hand sides
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:numerical-method:rhs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Approximation of right-hand sides of system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:system-in-vec-form"
+
+\end_inset
+
+ consists of two parts: computation of the advection term 
+\begin_inset Formula $\mat A(x)\vec{z}'_{x}$
+\end_inset
+
+, where the spatial derivative 
+\begin_inset Formula $\vec{z}'_{x}$
+\end_inset
+
+ must be approximated, and computation of the source term 
+\begin_inset Formula $\mat B(x)\vec{z}'$
+\end_inset
+
+, which is a simple evaluation local to every point of the numerical grid.
+\end_layout
+
+\begin_layout Standard
+Approximation of spatial derivatives are done differently in different areas
+ of the domain:
+\end_layout
+
+\begin_layout Itemize
+for grid points 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=0,\dots,N-2$
+\end_inset
+
+, WENO method for Hamilton–Jacobi equations of fifth order is used;
+\end_layout
+
+\begin_layout Itemize
+for grid points 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=N-1,N,N+1$
+\end_inset
+
+, approximations based on Taylor series expansions are used.
+\end_layout
+
+\begin_layout Subsubsection
+Approximation of the right-hand sides at points 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=0,\dots,N-2$
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "subsub:fsm:numerical-method:rhs:internal"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At grid points 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=0,\dots,N-2$
+\end_inset
+
+, the fifth-order WENO method for Hamilton–Jacobi equations is used for
+ the first two equations in the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:system-in-vec-form"
+
+\end_inset
+
+, as they constitute a Hamilton–Jacobi system.
+ That is, consider
+\begin_inset Formula 
+\begin{equation}
+\left.\frac{d\vec{z}_{j}}{dt}\right|_{x=x_{i}}=\left.\vec{L}_{j}\left(\vec{z}\right)\right|_{x=x_{i}},\quad j=1,2,\quad i=0,\dots,N-2.\label{eq:fsm:numerical-method:rhs:internal:system}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+1.
+ Description of WENOHJ for scalar equation.
+
+\series default
+ For simplicity, instead of the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:system"
+
+\end_inset
+
+ we consider a scalar equation
+\begin_inset Formula 
+\[
+\phi_{t}=-H\left(x,\phi,\phi_{x}\right),
+\]
+
+\end_inset
+
+which can be rewritten as a system of ODEs using method of lines:
+\begin_inset Formula 
+\[
+\frac{d\phi_{i}}{dt}=-\widehat{H}\left(x_{i},\,\phi_{i},\,\widehat{\phi}_{x,i}\right),
+\]
+
+\end_inset
+
+where 1) 
+\begin_inset Formula $\widehat{H}$
+\end_inset
+
+ is an approximation to 
+\begin_inset Formula $H$
+\end_inset
+
+; 2) 
+\begin_inset Formula $\widehat{\phi}_{x,i}^{\pm}$
+\end_inset
+
+ are WENO approximations to the 
+\begin_inset Formula $\phi_{x}$
+\end_inset
+
+ evaluated at point 
+\begin_inset Formula $x=x_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Approximation of 
+\begin_inset Formula $H$
+\end_inset
+
+
+\series default
+.
+ For the moment, suppose that 
+\begin_inset Formula $\widehat{\phi}_{x,i}^{\pm}$
+\end_inset
+
+ are given.
+ Then 
+\begin_inset Formula $H$
+\end_inset
+
+ can be approximated by local Lax–Friedrichs flux:
+\begin_inset Formula 
+\[
+\widehat{H}\left(x,\phi,\phi_{x}^{+},\phi_{x}^{-}\right)=H\left(x,\phi,\frac{\phi_{x}^{+}+\phi_{x}^{-}}{2}\right)-\alpha\frac{\phi_{x}^{+}-\phi_{x}^{-}}{2},
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\begin{equation}
+\alpha=\max\abs{\frac{\partial H}{\partial\phi_{x}}}.\label{eq:fsm:numerical-method:rhs:internal:alpha}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Approximations 
+\begin_inset Formula $\widehat{\phi}_{x}^{\pm}$
+\end_inset
+
+ of 
+\begin_inset Formula $\phi_{x}$
+\end_inset
+
+
+\series default
+.
+ WENO approximations 
+\begin_inset Formula $\widehat{\phi}_{x,i}^{\pm}$
+\end_inset
+
+ of the derivative 
+\begin_inset Formula $\phi_{x}\left(x_{i}\right)$
+\end_inset
+
+ are given by the formulas
+\begin_inset Formula 
+\begin{multline*}
+\phi_{x,i}^{\pm}=\frac{1}{12}\left(-\frac{\Delta^{+}\phi_{i-2}}{\Delta x}+7\frac{\Delta^{+}\phi_{i-1}}{\Delta}+7\frac{\Delta^{+}\phi_{i}}{\Delta x}-\frac{\Delta^{+}\phi_{i+1}}{\Delta x}\right)\pm\\
+\Phi\left(\frac{\Delta^{-}\Delta^{+}\phi_{i-2}}{\Delta x},\frac{\Delta^{-}\Delta^{+}\phi_{i-1}}{\Delta x},\frac{\Delta^{-}\Delta^{+}\phi_{i}}{\Delta x},\frac{\Delta^{-}\Delta^{+}\phi_{i+1}}{\Delta x}\right),
+\end{multline*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\phi_{i}=\phi(x_{i}),\quad\Delta^{+}\phi_{i}=\phi_{i+1}-\phi_{i},\quad\Delta^{-}\phi_{i}=\phi_{i}-\phi_{i-1},
+\]
+
+\end_inset
+
+and the WENO flux 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ is computed by the formulas 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+My exposition of WENO is too terse, must be made clearer.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Phi=\Phi(a,b,c,d)=\frac{1}{3}\tilde{\omega}_{0}\left(a-2b+c\right)+\frac{1}{6}\left(\tilde{\omega}_{2}-\frac{1}{2}\right)\left(b-2c+d\right),
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{\omega}_{0}=\frac{\omega_{0}}{\omega_{0}+\omega_{1}+\omega_{2}},\quad\tilde{\omega}_{2}=\frac{\omega_{2}}{\omega_{0}+\omega_{1}+\omega_{2}},
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\omega_{0}=\frac{1}{\left(\epsilon+IS_{0}\right)^{2}},\quad\omega_{1}=\frac{1}{\left(\epsilon+IS_{1}\right)^{2}},\quad\omega_{2}=\frac{1}{\left(\epsilon+IS_{2}\right)^{2}},\label{eq:fsm:numerical-method:rhs:internal:weno-weights}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+IS_{0} & =13\left(a-b\right)^{2}+3\left(a-3b\right)^{2},\\
+IS_{1} & =13(b-c)^{2}+3(b+c)^{2},\\
+IS_{2} & =13(c-d)^{2}+3(3c-d)^{2}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Quantity 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is used to prevent singularity of 
+\begin_inset Formula $\omega_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=0,1,2$
+\end_inset
+
+ in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+2.
+ Application of WENOHJ to the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:system"
+
+\end_inset
+
+.
+
+\series default
+ To apply WENOHJ method to the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:system"
+
+\end_inset
+
+, we consider the 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ submatrix of the matrix 
+\begin_inset Formula $\mat A$
+\end_inset
+
+ from
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:matrices"
+
+\end_inset
+
+.
+ The largest-in-magnitude eigenvalue of this submatrix is 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+, that is, 
+\begin_inset Formula $\alpha=\bar{D}$
+\end_inset
+
+ in formula
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:alpha"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Approximation of the spatial derivatives near the shock
+\begin_inset CommandInset label
+LatexCommand label
+name "subsub:fsm:numerical-method:rhs:shock"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To avoid the approximation of the spatial derivatives across the shock,
+ we have to avoid using WENO in the grid points 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=\{N-1,N,N+1\}$
+\end_inset
+
+.
+ Derivatives should be approximated using Taylor expansions of high order
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Henrick2006"
+
+\end_inset
+
+.
+ In this subsection, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ is used as a dummy variable, and in actual computations an appropriate
+ quantity must be used.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+1.
+ At point 
+\begin_inset Formula $x_{N-1}$
+\end_inset
+
+
+\series default
+.
+ At this point spatial derivatives of velocity 
+\begin_inset Formula $u_{x}'$
+\end_inset
+
+ and reaction progress variable 
+\begin_inset Formula $\lambda_{x}'$
+\end_inset
+
+ are approximated using formula
+\begin_inset Formula 
+\[
+\phi_{x,N-1}=\frac{1}{60\Delta x}\left(-2\phi_{N-4}+15u_{N-3}-60u_{N-2}+20u_{N-1}+30u_{N}-3u_{N+1}\right)+\bigO\left(\Delta x^{5}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+2.
+ At point 
+\begin_inset Formula $x_{N}$
+\end_inset
+
+
+\series default
+.
+ At this point spatial derivatives of velocity 
+\begin_inset Formula $u_{x}'$
+\end_inset
+
+ and reaction progress variable 
+\begin_inset Formula $\lambda_{x}'$
+\end_inset
+
+ are approximated using formula
+\begin_inset Formula 
+\[
+\phi_{x,N}=\frac{1}{12\Delta x}\left(-\phi_{N-3}+6\phi_{N-2}-18\phi_{N-1}+10\phi_{N}+3\phi_{N+1}\right)+\bigO\left(\Delta x^{4}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+3.
+ At point 
+\begin_inset Formula $x_{N+1}$
+\end_inset
+
+
+\series default
+.
+ At this point only 
+\begin_inset Formula $u'_{x}$
+\end_inset
+
+ must be approximated, as it enters the shock-evolution equation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:linearization:sheveq:sheveq"
+
+\end_inset
+
+.
+ The approximation formula is
+\begin_inset Formula 
+\[
+u'_{x,N+1}=\frac{1}{60\Delta x}\left(-12u_{N-4}+75u_{N-3}-200u_{N-2}+300u_{N-1}-300u_{N}+137u_{N+1}\right)+\bigO\left(\Delta x^{5}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Time-stepping
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:numerical-method:time-stepping"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Move me into the end of numerical method section.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The system of ordinary differential equations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:method-of-lines"
+
+\end_inset
+
+ can be solved by any ODE solver.
+ Our solver is implemented such that it works with third-order TVD (or SSP
+ in modern terminology) Runge–Kutta
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Shu1988"
+
+\end_inset
+
+and the fifth-order Runge–Kutta method
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+after "p. 56"
+key "Macdonald2003"
+
+\end_inset
+
+.
+ However, we report most of the results obtained using the latter method.
+ As we solve linear system, time step is computed at the start of computations
+ using CFL condition and remains fixed:
+\begin_inset Formula 
+\begin{equation}
+\Delta t=\frac{\text{CFL}\Delta x}{\bar{D}}\label{eq:fsm:numerical-method:time-stepping:cfl-condition}
+\end{equation}
+
+\end_inset
+
+because 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ is the largest wave speed, and used values of 
+\begin_inset Formula $\text{CFL}$
+\end_inset
+
+ are 0.8 for the third-order Runge-Kutta method and 1.4 for the fifth-order
+ Runge-Kutta method.
+\end_layout
+
+\begin_layout Subsection
+Initial conditions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:numerical-method:ics"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As initial conditions we use the conditions
+\begin_inset Formula 
+\begin{equation}
+u_{0}'(x,0)=A\exp\left(-x^{2}\right),\quad\lambda_{10}'(x,0)=0,\quad\quad\psi'(0)=\frac{1}{2}u_{0}'|_{\textrm{s}},\label{eq:fsm:numerical-method:ics:ics}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $A$
+\end_inset
+
+ is the amplitude of initial perturbation.
+ We use 
+\begin_inset Formula $A=10^{-5}$
+\end_inset
+
+.
+ Notice that initial condition for 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ is chosen such that initial and Rankine–Hugoniot conditions match.
+\end_layout
+
+\begin_layout Subsection
+Boundary conditions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:numerical-method:bcs"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Boundary conditions must be specified only for 
+\begin_inset Formula $u'$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda'$
+\end_inset
+
+, as they depend on 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The physics of the problem demands only one boundary condition, however,
+ two boundary treatments must be specified due to the numerical solution:
+ the upstream boundary treatment specifies the inflow into the domain through
+ the shock, and the downstream boundary treatment specifies the outflow
+ condition.
+\end_layout
+
+\begin_layout Standard
+At the upstream boundary the Dirichlet conditions are used
+\begin_inset Formula 
+\begin{equation}
+u_{N+1}'=2\psi',\quad\lambda_{N+1}'=0,\label{eq:fsm:numerical-method:bcs:upstream}
+\end{equation}
+
+\end_inset
+
+which are simply Rankine–Hugoniot conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:linearization:rh:conditions"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+At the downstream boundary the zero-order extrapolation is used
+\begin_inset Formula 
+\begin{equation}
+u_{i}'=u_{0}',\quad\lambda_{i}'=\lambda_{0}'\quad\mbox{for }i=\{-3,-2,-1\},\label{eq:fsm:numerical-method:bcs:downstream}
+\end{equation}
+
+\end_inset
+
+which is not, strictly speaking, an outflow boundary condition, but the
+ forward characteristic that transfers information from this boundary to
+ the shock is almost vertical, and therefore, does not affect the shock.
+ Actually, before starting unsteady simulations we check that the leftmost
+ characteristic does not reach the shock within time of integration.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+There must be a check of this in the code + x-t diagram would be good to
+ plot.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Termination condition for numerical simulation
+\end_layout
+
+\begin_layout Standard
+The solution of the linearized problem
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:system-in-vec-form"
+
+\end_inset
+
+ can be 1) stable or unstable.
+ In the former case, the detonation velocity reduces to the value 
+\begin_inset Formula $\bar{D}_{\mathrm{CJ}}$
+\end_inset
+
+.
+ In the latter case, the velocity grows unboundedly.
+ Therefore, numerical simulation must be terminated because of one of the
+ outcomes: either the user-specified final time is reached or the perturbation
+ of detonation velocity becomes of the same magnitude as 
+\begin_inset Formula $\bar{D}_{\mathrm{CJ}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+High-level description of the algorithm
+\end_layout
+
+\begin_layout Standard
+The numerical method requires the following input parameters: the resolution
+ of the grid 
+\begin_inset Formula $N$
+\end_inset
+
+, the minimal resolution in the half-reaction length 
+\begin_inset Formula $N_{1/2}$
+\end_inset
+
+, final time of computations 
+\begin_inset Formula $T_{\mathrm{final}}$
+\end_inset
+
+, tolerance of reaction progress variable 
+\begin_inset Formula $\tau_{\lambda}$
+\end_inset
+
+, heat release 
+\begin_inset Formula $q$
+\end_inset
+
+ , and activation energy
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given the input parameters, algorithm proceeds as follows:
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Initial phase.
+
+\series default
+ In the initial phase the numerical grid is created.
+ Then the ZND solution is computed in the grid points along with auxiliary
+ parameters such as 
+\begin_inset Formula $\od{\bar{u}}x$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{D}_{\mathrm{CJ}}$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $\bar{D}_{\mathrm{CJ}}$
+\end_inset
+
+ is the largest wave speed in the computational domain, time step must be
+ computed according to the CFL condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:time-stepping:cfl-condition"
+
+\end_inset
+
+ only once in the beginning of computations.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Time integration phase.
+
+\series default
+ In the time integration phase unknown quantities 
+\begin_inset Formula $\vec{z}'$
+\end_inset
+
+ are updated on each time step of the Runge–Kutta method, while at each
+ time stage of each time step the following procedures are performed:
+\end_layout
+
+\begin_layout Enumerate
+Boundary conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:bcs:upstream"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:bcs:downstream"
+
+\end_inset
+
+ are applied.
+\end_layout
+
+\begin_layout Enumerate
+Spatial derivatives 
+\begin_inset Formula $\vec{z}'_{x}$
+\end_inset
+
+ are approximated.
+\end_layout
+
+\begin_layout Enumerate
+Right-hand sides 
+\begin_inset Formula $\vec{L}\left(\vec{z}\right)$
+\end_inset
+
+ are computed.
+\end_layout
+
+\begin_layout Enumerate
+Between each time step the termination condition is checked, and if the
+ condition is true, then computations abort.
+\end_layout
+
+\begin_layout Standard
+Once numerical simulation is done, the time series 
+\begin_inset Formula $\psi'(t)$
+\end_inset
+
+ can be postprocessed to analyze the stability of the ZND solution as described
+ in
+\begin_inset space ~
+\end_inset
+
+subsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:fsm:postprocessing:extraction"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Postprocessing
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:postprocessing"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Solution of the linearized system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:system-in-vec-form"
+
+\end_inset
+
+ along with the initial conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:ics:ics"
+
+\end_inset
+
+ and boundary conditions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:bcs:upstream"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:bcs:downstream"
+
+\end_inset
+
+ gives us the profiles 
+\begin_inset Formula $u'(x,t)$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda'(x,t)$
+\end_inset
+
+ and time series 
+\begin_inset Formula $\psi'(t)$
+\end_inset
+
+.
+ These data must be postprocessed to extract the growth rates and frequencies
+ of the perturbations.
+\end_layout
+
+\begin_layout Standard
+To find the growth rate and frequencies of the perturbations, we fit the
+ time series 
+\begin_inset Formula $\psi'(t)$
+\end_inset
+
+ to the function
+\begin_inset Formula 
+\begin{equation}
+\psi'=a_{1}\exp\left(\alpha_{1}t\right)\sin\left(\omega_{1}t+\phi_{1}\right),\label{eq:fsm:postprocessing:fit-function}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\omega_{1}$
+\end_inset
+
+, and 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+ are the amplitude, growth rate, frequency, and the phase of perturbations,
+ respectively.
+\end_layout
+
+\begin_layout Standard
+The preliminary postprocessing of the time series consists of two steps,
+ which are needed for the nonlinear least-squares procedure described below.
+ First, we cut off the beginning of the time series before the first local
+ maximum.
+ Second, we average every point of time series by taking the average of
+ a point's value with the values of its neighbors with equal weights.
+ By averaging we smooth the signal a little bit to remove the high-frequency
+ noise (we need these to find local maxima, see further).
+\end_layout
+
+\begin_layout Standard
+Fitting is done by using nonlinear least-squares method.
+ It is crucial to supply good initial guess of parameters values to the
+ least-squares procedure to obtain good results.
+ We find initial guess as follows.
+ We collect the values of all local maxima of the signal 
+\begin_inset Formula $\psi'(t)$
+\end_inset
+
+.
+ Then we find the average difference 
+\begin_inset Formula $T$
+\end_inset
+
+ in time between these maxima.
+ This allows us to find initial guess for the frequency: 
+\begin_inset Formula $\omega_{1}=2\pi/T$
+\end_inset
+
+.
+ Then, by noting that for maxima sine-factor in
+\begin_inset space ~
+\end_inset
+
+expression
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:postprocessing:fit-function"
+
+\end_inset
+
+ must be equal to one, we arrive at the linear least-squares problem:
+\begin_inset Formula 
+\[
+\log a_{1}+\alpha_{1}t=\log\psi',
+\]
+
+\end_inset
+
+and using trivial transformation 
+\begin_inset Formula $a_{1}=\exp(\log a_{1})$
+\end_inset
+
+, we find initial guesses for 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{1}$
+\end_inset
+
+.
+ As initial guess for phase we take 
+\begin_inset Formula $\phi_{1}=\pi/2$
+\end_inset
+
+, as we cut off the beginning of the signal before the first local maximum.
+ By using these initial guesses for parameters, we find the more accurate
+ values by doing nonlinear least-squares.
+\end_layout
+
+\begin_layout Standard
+After the fitting process is done, we can say whether the ZND solution is
+ stable or not by looking at the sign of 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $a_{2}>0$
+\end_inset
+
+, then the perturbation will grow, and, therefore the ZND solution is unstable.
+ If 
+\begin_inset Formula $a_{2}<0,$
+\end_inset
+
+ then the perturbation will decay, and, therefore, the ZND solution is stable.
+ If 
+\begin_inset Formula $a_{2}=0$
+\end_inset
+
+, then the perturbation will neither grow nor decay, and the ZND solution
+ is neutrally stable.
+ In practice, using numerical computations it is extremely difficult to
+ get the latter case, so, neutral stability is defined by condition 
+\begin_inset Formula $|a_{2}|<\tau,$
+\end_inset
+
+ where 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is a given tolerance.
+\end_layout
+
+\begin_layout Standard
+The procedure described above relies on the fact that only one mode is present
+ in the solution (by mode we mean terms like in the right-hand side of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:postprocessing:fit-function"
+
+\end_inset
+
+).
+ However, the procedure is not sufficient if several modes are present in
+ the series 
+\begin_inset Formula $\phi'(t)$
+\end_inset
+
+, and the search for initial guesses must be more sophisticated.
+\end_layout
+
+\begin_layout Section
+Results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If not stated explicitly, all the results described here are obtained using
+ the following parameters: in computation of WENO weights in formulas
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
+
+\end_inset
+
+ 
+\begin_inset Formula $\epsilon=10^{-6}$
+\end_inset
+
+; in computation of the length of the computational domain 
+\begin_inset Formula $\mathrm{tol}_{\lambda}=10^{-6}$
+\end_inset
+
+ in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:znd:partial-length"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+ZND solution
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:znd:lambda-vs-theta"
+
+\end_inset
+
+ shows profiles of reaction progress variable 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ versus spatial coordinate 
+\begin_inset Formula $x$
+\end_inset
+
+ in ZND solution for fixed value of heat release 
+\begin_inset Formula $q=2.0$
+\end_inset
+
+ and varying activation energy 
+\begin_inset Formula $\theta=\left\{ 1.0,2.0,3.0,8.0\right\} $
+\end_inset
+
+.
+ The figure demonstrates that as the value of activation energy increases,
+ the profile of 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ develops steeper and steeper slope near the detonation shock (recall that
+ the half-reaction zone is rescaled to be always in 
+\begin_inset Formula $x\in[-1,0]$
+\end_inset
+
+).
+ The steep profiles are analogous to the square-wave detonations, which
+ are known to be unstable.
+ Therefore, we expect that, for any fixed 
+\begin_inset Formula $q$
+\end_inset
+
+, with the increase of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ the ZND solution looses stability for some critical value of activation
+ energy.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/znd-solution/znd-lambda.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of profiles of 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $q=2.0$
+\end_inset
+
+ and varying 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ As the value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ increases, the slope of 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+ becomes steeper.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:znd:lambda-vs-theta"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Demonstration of the stable and unstable solutions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:demo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:demo:bifurcation"
+
+\end_inset
+
+ shows examples of the stable and unstable solutions for the same value
+ of 
+\begin_inset Formula $q=1.7$
+\end_inset
+
+ but two different values of activation energy 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ For this value of 
+\begin_inset Formula $q$
+\end_inset
+
+ the critical value of activation energy is 
+\begin_inset Formula $\theta_{\mathrm{crit}}=2.35$
+\end_inset
+
+.
+ On Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:demo:bifurcation"
+
+\end_inset
+
+a stable case is shown, in which initial perturbation of the detonation
+ velocity 
+\begin_inset Formula $D$
+\end_inset
+
+ decays, and for long times 
+\begin_inset Formula $D=D_{\mathrm{CJ}}$
+\end_inset
+
+.
+ In contrast, Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:demo:bifurcation"
+
+\end_inset
+
+b shows the unstable case, in which detonation velocity grows away from
+ the CJ value.
+ In summary, the Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:demo:bifurcation"
+
+\end_inset
+
+ demonstrates that Hopf bifurcation occurs in the system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:fsm:math-model:gov-eqn-lab:system}
+\end_layout
+
+\end_inset
+
+ with production rate
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:gov-eqn-lab:production-rate"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Add solution profiles for u and lambda.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/linear-solver/detonation-speed-stable.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/linear-solver/detonation-speed-unstable.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Demonstration of stable and unstable solutions: a) stable solution with
+ 
+\begin_inset Formula $\theta<\theta_{\mathrm{crit}}$
+\end_inset
+
+; b) unstable solution with 
+\begin_inset Formula $\theta>\theta_{\mathrm{crit}}$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:demo:bifurcation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Comparison of linear and nonlinear solutions
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:comparison"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this subsection, we present the results of comparison of solutions of
+ the nonlinear problem and linear problem to verify our linear algorithm.
+ If parameters of the problem are such that the ZND solution is unstable,
+ then solutions of both problems should agree with each other for early
+ times, when the perturbation of the ZND solution is small.
+\end_layout
+
+\begin_layout Standard
+To conduct the comparison, nonlinear solver was implemented using algorithm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Henrick2006"
+
+\end_inset
+
+ for nonlinear conservation laws, again using biased approximations of spatial
+ derivatives of the fluxes of the conserved variables near the shock as
+ explained in Subsubsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsub:fsm:numerical-method:rhs:shock"
+
+\end_inset
+
+.
+ Details on the nonlinear solver and its verification are provided in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:ffmnls"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:comparison:comparison"
+
+\end_inset
+
+ shows normalized detonation velocity with respect to time obtained both
+ from linear and nonlinear solvers for heat release 
+\begin_inset Formula $q=1.7$
+\end_inset
+
+ and activation energy 
+\begin_inset Formula $\theta=2.4$
+\end_inset
+
+.
+ For these values of parameters ZND solution is unstable, therefore, perturbed
+ solution develops growing oscillations.
+ On Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:comparison:comparison"
+
+\end_inset
+
+a the normalized detonation velocity is shown for early times, when the
+ amplitude of perturbation is small.
+ As we can see, the solutions of the linear and nonlinear problems are indisting
+uishable from each other.
+ On Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:comparison:comparison"
+
+\end_inset
+
+b the detonation velocity is shown at later times when the amplitude of
+ perturbation is large.
+ We see that two solutions diverge in terms of the amplitude and the frequency
+ of the oscillations.
+ The agreement between two solutions for early times of perturbation growth
+ demonstrates that the usage of direct numerical simulation of the linearized
+ equations allows to conduct the linear stability analysis.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/linear-vs-nonlinear/early-times.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/linear-vs-nonlinear/late-times.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of solutions of linearized (solid line) and nonlinear (dashed
+ line) problems: a) at early times when the amplitude of perturbation is
+ small comparing to 
+\begin_inset Formula $D_{\mathrm{CJ}}$
+\end_inset
+
+ and two solutions are indistinguishable; b) at later times when the amplitude
+ of perturbation is large and two solutions diverge.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:comparison:comparison"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Neutral stability curve
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:nscurve"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Provided that we can extract the growth rates of the perturbations from
+ the results of the numerical simulations, we vary two parameters of the
+ problem—activation energy
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $\theta$
+\end_inset
+
+ and heat release
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $q$
+\end_inset
+
+—to plot neutral stability curve.
+ The range of 
+\begin_inset Formula $q$
+\end_inset
+
+ is from 0.4 to 6.0.
+ This procedure is semiautomatic and consists of three sets of simulations.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+First set
+\series default
+.
+ We vary 
+\begin_inset Formula $q$
+\end_inset
+
+ with the step 
+\begin_inset Formula $\Delta q=0.5$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ with step 
+\begin_inset Formula $\Delta\theta$
+\end_inset
+
+=1 to find estimates for the curve.
+ We run numerical simulations with resolution 
+\begin_inset Formula $N_{1/2}=100$
+\end_inset
+
+ at this step.
+ Specifically, for any given 
+\begin_inset Formula $q$
+\end_inset
+
+ we find two values of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ between which the change occurs in the stability of the solution.
+ This step gives us crude estimates of the neutral stability curve.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Second step
+\series default
+.
+ We run numerical simulations with resolution 
+\begin_inset Formula $N_{1/2}=1000$
+\end_inset
+
+ and steps 
+\begin_inset Formula $\Delta q=0.1$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta\theta=0.1$
+\end_inset
+
+ to find better estimates for the stability boundary.
+ The results of these studies are processed automatically to find the estimate
+ of activation energy 
+\begin_inset Formula $\theta$
+\end_inset
+
+ with error band 
+\begin_inset Formula $0.1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Third step
+\series default
+.
+ Then we run another set of numerical simulations in which 
+\begin_inset Formula $q$
+\end_inset
+
+ is varied with step 
+\begin_inset Formula $\Delta q=0.1$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is varied with step 
+\begin_inset Formula $\Delta\theta=0.01$
+\end_inset
+
+.
+ The results of the third set of simulations are postprocessed to find for
+ each 
+\begin_inset Formula $q$
+\end_inset
+
+ the value of 
+\begin_inset Formula $\theta$
+\end_inset
+
+ that gives the smallest-in-absolute-value growth rate.
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nscurve:curve"
+
+\end_inset
+
+ shows the neutral stability curve obtained by running parametric study
+ in 
+\begin_inset Formula $q$
+\end_inset
+
+–
+\begin_inset Formula $\theta$
+\end_inset
+
+ parameter plane.
+ The curve serves as a boundary between stable region below and unstable
+ region above the curve.
+ The curve itself represents the region of neutral stability such that for
+ any pair 
+\begin_inset Formula $\left(q,\theta\right)$
+\end_inset
+
+ lying on the curve a perturbation to the ZND solution of the system will
+ not grow or decay with time.
+ To emphasize that the curve is obtained by running finite set of numerical
+ simulations with discrete steps for 
+\begin_inset Formula $q$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+, we plot the curve as a set of markers instead of a solid line.
+ We want to emphasize that the curve on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nscurve:curve"
+
+\end_inset
+
+ is found numerically by choosing such results of numerical simulations
+ that satisfy condition
+\begin_inset Formula 
+\[
+\abs{\mbox{growth rate}}<\tau,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is a tolerance.
+ All the growth rates are divided in three classes: growth rates with absolute
+ values smaller than 
+\begin_inset Formula $0.001$
+\end_inset
+
+; growth rates with absolute value smaller than 0.01; growth rates with absolute
+ values smaller than 0.05.
+ The results of this step are plotted as neutral stability curve.
+ As we vary 
+\begin_inset Formula $q$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ with uniform steps 
+\begin_inset Formula $\Delta q=0.1$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta\theta=0.01$
+\end_inset
+
+, then the tolerance may be different for different results.
+ The uniform steps are also the reason that the markers on the figure are
+ plotted with variable density.
+\end_layout
+
+\begin_layout Standard
+The curve on the Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nscurve:curve"
+
+\end_inset
+
+ is similar to the
+\begin_inset space ~
+\end_inset
+
+lower branch of the neutral stability curve for the reactive Euler equations
+ with one-step kinetics (cf.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet*
+after "Figure~7"
+key "LeeStewart1990"
+
+\end_inset
+
+).
+ However, the question whether the upper branch exists for the Fickett's
+ detonation analog with production rate
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:math-model:gov-eqn-lab:production-rate"
+
+\end_inset
+
+ was not investigated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/neutral-stability/neutral-stability-curve.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Neutral stability curve in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Formula $q$
+\end_inset
+
+–
+\begin_inset Formula $\theta$
+\end_inset
+
+ parameter plane separating regions in which ZND solutions are either stable
+ or unstable.
+ Different markers specify that the absolute value of the growth rate of
+ perturbation is within some tolerance 
+\begin_inset Formula $\tau$
+\end_inset
+
+: 
+\begin_inset Formula $\tau=0.001$
+\end_inset
+
+ (green circles); 
+\begin_inset Formula $\tau=0.01$
+\end_inset
+
+ (blue squares); 
+\begin_inset Formula $\tau=0.05$
+\end_inset
+
+ (orange triangles).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:nscurve:curve"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Code verification
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:verification"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For any newly implemented numerical PDE solver it is very important to verify
+ it on several test cases.
+ It is widely accepted 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Salari2000,Roy2005"
+
+\end_inset
+
+that the most stringent test case is comparison of the observable order
+ of accuracy with theoretical order of accuracy.
+\end_layout
+
+\begin_layout Standard
+In all computational experiments aiming to verify the code we compute the
+ observable order of accuracy 
+\begin_inset Formula $p_{N}$
+\end_inset
+
+ for the grid with resolution 
+\begin_inset Formula $N$
+\end_inset
+
+ internal grid points as
+\begin_inset Formula 
+\[
+p_{2}=\frac{\log\left(\norm{E_{1}}/\norm{E_{2}}\right)}{\log\left(\Delta x_{1}/\Delta x_{2}\right)},
+\]
+
+\end_inset
+
+where errors 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{2}$
+\end_inset
+
+ are computed on the grid with resolutions 
+\begin_inset Formula $N$
+\end_inset
+
+ and 
+\begin_inset Formula $2N$
+\end_inset
+
+, respectively, and 
+\begin_inset Formula $\Delta x$
+\end_inset
+
+ is given by formula
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:spatial-step"
+
+\end_inset
+
+.
+ The formula for error computation depends on the given test case.
+\end_layout
+
+\begin_layout Subsubsection
+Stable ZND solution
+\begin_inset CommandInset label
+LatexCommand label
+name "subsub:fsm:results:verification:stable-znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We start the code verification with the following test case.
+ We specify values of heat release 
+\begin_inset Formula $q=2.0$
+\end_inset
+
+ and activation energy 
+\begin_inset Formula $\theta=1.90$
+\end_inset
+
+ such that ZND solution is stable.
+ Final time is 
+\begin_inset Formula $T_{\mathrm{final}}=100$
+\end_inset
+
+.
+ Grid resolution is specified such that spatial steps (and consequently,
+ time steps) are proportional with integer ratio, therefore, we can compute
+ discretization errors by taking solutions on two successive grids.
+ For a grid with twice smaller time step than the current grid, we take
+ every second sample of detonation velocity time series and subtract every
+ sample of time series obtained on the current grid.
+ We make sure that we subtract detonation velocities exactly at the same
+ time values by putting assertion in the code.
+\end_layout
+
+\begin_layout Standard
+The results of the convergence study are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:fsm:results:verification:stable-znd:convergence"
+
+\end_inset
+
+.
+ As data demonstrate, the observed order of accuracy varies from first to
+ fifth orders in different norms.
+ Only in 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+-norm we obtain true fifth-order accuracy for resolution 
+\begin_inset Formula $N=399$
+\end_inset
+
+.
+ To investigate the reason for this unexpected behavior of the code, we
+ consider the influence of an artificial parameter 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ in computation of WENO weights in
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
+
+\end_inset
+
+ on the solution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand input
+filename "results/verification-linear-stable/convergence-data.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Convergence study for the linearized solver in the case of the stable ZND
+ solution.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:fsm:results:verification:stable-znd:convergence"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Investigation of the dependence on WENO parameter
+\series default
+.
+ We analyze the dependence of the solution for stable ZND case on the value
+ of WENO parameter 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+ We take 
+\begin_inset Formula $q=2.0$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta=1.90$
+\end_inset
+
+ with domain length 11.
+ The grid resolution is 
+\begin_inset Formula $N=440$
+\end_inset
+
+ points.
+ We vary 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ from 
+\begin_inset Formula $10^{-6}$
+\end_inset
+
+ to 
+\begin_inset Formula $10^{-45}$
+\end_inset
+
+ and monitor how the perturbation 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ of detonation velocity behaves (as it is a stable ZND case, 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ should decay to zero).
+ The results are shown in Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:fsm:results:verification:stable-znd:epsilon-dependence"
+
+\end_inset
+
+.
+ The data demonstrate that the value of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ drastically changes the character of the solution, and for 
+\begin_inset Formula $\epsilon\leq10^{-11}$
+\end_inset
+
+ solution is numerically unstable.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+
+\end_inset
+
+ shows the perturbation of detonation velocity versus time for two different
+ values of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, all other physical and numerical parameters are taken the same.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+
+\end_inset
+
+a shows for 
+\begin_inset Formula $\epsilon=10^{-6}$
+\end_inset
+
+ solution is a stable ZND solution.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+
+\end_inset
+
+b shows that for 
+\begin_inset Formula $\epsilon=10^{-11}$
+\end_inset
+
+ solution is an unstable ZND solution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand input
+filename "results/verification-linear-stable-epsilon-dependence/epsilon-dependence.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dependence on
+\begin_inset space ~
+\end_inset
+
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:fsm:results:verification:stable-znd:epsilon-dependence"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/verification-linear-stable-epsilon-dependence/det-vel-eps=1e-6.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/verification-linear-stable-epsilon-dependence/det-vel-eps=1e-11.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Detonation velocity vs time for two different values of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+: a) 
+\begin_inset Formula $\epsilon=1e-6$
+\end_inset
+
+; b) 
+\begin_inset Formula $\epsilon=1e-11$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+Investigation of the dependence on the length of computational domain
+\series default
+.
+ The length of the computational domain for any given values of physical
+ parameters depend on the value of 
+\begin_inset Formula $\mathrm{tol}_{\lambda}$
+\end_inset
+
+.
+ Therefore, we study here the dependence of the error in the detonation
+ velocity at final time 
+\begin_inset Formula $T_{\mathrm{final}}$
+\end_inset
+
+ on tolerance of 
+\begin_inset Formula $\mathrm{tol}_{\lambda}$
+\end_inset
+
+.
+ Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:fsm:results:verification:stable-znd:lambda-dependence"
+
+\end_inset
+
+ shows the results obtained for domain length 
+\begin_inset Formula $\mathcal{L}=22$
+\end_inset
+
+ (such domain length corresponds to the minimum value of 
+\begin_inset Formula $\mathrm{tol}_{\lambda}$
+\end_inset
+
+ in
+\begin_inset space ~
+\end_inset
+
+Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:fsm:results:verification:stable-znd:lambda-dependence"
+
+\end_inset
+
+) and resolution 
+\begin_inset Formula $N=6600$
+\end_inset
+
+.
+ We can see that the error is always the same, no matter how close to unity
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is at the end of the reaction zone.
+ Therefore, bad convergence of the code is not affected by the length of
+ computational domain, and the value 
+\begin_inset Formula $\mathrm{tol}_{\lambda}=10^{-6}$
+\end_inset
+
+ is enough.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand input
+filename "results/verification-linear-stable-lambda-dependence/experiment/results.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dependence of the perturbation of detonation velocity on the length of the
+ computational domain.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:fsm:results:verification:stable-znd:lambda-dependence"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Investigation of resolution dependence of the growth of instability for
+ small values of WENO parameter
+\series default
+.
+ As was demonstrated, for value 
+\begin_inset Formula $\epsilon=10^{-12}$
+\end_inset
+
+ detonation is unstable for 
+\begin_inset Formula $q=2.0$
+\end_inset
+
+, 
+\begin_inset Formula $\theta=2.0$
+\end_inset
+
+.
+ Here we demonstrate that the results are resolution dependent in this case.
+ We run two simulations in which only resolution differs and see that the
+ growth rate of instability increases drastically when resolution increases.
+ Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+
+\end_inset
+
+ shows detonation velocity versus time obtained from simulations with resolution
+s 
+\begin_inset Formula $N=1000$
+\end_inset
+
+ and 
+\begin_inset Formula $N=10000$
+\end_inset
+
+ internal grid points.
+ Notice on the figure how time to the end of simulation changes.
+ Due to the termination condition (???), simulations stop long before user-reque
+sted time: perturbation of detonation velocity becomes of the same magnitude
+ as the steady detonation velocity at time about 2.2 on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+
+\end_inset
+
+a and at time about 0.28 on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+
+\end_inset
+
+b.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/verification-linear-stable-epsilon-dependence-resolution/det-vel-N=1000.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/verification-linear-stable-epsilon-dependence-resolution/det-vel-N=10000.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Dependence of the growth rate of instability on grid resolution: a) 
+\begin_inset Formula $N=1000$
+\end_inset
+
+; b) 
+\begin_inset Formula $N=10000$
+\end_inset
+
+.
+ Note the log scale on ordinate axis.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In conclusion, it can be said that numerical results depend seriously on
+ the value of the parameter 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ that is used in the computation of the WENO weights.
+ It was noticed that the stability of ZND solution obtained in numerical
+ simulation can be affected by the value of this parameter.
+ A possible explanation is that small values of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ cause WENO for Hamilton–Jacobi equations to be numerically unstable.
+ It was also noticed that the growth of numerical instability depends on
+ the grid resolution—as resolution increases, the growth rate of instability
+ increases as well.
+\end_layout
+
+\begin_layout Subsubsection
+Unstable ZND solution
+\begin_inset CommandInset label
+LatexCommand label
+name "subsub:fsm:results:verification:unstable-znd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We verify the code by running simulations for unstable ZND solution.
+ Parameters are 
+\begin_inset Formula $q=2.0$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta=2.15$
+\end_inset
+
+.
+ The domain length in this case is 
+\begin_inset Formula $10$
+\end_inset
+
+.
+ We run simulations to the final time 
+\begin_inset Formula $100$
+\end_inset
+
+.
+ Again, as in the Subsubsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsub:fsm:results:verification:stable-znd"
+
+\end_inset
+
+, we vary grid resolution such that spatial steps (and consequently, time
+ steps) are exactly proportional, therefore, we can compute norms of discretizat
+ion errors by taking differences of detonation velocities at exactly the
+ same time values.
+\end_layout
+
+\begin_layout Standard
+Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:fsm:results:verification:unstable-znd:results"
+
+\end_inset
+
+ shows the results of the convergence study.
+ For the coarser grids (rows 2–3 of the table) results demonstrate that
+ the observed order of accuracy matches the theoretical fifth order of accuracy
+ and actually even slightly better.
+ For finer grid (row 4) the observed order of accuracy is smaller than the
+ theoretical order, which is due to the increasing influence of round-off
+ errors.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand input
+filename "results/verification-linear-unstable/convergence-data.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results of convergence study of the solver in the case of unstable ZND solution.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:fsm:results:verification:unstable-znd:results"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Comparison of unsteady linear analysis with normal-mode analysis
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:comp-nm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this subsection we compare the results obtained by unsteady linear analysis
+ with the algorithm described above, with the results obtained with normal-mode
+ analysis.
+ We conduct normal-mode analysis using approach by 
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "LeeStewart1990"
+
+\end_inset
+
+.
+ In this approach the governing equations are linearized about the ZND solution
+ and boundary-value problem is posed for a complex eigenvalue 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ with Rankine–Hugoniot conditions on the right boundary (on the shock) and
+ complex-valued boundedness condition 
+\begin_inset Formula $H$
+\end_inset
+
+ on the left boundary (at the chemical equilibrium).
+ The boundedness condition expresses the fact that eigenfunctions of the
+ problem should not 
+\begin_inset Quotes eld
+\end_inset
+
+blow up
+\begin_inset Quotes erd
+\end_inset
+
+ at the equilibrium point of the reaction zone.
+ Full details of the approach applied to the Fickett's detonation analog
+ are described in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:ffmnm"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We apply the normal-mode analysis for the problem with parameters: heat
+ release 
+\begin_inset Formula $q=1.7$
+\end_inset
+
+ and activation energy 
+\begin_inset Formula $\theta=2.4$
+\end_inset
+
+, which is known from unsteady linear computations described above to be
+ an unstable case.
+ In the first part of the normal-mode analysis we do 
+\begin_inset Quotes eld
+\end_inset
+
+carpet search
+\begin_inset Quotes erd
+\end_inset
+
+ to find a minimum of the boundedness function 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ First, we plot the carpet by sampling the boundedness function in a range
+ 
+\begin_inset Formula $\Re\alpha$
+\end_inset
+
+ 0.03–0.04, 
+\begin_inset Formula $\Im\alpha$
+\end_inset
+
+ 0.6–0.7 with resolution 
+\begin_inset Formula $100$
+\end_inset
+
+ points along each axes.
+ Carpet is shown as a contour plot on Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:comp-nm:carpet"
+
+\end_inset
+
+.
+ As can be seen from the contour plot, there is a well-defined minimum of
+ the carpet with coordinates 
+\begin_inset Formula $\alpha_{r}\approx0.03272$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha_{i}\approx0.6626$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/normal-modes/carpet-contour-fine.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Carpet plot shown approximate location of the eigenvalue 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:comp-nm:carpet"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the found values of 
+\begin_inset Formula $\alpha_{r}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ as an initial guess, we now solve the boundary value problem using Newton
+ method for the system of equations
+\begin_inset Formula 
+\[
+H_{r}\left(\alpha_{r},\alpha_{i}\right)=0,\quad H_{i}\left(\alpha_{r},\alpha_{i}\right)=0
+\]
+
+\end_inset
+
+on the domain 
+\begin_inset Formula $[0;1-10^{-5}]$
+\end_inset
+
+.
+ We also tried to work on the domain 
+\begin_inset Formula $[0;1-10^{-6}]$
+\end_inset
+
+ with no success because integration from the shock towards the equilibrium
+ is ill-conditioned, which is a
+\begin_inset space ~
+\end_inset
+
+known issue in application of normal-mode analysis to detonation stability
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Sharpe1997"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:comp-nm:nm-profiles"
+
+\end_inset
+
+ shows ZND solution versus spatial coordinate along with the perturbation
+ eigenfunctions 
+\begin_inset Formula $u'$
+\end_inset
+
+ (perturbation of velocity) and 
+\begin_inset Formula $\lambda'$
+\end_inset
+
+ (perturbation of reaction progress variable).
+ Figure shows that the eigenfunctions are very smooth, which is expected
+ as activation energy 
+\begin_inset Formula $\theta=2.4$
+\end_inset
+
+ is only slightly larger than critical value 
+\begin_inset Formula $\theta_{\textrm{crit}}=2.35$
+\end_inset
+
+ and there is only one unstable mode, and vanish as the equilibrium part
+ of the reaction zone is approached, similarly to what is found in the analysis
+ of the reactive Euler equations (
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LeeStewart1990,Short1998,Sharpe1997"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/normal-modes/normal-modes-profiles.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ZND solution and perturbations obtained via normal-mode analysis with parameters
+ 
+\begin_inset Formula $q=1.7$
+\end_inset
+
+, 
+\begin_inset Formula $\theta=2.4$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:comp-nm:nm-profiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Table
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:fsm:results:comp-nm:alpha"
+
+\end_inset
+
+ shows the comparison of growth rates and frequencies of perturbations obtained
+ via unsteady linear computations and normal-mode computations.
+ Results of two different approaches match to five significant digits, which
+ verifies the correctness of unsteady linear computations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset CommandInset include
+LatexCommand input
+filename "results/normal-modes/unsteady-solver-vs-normal-modes.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of the growth rates and frequencies of perturbations obtained
+ via unsteady linear computations and normal-mode computations.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:fsm:results:comp-nm:alpha"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Nonlinear dynamics of the model
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:fsm:results:nonl"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this subsection we demonstrate that the considered model is capable of
+ not only one bifurcation from stable to unstable ZND solution but also
+ presents nonlinear dynamics with limits cycles of period-1 and period-2
+ oscillations
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Strogatz2015"
+
+\end_inset
+
+ similar to the dynamics of the reactive Euler equations.
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nonl:oscil"
+
+\end_inset
+
+ shows normalized detonation velocity versus time obtained from simulations
+ with parameters 
+\begin_inset Formula $q=1.7$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta=2.5$
+\end_inset
+
+ (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nonl:oscil-a"
+
+\end_inset
+
+) and 
+\begin_inset Formula $\theta=2.54$
+\end_inset
+
+ (Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nonl:oscil-b"
+
+\end_inset
+
+).
+ As can be seen in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nonl:oscil-a"
+
+\end_inset
+
+, limit cycle with period-1 oscillations is attained after initial exponential
+ growth, while in Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nonl:oscil-b"
+
+\end_inset
+
+, limit cycle with period-2 oscillations is attained.
+ We notice that in period-2 oscillations difference between local maxima
+ is drastic (top maxima are about 1.7 and bottom maxima are about 1.2 of CJ
+ detonation velocity).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/nonlinear-solver/det-vel-q-1.7-theta-2.50.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:nonl:oscil-a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/nonlinear-solver/det-vel-q-1.7-theta-2.54.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:nonl:oscil-b"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Period-1 and period-2 oscillations obtained with parameters 
+\begin_inset Formula $q=1.7$
+\end_inset
+
+ and a) 
+\begin_inset Formula $\theta=2.5$
+\end_inset
+
+, b) 
+\begin_inset Formula $\theta=2.54$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:nonl:oscil"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Work in progress.
+
+\series default
+ We aim to study nonlinear dynamics of the Fickett's detonation analog by
+ plotting bifurcation diagram for 
+\begin_inset Formula $q=4$
+\end_inset
+
+ and activation energy in a range 1.15-1.35 with step 0.001 (in total 201 simulatio
+ns).
+ We were not able to employ the same method
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Henrick2006"
+
+\end_inset
+
+ as used to plot
+\begin_inset space ~
+\end_inset
+
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fsm:results:nonl:oscil"
+
+\end_inset
+
+, because of the presence of the internal shocks that reach the lead shock
+ and destroy numerical stability of the solution due to the use of biased
+ finite-difference approximations (see Subsubsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsub:fsm:numerical-method:rhs:shock"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Instead, we build a version of the method, in which ghost points are introduced
+ ahead of the shock and at each time step solution is extrapolated to these
+ points by zero-order extrapolation.
+ Hence, WENO approximations can be used everywhere in the domain, including
+ the points in the neighborhood of the shock.
+ Besides that, we notice that as we increase activation energy, reaction
+ rate function shape and magnitude changes drastically through the simulation
+ time—it can change from smooth Gaussian-like shape with magnitude unity
+ to a very sharp spike with magnitude 300! Usage of the time step based
+ only on the CFL condition, is not appropriate in this case
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Wang2015HighOrder"
+
+\end_inset
+
+, as stiffness of the source terms should be properly taken in a account.
+ Therefore, we modify the code to use 
+\family typewriter
+ode45
+\family default
+ solver of MATLAB to be able to take time steps based on errors in the solutions
+, which depend both on convective and source terms.
+\end_layout
+
+\begin_layout Standard
+We employ this version of code to plot the bifurcation diagram shown in
+ the Figure
+\begin_inset space ~
+\end_inset
+
+.
+ We use resolution 1000 points per half-reaction zone of steady reaction.
+ The bifurcation diagram is partial as the simulations are not over yet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename results/bifurcation-diagram.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Partial bifurcation diagram for parameters 
+\begin_inset Formula $q=4$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ in a range 1.15–1.35.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fsm:results:nonl:bif-diag"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusions
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:fsm:conclusions"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this chapter we applied our approach to
+\begin_inset space ~
+\end_inset
+
+linear stability analysis of detonations to the Fickett's detonation analog
+ with one-step kinetics.
+ The analog exhibits instability to longitudinal perturbations similar to
+ the one-dimensional reactive Euler equations, which are widely used by
+ the researchers to study detonation dynamics.
+ The results of our computations demonstrate that for sufficiently high
+ values of activation energy the system switches from stable ZND solution
+ to unstable one through what appears to be a Hopf bifurcation.
+ We verify our approach by comparing solutions of linearized system with
+ the solutions obtained from direct numerical simulations of nonlinear system
+ for early times, when the amplitude of perturbation is small.
+ Also, we compare the growth rates and frequencies of perturbations obtained
+ from the results of unsteady linear computations with the results of more
+ conventional normal-mode analysis and find agreement to five significant
+ digits.
+ Finally, we consider pairs of heat release 
+\begin_inset Formula $q$
+\end_inset
+
+ and
+\begin_inset space ~
+\end_inset
+
+activation energy 
+\begin_inset Formula $\theta$
+\end_inset
+
+ in a wide range to find the neutral stability boundary.
+ In summary, the application of our approach to the Fickett's detonation
+ analog shows that it is a viable alternative to the analysis by normal
+ modes that allows to avoid imposing radiation condition on the downstream
+ boundary of the reaction zone, while giving an
+\begin_inset space ~
+\end_inset
+
+advantage of using highly accurate numerical method to the solution of linearize
+d system.
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,289 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\options doublespace,fullpage
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref section
+\pdf_pdfusetitle false
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\rightmargin 1in
+\headsep 0.083334in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Conclusion File
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Conclusions
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+In this thesis, we developed and implemented a new approach to study stability
+ of steady-state solutions of detonation models.
+ Our approach is based on the linearization of the governing equations written
+ in a shock-attached frame and numerical solution of the linearized problem.
+ Resultant time series of detonation velocity are postprocessed using novel
+ technique of dynamic mode decomposition, which is a novel technique aimed
+ at identification of modes of the system that grow or decay exponentially
+ in time with fixed frequencies, and these modes are identical to the normal
+ modes in linearized systems.
+\end_layout
+
+\begin_layout Standard
+We implement and test our algorithm using commonly used detonation model
+ based on the reactive Euler equations with one irreversible reaction.
+ Comparing our stability results with the results of linear stability analysis
+ via normal-mode approach, which are widely present in the literature for
+ this model, we have found excellent agreement both for growth rates and
+ frequencies of the perturbations of the base flow for all cases considered.
+ Computation of the neutral stability boundary for a wide range of activation
+ energy 
+\begin_inset Formula $E$
+\end_inset
+
+ and heat release 
+\begin_inset Formula $Q$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+ also have showed an agreement with the results of normal-mode approach.
+ Additionally, we have studied neutral stability boundaries for other values
+ of 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ (1.1, 1.3, and 1.4) and have found that for low values of 
+\begin_inset Formula $Q$
+\end_inset
+
+ critical value of 
+\begin_inset Formula $E$
+\end_inset
+
+ decreases as 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ increases, while for large values of 
+\begin_inset Formula $Q$
+\end_inset
+
+ critical values of 
+\begin_inset Formula $E$
+\end_inset
+
+ increases as 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ increases.
+ Also, we have studied the dependence of the frequencies along the neutral
+ stability curves on 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and have found that for low values of 
+\begin_inset Formula $Q$
+\end_inset
+
+ frequency is insensitive to 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, while for large values of 
+\begin_inset Formula $Q$
+\end_inset
+
+ frequency increases as 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ increases.
+ One particularly interesting result was that although for 
+\begin_inset Formula $\gamma\geq1.2$
+\end_inset
+
+ neutral stability curves of the fundamental mode are neutral stability
+ boundaries that separate stable base flows from unstable ones, for 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ that was not the case: for mid-range of 
+\begin_inset Formula $Q$
+\end_inset
+
+ first overtone is more unstable than the fundamental mode, hence, neutral
+ stability boundary is determined by a union of neutral stability curves
+ for these two modes.
+\end_layout
+
+\begin_layout Standard
+The advantage of the present approach over traditional normal-mode approach
+ is that analytic complications of formulating boundary-value problem, namely,
+ formulation of the boundary condition at the end of the reaction zone,
+ are replaced by straightforward linearization with simple outflow boundary
+ condition.
+ However, difficulty arises in postprocessing step as time series of detonation
+ velocity inevitably contain noise due to numerical approximation and hence
+ it may become challenging to identify all normal modes correctly.
+\end_layout
+
+\begin_layout Standard
+Having developed and well-tested approach to linear stability analysis,
+ we have considered an extension of the model based on reactive Euler equations
+ with one-step kinetics, to the model that includes two reactions: one is
+ exothermic and another one is endothermic.
+ Analysis of the ZND solutions for this model showed that there are two
+ types of the admissible ZND solutions, which are the same for the region
+ between the embedded sonic locus and the leading shock, and are different
+ between the end of the reaction zone and the sonic locus.
+ We have studied the effects of endothermicity on stability and have shown
+ that as endothermicity increases, more and more unstable modes are excited
+ in the stability spectrum, hence, rendering base ZND flow unstable.
+ We have also showed that stability spectrum is independent of the underlying
+ ZND solution, which serves as a demonstration of the postulate that intrinsic
+ stability of detonations is determined solely by flow between the sonic
+ locus and the detonation front.
+\end_layout
+
+\begin_layout Standard
+Using particular reaction-rate expression obtained in the asymptotic theory
+ of detonations, we analyze the Fickett's detonation analogue both for linear
+ and nonlinear stability.
+ We have shown that this model demonstrates rich nonlinear dynamics with
+ multiple bifurcations and chaotic behavior.
+\end_layout
+
+\begin_layout Section
+Future Research Work
+\end_layout
+
+\begin_layout Standard
+The work presented in this thesis can be extended in the following directions.
+\end_layout
+
+\begin_layout Standard
+Extension of the present approach to linear stability analysis to more complicat
+ed models based on reactive Euler equations coupled with thermodynamic relations
+ of calorically perfect gases with multistep reaction mechanisms.
+\end_layout
+
+\begin_layout Standard
+Extension of the present approach to linear stability analysis to more complicat
+ed models based on reactive Euler equations coupled with thermodynamic relations
+ of ideal, but not calorically perfect, gases with multistep reaction mechanisms.
+\end_layout
+
+\begin_layout Standard
+Thorough investigation of the nonlinear dynamics of the Fickett's model
+ with reaction-rate expression that gives rich nonlinear dynamics by using
+ different numerical schemes for approximation of spatial derivatives (including
+ characteristic decomposition) and different time integrators (strong-stability-
+preserving Runge–Kutta schemes and implicit-explicit Runge–Kutta schemes)
+ to analyze sensitivity of the nonlinear dynamics to numerical methods and
+ to determine which schemes are the most robust in terms of preservation
+ of the solutions invariants 
+\begin_inset Formula $(u>0$
+\end_inset
+
+ and 
+\begin_inset Formula $0\leq\lambda\leq1)$
+\end_inset
+
+ and handling of the secondary shock waves.
+\end_layout
+
+\end_body
+\end_document
