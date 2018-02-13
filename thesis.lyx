@@ -1185,7 +1185,7 @@ status collapsed
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "/home/kabanod/Documents/References/main"
-options "plainnat"
+options "rusnat"
 
 \end_inset
 

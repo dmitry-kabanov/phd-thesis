@@ -59,7 +59,7 @@
 \use_package stmaryrd 1
 \use_package undertilde 1
 \cite_engine natbib
-\cite_engine_type numerical
+\cite_engine_type authoryear
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -170,14 +170,15 @@ The wave is assumed to propagate from left to right with speed
 \end_inset
 
 , and in the reference frame attached to the lead shock, the governing equations
- are written as (see 
+ are written as 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
+before "see"
 key "KasimovStewart2004"
 
 \end_inset
 
-):
+:
 \begin_inset Formula 
 \begin{align}
 \rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:mass}\\
