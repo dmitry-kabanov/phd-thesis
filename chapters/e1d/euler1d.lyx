@@ -131,6 +131,17 @@ Our analysis of detonation stability is based on the one-dimensional reactive
  solutions and linearization about the steady state.
 \end_layout
 
+\begin_layout Subsection
+Governing equations
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:e1d:model:goveqn"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 First, we present the governing equations for the case of one-step irreversible
  reaction 
