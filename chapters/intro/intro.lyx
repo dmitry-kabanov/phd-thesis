@@ -1314,7 +1314,7 @@ name "fig:intro:cj-znd:znd:schema-znd-flow"
 \end_layout
 
 \begin_layout Section
-Literature review
+Stability computations
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:intro:literature-review"
