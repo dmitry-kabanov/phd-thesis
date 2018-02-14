@@ -86,39 +86,6 @@
 \begin_body
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Abstract File
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-% Do not remove centering environment below
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \align center
 \begin_inset ERT
 status collapsed
@@ -211,7 +178,7 @@ status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -224,7 +191,7 @@ doublespacing
 
  
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -339,41 +306,44 @@ status collapsed
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
-Detonation is a supersonic mode of combustion that is modeled as a system
+Detonation is a supersonic mode of combustion that is modeled by a system
  of conservation laws of compressible fluid mechanics coupled with the equations
  describing thermodynamic and chemical properties of the fluid.
- Mathematically, these governing equations admit steady-state solutions.
- However, such solutions are unstable to small perturbations and almost
- never observed in laboratory experiments.
+ Mathematically, these governing equations admit steady-state travelling-wave
+ solutions consisting of leading shock wave followed by a reaction zone.
+ However, such solutions are often unstable to small perturbations and rarely
+ observed in laboratory experiments.
 \end_layout
 
 \begin_layout Standard
-The goal of this work is to study the stability of steady-state solutions
- of detonation models by the following approach.
- We linearize the governing equations about steady-state solution and solve
- the linearized problem using high-order numerical methods.
- The results of these computations are postprocessed to extract growth rates
- and frequencies of the perturbations and predict stability of steady-state
- solutions to infinitesimal perturbations.
+The goal of this work is to study the stability of travelling-wave solutions
+ of detonation models by the following novel approach.
+ We linearize the governing equations about a base travelling-wave solution
+ and solve the resultant linearized problem using high-order numerical methods.
+ The results of these computations are postprocessed using dynamic mode
+ decomposition to extract growth rates and frequencies of the perturbations
+ and predict stability of travelling-wave solutions to infinitesimal perturbatio
+ns.
 \end_layout
 
 \begin_layout Standard
 We apply this approach to two models based on the reactive Euler equations
  for perfect gases.
- For the first model with one-step reaction mechanism, we find excellent
- agreement of our results with the results of normal-mode analysis.
+ For the first model with one-step reaction mechanism, we find agreement
+ of our results with the results of normal-mode analysis to two significant
+ digits.
  For the second model with two-step mechanism, we find that both types of
- admissible steady-state solutions exhibit the same stability spectra.
+ admissible travelling-wave solutions exhibit the same stability spectra.
 \end_layout
 
 \begin_layout Standard
-Then we turn our attention to the Fickett's detonation analogue coupled
- with a particular reaction-rate expression.
- Besides studying linear-stability properties of this model, we demonstrate
+Then we investigate to the Fickett's detonation analogue coupled with a
+ particular reaction-rate expression.
+ In addition to linear stability analysis of this model, we demonstrate
  that it exhibits rich nonlinear dynamics with multiple bifurcations and
  chaotic behavior.
 \end_layout
