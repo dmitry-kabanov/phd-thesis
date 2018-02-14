@@ -1982,7 +1982,41 @@ name "sec:intro:outline"
 \end_layout
 
 \begin_layout Standard
-Plan of the following text is as follows.
+Following chapters consider analysis of three different detonation models.
+ In
+\begin_inset space ~
+\end_inset
+
+Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1d"
+
+\end_inset
+
+ we develop our approach and analyze the model based on the reactive Euler
+ equations with one-step chemistry, which is the model that was extensively
+ analyzed by normal-mode approach by previous researchers.
+ This is the chapter that contains full detailed description of numerical
+ algorithms used to solve linearized problem and postprocess the resultant
+ time series of detonation velocity using dynamic mode decomposition algorithm.
+ In Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1deig"
+
+\end_inset
+
+, we apply our approach to the model based on the reactive Euler equations
+ with two-step chemistry with the second reaction being endothermic.
  In Chapter
 \begin_inset space ~
 \end_inset
@@ -1994,25 +2028,21 @@ reference "chap:fsm"
 
 \end_inset
 
- we study Fickett's detonation analog by applying the approach described
- above.
+ we study Fickett's detonation analog.
  Additionally, we verify our approach by linear stability analysis via normal
  modes and also study nonlinear dynamics present in the model.
- In Chapter
+ Finally, in Chapter
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:future"
+reference "chap:conclusions"
 
 \end_inset
 
- we describe the future work that we aim to do, such as application of our
- approach to the detonation models based on reactive Euler equations with
- different thermodynamics (perfect gas and ideal gas) and different types
- of chemical kinetics (one and several reactions).
+ we summarize the most significant results achieved in this work.
 \end_layout
 
 \end_body
