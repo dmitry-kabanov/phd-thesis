@@ -103,39 +103,21 @@ name "chap:e1d"
 
 \end_layout
 
-\begin_layout Section
-Mathematical model 
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:e1d:model"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 Our analysis of detonation stability is based on the one-dimensional reactive
  Euler equations for a perfect gas that has a constant ratio of specific
- heats and reacts following either a single-step Arrhenius law or a two-step
- mechanism of the type 
-\begin_inset Formula $\text{A}\to\text{B}\to\text{C}$
-\end_inset
-
-.
- The steady traveling-wave solutions for these two cases are investigated
- for linear stability by means of direct numerical integration of the linearized
- Euler equations with a subsequent analysis of the resultant time series
- of the shock speed using the DMD algorithm.
- In this section, we introduce the governing equations, their steady-state
- solutions and linearization about the steady state.
+ heats and reacts following a single-step Arrhenius law.
+ The steady traveling-wave solutions are investigated for linear stability
+ by means of direct numerical integration of the linearized Euler equations
+ with a subsequent analysis of the resultant time series of the detonation
+ velocity using the dynamic mode decomposition algorithm.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Governing equations
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:e1d:model:goveqn"
+name "subsec:e1d:goveqn"
 
 \end_inset
 
@@ -400,7 +382,7 @@ and
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 ZND solution
 \end_layout
 
@@ -554,7 +536,7 @@ k=\int_{0}^{1/2}\frac{\bar{U}}{\left(1-\bar{\lambda}\right)\exp\left(-E\bar{\rho
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Linearization
 \end_layout
 
