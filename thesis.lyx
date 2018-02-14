@@ -1101,6 +1101,16 @@ filename "chapters/e1d/euler1d.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
+filename "chapters/e1deig/euler1d-eigval.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
 filename "chapters/fm/fickettmodel.lyx"
 
 \end_inset
@@ -1168,7 +1178,7 @@ addcontentsline{toc}{chapter}{References}
 
 
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1208,7 +1218,7 @@ end{onehalfspacing}
 \begin_layout Standard
 \start_of_appendix
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1275,33 +1285,11 @@ baselineskip}
 \end_inset
 
  
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\end_inset
-
- 
 \series bold
 \size large
 APPENDICES
 \series default
 \size default
-
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
  
 \begin_inset ERT
 status collapsed
@@ -1315,7 +1303,7 @@ addcontentsline{toc}{chapter}{Appendices}
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard

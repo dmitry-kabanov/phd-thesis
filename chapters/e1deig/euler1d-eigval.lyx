@@ -1,0 +1,2163 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\master ../../thesis.lyx
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "utopia" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing double
+\use_hyperref false
+\pdf_title "Fickett model"
+\pdf_author "Dmitry Kabanov kabanovdmitry@gmail.com"
+\pdf_keywords "detonation; linear stability; numerics"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, linkcolor=blue"
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Reactive Euler equations with two-step chemistry
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:e1deig"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this chapter, we apply our approach to the detonation model based on
+ the reactive Euler equations with two-step reaction mechanism.
+\end_layout
+
+\begin_layout Section
+Governing equations
+\end_layout
+
+\begin_layout Standard
+The two-step model that we consider here consists of two consecutive reactions:
+ 
+\begin_inset Formula 
+\begin{equation}
+\text{A}\overset{k_{1}}{\to}\text{B}\overset{k_{2}}{\to}\text{C},
+\end{equation}
+
+\end_inset
+
+where the first reaction is exothermic and the second endothermic.
+ This is often referred to as the case of a 
+\begin_inset Quotes eld
+\end_inset
+
+pathological
+\begin_inset Quotes erd
+\end_inset
+
+ detonation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "FickettDavis2000"
+
+\end_inset
+
+.
+ The unfortunate name comes from the fact that the detonation in this case
+ propagates faster than expected, the expectation based on the (wrong) thinking
+ that it is the overall heat release that controls the detonation speed.
+ In reality, it is not the overall but rather the maximum heat release—which
+ is larger—that controls the wave speed.
+ This should become clear from the analysis of the steady-state structure
+ that follows.
+\end_layout
+
+\begin_layout Standard
+Let the reactions have rate constants 
+\begin_inset Formula $k_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{2}$
+\end_inset
+
+, heat releases 
+\begin_inset Formula $Q_{1}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{2}<0$
+\end_inset
+
+, and activation energies, 
+\begin_inset Formula $E_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{2}$
+\end_inset
+
+, for the first (
+\begin_inset Formula $\text{A}\to\text{B}$
+\end_inset
+
+), and second, (
+\begin_inset Formula $\text{B}\to\text{C}$
+\end_inset
+
+), reactions, respectively.
+ Then, if 
+\begin_inset Formula $X_{A}$
+\end_inset
+
+, 
+\begin_inset Formula $X_{B}$
+\end_inset
+
+, and 
+\begin_inset Formula $X_{C}$
+\end_inset
+
+ denote the mass fractions of the species, the kinetic equations for the
+ reactions are 
+\begin_inset Formula 
+\begin{eqnarray}
+\dot{X}_{A} & = & -k_{1}X_{A}e^{-E_{1}/RT},\\
+\dot{X}_{B} & = & k_{1}X_{A}e^{-E_{1}/RT}-k_{2}X_{B}e^{-E_{2}/RT},\\
+\dot{X}_{C} & = & k_{2}X_{B}e^{-E_{2}/RT}.
+\end{eqnarray}
+
+\end_inset
+
+Adding these equations and noting that initially 
+\begin_inset Formula $X_{A}=1$
+\end_inset
+
+, 
+\begin_inset Formula $X_{B}=X_{C}=0$
+\end_inset
+
+, we find that 
+\begin_inset Formula $X_{A}+X_{B}+X_{C}=1$
+\end_inset
+
+.
+ We introduce the reaction progress variables for each reaction as 
+\begin_inset Formula $\lambda_{1}=1-X_{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{2}=X_{C}$
+\end_inset
+
+ with 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+ varying from 0 at the shock to 1 at the end of the reaction.
+\end_layout
+
+\begin_layout Standard
+Then the full system of the governing equations in the shock-attached frame
+ is
+\begin_inset Formula 
+\begin{align*}
+\rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\\
+\left(\rho u\right)_{t}+\left(\rho u\left(u-D\right)+p\right)_{x} & =0,\\
+\left(\rho e\right)_{t}+\left(\rho\left(u-D\right)e+pu\right)_{x} & =0,\\
+\left(\rho\lambda_{1}\right)_{t}+\left(\rho(u-D)\lambda_{1}\right)_{x} & =\rho\omega_{1},\\
+\left(\rho\lambda_{2}\right)_{t}+\left(\rho(u-D)\lambda_{2}\right)_{x} & =\rho\omega_{2},
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $\omega_{1}=k_{1}\left(1-\lambda_{1}\right)e^{-E_{1}/RT}$
+\end_inset
+
+ and 
+\begin_inset Formula $\omega_{2}=k_{2}\left(\lambda_{1}-\lambda_{2}\right)e^{-E_{2}/RT}$
+\end_inset
+
+, and 
+\begin_inset Formula $e_{i}=pv/\left(\gamma-1\right)-\left(Q_{1}\lambda_{1}+Q_{2}\lambda_{2}\right)$
+\end_inset
+
+ being the specific internal energy.
+\end_layout
+
+\begin_layout Section
+ZND solutions
+\end_layout
+
+\begin_layout Standard
+ZND solution is defined by the following differential-algebraic system
+\begin_inset Formula 
+\begin{align*}
+-\rhoA\DZnd & =\rhoZnd\UZnd,\\
+\pA+\rhoA\DZnd^{2} & =\pZnd+\rhoZnd\UZnd^{2},\\
+\eA+\pA\vA+\frac{\DZnd^{2}}{2} & =\eZnd+\pZnd\vZnd+\frac{\UZnd^{2}}{2},\\
+\od{\bar{\lambda}_{1}}x & =\frac{\rZnd_{1}}{\UZnd}=\frac{k_{1}(1-\lambdaZnd_{1})\exp\left(-\rhoZnd E_{1}/\pZnd\right)}{\UZnd},\\
+\od{\lambdaZnd_{2}}x & =\frac{\rZnd_{2}}{\UZnd}=\frac{k_{2}(\lambdaZnd_{1}-\lambdaZnd_{2})\exp\left(-\rhoZnd E_{2}/\pZnd\right)}{\UZnd}.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We introduce 
+\begin_inset Quotes eld
+\end_inset
+
+big
+\begin_inset Quotes erd
+\end_inset
+
+ quantities 
+\begin_inset Formula $\bar{M}=-\rhoA\DZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{P}=\pA+\rhoA\DZnd^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{H}=\eA+\pA\vA+\DZnd^{2}/2$
+\end_inset
+
+ and express 
+\begin_inset Formula $\UZnd$
+\end_inset
+
+ and 
+\begin_inset Formula $\pZnd$
+\end_inset
+
+ in terms of 
+\begin_inset Formula $\vZnd$
+\end_inset
+
+ and these big quantities:
+\begin_inset Formula 
+\[
+\UZnd=\bar{M}\vZnd,\quad\pZnd=\bar{P}-\bar{M}^{2}\vZnd,
+\]
+
+\end_inset
+
+and arrive at the quadratic equation for 
+\begin_inset Formula $\vZnd$
+\end_inset
+
+ with the root
+\begin_inset Formula 
+\[
+\vZnd=\frac{\gamma}{\gamma+1}\frac{\bar{P}}{\bar{M}^{2}}(1-\delta),
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\delta=\pm\sqrt{1-\frac{h\bar{M}^{2}}{\bar{P}^{2}}\left(\bar{H}+\bar{Q}\right)},\quad h=\frac{2(\gamma^{2}-1)}{\gamma^{2}},\quad\bar{Q}=Q_{1}\lambdaZnd_{1}+Q_{2}\lambdaZnd_{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Also, it is important to note that
+\begin_inset Formula 
+\[
+\delta^{2}=\left(\frac{1-\MachZnd^{2}}{1+\gamma\MachZnd^{2}}\right)^{2},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\MachZnd=\UZnd/\cZnd$
+\end_inset
+
+ is the Mach number of the steady-state flow.
+ Hence the sign of the square root in the expression for 
+\begin_inset Formula $\delta$
+\end_inset
+
+ is determined by whether we want to get a subsonic or supersonic flow.
+ Also, 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ when the flow is sonic 
+\begin_inset Formula $\UZnd=-\cZnd$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Generally, the sonic state and the detonation speed are calculated as follows.
+ For a chosen 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+, one solves steady reaction equations from the shock to the sonic point,
+ 
+\begin_inset Formula $x_{*}$
+\end_inset
+
+, where the sonic conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:D-2step"
+
+\end_inset
+
+ and must be satisfied.
+ For arbitrary 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+, these conditions will not be satisfied, and instead the steady-state solution
+ will blow up.
+ But for special 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ (one or more), the solution will pass continuously (however, not necessarily
+ smoothly) through 
+\begin_inset Formula $x_{*}$
+\end_inset
+
+ to the equilibrium state at 
+\begin_inset Formula $x\to-\infty$
+\end_inset
+
+.
+ This is a general numerical procedure that can be followed to determine
+ the detonation speed 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+.
+ We however restrict our attention in this work to the case 
+\begin_inset Formula $E_{1}=E_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{1}=k_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now, considering only reaction equations and dividing the second-reaction
+ equation by the first-reaction equation, we arrive at
+\begin_inset Formula 
+\[
+\od{\lambdaZnd_{2}}{\lambdaZnd_{1}}=\frac{\lambdaZnd_{1}-\lambdaZnd_{2}}{1-\lambdaZnd_{1}},
+\]
+
+\end_inset
+
+which is solved as follows: denote 
+\begin_inset Formula $\psi=\lambdaZnd_{2}-\lambdaZnd_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\xi=\lambdaZnd_{1}$
+\end_inset
+
+ to obtain
+\begin_inset Formula 
+\[
+\od{\lambdaZnd_{2}}{\lambdaZnd_{1}}=\od{\left(\xi+\psi\right)}{\xi}=1+\od{\psi}{\xi}=\frac{-\psi}{1-\xi}\quad\Rightarrow\od{\psi}{\xi}+\frac{\psi}{1-\xi}+1=0,
+\]
+
+\end_inset
+
+which is a linear ODE of the first order with the solution 
+\begin_inset Formula $\psi=\left(1-\xi\right)\,\ln\left(1-\xi\right)$
+\end_inset
+
+.
+ Hence,
+\begin_inset Formula 
+\[
+\lambdaZnd_{2}=\lambdaZnd_{1}+(1-\lambdaZnd_{1})\,\ln\left(1-\lambdaZnd_{1}\right),
+\]
+
+\end_inset
+
+and therefore, 
+\begin_inset Formula $\lambdaZnd_{2}\leq\lambdaZnd_{1}$
+\end_inset
+
+ (natural logarithm yields negative values for 
+\begin_inset Formula $0\leq\lambdaZnd_{1}\leq1$
+\end_inset
+
+) with equality holding only for 
+\begin_inset Formula $\lambdaZnd_{1}=0$
+\end_inset
+
+ or 
+\begin_inset Formula $\lambdaZnd_{1}=1$
+\end_inset
+
+.
+ It has the following consequence: both 
+\begin_inset Formula $\lambdaZnd_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambdaZnd_{2}$
+\end_inset
+
+ monotonically increase as 
+\begin_inset Formula $x\to-\infty$
+\end_inset
+
+.
+ Hence, equilibriuim 
+\begin_inset Formula $Q=Q_{1}+Q_{2}$
+\end_inset
+
+ is not a maximum value of 
+\begin_inset Formula $Q$
+\end_inset
+
+ in the reaction zone.
+\end_layout
+
+\begin_layout Standard
+Regularity condition for the solution to be continuous are determined by
+ finiteness of the derivative of 
+\begin_inset Formula $\delta$
+\end_inset
+
+, hence
+\begin_inset Formula 
+\[
+\od{\delta}x\text{ is finite, when }\delta=0\text{ and \od Qx=0}
+\]
+
+\end_inset
+
+simultaneously.
+ From condition 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ it follows that it is satisfied for a maximum value of 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ From the second condition,
+\begin_inset Formula 
+\[
+Q_{1}\od{\lambdaZnd_{1}}x+Q_{2}\od{\lambdaZnd_{2}}x=0,\quad\Rightarrow Q_{1}\rZnd_{1}+Q_{2}\rZnd_{2}=0,
+\]
+
+\end_inset
+
+from which it follows that
+\begin_inset Formula 
+\[
+Q_{1}(1-\lambdaZnd_{1})-Q_{2}(1-\lambdaZnd_{1})\,\ln\left(1-\lambdaZnd_{1}\right)=0,
+\]
+
+\end_inset
+
+so either 
+\begin_inset Formula $\lambdaZnd_{1}=1$
+\end_inset
+
+ or 
+\begin_inset Formula $\lambdaZnd=1-\exp\left(Q_{1}/Q_{2}\right)$
+\end_inset
+
+.
+ However, case 
+\begin_inset Formula $\lambdaZnd_{1}=1$
+\end_inset
+
+ must be discarded as it does not correspond to the condition 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ (because 
+\begin_inset Formula $Q$
+\end_inset
+
+ is not maximal for 
+\begin_inset Formula $\lambdaZnd_{1}=1$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Figure
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:e1deig:znd-solution-Q-vs-lambda1"
+
+\end_inset
+
+ shows how 
+\begin_inset Formula $Q$
+\end_inset
+
+ changes as 
+\begin_inset Formula $\lambdaZnd_{1}$
+\end_inset
+
+ goes from 0 to 1.
+ In agreement with the above analysis, 
+\begin_inset Formula $Q$
+\end_inset
+
+ has a maximum value inside the reaction zone.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../../../euler1d-eigval/tasks/04-2017-09-01-impossibility-of-equilibrium-solution/_assets/Q-vs-lambda_1.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Total heat release 
+\begin_inset Formula $\bar{Q}$
+\end_inset
+
+ versus 
+\begin_inset Formula $\lambdaZnd_{1}$
+\end_inset
+
+.
+ Notice that the maximum of 
+\begin_inset Formula $\bar{Q}$
+\end_inset
+
+ is inside of the reaction zone.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:e1deig:znd-solution-Q-vs-lambda1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second case gives an embedded sonic locus.
+ The flow is divided then by the sonic point into two parts.
+ Between the shock and the sonic point, the flow is always subsonic relative
+ to the shock.
+ Between the sonic point and equilibrium point, the flow can be either subsonic
+ or supersonic: flow is supersonic if expression 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:delta-2step"
+
+\end_inset
+
+ is used as is, while subsonic if the sign of the right-hand side of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:delta-2step"
+
+\end_inset
+
+ is changed to negative 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kasimov2004"
+
+\end_inset
+
+.
+ Thus we obtain two steady-state solutions with the embedded sonic locus.
+ Stability of both will be investigated below.
+\end_layout
+
+\begin_layout Standard
+The solution of 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ yields the same result for steady detonation velocity 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ as before: 
+\begin_inset Formula 
+\begin{equation}
+\bar{D}=\sqrt{c_{\text{a}}^{2}+\frac{\gamma^{2}-1}{2}\left(Q_{1}\bar{\lambda}_{1}^{*}+Q_{2}\bar{\lambda}_{2}^{*}\right)}+\sqrt{\frac{\gamma^{2}-1}{2}\left(Q_{1}\bar{\lambda}_{1}^{*}+Q_{2}\bar{\lambda}_{2}^{*}\right)}\label{eq:D-2step}
+\end{equation}
+
+\end_inset
+
+with star denoting the sonic locus.
+\end_layout
+
+\begin_layout Section
+Linearized problem
+\end_layout
+
+\begin_layout Standard
+The linearized perturbation system is the same as it was in the previous
+ chapter, but with 
+\begin_inset Formula $z=(\rho,u,p,\lambda_{1},\lambda_{2})^{\mathrm{T}}$
+\end_inset
+
+ and with the following new matrices of coefficients (with 
+\begin_inset Formula $C_{i}=-(\gamma-1)Q_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+): 
+\begin_inset Formula 
+\begin{align}
+A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0 & 0\\
+0 & \bar{U} & 1/\bar{\rho} & 0 & 0\\
+0 & \gamma\bar{p} & \bar{U} & 0 & 0\\
+0 & 0 & 0 & \bar{U} & 0\\
+0 & 0 & 0 & 0 & \bar{U}
+\end{bmatrix},\quad & B=\begin{bmatrix}\frac{d\bar{u}}{dx} & \frac{d\bar{\rho}}{dx} & 0 & 0 & 0\\[0.3em]
+-\frac{1}{\bar{\rho}^{2}}\frac{d\bar{p}}{dx} & \frac{d\bar{u}}{dx} & 0 & 0 & 0\\[0.3em]
+\sum_{i}C_{i}(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}) & \frac{d\bar{p}}{dx} & \gamma\frac{d\bar{u}}{dx}+\bar{\rho}\sum_{i}C_{i}\bar{\omega}_{ip} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{1}} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{2}}\\[0.3em]
+-\bar{\omega}_{1\rho} & \frac{d\bar{\lambda}_{1}}{dx} & -\bar{\omega}_{1p} & -\bar{\omega}_{1\lambda_{1}} & -\bar{\omega}_{1\lambda_{2}}\\
+-\bar{\omega}_{2\rho} & \frac{d\bar{\lambda}_{2}}{dx} & -\bar{\omega}_{2p} & -\bar{\omega}_{2\lambda_{1}} & -\bar{\omega}_{2\lambda_{2}}
+\end{bmatrix}.\label{eq:AB-2reaction}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the shock evolution equation we obtain 
+\begin_inset Formula 
+\begin{eqnarray}
+\bar{R}_{\text{s}} & = & (\gamma-1)\rho_{\text{s}}\sum_{i}Q_{i}\bar{\omega}_{i\text{s}},\\
+R_{\text{s}}' & = & (\gamma-1)\sum_{i}Q_{i}\left.\left[\left(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}\right)\rho'+\bar{\rho}\bar{\omega}_{ip}p'\right]\right|_{\text{s}}.
+\end{eqnarray}
+
+\end_inset
+
+All the other expressions remain as before.
+\end_layout
+
+\begin_layout Standard
+The equations are rescaled using the so-called Erpenbeck scales such that
+ 
+\begin_inset Formula $\rho_{\text{a}}=p_{\text{a}}=1$
+\end_inset
+
+, velocity is scaled by 
+\begin_inset Formula $\sqrt{p_{\text{a}}/\rho_{\text{a}}}$
+\end_inset
+
+, spatial scale is that of the half-reaction length.
+ With these scales, equations keep their form.
+ Activation energy and heat release are rescaled by the ambient temperature
+ multiplied by 
+\begin_inset Formula $R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Results
+\end_layout
+
+\begin_layout Standard
+The model with two reactions represents an example of complex chemistry
+ that brings in the following additional complications that are absent in
+ the one-step model.
+ First, we now have two traveling-wave solutions for the same set of parameters
+ of the problem, and therefore we must investigate the stability of both.
+ Second, the solution has an embedded sonic point, that is the sonic condition
+ is reached at a finite distance from the lead shock.
+ This divides the post-shock flow into two regions that play distinct roles
+ in the detonation dynamics.
+ Following prior research on the role of sonic points in unsteady detonation
+ dynamics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kasimov2004dynamics,StewartKasimovSIAP05"
+
+\end_inset
+
+, we expect that the dynamics is affected only by the solution between the
+ shock and the sonic point.
+ How exactly this idea plays out in the linear stability calculations is
+ not obvious, and this will be explored in this section.
+\end_layout
+
+\begin_layout Subsection
+ZND and perturbation solutions
+\end_layout
+
+\begin_layout Standard
+Now the model has several additional parameters coming from the more complex
+ chemistry.
+ Comprehensive investigation of the entire parameter space would be a difficult
+ task.
+ Instead, we focus here on particular questions that have certain physical
+ interest.
+ Namely, we investigate how the level of endothermicity affects stability,
+ and in addition, we compare stability behavior of the two steady-state
+ solutions that co-exist at the same parameter set.
+\end_layout
+
+\begin_layout Standard
+First, we study the behavior of ZND solutions when 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ is varied while all other parameters are kept fixed.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-znd-solutions-sub-super"
+
+\end_inset
+
+ shows profiles of ZND variables 
+\begin_inset Formula $\rhoZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\uZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\pZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\TZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\lambda}_{1}$
+\end_inset
+
+, and 
+\begin_inset Formula $\bar{\lambda}_{2}$
+\end_inset
+
+ for subsonic-supersonic case with 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}=50$
+\end_inset
+
+ and 
+\begin_inset Formula $E=25$
+\end_inset
+
+ for several values of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+, obtained with 
+\begin_inset Formula $\Nhrz=40$
+\end_inset
+
+.
+ As can be seen from the figure, the lower the values of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+, the larger the gradients of the profiles become.
+ The maximum temperature decreases with increasing magnitude of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+, as expected.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/eigval-znd-solutions-subsonic-supersonic.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ZND subsonic-supersonic profiles of density 
+\begin_inset Formula $\bar{\rho}$
+\end_inset
+
+, flow velocity 
+\begin_inset Formula $\bar{u}$
+\end_inset
+
+, pressure 
+\begin_inset Formula $\bar{p}$
+\end_inset
+
+, temperature 
+\begin_inset Formula $\bar{T}$
+\end_inset
+
+, and progress variables 
+\begin_inset Formula $\bar{\lambda}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\lambda}_{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}=50$
+\end_inset
+
+, 
+\begin_inset Formula $E=25$
+\end_inset
+
+, and different values of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+.
+ Solid line corresponds to 
+\begin_inset Formula $Q_{2}=-1$
+\end_inset
+
+; dashed line to 
+\begin_inset Formula $Q_{2}=-10$
+\end_inset
+
+; dotted line to 
+\begin_inset Formula $Q_{2}=-20$
+\end_inset
+
+; solid line with circle markers to 
+\begin_inset Formula $Q_{2}=-30$
+\end_inset
+
+.
+ Density, flow velocity, pressure, and temperature are normalized by their
+ values on the shock.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-znd-solutions-sub-super"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:fig:eigval-znd-solutions-sub-sub"
+
+\end_inset
+
+ displays the same results as in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-znd-solutions-sub-super"
+
+\end_inset
+
+, but for subsonic-subsonic solution, which is obtained now with 
+\begin_inset Formula $\Nhrz=640$
+\end_inset
+
+ to accurately resolve the weak discontinuity in the solution.
+ It can be seen that as the magnitude of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ increases, and the sonic point moves toward the shock, the kink in the
+ profiles of 
+\begin_inset Formula $\rhoZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\uZnd$
+\end_inset
+
+ and 
+\begin_inset Formula $\pZnd$
+\end_inset
+
+ becomes more pronounced.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/eigval-znd-solutions-subsonic-subsonic.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ZND subsonic-subsonic profiles of density 
+\begin_inset Formula $\bar{\rho}$
+\end_inset
+
+, flow velocity 
+\begin_inset Formula $\bar{u}$
+\end_inset
+
+, pressure 
+\begin_inset Formula $\bar{p}$
+\end_inset
+
+, temperature 
+\begin_inset Formula $\bar{T}$
+\end_inset
+
+, and progress variables 
+\begin_inset Formula $\bar{\lambda}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\bar{\lambda}_{2}$
+\end_inset
+
+ for different values of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+.
+ Solid line corresponds to 
+\begin_inset Formula $Q_{2}=-1$
+\end_inset
+
+; dashed line to 
+\begin_inset Formula $Q_{2}=-10$
+\end_inset
+
+; dotted line to 
+\begin_inset Formula $Q_{2}=-20$
+\end_inset
+
+; solid line with circle markers to 
+\begin_inset Formula $Q_{2}=-30$
+\end_inset
+
+.
+ Density, flow velocity, pressure, and temperature are normalized by their
+ values on the shock.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:fig:eigval-znd-solutions-sub-sub"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we consider the behavior of the perturbation profiles 
+\begin_inset Formula $z'(x,t)=\{\rho',u',p',\lambda_{1}',\lambda_{2}'\}$
+\end_inset
+
+ taken at a particular time with 
+\begin_inset Formula $\TFinal=4$
+\end_inset
+
+.
+ We take 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $E=15$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{1}=\{10,20,50\}$
+\end_inset
+
+ with 
+\begin_inset Formula $Q_{2}=-0.75Q_{1}$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-pert"
+
+\end_inset
+
+ shows the perturbations for the subsonic-supersonic case, while Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-pert-sub-sub"
+
+\end_inset
+
+ for the subsonic-subsonic case.
+ The most prominent distinction between the two figures is that, while profiles
+ for the subsonic-supersonic case are smooth, profiles for the subsonic-subsonic
+ case develop discontinuities at the sonic point caused by discontinuous
+ coefficient matrices 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:numalg:gov"
+
+\end_inset
+
+: ZND profiles themselves are continuous, their derivatives with respect
+ to 
+\begin_inset Formula $x$
+\end_inset
+
+ have jump discontinuities at the sonic point, hence, discontinuous perturbation
+s.
+ In addition, we noticed that the upwind method (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numal:upwind5-left"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:numalg:upwind5-right"
+
+\end_inset
+
+) with Lax–Friedrichs flux led to severe Gibbs oscillations on both sides
+ of the jump in the profiles of the subsonic-subsonic case.
+ For this reason, we replaced the upwind method with the WENO method 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JiangPeng2000"
+
+\end_inset
+
+ for all simulations based on subsonic-subsonic case.
+ Another important observation from comparing figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-pert"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-pert-sub-sub"
+
+\end_inset
+
+ is that perturbations are nearly the same in the region between the sonic
+ point and the leading detonation shock: for example, the relative difference
+ between density perturbations is only 
+\begin_inset Formula $1\%$
+\end_inset
+
+ in this region, and it is likely caused by the smearing of the discontinuities
+ in the neighborhood of the sonic point.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/eigval-perturbations-sub-super.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Perturbation profiles for the subsonic-supersonic case for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $E=15$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}\in\{10,20,50\}$
+\end_inset
+
+ with 
+\begin_inset Formula $Q_{2}=-0.75Q_{1}$
+\end_inset
+
+.
+ On the left: solid line 
+\begin_inset Formula $\rho'$
+\end_inset
+
+, dashed line 
+\begin_inset Formula $u'$
+\end_inset
+
+, dash-dotted line 
+\begin_inset Formula $p'$
+\end_inset
+
+.
+ On the right: solid line 
+\begin_inset Formula $\lambda_{1}'$
+\end_inset
+
+, dashed line 
+\begin_inset Formula $\lambda_{2}'$
+\end_inset
+
+.
+ Perturbations are not scaled and shown as they are at the simulation time
+ 
+\begin_inset Formula $\TFinal=4$
+\end_inset
+
+.
+ Notice, that the left limits of 
+\begin_inset Formula $x$
+\end_inset
+
+-axes are taken to be 5 for clarity and are much smaller than the reaction
+ lengths.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-pert"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/eigval-perturbations-sub-sub.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Perturbation profiles for the subsonic-subsonic case for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $E=15$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}\in\{10,20,50\}$
+\end_inset
+
+ with 
+\begin_inset Formula $Q_{2}=-0.75Q_{1}$
+\end_inset
+
+.
+ On the left: solid line 
+\begin_inset Formula $\rho'$
+\end_inset
+
+, dashed line 
+\begin_inset Formula $u'$
+\end_inset
+
+, dash-dotted line 
+\begin_inset Formula $p'$
+\end_inset
+
+.
+ On the right: solid line 
+\begin_inset Formula $\lambda_{1}'$
+\end_inset
+
+, dashed line 
+\begin_inset Formula $\lambda_{2}'$
+\end_inset
+
+.
+ Perturbations are not scaled and shown as they are at the simulation time
+ 
+\begin_inset Formula $\TFinal=4$
+\end_inset
+
+.
+ Notice, that the left limits of 
+\begin_inset Formula $x$
+\end_inset
+
+-axes are taken to be 5 for clarity and are much smaller than the reaction
+ lengths.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-pert-sub-sub"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Migration of spectra with increasing endothermicity
+\end_layout
+
+\begin_layout Standard
+Here we investigate how the stability behavior changes as the endothermicity
+ increases, that is as 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ increases in magnitude while all the other parameters are kept fixed.
+\end_layout
+
+\begin_layout Standard
+First, consider the subsonic-supersonic case.
+ We choose 
+\begin_inset Formula $\Nhrz=40$
+\end_inset
+
+, 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $E=25$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}=50$
+\end_inset
+
+ and let 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ vary in the range 
+\begin_inset Formula $-45\le Q_{2}\le0$
+\end_inset
+
+ with step 
+\begin_inset Formula $\Delta Q_{2}=0.0025$
+\end_inset
+
+ for 
+\begin_inset Formula $Q_{2}\in[-0.7;-0.8]\cup[-13.9;-14]\cup[-19.9;-20]\cup[-25.2;-25.3]$
+\end_inset
+
+ and step 
+\begin_inset Formula $\Delta Q_{2}=0.1$
+\end_inset
+
+ otherwise.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-migration-sub-super"
+
+\end_inset
+
+ shows how growth rates change as 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ decreases.
+ Initially, at 
+\begin_inset Formula $Q_{2}=0$
+\end_inset
+
+ detonation corresponds to the equilibrium CJ case and is stable for 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $Q_{1}$
+\end_inset
+
+ that we use (critical value of activation energy is 
+\begin_inset Formula $25.26$
+\end_inset
+
+).
+ As 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ decreases, the growth rate of the fundamental mode (mode 0) increases almost
+ linearly such that at 
+\begin_inset Formula $Q_{2}\approx-0.79$
+\end_inset
+
+ detonation becomes unstable, and at 
+\begin_inset Formula $Q_{2}\approx-25.2225$
+\end_inset
+
+ mode 0 splits into two purely exponential branches, with growth rates increasin
+g and decreasing for the top and bottom branches, respectively.
+ At the same time at 
+\begin_inset Formula $Q_{2}\approx-13.1$
+\end_inset
+
+ the stable mode 1 appears in the spectrum, which becomes unstable at 
+\begin_inset Formula $Q_{2}\approx-13.9425$
+\end_inset
+
+.
+ As the growth rate of this mode increases faster than that of mode 0, at
+ 
+\begin_inset Formula $Q_{2}\approx-19.92$
+\end_inset
+
+ it becomes the dominant mode and remains so all the way down to 
+\begin_inset Formula $Q_{2}=-45$
+\end_inset
+
+.
+ In total, up to six modes appear in the spectrum as 
+\begin_inset Formula $Q_{2}\to-45$
+\end_inset
+
+.
+ Here we point out that taking 
+\begin_inset Formula $|Q_{2}|$
+\end_inset
+
+ larger than 45 makes computations prohibitively expensive as the effective
+ reaction lengths become hundreds of thousands of nondimensional units,
+ because as 
+\begin_inset Formula $|Q_{2}|\to|Q_{1}|$
+\end_inset
+
+ the overall heat release becomes effectively zero and detonation degenerates
+ to an inert weak shock.
+\end_layout
+
+\begin_layout Standard
+Next, consider the subsonic-subsonic case.
+ The physical parameters are taken the same as in the previous case.
+ However, due to the discontinuous coefficients in the linearized system
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:numalg:gov"
+
+\end_inset
+
+, now we must use drastically higher resolutions (here 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+) than for the subsonic-supersonic case.
+ Otherwise, we are unable to extract low-energy modes.
+ We also emphasize that it is significantly more difficult to postprocess
+ the time series of perturbation of detonation velocity for the subsonic-subsoni
+c case.
+ The reason is that the time series contains substantial amount of numerical
+ noise caused by the numerical smearing of the jump in the solution in the
+ neighborhood of the sonic locus.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/eigval-re-alpha-vs-q_2-sub-super.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Growth rate versus 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $-45\leq Q_{2}\leq0$
+\end_inset
+
+ with other parameters 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $E=25$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}=50$
+\end_inset
+
+ for subsonic-supersonic case.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-migration-sub-super"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/eigval-re-alpha-vs-q_2-together.pdf
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Growth rate versus 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ for 
+\begin_inset Formula $-45\leq Q_{2}\leq0$
+\end_inset
+
+ with 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $E=25$
+\end_inset
+
+, 
+\begin_inset Formula $Q_{1}=50$
+\end_inset
+
+.
+ Solid lines: subsonic-supersonic case, dashed lines: subsonic-subsonic
+ case.
+ Note that in most cases the solid and dashed curves overlap and are thus
+ indistinguishable.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-re-alpha-vs-q_2-together"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-re-alpha-vs-q_2-together"
+
+\end_inset
+
+ shows the spectra for subsonic-supersonic and subsonic-subsonic cases together.
+ It can be seen that the spectra are close to each other.
+ In fact, they are essentially indistinguishable for oscillatory part of
+ mode 0, upper branch of exponential part of mode 0, and for modes 1, 2,
+ and 3.
+ However, for subsonic-subsonic case, the lower branch of exponential part
+ of mode 0 shows significant numerical noise as 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ decreases.
+ The same behavior is seen with mode 4 as well.
+ The reason for this is that the discontinuity in the solutions for subsonic-sub
+sonic case generates noise that contaminates time series of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+.
+ As the lower branches of modes 0 and 4 contribute to the time series much
+ less energy than other modes, they are more difficult to distinguish from
+ the noise, which is an issue that can probably be fixed by using an improved
+ algorithm for solving hyperbolic problems with discontinuous coefficients.
+ Nevertheless, the computed values are near their counterparts for the subsonic-
+supersonic case.
+ Despite some differences in the spectra, Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-re-alpha-vs-q_2-together"
+
+\end_inset
+
+ serves as a demonstration that stability of ZND solutions of the two-step
+ model with endothermicity does not depend on whether the underlying ZND
+ solution is of subsonic-supersonic or subsonic-subsonic case.
+ That is, the detonation stability is apparently determined solely by the
+ dynamics of the reaction zone between the sonic point and the leading detonatio
+n shock.
+\end_layout
+
+\begin_layout Standard
+As a final note on this section, we give the reader an idea of the computational
+ requirements for these calculations.
+ For both subsonic-supersonic and subsonic-subsonic cases, the number of
+ values of 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ we took is approximately 500.
+ Then, as the resolution necessary for the subsonic-supersonic case is only
+ 
+\begin_inset Formula $\Nhrz=40$
+\end_inset
+
+, we were able to compute Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-migration-sub-super"
+
+\end_inset
+
+ overnight on a workstation with 16 cores.
+ In contrast, the subsonic-subsonic case requires much higher resolution
+ of 
+\begin_inset Formula $\Nhrz=1280$
+\end_inset
+
+, so these computations required a day with 512 parallel workers on a parallel
+ computer, where a worker simulates and postprocesses results for a given
+ 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ independently of other workers.
+\end_layout
+
+\begin_layout Subsection
+Neutral stability curve
+\end_layout
+
+\begin_layout Standard
+In this section, we study how endothermicity affects the neutral stability
+ boundary in comparison with the one-step model.
+ The comparison is based on the idea that the detonation dynamics in both
+ cases is determined by the energy released between the shock and sonic
+ point.
+ Therefore, the one-step model with heat release 
+\begin_inset Formula $Q$
+\end_inset
+
+ is compared with the two-step model with the maximum heat release 
+\begin_inset Formula $Q^{*}$
+\end_inset
+
+ equal to 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-neutral-curve"
+
+\end_inset
+
+, we show the neutral stability curves in the parametric plane 
+\begin_inset Formula $E$
+\end_inset
+
+–
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ We use 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+ and therefore the neutral stability curve for the one-step model is the
+ same as in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:LS-comparison"
+
+\end_inset
+
+.
+ The neutral curve for the two-step model is obtained for the ZND solution
+ corresponding to the subsonic-supersonic case.
+ The range of 
+\begin_inset Formula $Q_{1}$
+\end_inset
+
+ is 
+\begin_inset Formula $10^{-0.35}$
+\end_inset
+
+–
+\begin_inset Formula $10^{2.35}$
+\end_inset
+
+ with 256 logspaced points while 
+\begin_inset Formula $Q_{2}$
+\end_inset
+
+ is varied in proportion to 
+\begin_inset Formula $Q_{1}$
+\end_inset
+
+: 
+\begin_inset Formula $Q_{2}=-0.75Q_{1}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $Q_{1}$
+\end_inset
+
+ we find the critical value of 
+\begin_inset Formula $E$
+\end_inset
+
+ by the algorithm described earlier.
+ For values of 
+\begin_inset Formula $10^{-0.35}\le Q_{1}\lessapprox0.8$
+\end_inset
+
+ (approximately 20 points) the algorithm did not converge and we omit these
+ values from the figure.
+ The curves shown demonstrate that endothermicity consistently shifts the
+ neutral stability boundary toward smaller values of 
+\begin_inset Formula $E$
+\end_inset
+
+ over the whole range of 
+\begin_inset Formula $Q$
+\end_inset
+
+ that we investigated.
+ The difference 
+\begin_inset Formula $\Delta E$
+\end_inset
+
+ between critical activation energies for two models behaves with varying
+ 
+\begin_inset Formula $Q$
+\end_inset
+
+ as follows.
+ The minimum value 
+\begin_inset Formula $\Delta E\approx1.5$
+\end_inset
+
+ is attained for 
+\begin_inset Formula $5\lessapprox Q\lessapprox15$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $Q$
+\end_inset
+
+ increases, 
+\begin_inset Formula $\Delta E$
+\end_inset
+
+ increases monotonically and reaches 
+\begin_inset Formula $\Delta E\approx4.5$
+\end_inset
+
+ as 
+\begin_inset Formula $Q\to100$
+\end_inset
+
+.
+ For low values of 
+\begin_inset Formula $Q$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta E$
+\end_inset
+
+ increases quickly and in the limit 
+\begin_inset Formula $Q\to0$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta E\to\infty$
+\end_inset
+
+ as the detonation wave becomes an inert shock.
+ Additionally, while for the one-step model, all ZND solutions are stable
+ at 
+\begin_inset Formula $E\leq14.2$
+\end_inset
+
+ for the full considered range of 
+\begin_inset Formula $Q$
+\end_inset
+
+, for the two-reaction model all ZND solutions are stable for 
+\begin_inset Formula $E\leq12.6$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "l"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/eigval-neutral-curve-gamma=1.2.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Neutral stability curves for two-step model with subsonic-supersonic steady-stat
+e solution (solid line) and one-step model (dashed line).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-neutral-curve"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace*{\fill}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "l"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "49col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/eigval-thermicity.pdf
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Thermicity profiles for 
+\begin_inset Formula $Q^{*}=10$
+\end_inset
+
+, 
+\begin_inset Formula $E=15$
+\end_inset
+
+ for two-step model with subsonic-supersonic steady-state solution (solid
+ line) and one-step model (dashed line).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:eigval-themicity"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Thus, the two-step exothermic-endothermic heat release leads to an increased
+ instability compared to the equivalent one-step heat release.
+ In order to provide some qualitative explanation for this observation,
+ we look at how the steady-state thermicity behaves for the same values
+ of 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $Q^{*}$
+\end_inset
+
+ for the two models.
+ The thermicity for the two-step model is given by 
+\begin_inset Formula $\bar{\sigma}_{1}\bar{\omega}_{1}+\bar{\sigma}_{2}\bar{\omega}_{2}$
+\end_inset
+
+, where 
+\begin_inset Formula $\bar{\sigma}_{i}=(\gamma-1)Q_{i}/\bar{c}^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-themicity"
+
+\end_inset
+
+ shows the thermicity profiles for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q^{*}=10$
+\end_inset
+
+, and 
+\begin_inset Formula $E=15$
+\end_inset
+
+ which correspond to the unstable steady-state solutions from Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:eigval-neutral-curve"
+
+\end_inset
+
+.
+ It is clear that for the two-step model the thermicity has significantly
+ larger peak value which is in addition located closer to the lead shock
+ than the value for the one-step model.
+ Thus, a possible reason for the increased instability is this sharper profile
+ of the thermicity function that makes for a more effective resonant cavity
+ for the perturbations between the shock and the sonic point.
+ Recall that the thermicity is a source term in the equation for the forward
+ characteristics, 
+\begin_inset Formula $\dot{p}+\rho c\dot{u}=\rho c^{2}\left(\sigma_{1}\omega_{1}+\sigma_{2}\omega_{2}\right)$
+\end_inset
+
+.
+ As such it could be looked at as a measure of how the chemical reactions
+ amplify the forward compression waves that influence the lead shock.
+ The larger the magnitude of thermicity, the stronger the effect.
+ The sharpness of the thermicity function reflects in the sensitivity of
+ this influence on the changes in the local state in the reaction zone,
+ the stronger sensitivity implying more instability.
+ This is a qualitative arguments explaining the shift of the stability boundary.
+\end_layout
+
+\end_body
+\end_document

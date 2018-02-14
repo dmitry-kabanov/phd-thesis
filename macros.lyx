@@ -131,6 +131,69 @@ Ambient quantities
 \end_layout
 
 \begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\vA}{v_{\mathrm{a}}}
+{v_{\mathrm{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\uA}{u_{\mathrm{a}}}
+{u_{\mathrm{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\UA}{U_{\mathrm{a}}}
+{U_{\mathrm{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\pA}{p_{\mathrm{a}}}
+{p_{\mathrm{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\eA}{e_{\mathrm{a}}}
+{e_{\mathrm{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\lambdaA}{\lambda_{\text{a}}}
+{\lambda_{\text{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\cA}{c_{\mathrm{a}}}
+{c_{\mathrm{a}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -154,6 +217,15 @@ ZND quantities
 
 \begin_layout Standard
 \begin_inset FormulaMacro
+\newcommand{\vZnd}{\bar{v}}
+{\bar{v}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
 \newcommand{\uZnd}{\bar{u}}
 {\bar{u}}
 \end_inset
@@ -165,6 +237,16 @@ ZND quantities
 \begin_inset FormulaMacro
 \newcommand{\UZnd}{\bar{U}}
 {\bar{U}}
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Flow velocity relative to the shock speed
+\end_layout
+
 \end_inset
 
 
@@ -181,8 +263,8 @@ ZND quantities
 
 \begin_layout Standard
 \begin_inset FormulaMacro
-\newcommand{\TZnd}{\bar{T}}
-{\bar{T}}
+\newcommand{\eZnd}{\bar{e}}
+{\bar{e}}
 \end_inset
 
 
@@ -192,6 +274,90 @@ ZND quantities
 \begin_inset FormulaMacro
 \newcommand{\lambdaZnd}{\bar{\lambda}}
 {\bar{\lambda}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\cZnd}{\bar{c}}
+{\bar{c}}
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Sonic speed
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\rZnd}{\bar{r}}
+{\bar{r}}
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Reaction rate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\DZnd}{\bar{D}}
+{\bar{D}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\DCJ}{D_{\text{CJ}}}
+{D_{\text{CJ}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\TZnd}{\bar{T}}
+{\bar{T}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\MachZnd}{\bar{\mathcal{M}}}
+{\bar{\mathcal{M}}}
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Mach number
+\end_layout
+
 \end_inset
 
 
@@ -319,8 +485,8 @@ Mathematical stuff
 
 \begin_layout Standard
 \begin_inset FormulaMacro
-\newcommand{\dd}{\,\text{d}}
-{\:\text{d}}
+\newcommand{\dd}{\mathrm{d}}
+{\mathrm{d}}
 \end_inset
 
 
