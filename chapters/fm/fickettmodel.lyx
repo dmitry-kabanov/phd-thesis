@@ -96,7 +96,7 @@
 Analysis of Fickett's detonation analog
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:fsm"
+name "chap:fm"
 
 \end_inset
 
@@ -140,7 +140,7 @@ citet{Drazin2002}}
 Introduction
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:intro"
+name "sec:fm:intro"
 
 \end_inset
 
@@ -243,8 +243,8 @@ key "Fickett1984"
 ):
 \begin_inset Formula 
 \begin{align}
-u_{t}+\frac{1}{2}\left(u^{2}+q\lambda\right)_{x} & =0,\label{eq:fsm:eqn-of-motion}\\
-\lambda_{t} & =\omega,\label{eq:fsm:eqn-of-reaction}
+u_{t}+\frac{1}{2}\left(u^{2}+q\lambda\right)_{x} & =0,\label{eq:fm:eqn-of-motion}\\
+\lambda_{t} & =\omega,\label{eq:fm:eqn-of-reaction}
 \end{align}
 
 \end_inset
@@ -354,7 +354,7 @@ key "Faria2015Theory"
 Mathematical model
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:math-model"
+name "sec:fm:math-model"
 
 \end_inset
 
@@ -370,7 +370,7 @@ In this section we define the governing equations, ambient and Rankine–Hugonio
 Governing equations in the laboratory frame
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:math-model:gov-eqn-lab"
+name "subsec:fm:math-model:gov-eqn-lab"
 
 \end_inset
 
@@ -389,7 +389,7 @@ status open
 \backslash
 begin{subequations}
 \backslash
-label{eq:fsm:math-model:gov-eqn-lab:system}
+label{eq:fm:math-model:gov-eqn-lab:system}
 \end_layout
 
 \end_inset
@@ -397,8 +397,8 @@ label{eq:fsm:math-model:gov-eqn-lab:system}
 
 \begin_inset Formula 
 \begin{align}
-u_{t}+\frac{1}{2}\left(u^{2}+q\lambda\right)_{x} & =0,\label{eq:fsm:math-model:gov-eqn-lab:eqn-of-motion}\\
-\lambda_{t} & =\omega\left(u,\lambda\right),\label{eq:fsm:math-model:gov-eqn-lab:eqn-of-reaction}
+u_{t}+\frac{1}{2}\left(u^{2}+q\lambda\right)_{x} & =0,\label{eq:fm:math-model:gov-eqn-lab:eqn-of-motion}\\
+\lambda_{t} & =\omega\left(u,\lambda\right),\label{eq:fm:math-model:gov-eqn-lab:eqn-of-reaction}
 \end{align}
 
 \end_inset
@@ -471,7 +471,7 @@ key "Faria2015Theory"
 
 \begin_inset Formula 
 \begin{equation}
-\omega(u,\lambda)=k(1-\lambda)\exp\left(\theta\left(u+q\lambda\right)\right),\label{eq:fsm:math-model:gov-eqn-lab:production-rate}
+\omega(u,\lambda)=k(1-\lambda)\exp\left(\theta\left(u+q\lambda\right)\right),\label{eq:fm:math-model:gov-eqn-lab:production-rate}
 \end{equation}
 
 \end_inset
@@ -487,7 +487,7 @@ where
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:fsm:znd"
+reference "sec:fm:znd"
 
 \end_inset
 
@@ -518,7 +518,7 @@ All the quantities in this model are assumed to be nondimensional.
 Governing equations in the shock-attached frame
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:math-model:gov-eqn-saf"
+name "subsec:fm:math-model:gov-eqn-saf"
 
 \end_inset
 
@@ -543,7 +543,7 @@ n speed is known exactly (up to the numerical accuracy), because it appears
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:fsm:math-model:sheveq"
+reference "subsec:fm:math-model:sheveq"
 
 \end_inset
 
@@ -601,7 +601,7 @@ status open
 \backslash
 begin{subequations}
 \backslash
-label{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+label{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \end_layout
 
 \end_inset
@@ -644,7 +644,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \end_layout
 
 \end_inset
@@ -657,7 +657,7 @@ eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:fsm:linearization"
+reference "sec:fm:linearization"
 
 \end_inset
 
@@ -671,7 +671,7 @@ status open
 \backslash
 begin{subequations}
 \backslash
-label{eq:fsm:math-model:gov-eqn-saf:system}
+label{eq:fm:math-model:gov-eqn-saf:system}
 \end_layout
 
 \end_inset
@@ -679,8 +679,8 @@ label{eq:fsm:math-model:gov-eqn-saf:system}
 
 \begin_inset Formula 
 \begin{align}
-u_{t}+\left(u-D\right)u_{x}+\sigma\lambda_{x} & =0,\label{eq:fsm:math-model:gov-eqn-saf:eqn-of-motion}\\
-\lambda_{t}-D\lambda_{x} & =\omega.\label{eq:fsm:math-model:gov-eqn-saf:eqn-of-reaction}
+u_{t}+\left(u-D\right)u_{x}+\sigma\lambda_{x} & =0,\label{eq:fm:math-model:gov-eqn-saf:eqn-of-motion}\\
+\lambda_{t}-D\lambda_{x} & =\omega.\label{eq:fm:math-model:gov-eqn-saf:eqn-of-reaction}
 \end{align}
 
 \end_inset
@@ -705,7 +705,7 @@ end{subequations}
 Ambient and Rankine–Hugoniot conditions
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:math-model:ac-rhc"
+name "subsec:fm:math-model:ac-rhc"
 
 \end_inset
 
@@ -725,7 +725,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \end_layout
 
 \end_inset
@@ -774,7 +774,7 @@ Ambient conditions are specified for the state ahead of the shock.
  We assume trivial constant state:
 \begin_inset Formula 
 \begin{equation}
-u_{\mathrm{a}}=0,\quad\lambda_{\mathrm{a}}=0.\label{eq:fsm:math-model:ac-rhc:ac}
+u_{\mathrm{a}}=0,\quad\lambda_{\mathrm{a}}=0.\label{eq:fm:math-model:ac-rhc:ac}
 \end{equation}
 
 \end_inset
@@ -798,7 +798,7 @@ Rankine–Hugoniot condition for
  Therefore
 \begin_inset Formula 
 \begin{equation}
-\lambda_{\mathrm{s}}=0.\label{eq:fsm:math-model:ac-rhc:rh-lambda}
+\lambda_{\mathrm{s}}=0.\label{eq:fm:math-model:ac-rhc:rh-lambda}
 \end{equation}
 
 \end_inset
@@ -818,7 +818,7 @@ To derive Rankine–Hugoniot condition for
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:gov-eqn-saf:eqn-of-motion"
+reference "eq:fm:math-model:gov-eqn-saf:eqn-of-motion"
 
 \end_inset
 
@@ -841,7 +841,7 @@ and integrate over domain
 :
 \begin_inset Formula 
 \begin{equation}
-\frac{\partial}{\partial t}\left(\int_{x_{1}}^{x_{\mathrm{s}}}u\,dx+\int_{x_{\mathrm{s}}}^{x_{2}}u\,dx\right)=-\int_{x_{1}}^{x_{2}}\left(\left(\frac{u}{2}-D\right)u+\sigma\lambda\right)_{x}\,dx.\label{eq:fsm:math-model:ac-rhc:claw-integral-form}
+\frac{\partial}{\partial t}\left(\int_{x_{1}}^{x_{\mathrm{s}}}u\,dx+\int_{x_{\mathrm{s}}}^{x_{2}}u\,dx\right)=-\int_{x_{1}}^{x_{2}}\left(\left(\frac{u}{2}-D\right)u+\sigma\lambda\right)_{x}\,dx.\label{eq:fm:math-model:ac-rhc:claw-integral-form}
 \end{equation}
 
 \end_inset
@@ -870,7 +870,7 @@ Note that
  Therefore, 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:ac-rhc:claw-integral-form"
+reference "eq:fm:math-model:ac-rhc:claw-integral-form"
 
 \end_inset
 
@@ -913,7 +913,7 @@ Using ambient conditions
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:ac-rhc:ac"
+reference "eq:fm:math-model:ac-rhc:ac"
 
 \end_inset
 
@@ -924,7 +924,7 @@ reference "eq:fsm:math-model:ac-rhc:ac"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+reference "eq:fm:math-model:ac-rhc:rh-lambda"
 
 \end_inset
 
@@ -943,7 +943,7 @@ and Rankine–Hugoniot condition for
  is
 \begin_inset Formula 
 \begin{equation}
-u_{\mathrm{s}}=2D.\label{eq:fsm:math-model:ac-rhc:rh-u}
+u_{\mathrm{s}}=2D.\label{eq:fm:math-model:ac-rhc:rh-u}
 \end{equation}
 
 \end_inset
@@ -955,7 +955,7 @@ u_{\mathrm{s}}=2D.\label{eq:fsm:math-model:ac-rhc:rh-u}
 Shock-evolution equation
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:math-model:sheveq"
+name "subsec:fm:math-model:sheveq"
 
 \end_inset
 
@@ -975,7 +975,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \end_layout
 
 \end_inset
@@ -1013,7 +1013,7 @@ We want to find the rate of change of
 Using the equation 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:gov-eqn-lab:eqn-of-motion"
+reference "eq:fm:math-model:gov-eqn-lab:eqn-of-motion"
 
 \end_inset
 
@@ -1041,7 +1041,7 @@ By noting that no chemical reaction occurs right behind the shock and using
  
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:gov-eqn-lab:eqn-of-reaction"
+reference "eq:fm:math-model:gov-eqn-lab:eqn-of-reaction"
 
 \end_inset
 
@@ -1092,14 +1092,14 @@ which connects the evolution of
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:ac-rhc:rh-u"
+reference "eq:fm:math-model:ac-rhc:rh-u"
 
 \end_inset
 
 , we find that the shock- evolution equation is
 \begin_inset Formula 
 \begin{equation}
-\od Dt=\frac{1}{2}\left.\left[(D-u)u_{x}+\frac{\sigma}{D}\omega\right]\right|_{\mathrm{s}}.\label{eq:fsm:math-model:sheveq}
+\od Dt=\frac{1}{2}\left.\left[(D-u)u_{x}+\frac{\sigma}{D}\omega\right]\right|_{\mathrm{s}}.\label{eq:fm:math-model:sheveq}
 \end{equation}
 
 \end_inset
@@ -1143,7 +1143,7 @@ shock-change relation
 ZND solution
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:znd"
+name "sec:fm:znd"
 
 \end_inset
 
@@ -1163,7 +1163,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \end_layout
 
 \end_inset
@@ -1199,7 +1199,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
+eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \end_layout
 
 \end_inset
@@ -1207,8 +1207,8 @@ eqref{eq:fsm:math-model:gov-eqn-saf:system-conservative}
  reduce to
 \begin_inset Formula 
 \begin{align}
-\od{}{}\left(\frac{\bar{u}^{2}}{2}-\bar{D}\bar{u}+\frac{q}{2}\bar{\lambda}\right) & =0,\label{eq:fsm:znd:eqn-of-motion}\\
-\od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}}.\label{eq:fsm:znd:eqn-of-reaction}
+\od{}{}\left(\frac{\bar{u}^{2}}{2}-\bar{D}\bar{u}+\frac{q}{2}\bar{\lambda}\right) & =0,\label{eq:fm:znd:eqn-of-motion}\\
+\od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}}.\label{eq:fm:znd:eqn-of-reaction}
 \end{align}
 
 \end_inset
@@ -1224,14 +1224,14 @@ Using ambient conditions
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:ac"
+reference "eq:fm:math-model:ac-rhc:ac"
 
 \end_inset
 
  we obtain from 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:eqn-of-motion"
+reference "eq:fm:znd:eqn-of-motion"
 
 \end_inset
 
@@ -1271,21 +1271,21 @@ and we take the largest root (in absolute value) to satisfy Rankine–Hugoniot
 (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+reference "eq:fm:math-model:ac-rhc:rh-lambda"
 
 \end_inset
 
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-u"
+reference "eq:fm:math-model:ac-rhc:rh-u"
 
 \end_inset
 
 ):
 \begin_inset Formula 
 \begin{equation}
-\bar{u}=\bar{D}+\sqrt{\bar{D}^{2}-q\bar{\lambda}}.\label{eq:fsm:znd:u-of-lambda}
+\bar{u}=\bar{D}+\sqrt{\bar{D}^{2}-q\bar{\lambda}}.\label{eq:fm:znd:u-of-lambda}
 \end{equation}
 
 \end_inset
@@ -1297,7 +1297,7 @@ reference "eq:fsm:math-model:ac-rhc:rh-u"
 Therefore, steady structure is defined by substituting 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:u-of-lambda"
+reference "eq:fm:znd:u-of-lambda"
 
 \end_inset
 
@@ -1308,7 +1308,7 @@ reference "eq:fsm:znd:u-of-lambda"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:eqn-of-reaction"
+reference "eq:fm:znd:eqn-of-reaction"
 
 \end_inset
 
@@ -1316,7 +1316,7 @@ reference "eq:fsm:znd:eqn-of-reaction"
  starting at the shock:
 \begin_inset Formula 
 \begin{equation}
-\bar{u}_{\mathrm{s}}=2\bar{D},\quad\bar{\lambda}_{\mathrm{s}}=0\label{eq:fsm:znd:ics}
+\bar{u}_{\mathrm{s}}=2\bar{D},\quad\bar{\lambda}_{\mathrm{s}}=0\label{eq:fm:znd:ics}
 \end{equation}
 
 \end_inset
@@ -1328,14 +1328,14 @@ towards the chemical equilibrium.
 From 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:u-of-lambda"
+reference "eq:fm:znd:u-of-lambda"
 
 \end_inset
 
  it follows that the Chapman–Jouguet detonation velocity is defined by
 \begin_inset Formula 
 \begin{equation}
-D_{\mathrm{CJ}}=\sqrt{q}.\label{eq:fsm:znd:dcj}
+D_{\mathrm{CJ}}=\sqrt{q}.\label{eq:fm:znd:dcj}
 \end{equation}
 
 \end_inset
@@ -1371,7 +1371,7 @@ We define preexponent
 therefore,
 \begin_inset Formula 
 \begin{equation}
-k=\int_{0}^{1/2}\frac{\bar{D}}{\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda},\label{eq:fsm:znd:k}
+k=\int_{0}^{1/2}\frac{\bar{D}}{\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda},\label{eq:fm:znd:k}
 \end{equation}
 
 \end_inset
@@ -1383,7 +1383,7 @@ where
  is defined by 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:u-of-lambda"
+reference "eq:fm:znd:u-of-lambda"
 
 \end_inset
 
@@ -1402,8 +1402,8 @@ For further work we will need expressions for
 :
 \begin_inset Formula 
 \begin{align}
-\od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}},\label{eq:fsm:znd:dlambda_dx}\\
-\od{\bar{u}}x & =\frac{1}{2}\frac{-q\od{\bar{\lambda}}x}{\sqrt{\bar{D}^{2}-q\bar{\lambda}}}=\frac{1}{2}\frac{q\bar{\omega}}{\bar{D}\sqrt{\bar{D}^{2}-q\bar{\lambda}}}.\label{eq:fsm:znd:du_dx}
+\od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}},\label{eq:fm:znd:dlambda_dx}\\
+\od{\bar{u}}x & =\frac{1}{2}\frac{-q\od{\bar{\lambda}}x}{\sqrt{\bar{D}^{2}-q\bar{\lambda}}}=\frac{1}{2}\frac{q\bar{\omega}}{\bar{D}\sqrt{\bar{D}^{2}-q\bar{\lambda}}}.\label{eq:fm:znd:du_dx}
 \end{align}
 
 \end_inset
@@ -1415,7 +1415,7 @@ For further work we will need expressions for
 Linearization
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:linearization"
+name "sec:fm:linearization"
 
 \end_inset
 
@@ -1431,7 +1431,7 @@ status open
 
 
 \backslash
-ref{eq:fsm:math-model:gov-eqn-saf:system}
+ref{eq:fm:math-model:gov-eqn-saf:system}
 \end_layout
 
 \end_inset
@@ -1439,21 +1439,21 @@ ref{eq:fsm:math-model:gov-eqn-saf:system}
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+reference "eq:fm:math-model:ac-rhc:rh-lambda"
 
 \end_inset
 
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-u"
+reference "eq:fm:math-model:ac-rhc:rh-u"
 
 \end_inset
 
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:sheveq"
+reference "eq:fm:math-model:sheveq"
 
 \end_inset
 
@@ -1464,7 +1464,7 @@ reference "eq:fsm:math-model:sheveq"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:fsm:znd"
+reference "sec:fm:znd"
 
 \end_inset
 
@@ -1500,7 +1500,7 @@ status open
 \backslash
 begin{subequations}
 \backslash
-label{eq:fsm:linearization:expansions}
+label{eq:fm:linearization:expansions}
 \end_layout
 
 \end_inset
@@ -1508,9 +1508,9 @@ label{eq:fsm:linearization:expansions}
 
 \begin_inset Formula 
 \begin{align}
-D & =\bar{D}+\varepsilon\psi'(t)\label{eq:fsm:linearization:expansion-d}\\
-u & =\bar{u}(x)+\varepsilon u'(x,t),\label{eq:fsm:linearization:expansion-u}\\
-\lambda & =\bar{\lambda}(x)+\varepsilon\lambda'(x,t),\label{eq:fsm:linearization:expansion-lambda}
+D & =\bar{D}+\varepsilon\psi'(t)\label{eq:fm:linearization:expansion-d}\\
+u & =\bar{u}(x)+\varepsilon u'(x,t),\label{eq:fm:linearization:expansion-u}\\
+\lambda & =\bar{\lambda}(x)+\varepsilon\lambda'(x,t),\label{eq:fm:linearization:expansion-lambda}
 \end{align}
 
 \end_inset
@@ -1547,7 +1547,7 @@ where
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:fsm:znd"
+reference "sec:fm:znd"
 
 \end_inset
 
@@ -1596,7 +1596,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:linearization:expansions}
+eqref{eq:fm:linearization:expansions}
 \end_layout
 
 \end_inset
@@ -1609,7 +1609,7 @@ status open
 
 
 \backslash
-ref{eq:fsm:math-model:gov-eqn-saf:system}
+ref{eq:fm:math-model:gov-eqn-saf:system}
 \end_layout
 
 \end_inset
@@ -1617,21 +1617,21 @@ ref{eq:fsm:math-model:gov-eqn-saf:system}
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+reference "eq:fm:math-model:ac-rhc:rh-lambda"
 
 \end_inset
 
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-u"
+reference "eq:fm:math-model:ac-rhc:rh-u"
 
 \end_inset
 
  and 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:sheveq"
+reference "eq:fm:math-model:sheveq"
 
 \end_inset
 
@@ -1670,7 +1670,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:linearization:expansions}
+eqref{eq:fm:linearization:expansions}
 \end_layout
 
 \end_inset
@@ -1687,7 +1687,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-saf:system}
+eqref{eq:fm:math-model:gov-eqn-saf:system}
 \end_layout
 
 \end_inset
@@ -1712,7 +1712,7 @@ By keeping only
  terms from the first equation we obtain
 \begin_inset Formula 
 \begin{equation}
-u'_{t}+\left(\bar{u}-\bar{D}\right)u'_{x}+\sigma\lambda'_{x}+\od{\bar{u}}x\left(u'-\psi'\right)=0,\label{eq:fsm:linearization:eq-of-motion}
+u'_{t}+\left(\bar{u}-\bar{D}\right)u'_{x}+\sigma\lambda'_{x}+\od{\bar{u}}x\left(u'-\psi'\right)=0,\label{eq:fm:linearization:eq-of-motion}
 \end{equation}
 
 \end_inset
@@ -1783,7 +1783,7 @@ where
 Then linearized reaction equation is
 \begin_inset Formula 
 \begin{equation}
-\lambda'_{t}-\bar{D}\lambda'_{x}-\bar{\omega}_{u}u'-\bar{\omega}_{\lambda}\lambda'-\od{\bar{\lambda}}x\psi'=0,\label{eq:fsm:linearization:eq-of-reaction}
+\lambda'_{t}-\bar{D}\lambda'_{x}-\bar{\omega}_{u}u'-\bar{\omega}_{\lambda}\lambda'-\od{\bar{\lambda}}x\psi'=0,\label{eq:fm:linearization:eq-of-reaction}
 \end{equation}
 
 \end_inset
@@ -1823,7 +1823,7 @@ in which steady quantities
 Linearization of the Rankine–Hugoniot conditions
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:linearization:rh"
+name "subsec:fm:linearization:rh"
 
 \end_inset
 
@@ -1843,7 +1843,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:linearization:expansions}
+eqref{eq:fm:linearization:expansions}
 \end_layout
 
 \end_inset
@@ -1851,14 +1851,14 @@ eqref{eq:fsm:linearization:expansions}
  to (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-lambda"
+reference "eq:fm:math-model:ac-rhc:rh-lambda"
 
 \end_inset
 
 , 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:fsm:math-model:ac-rhc:rh-u"
+reference "eq:fm:math-model:ac-rhc:rh-u"
 
 \end_inset
 
@@ -1878,7 +1878,7 @@ and, by keeping only
  terms we get the Rankine–Hugoniot conditions for perturbations:
 \begin_inset Formula 
 \begin{equation}
-\lambda'_{\mathrm{s}}=0,\quad u'_{\mathrm{s}}=2\psi'.\label{eq:fsm:linearization:rh:conditions}
+\lambda'_{\mathrm{s}}=0,\quad u'_{\mathrm{s}}=2\psi'.\label{eq:fm:linearization:rh:conditions}
 \end{equation}
 
 \end_inset
@@ -1890,7 +1890,7 @@ and, by keeping only
 Linearization of the shock-evolution equation
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:linearization:sheveq"
+name "subsec:fm:linearization:sheveq"
 
 \end_inset
 
@@ -1910,7 +1910,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:linearization:expansions}
+eqref{eq:fm:linearization:expansions}
 \end_layout
 
 \end_inset
@@ -1918,7 +1918,7 @@ eqref{eq:fsm:linearization:expansions}
  into 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:sheveq"
+reference "eq:fm:math-model:sheveq"
 
 \end_inset
 
@@ -1953,14 +1953,14 @@ Using Rankine–Hugoniot conditions and expression
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:du_dx"
+reference "eq:fm:znd:du_dx"
 
 \end_inset
 
  we arrive at the linearized shock-evolution equation:
 \begin_inset Formula 
 \begin{equation}
-\od{\psi'}t=\frac{1}{2}\left[\frac{qk\exp(2\theta\bar{D})(\theta\bar{D}-1)}{\bar{D}^{2}}\psi'-\bar{D}u'_{x}|_{\mathrm{s}}\right].\label{eq:fsm:linearization:sheveq:sheveq}
+\od{\psi'}t=\frac{1}{2}\left[\frac{qk\exp(2\theta\bar{D})(\theta\bar{D}-1)}{\bar{D}^{2}}\psi'-\bar{D}u'_{x}|_{\mathrm{s}}\right].\label{eq:fm:linearization:sheveq:sheveq}
 \end{equation}
 
 \end_inset
@@ -1986,7 +1986,7 @@ Shock-evolution equation contains velocity perturbation gradient
 Numerical method
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:numerical-method"
+name "sec:fm:numerical-method"
 
 \end_inset
 
@@ -1998,7 +1998,7 @@ In this section, we explain the algorithm that we use to integrate linearized
  system
 \begin_inset Formula 
 \begin{eqnarray}
-\boldsymbol{z}'_{t} & = & -\boldsymbol{A}(x)\boldsymbol{z}'_{x}-\boldsymbol{B}(x)\boldsymbol{z}',\label{eq:fsm:numerical-method:system-in-vec-form}
+\boldsymbol{z}'_{t} & = & -\boldsymbol{A}(x)\boldsymbol{z}'_{x}-\boldsymbol{B}(x)\boldsymbol{z}',\label{eq:fm:numerical-method:system-in-vec-form}
 \end{eqnarray}
 
 \end_inset
@@ -2014,7 +2014,7 @@ where
 \frac{d\bar{u}}{dx} & 0 & -\frac{d\bar{u}}{dx}\\
 -\bar{\omega}_{u} & -\bar{\omega}_{\lambda} & -\frac{d\bar{\lambda}}{dx}\\
 0 & 0 & -\frac{qk\exp(2\theta\bar{D})(\theta\bar{D}-1)}{2\bar{D}^{2}}
-\end{array}\right).\label{eq:fsm:numerical-method:matrices}
+\end{array}\right).\label{eq:fm:numerical-method:matrices}
 \end{equation}
 
 \end_inset
@@ -2068,7 +2068,7 @@ key "LeVeque2007"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:numerical-method:grid"
+reference "fig:fm:numerical-method:grid"
 
 \end_inset
 
@@ -2091,7 +2091,7 @@ reference "fig:fsm:numerical-method:grid"
  is constant and computed as
 \begin_inset Formula 
 \begin{equation}
-\Delta x=\frac{\mathcal{L}}{N+1},\label{eq:fsm:numerical-method:spatial-step}
+\Delta x=\frac{\mathcal{L}}{N+1},\label{eq:fm:numerical-method:spatial-step}
 \end{equation}
 
 \end_inset
@@ -2108,7 +2108,7 @@ where
  at each grid points we arrive at the system
 \begin_inset Formula 
 \begin{equation}
-\od{\vec{z}}t=\vec{L}\left(\vec{z}\right),\label{eq:fsm:numerical-method:method-of-lines}
+\od{\vec{z}}t=\vec{L}\left(\vec{z}\right),\label{eq:fm:numerical-method:method-of-lines}
 \end{equation}
 
 \end_inset
@@ -2143,7 +2143,7 @@ status open
 The grid schema.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:numerical-method:grid"
+name "fig:fm:numerical-method:grid"
 
 \end_inset
 
@@ -2164,7 +2164,7 @@ name "fig:fsm:numerical-method:grid"
 Computation of the ZND solution
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:numerical-method:znd"
+name "subsec:fm:numerical-method:znd"
 
 \end_inset
 
@@ -2195,7 +2195,7 @@ Self-sustained detonation velocity
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:dcj"
+reference "eq:fm:znd:dcj"
 
 \end_inset
 
@@ -2219,7 +2219,7 @@ Pre-exponential factor.
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:k"
+reference "eq:fm:znd:k"
 
 \end_inset
 
@@ -2239,7 +2239,7 @@ Length of the reaction zone.
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:dlambda_dx"
+reference "eq:fm:znd:dlambda_dx"
 
 \end_inset
 
@@ -2251,7 +2251,7 @@ reference "eq:fsm:znd:dlambda_dx"
 :
 \begin_inset Formula 
 \begin{equation}
-\mathcal{L}\left(\lambda^{*}\right)=\int_{0}^{\lambda^{*}}\frac{\bar{D}}{k\left(1-\bar{\lambda}\right)\exp\left(\theta\bar{u}+q\bar{\lambda}\right)}\,\dd\bar{\lambda},\label{eq:fsm:numerical-method:znd:partial-length}
+\mathcal{L}\left(\lambda^{*}\right)=\int_{0}^{\lambda^{*}}\frac{\bar{D}}{k\left(1-\bar{\lambda}\right)\exp\left(\theta\bar{u}+q\bar{\lambda}\right)}\,\dd\bar{\lambda},\label{eq:fm:numerical-method:znd:partial-length}
 \end{equation}
 
 \end_inset
@@ -2267,7 +2267,7 @@ where
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:u-of-lambda"
+reference "eq:fm:znd:u-of-lambda"
 
 \end_inset
 
@@ -2311,7 +2311,7 @@ Integration of the solution profiles
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:dlambda_dx"
+reference "eq:fm:znd:dlambda_dx"
 
 \end_inset
 
@@ -2322,7 +2322,7 @@ reference "eq:fsm:znd:dlambda_dx"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:ics"
+reference "eq:fm:znd:ics"
 
 \end_inset
 
@@ -2333,7 +2333,7 @@ reference "eq:fsm:znd:ics"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:znd:u-of-lambda"
+reference "eq:fm:znd:u-of-lambda"
 
 \end_inset
 
@@ -2410,7 +2410,7 @@ This idea was suggested by Luiz Faria
 Approximation of the right-hand sides
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:numerical-method:rhs"
+name "subsec:fm:numerical-method:rhs"
 
 \end_inset
 
@@ -2425,7 +2425,7 @@ Approximation of right-hand sides of system
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:system-in-vec-form"
+reference "eq:fm:numerical-method:system-in-vec-form"
 
 \end_inset
 
@@ -2485,7 +2485,7 @@ Approximation of the right-hand sides at points
 
 \begin_inset CommandInset label
 LatexCommand label
-name "subsub:fsm:numerical-method:rhs:internal"
+name "subsub:fm:numerical-method:rhs:internal"
 
 \end_inset
 
@@ -2509,7 +2509,7 @@ At grid points
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:system-in-vec-form"
+reference "eq:fm:numerical-method:system-in-vec-form"
 
 \end_inset
 
@@ -2517,7 +2517,7 @@ reference "eq:fsm:numerical-method:system-in-vec-form"
  That is, consider
 \begin_inset Formula 
 \begin{equation}
-\left.\frac{d\vec{z}_{j}}{dt}\right|_{x=x_{i}}=\left.\vec{L}_{j}\left(\vec{z}\right)\right|_{x=x_{i}},\quad j=1,2,\quad i=0,\dots,N-2.\label{eq:fsm:numerical-method:rhs:internal:system}
+\left.\frac{d\vec{z}_{j}}{dt}\right|_{x=x_{i}}=\left.\vec{L}_{j}\left(\vec{z}\right)\right|_{x=x_{i}},\quad j=1,2,\quad i=0,\dots,N-2.\label{eq:fm:numerical-method:rhs:internal:system}
 \end{equation}
 
 \end_inset
@@ -2539,7 +2539,7 @@ reference "eq:fsm:numerical-method:system-in-vec-form"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:system"
+reference "eq:fm:numerical-method:rhs:internal:system"
 
 \end_inset
 
@@ -2612,7 +2612,7 @@ Approximation of
 where
 \begin_inset Formula 
 \begin{equation}
-\alpha=\max\abs{\frac{\partial H}{\partial\phi_{x}}}.\label{eq:fsm:numerical-method:rhs:internal:alpha}
+\alpha=\max\abs{\frac{\partial H}{\partial\phi_{x}}}.\label{eq:fm:numerical-method:rhs:internal:alpha}
 \end{equation}
 
 \end_inset
@@ -2692,7 +2692,7 @@ My exposition of WENO is too terse, must be made clearer.
 
 \begin_inset Formula 
 \begin{equation}
-\omega_{0}=\frac{1}{\left(\epsilon+IS_{0}\right)^{2}},\quad\omega_{1}=\frac{1}{\left(\epsilon+IS_{1}\right)^{2}},\quad\omega_{2}=\frac{1}{\left(\epsilon+IS_{2}\right)^{2}},\label{eq:fsm:numerical-method:rhs:internal:weno-weights}
+\omega_{0}=\frac{1}{\left(\epsilon+IS_{0}\right)^{2}},\quad\omega_{1}=\frac{1}{\left(\epsilon+IS_{1}\right)^{2}},\quad\omega_{2}=\frac{1}{\left(\epsilon+IS_{2}\right)^{2}},\label{eq:fm:numerical-method:rhs:internal:weno-weights}
 \end{equation}
 
 \end_inset
@@ -2730,7 +2730,7 @@ Quantity
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
+reference "eq:fm:numerical-method:rhs:internal:weno-weights"
 
 \end_inset
 
@@ -2748,7 +2748,7 @@ reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:system"
+reference "eq:fm:numerical-method:rhs:internal:system"
 
 \end_inset
 
@@ -2762,7 +2762,7 @@ reference "eq:fsm:numerical-method:rhs:internal:system"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:system"
+reference "eq:fm:numerical-method:rhs:internal:system"
 
 \end_inset
 
@@ -2781,7 +2781,7 @@ reference "eq:fsm:numerical-method:rhs:internal:system"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:matrices"
+reference "eq:fm:numerical-method:matrices"
 
 \end_inset
 
@@ -2801,7 +2801,7 @@ reference "eq:fsm:numerical-method:matrices"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:alpha"
+reference "eq:fm:numerical-method:rhs:internal:alpha"
 
 \end_inset
 
@@ -2812,7 +2812,7 @@ reference "eq:fsm:numerical-method:rhs:internal:alpha"
 Approximation of the spatial derivatives near the shock
 \begin_inset CommandInset label
 LatexCommand label
-name "subsub:fsm:numerical-method:rhs:shock"
+name "subsub:fm:numerical-method:rhs:shock"
 
 \end_inset
 
@@ -2932,7 +2932,7 @@ key "Henrick2006"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:linearization:sheveq:sheveq"
+reference "eq:fm:linearization:sheveq:sheveq"
 
 \end_inset
 
@@ -2952,7 +2952,7 @@ u'_{x,N+1}=\frac{1}{60\Delta x}\left(-12u_{N-4}+75u_{N-3}-200u_{N-2}+300u_{N-1}-
 Time-stepping
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:numerical-method:time-stepping"
+name "subsec:fm:numerical-method:time-stepping"
 
 \end_inset
 
@@ -2980,7 +2980,7 @@ The system of ordinary differential equations
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:method-of-lines"
+reference "eq:fm:numerical-method:method-of-lines"
 
 \end_inset
 
@@ -3015,7 +3015,7 @@ key "Macdonald2003"
  using CFL condition and remains fixed:
 \begin_inset Formula 
 \begin{equation}
-\Delta t=\frac{\text{CFL}\Delta x}{\bar{D}}\label{eq:fsm:numerical-method:time-stepping:cfl-condition}
+\Delta t=\frac{\text{CFL}\Delta x}{\bar{D}}\label{eq:fm:numerical-method:time-stepping:cfl-condition}
 \end{equation}
 
 \end_inset
@@ -3036,7 +3036,7 @@ because
 Initial conditions
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:numerical-method:ics"
+name "subsec:fm:numerical-method:ics"
 
 \end_inset
 
@@ -3047,7 +3047,7 @@ name "subsec:fsm:numerical-method:ics"
 As initial conditions we use the conditions
 \begin_inset Formula 
 \begin{equation}
-u_{0}'(x,0)=A\exp\left(-x^{2}\right),\quad\lambda_{10}'(x,0)=0,\quad\quad\psi'(0)=\frac{1}{2}u_{0}'|_{\textrm{s}},\label{eq:fsm:numerical-method:ics:ics}
+u_{0}'(x,0)=A\exp\left(-x^{2}\right),\quad\lambda_{10}'(x,0)=0,\quad\quad\psi'(0)=\frac{1}{2}u_{0}'|_{\textrm{s}},\label{eq:fm:numerical-method:ics:ics}
 \end{equation}
 
 \end_inset
@@ -3073,7 +3073,7 @@ where
 Boundary conditions
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:numerical-method:bcs"
+name "subsec:fm:numerical-method:bcs"
 
 \end_inset
 
@@ -3105,7 +3105,7 @@ Boundary conditions must be specified only for
 At the upstream boundary the Dirichlet conditions are used
 \begin_inset Formula 
 \begin{equation}
-u_{N+1}'=2\psi',\quad\lambda_{N+1}'=0,\label{eq:fsm:numerical-method:bcs:upstream}
+u_{N+1}'=2\psi',\quad\lambda_{N+1}'=0,\label{eq:fm:numerical-method:bcs:upstream}
 \end{equation}
 
 \end_inset
@@ -3117,7 +3117,7 @@ which are simply Rankine–Hugoniot conditions
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:linearization:rh:conditions"
+reference "eq:fm:linearization:rh:conditions"
 
 \end_inset
 
@@ -3128,7 +3128,7 @@ reference "eq:fsm:linearization:rh:conditions"
 At the downstream boundary the zero-order extrapolation is used
 \begin_inset Formula 
 \begin{equation}
-u_{i}'=u_{0}',\quad\lambda_{i}'=\lambda_{0}'\quad\mbox{for }i=\{-3,-2,-1\},\label{eq:fsm:numerical-method:bcs:downstream}
+u_{i}'=u_{0}',\quad\lambda_{i}'=\lambda_{0}'\quad\mbox{for }i=\{-3,-2,-1\},\label{eq:fm:numerical-method:bcs:downstream}
 \end{equation}
 
 \end_inset
@@ -3166,7 +3166,7 @@ The solution of the linearized problem
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:system-in-vec-form"
+reference "eq:fm:numerical-method:system-in-vec-form"
 
 \end_inset
 
@@ -3256,7 +3256,7 @@ Initial phase.
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:time-stepping:cfl-condition"
+reference "eq:fm:numerical-method:time-stepping:cfl-condition"
 
 \end_inset
 
@@ -3285,14 +3285,14 @@ Boundary conditions
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:bcs:upstream"
+reference "eq:fm:numerical-method:bcs:upstream"
 
 \end_inset
 
 –
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:bcs:downstream"
+reference "eq:fm:numerical-method:bcs:downstream"
 
 \end_inset
 
@@ -3337,7 +3337,7 @@ subsection
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:fsm:postprocessing:extraction"
+reference "subsec:fm:postprocessing:extraction"
 
 \end_inset
 
@@ -3349,7 +3349,7 @@ reference "subsec:fsm:postprocessing:extraction"
 Postprocessing
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:postprocessing"
+name "sec:fm:postprocessing"
 
 \end_inset
 
@@ -3364,7 +3364,7 @@ Solution of the linearized system
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:system-in-vec-form"
+reference "eq:fm:numerical-method:system-in-vec-form"
 
 \end_inset
 
@@ -3375,7 +3375,7 @@ reference "eq:fsm:numerical-method:system-in-vec-form"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:ics:ics"
+reference "eq:fm:numerical-method:ics:ics"
 
 \end_inset
 
@@ -3386,14 +3386,14 @@ reference "eq:fsm:numerical-method:ics:ics"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:bcs:upstream"
+reference "eq:fm:numerical-method:bcs:upstream"
 
 \end_inset
 
 –
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:bcs:downstream"
+reference "eq:fm:numerical-method:bcs:downstream"
 
 \end_inset
 
@@ -3423,7 +3423,7 @@ To find the growth rate and frequencies of the perturbations, we fit the
  to the function
 \begin_inset Formula 
 \begin{equation}
-\psi'=a_{1}\exp\left(\alpha_{1}t\right)\sin\left(\omega_{1}t+\phi_{1}\right),\label{eq:fsm:postprocessing:fit-function}
+\psi'=a_{1}\exp\left(\alpha_{1}t\right)\sin\left(\omega_{1}t+\phi_{1}\right),\label{eq:fm:postprocessing:fit-function}
 \end{equation}
 
 \end_inset
@@ -3490,7 +3490,7 @@ expression
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:postprocessing:fit-function"
+reference "eq:fm:postprocessing:fit-function"
 
 \end_inset
 
@@ -3568,7 +3568,7 @@ The procedure described above relies on the fact that only one mode is present
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:postprocessing:fit-function"
+reference "eq:fm:postprocessing:fit-function"
 
 \end_inset
 
@@ -3585,7 +3585,7 @@ reference "eq:fsm:postprocessing:fit-function"
 Results
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:results"
+name "sec:fm:results"
 
 \end_inset
 
@@ -3601,7 +3601,7 @@ If not stated explicitly, all the results described here are obtained using
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
+reference "eq:fm:numerical-method:rhs:internal:weno-weights"
 
 \end_inset
 
@@ -3620,7 +3620,7 @@ reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:znd:partial-length"
+reference "eq:fm:numerical-method:znd:partial-length"
 
 \end_inset
 
@@ -3631,7 +3631,7 @@ reference "eq:fsm:numerical-method:znd:partial-length"
 ZND solution
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:znd"
+name "subsec:fm:results:znd"
 
 \end_inset
 
@@ -3646,7 +3646,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:znd:lambda-vs-theta"
+reference "fig:fm:results:znd:lambda-vs-theta"
 
 \end_inset
 
@@ -3736,7 +3736,7 @@ Comparison of profiles of
  becomes steeper.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:znd:lambda-vs-theta"
+name "fig:fm:results:znd:lambda-vs-theta"
 
 \end_inset
 
@@ -3757,7 +3757,7 @@ name "fig:fsm:results:znd:lambda-vs-theta"
 Demonstration of the stable and unstable solutions
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:demo"
+name "subsec:fm:results:demo"
 
 \end_inset
 
@@ -3772,7 +3772,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:demo:bifurcation"
+reference "fig:fm:results:demo:bifurcation"
 
 \end_inset
 
@@ -3802,7 +3802,7 @@ reference "fig:fsm:results:demo:bifurcation"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:demo:bifurcation"
+reference "fig:fm:results:demo:bifurcation"
 
 \end_inset
 
@@ -3823,7 +3823,7 @@ a stable case is shown, in which initial perturbation of the detonation
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:demo:bifurcation"
+reference "fig:fm:results:demo:bifurcation"
 
 \end_inset
 
@@ -3836,7 +3836,7 @@ b shows the unstable case, in which detonation velocity grows away from
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:demo:bifurcation"
+reference "fig:fm:results:demo:bifurcation"
 
 \end_inset
 
@@ -3852,7 +3852,7 @@ status open
 
 
 \backslash
-eqref{eq:fsm:math-model:gov-eqn-lab:system}
+eqref{eq:fm:math-model:gov-eqn-lab:system}
 \end_layout
 
 \end_inset
@@ -3864,7 +3864,7 @@ eqref{eq:fsm:math-model:gov-eqn-lab:system}
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:gov-eqn-lab:production-rate"
+reference "eq:fm:math-model:gov-eqn-lab:production-rate"
 
 \end_inset
 
@@ -3964,7 +3964,7 @@ Demonstration of stable and unstable solutions: a) stable solution with
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:demo:bifurcation"
+name "fig:fm:results:demo:bifurcation"
 
 \end_inset
 
@@ -3985,7 +3985,7 @@ name "fig:fsm:results:demo:bifurcation"
 Comparison of linear and nonlinear solutions
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:comparison"
+name "subsec:fm:results:comparison"
 
 \end_inset
 
@@ -4021,7 +4021,7 @@ key "Henrick2006"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsub:fsm:numerical-method:rhs:shock"
+reference "subsub:fm:numerical-method:rhs:shock"
 
 \end_inset
 
@@ -4048,7 +4048,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:comparison:comparison"
+reference "fig:fm:results:comparison:comparison"
 
 \end_inset
 
@@ -4071,7 +4071,7 @@ reference "fig:fsm:results:comparison:comparison"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:comparison:comparison"
+reference "fig:fm:results:comparison:comparison"
 
 \end_inset
 
@@ -4086,7 +4086,7 @@ uishable from each other.
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:comparison:comparison"
+reference "fig:fm:results:comparison:comparison"
 
 \end_inset
 
@@ -4174,7 +4174,7 @@ Comparison of solutions of linearized (solid line) and nonlinear (dashed
  of perturbation is large and two solutions diverge.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:comparison:comparison"
+name "fig:fm:results:comparison:comparison"
 
 \end_inset
 
@@ -4195,7 +4195,7 @@ name "fig:fsm:results:comparison:comparison"
 Neutral stability curve
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:nscurve"
+name "subsec:fm:results:nscurve"
 
 \end_inset
 
@@ -4344,7 +4344,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nscurve:curve"
+reference "fig:fm:results:nscurve:curve"
 
 \end_inset
 
@@ -4384,7 +4384,7 @@ reference "fig:fsm:results:nscurve:curve"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nscurve:curve"
+reference "fig:fm:results:nscurve:curve"
 
 \end_inset
 
@@ -4439,7 +4439,7 @@ The curve on the Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nscurve:curve"
+reference "fig:fm:results:nscurve:curve"
 
 \end_inset
 
@@ -4469,7 +4469,7 @@ key "LeeStewart1990"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:math-model:gov-eqn-lab:production-rate"
+reference "eq:fm:math-model:gov-eqn-lab:production-rate"
 
 \end_inset
 
@@ -4527,7 +4527,7 @@ Neutral stability curve in
  (orange triangles).
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:nscurve:curve"
+name "fig:fm:results:nscurve:curve"
 
 \end_inset
 
@@ -4548,7 +4548,7 @@ name "fig:fsm:results:nscurve:curve"
 Code verification
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:verification"
+name "subsec:fm:results:verification"
 
 \end_inset
 
@@ -4614,7 +4614,7 @@ where errors
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:spatial-step"
+reference "eq:fm:numerical-method:spatial-step"
 
 \end_inset
 
@@ -4626,7 +4626,7 @@ reference "eq:fsm:numerical-method:spatial-step"
 Stable ZND solution
 \begin_inset CommandInset label
 LatexCommand label
-name "subsub:fsm:results:verification:stable-znd"
+name "subsub:fm:results:verification:stable-znd"
 
 \end_inset
 
@@ -4667,7 +4667,7 @@ The results of the convergence study are shown in Table
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:fsm:results:verification:stable-znd:convergence"
+reference "tab:fm:results:verification:stable-znd:convergence"
 
 \end_inset
 
@@ -4695,7 +4695,7 @@ reference "tab:fsm:results:verification:stable-znd:convergence"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:fsm:numerical-method:rhs:internal:weno-weights"
+reference "eq:fm:numerical-method:rhs:internal:weno-weights"
 
 \end_inset
 
@@ -4727,7 +4727,7 @@ Convergence study for the linearized solver in the case of the stable ZND
  solution.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:fsm:results:verification:stable-znd:convergence"
+name "tab:fm:results:verification:stable-znd:convergence"
 
 \end_inset
 
@@ -4798,7 +4798,7 @@ Investigation of the dependence on WENO parameter
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:fsm:results:verification:stable-znd:epsilon-dependence"
+reference "tab:fm:results:verification:stable-znd:epsilon-dependence"
 
 \end_inset
 
@@ -4819,7 +4819,7 @@ reference "tab:fsm:results:verification:stable-znd:epsilon-dependence"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+reference "fig:fm:results:verification:stable-znd:det-velocity-epsilon"
 
 \end_inset
 
@@ -4836,7 +4836,7 @@ reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+reference "fig:fm:results:verification:stable-znd:det-velocity-epsilon"
 
 \end_inset
 
@@ -4852,7 +4852,7 @@ a shows for
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+reference "fig:fm:results:verification:stable-znd:det-velocity-epsilon"
 
 \end_inset
 
@@ -4895,7 +4895,7 @@ Dependence on
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:fsm:results:verification:stable-znd:epsilon-dependence"
+name "tab:fm:results:verification:stable-znd:epsilon-dependence"
 
 \end_inset
 
@@ -5004,7 +5004,7 @@ Detonation velocity vs time for two different values of
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:verification:stable-znd:det-velocity-epsilon"
+name "fig:fm:results:verification:stable-znd:det-velocity-epsilon"
 
 \end_inset
 
@@ -5056,7 +5056,7 @@ Investigation of the dependence on the length of computational domain
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:fsm:results:verification:stable-znd:lambda-dependence"
+reference "tab:fm:results:verification:stable-znd:lambda-dependence"
 
 \end_inset
 
@@ -5079,7 +5079,7 @@ Table
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:fsm:results:verification:stable-znd:lambda-dependence"
+reference "tab:fm:results:verification:stable-znd:lambda-dependence"
 
 \end_inset
 
@@ -5127,7 +5127,7 @@ Dependence of the perturbation of detonation velocity on the length of the
  computational domain.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:fsm:results:verification:stable-znd:lambda-dependence"
+name "tab:fm:results:verification:stable-znd:lambda-dependence"
 
 \end_inset
 
@@ -5174,7 +5174,7 @@ Investigation of resolution dependence of the growth of instability for
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+reference "fig:fm:results:verification:stable-znd:eps-dep-resolution"
 
 \end_inset
 
@@ -5198,7 +5198,7 @@ sted time: perturbation of detonation velocity becomes of the same magnitude
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+reference "fig:fm:results:verification:stable-znd:eps-dep-resolution"
 
 \end_inset
 
@@ -5209,7 +5209,7 @@ a and at time about 0.28 on Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+reference "fig:fm:results:verification:stable-znd:eps-dep-resolution"
 
 \end_inset
 
@@ -5306,7 +5306,7 @@ Dependence of the growth rate of instability on grid resolution: a)
  Note the log scale on ordinate axis.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:verification:stable-znd:eps-dep-resolution"
+name "fig:fm:results:verification:stable-znd:eps-dep-resolution"
 
 \end_inset
 
@@ -5351,7 +5351,7 @@ In conclusion, it can be said that numerical results depend seriously on
 Unstable ZND solution
 \begin_inset CommandInset label
 LatexCommand label
-name "subsub:fsm:results:verification:unstable-znd"
+name "subsub:fm:results:verification:unstable-znd"
 
 \end_inset
 
@@ -5386,7 +5386,7 @@ We verify the code by running simulations for unstable ZND solution.
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsub:fsm:results:verification:stable-znd"
+reference "subsub:fm:results:verification:stable-znd"
 
 \end_inset
 
@@ -5404,7 +5404,7 @@ Table
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:fsm:results:verification:unstable-znd:results"
+reference "tab:fm:results:verification:unstable-znd:results"
 
 \end_inset
 
@@ -5441,7 +5441,7 @@ filename "results/verification-linear-unstable/convergence-data.tex"
 Results of convergence study of the solver in the case of unstable ZND solution.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:fsm:results:verification:unstable-znd:results"
+name "tab:fm:results:verification:unstable-znd:results"
 
 \end_inset
 
@@ -5462,7 +5462,7 @@ name "tab:fsm:results:verification:unstable-znd:results"
 Comparison of unsteady linear analysis with normal-mode analysis
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:comp-nm"
+name "subsec:fm:results:comp-nm"
 
 \end_inset
 
@@ -5563,7 +5563,7 @@ carpet search
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:comp-nm:carpet"
+reference "fig:fm:results:comp-nm:carpet"
 
 \end_inset
 
@@ -5607,7 +5607,7 @@ Carpet plot shown approximate location of the eigenvalue
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:comp-nm:carpet"
+name "fig:fm:results:comp-nm:carpet"
 
 \end_inset
 
@@ -5678,7 +5678,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:comp-nm:nm-profiles"
+reference "fig:fm:results:comp-nm:nm-profiles"
 
 \end_inset
 
@@ -5745,7 +5745,7 @@ ZND solution and perturbations obtained via normal-mode analysis with parameters
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:comp-nm:nm-profiles"
+name "fig:fm:results:comp-nm:nm-profiles"
 
 \end_inset
 
@@ -5770,7 +5770,7 @@ Table
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "tab:fsm:results:comp-nm:alpha"
+reference "tab:fm:results:comp-nm:alpha"
 
 \end_inset
 
@@ -5805,7 +5805,7 @@ Comparison of the growth rates and frequencies of perturbations obtained
  via unsteady linear computations and normal-mode computations.
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:fsm:results:comp-nm:alpha"
+name "tab:fm:results:comp-nm:alpha"
 
 \end_inset
 
@@ -5826,7 +5826,7 @@ name "tab:fsm:results:comp-nm:alpha"
 Nonlinear dynamics of the model
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fsm:results:nonl"
+name "subsec:fm:results:nonl"
 
 \end_inset
 
@@ -5859,7 +5859,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nonl:oscil"
+reference "fig:fm:results:nonl:oscil"
 
 \end_inset
 
@@ -5879,7 +5879,7 @@ reference "fig:fsm:results:nonl:oscil"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nonl:oscil-a"
+reference "fig:fm:results:nonl:oscil-a"
 
 \end_inset
 
@@ -5894,7 +5894,7 @@ reference "fig:fsm:results:nonl:oscil-a"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nonl:oscil-b"
+reference "fig:fm:results:nonl:oscil-b"
 
 \end_inset
 
@@ -5906,7 +5906,7 @@ reference "fig:fsm:results:nonl:oscil-b"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nonl:oscil-a"
+reference "fig:fm:results:nonl:oscil-a"
 
 \end_inset
 
@@ -5918,7 +5918,7 @@ reference "fig:fsm:results:nonl:oscil-a"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nonl:oscil-b"
+reference "fig:fm:results:nonl:oscil-b"
 
 \end_inset
 
@@ -5957,7 +5957,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:nonl:oscil-a"
+name "fig:fm:results:nonl:oscil-a"
 
 \end_inset
 
@@ -5993,7 +5993,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:nonl:oscil-b"
+name "fig:fm:results:nonl:oscil-b"
 
 \end_inset
 
@@ -6026,7 +6026,7 @@ Period-1 and period-2 oscillations obtained with parameters
 .
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:nonl:oscil"
+name "fig:fm:results:nonl:oscil"
 
 \end_inset
 
@@ -6078,7 +6078,7 @@ Figure
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:fsm:results:nonl:oscil"
+reference "fig:fm:results:nonl:oscil"
 
 \end_inset
 
@@ -6091,7 +6091,7 @@ reference "fig:fsm:results:nonl:oscil"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsub:fsm:numerical-method:rhs:shock"
+reference "subsub:fm:numerical-method:rhs:shock"
 
 \end_inset
 
@@ -6170,7 +6170,7 @@ Partial bifurcation diagram for parameters
  in a range 1.15–1.35.
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:fsm:results:nonl:bif-diag"
+name "fig:fm:results:nonl:bif-diag"
 
 \end_inset
 
@@ -6191,7 +6191,7 @@ name "fig:fsm:results:nonl:bif-diag"
 Conclusions
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:fsm:conclusions"
+name "sec:fm:conclusions"
 
 \end_inset
 
