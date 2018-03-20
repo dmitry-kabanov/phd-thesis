@@ -671,6 +671,13 @@ with all the spatially-dependent quantities on the right-hand sides of
 
 \begin_layout Section
 Numerical algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:e1d:algo"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
