@@ -93,7 +93,7 @@
 \begin_body
 
 \begin_layout Chapter
-Analysis of Fickett's detonation analog
+Fickett's detonation analog
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:fm"
@@ -148,7 +148,7 @@ name "sec:fm:intro"
 \end_layout
 
 \begin_layout Standard
-In this chapter, we consider a model that is much simpler that conventional
+In this chapter we consider a model that is much simpler that conventional
  detonation models are, yet it is able to reproduce the unsteady dynamics
  of these models in terms of the possibility of stable and unstable ZND
  solutions.
