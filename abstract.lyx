@@ -334,15 +334,14 @@ ns.
 We apply this approach to two models based on the reactive Euler equations
  for perfect gases.
  For the first model with one-step reaction mechanism, we find agreement
- of our results with the results of normal-mode analysis to two significant
- digits.
+ of our results with the results of normal-mode analysis.
  For the second model with two-step mechanism, we find that both types of
  admissible travelling-wave solutions exhibit the same stability spectra.
 \end_layout
 
 \begin_layout Standard
-Then we investigate to the Fickett's detonation analogue coupled with a
- particular reaction-rate expression.
+Then we investigate the Fickett's detonation analogue coupled with a particular
+ reaction-rate expression.
  In addition to linear stability analysis of this model, we demonstrate
  that it exhibits rich nonlinear dynamics with multiple bifurcations and
  chaotic behavior.
