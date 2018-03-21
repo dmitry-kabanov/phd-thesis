@@ -104,13 +104,181 @@ name "chap:e1d"
 \end_layout
 
 \begin_layout Standard
-Our analysis of detonation stability is based on the one-dimensional reactive
- Euler equations for a perfect gas that has a constant ratio of specific
- heats and reacts following a single-step Arrhenius law.
- The steady traveling-wave solutions are investigated for linear stability
- by means of direct numerical integration of the linearized Euler equations
- with a subsequent analysis of the resultant time series of the detonation
- velocity using the dynamic mode decomposition algorithm.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+epigraphwidth}{0.7
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand*{
+\backslash
+textflush}{flushright}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+epigraph{The classical method of investigating the stability of a steady
+ solution is to impose small multidimensional perturbations on the solution
+ and see if the amplitude of the perturbations grows.}{J.
+\backslash
+ H.
+\backslash
+ S.~
+\backslash
+citet{Lee2008}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this chapter we consider linear stability of a detonation model which
+ is based on the one-dimensional reactive Euler equations for a perfect
+ gas that has a constant ratio of specific heats and undergoes single first-orde
+r irreversible monomolecular reaction
+\begin_inset Formula 
+\begin{equation}
+\text{reactant}\to\text{product}.
+\end{equation}
+
+\end_inset
+
+such that the molar masses of both species are the same.
+ This model is ubiquitously used in the research on stability of detonations
+ beginning with 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Erpenbeck1964"
+
+\end_inset
+
+ due to its relative simplicity and was studied extensively using normal-mode
+ approach (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "LeeStewart1990,ShortStewart1998,Sharpe1997"
+
+\end_inset
+
+) for its linear stability properties.
+ However, one should be aware that despite of the simplicity of the model,
+ its analysis via normal modes is complicated: postulation of the normal-mode
+ solution of the governing equations linearized about a base steady-state
+ solution leads to the two-point boundary-value problem for a system of
+ ordinary differential equations (ODEs) with one boundary at the shock state
+ and the other boundary in the equilibrium state at the end of the reaction
+ zone, in which the system of ODEs becomes singular.
+ Besides, due to the first-order of the reaction, the reaction zone length
+ is infinite, such that one has to truncate the computational domain at
+ some point and formulate an approximate boundary condition at the 
+\begin_inset Quotes eld
+\end_inset
+
+practical
+\begin_inset Quotes erd
+\end_inset
+
+ end of the reaction zone, which demands that perturbations are bounded
+ (boundedness condition).
+ After that one has to integrate the system numerically as it is with variable
+ coefficients due to the nonconstant base steady state and obtain the eigenvalue
+s of the problem (stability spectra) with positive real parts indicating
+ the growth of the amplitude of the perturbations with time and hence, instabili
+ty.
+ Finding eigenvalues is done using shooting method
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "PressEtAl2007"
+
+\end_inset
+
+ and there are two options here: start at the shock and integrate towards
+ chemical-equilibrium boundary ensuring that the boundedness condition is
+ satisfied (an approach taken by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "LeeStewart1990,ShortStewart1998"
+
+\end_inset
+
+) or start at the 
+\begin_inset Quotes eld
+\end_inset
+
+practical
+\begin_inset Quotes erd
+\end_inset
+
+ equilibrium boundary using asymptotic expansions to obtain the approximate
+ values of state variables as an initial condition for the shooting method
+ and integrate towards the shock (approach used by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sharpe1997"
+
+\end_inset
+
+) ensuring that the Rankine–Hugoniot conditions are satisfied at the shock.
+ Both approaches are complicated in a sense that they require a special
+ treatment of the singularity.
+\end_layout
+
+\begin_layout Standard
+Our aim here to develop a new method of linear stability analysis and apply
+ it to this model.
+ The method avoids dealing with singularity as the linearized equations
+ for perturbations are unsteady and nonsingular.
+ We fully explain in this chapter the method including the formulation of
+ the governing equations in the shock-attached frame, formulation of the
+ linear unsteady problem, numerical methods used to solve it, and the method
+ of postprocessing via dynamic mode decomposition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schmid2010"
+
+\end_inset
+
+ the results of computations to extract stability spectra, namely, growth
+ rates and frequencies (stability spectra) of the linear perturbations,
+ which are solutions of the linear unsteady problem.
+ Particularly, we show that the time series of the perturbation of detonation
+ velocity are enough to extract stability spectra without the need to postproces
+s the full solution of the linear unsteady problem.
+ Numerous stability results obtained by other researchers using normal-mode
+ approach allow us to verify the method.
 \end_layout
 
 \begin_layout Section
@@ -125,59 +293,15 @@ name "subsec:e1d:goveqn"
 \end_layout
 
 \begin_layout Standard
-First, we present the governing equations for the case of one-step irreversible
- reaction 
-\begin_inset Formula 
-\begin{equation}
-\text{A}\to\text{B}.
-\end{equation}
-
-\end_inset
-
-The progress of this reaction is followed by a variable 
-\begin_inset Formula $\lambda$
-\end_inset
-
- such that the mass fraction of 
-\begin_inset Formula $\text{A}$
-\end_inset
-
- is 
-\begin_inset Formula $1-\lambda$
-\end_inset
-
- and that of 
-\begin_inset Formula $\text{B}$
-\end_inset
-
- is 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The wave is assumed to propagate from left to right with speed 
-\begin_inset Formula $D$
-\end_inset
-
-, and in the reference frame attached to the lead shock, the governing equations
- are written as 
-\begin_inset CommandInset citation
-LatexCommand citep
-before "see"
-key "KasimovStewart2004"
-
-\end_inset
-
-:
+The one-dimensional reactive Euler equations for this system with one-step
+ chemistry are the usual laws of conservation of mass, momentum, and energy,
+ augmented with the balance law for the reaction progress variable:
 \begin_inset Formula 
 \begin{align}
-\rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:mass}\\
-\left(\rho u\right)_{t}+\left(\rho u\left(u-D\right)+p\right)_{x} & =0,\label{eq:momentum}\\
-\left(\rho e\right)_{t}+\left(\rho\left(u-D\right)e+pu\right)_{x} & =0,\label{eq:energy}\\
-\left(\rho\lambda\right)_{t}+\left(\rho\left(u-D\right)\lambda\right)_{x} & =\rho\omega.\label{eq:reaction}
+\rho_{t}+\left(\rho u\right)_{x} & =0,\label{eq:e1d:mass-1}\\
+\left(\rho u\right)_{t}+\left(\rho u^{2}+p\right)_{x} & =0,\label{eq:e1d:momentum-1}\\
+\left(\rho e\right)_{t}+\left(\rho ue+pu\right)_{x} & =0,\label{eq:e1d:energy-1}\\
+\left(\rho\lambda\right)_{t}+\left(\rho u\lambda\right)_{x} & =\rho\omega,\label{eq:e1d:reaction-1}
 \end{align}
 
 \end_inset
@@ -199,11 +323,32 @@ where
 \end_inset
 
 , 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, 
 \begin_inset Formula $\omega$
 \end_inset
 
- are density, flow velocity, pressure, total specific energy, and reaction
- rate, respectively.
+ are density, flow velocity, pressure, total specific energy, reaction progress
+ variable, and reaction rate, respectively.
+ Reaction progress variable 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is defined such that the mass fraction of the reactant is 
+\begin_inset Formula $1-\lambda$
+\end_inset
+
+ and that of the product is 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ (hence, 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ varies from zero in nonreacted state to unity in the fully reacted state).
  The specific energy is 
 \begin_inset Formula $e=e_{\text{i}}+u^{2}/2$
 \end_inset
@@ -211,7 +356,7 @@ where
  with constitutive relations of a calorically perfect gas: 
 \begin_inset Formula 
 \begin{equation}
-e_{\text{i}}=\frac{pv}{\gamma-1}-Q\lambda,\qquad pv=RT,\label{eq:e_i}
+e_{\text{i}}=\frac{pv}{\gamma-1}-Q\lambda,\qquad pv=RT,\label{eq:e1d:e_i}
 \end{equation}
 
 \end_inset
@@ -220,7 +365,7 @@ where
 \begin_inset Formula $\gamma$
 \end_inset
 
- is the polytropic index, 
+ is the ratio of specific heats, 
 \begin_inset Formula $v=1/\rho$
 \end_inset
 
@@ -237,11 +382,11 @@ where
 \end_inset
 
  temperature.
- The reaction rate is taken here to follow simple-depletion Arrhenius law:
- 
+ The reaction rate is taken here to follow simple-depletion first-order
+ Arrhenius law: 
 \begin_inset Formula 
 \begin{equation}
-\omega=k\left(1-\lambda\right)\exp\left(-\frac{E\rho}{p}\right),\label{eq:Arrhenius}
+\omega=k\left(1-\lambda\right)\exp\left(-\frac{E\rho}{p}\right),\label{eq:e1d:Arrhenius}
 \end{equation}
 
 \end_inset
@@ -258,21 +403,87 @@ where
 \end_layout
 
 \begin_layout Standard
-The numerical solution of the governing equations (
+To transform Eq.
+ (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:mass"
+reference "eq:e1d:mass-1"
 
 \end_inset
 
 –
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:reaction"
+reference "eq:e1d:reaction-1"
 
 \end_inset
 
-) in the shock-attached frame requires an evolution equation for 
+) to the shock-attached frame, we assume that in the laboratory reference
+ frame detonation wave moves from left to right with detonation speed 
+\begin_inset Formula $D=D(t^{\ell})>0$
+\end_inset
+
+, where 
+\begin_inset Formula $t^{\ell}$
+\end_inset
+
+ is time, from initial position 
+\begin_inset Formula $x_{0}^{\ell}=0$
+\end_inset
+
+ at time 
+\begin_inset Formula $t_{0}^{\ell}=0$
+\end_inset
+
+.
+ Then the transformation to the shock-attached frame is defined by equations
+\begin_inset Formula 
+\begin{align*}
+x & =x^{\ell}-x_{\mathrm{s}}^{\ell}=x^{\ell}-\int_{0}^{t^{\ell}}D(\tau)\,d\tau,\\
+t & =t^{\ell},
+\end{align*}
+
+\end_inset
+
+such that position of the shock in the shock-attached frame is 
+\begin_inset Formula $x_{\mathrm{s}}=0$
+\end_inset
+
+ for any time 
+\begin_inset Formula $t\geq0$
+\end_inset
+
+.
+ Then the governing equations in the shock-attached frame are
+\begin_inset Formula 
+\begin{align}
+\rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:e1d:mass}\\
+\left(\rho u\right)_{t}+\left(\rho u\left(u-D\right)+p\right)_{x} & =0,\label{eq:e1d:momentum}\\
+\left(\rho e\right)_{t}+\left(\rho\left(u-D\right)e+pu\right)_{x} & =0,\label{eq:e1d:energy}\\
+\left(\rho\lambda\right)_{t}+\left(\rho\left(u-D\right)\lambda\right)_{x} & =\rho\omega.\label{eq:e1d:reaction}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The numerical solution of the governing equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:reaction"
+
+\end_inset
+
+) requires an evolution equation for 
 \begin_inset Formula $D$
 \end_inset
 
@@ -366,20 +577,58 @@ The Rankine–Hugoniot conditions at
  the shock speed): 
 \begin_inset Formula 
 \begin{align}
-p_{\text{s}} & =-\frac{\gamma-1}{\gamma+1}p_{\text{a}}+\frac{2v_{\text{a}}}{\gamma+1}M^{2}, & v_{\text{s}} & =\frac{\gamma-1}{\gamma+1}v_{\text{a}}+\frac{2}{\gamma+1}\frac{\gamma p_{\text{a}}}{M^{2}}, & U_{\text{s}} & =Mv_{\text{s}},\label{RH-conditions}
+p_{\text{s}} & =-\frac{\gamma-1}{\gamma+1}p_{\text{a}}+\frac{2v_{\text{a}}M^{2}}{\gamma+1}, & v_{\text{s}} & =\frac{\gamma-1}{\gamma+1}v_{\text{a}}+\frac{2}{\gamma+1}\frac{\gamma p_{\text{a}}}{M^{2}}, & U_{\text{s}} & =\frac{M}{\rhoS}, & \lambdaS=0, &  & \rho_{\text{s}}=\frac{1}{v_{\text{s}}}.\label{RH-conditions}
 \end{align}
 
 \end_inset
 
-and 
-\begin_inset Formula $\lambda_{\text{s}}=0$
+
+\end_layout
+
+\begin_layout Standard
+Ambient state ahead of the shock is given by density 
+\begin_inset Formula $\rhoA$
 \end_inset
 
-, 
-\begin_inset Formula $\rho_{\text{s}}=1/v_{\text{s}}$
+, pressure 
+\begin_inset Formula $\pA$
 \end_inset
 
-.
+, and velocity 
+\begin_inset Formula $\uA=0$
+\end_inset
+
+, hence, the flow ahead of the shock is motionless.
+ Additionally, we assume that the reaction rate 
+\begin_inset Formula $\omega=0$
+\end_inset
+
+ in the ambient state such that the reaction is initiated by the leading
+ shock wave.
+\end_layout
+
+\begin_layout Standard
+All equations are nondimensionalized using upstream scales, also called
+ Erpenbeck scales, namely, density scale is 
+\begin_inset Formula $\rho_{\text{a}}$
+\end_inset
+
+, pressure scale is 
+\begin_inset Formula $p_{\text{a}}$
+\end_inset
+
+, velocity scale is 
+\begin_inset Formula $\sqrt{p_{\text{a}}/\rho_{\text{a}}}$
+\end_inset
+
+, energy scale is 
+\begin_inset Formula $RT_{\text{a}}$
+\end_inset
+
+, length scale is the length of the steady-state half-reaction zone, and
+ the characteristic time scale is the length scale divided by the velocity
+ scale.
+ In these scales equations retain their form.
 \end_layout
 
 \begin_layout Section
@@ -387,9 +636,76 @@ ZND solution
 \end_layout
 
 \begin_layout Standard
-The base steady-state traveling wave is the ZND solution that can be computed
- in several different ways.
- Here we use formulation from 
+The steady-state traveling-wave solution of the equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:reaction"
+
+\end_inset
+
+) is the ZND solution that travels to the right with constant speed 
+\begin_inset Formula $\DZnd$
+\end_inset
+
+, which reduces to the algebraic-differential problem:
+\begin_inset Formula 
+\begin{align}
+\rhoZnd\UZnd & =-\rhoA\DZnd,\label{eq:e1d:znd-mass}\\
+\pZnd+\rhoZnd\UZnd^{2} & =\pA+\rhoA\DZnd^{2},\nonumber \\
+\eZnd+\frac{\pZnd}{\rhoZnd}+\frac{\UZnd^{2}}{2} & =\eA+\frac{\pA}{\rhoA}+\frac{\DZnd^{2}}{2},\nonumber \\
+\od{\lambdaZnd}x & =\frac{\bar{\omega}}{\bar{U}},\label{eq:e1d:znd-lambda}
+\end{align}
+
+\end_inset
+
+where we denote steady-state quantities using 
+\begin_inset Quotes eld
+\end_inset
+
+bar
+\begin_inset Quotes erd
+\end_inset
+
+ symbol.
+ The algebraic expressions (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:znd-mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:znd-lambda"
+
+\end_inset
+
+) can be manipulated in different ways such that 
+\begin_inset Formula $\rhoZnd$
+\end_inset
+
+, 
+\begin_inset Formula $\UZnd$
+\end_inset
+
+, and 
+\begin_inset Formula $\pZnd$
+\end_inset
+
+ depend on 
+\begin_inset Formula $\bar{\lambda}$
+\end_inset
+
+, and it can be done in many different ways.
+ Here we use the formulation from 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "KasimovStewart2005"
@@ -397,15 +713,20 @@ key "KasimovStewart2005"
 \end_inset
 
 .
- In this formulation, the ZND solutions is given in terms of 
-\begin_inset Formula $\bar{\lambda}$
+ Introducing steady mass flux 
+\begin_inset Formula $\bar{M}=-\rho_{\text{a}}\DZnd$
 \end_inset
 
- and 
-\begin_inset Formula $\bar{D}$
+, momentum flux 
+\begin_inset Formula $\bar{P}=p_{\text{a}}+\rho_{\text{a}}\bar{D}^{2}$
 \end_inset
 
- by: 
+, and energy flux 
+\begin_inset Formula $\bar{H}=e_{\text{a}}+p_{\text{a}}/\rho_{\text{a}}+\bar{D}^{2}/2$
+\end_inset
+
+, which are constant in the steady-state wave through the reaction zone,
+ the ZND solution is given then by:
 \begin_inset Formula 
 \begin{equation}
 \bar{v}=\frac{\gamma}{\gamma+1}\frac{\bar{P}}{\bar{M}^{2}}(1-\delta),\quad\bar{p}=\bar{P}-\bar{M}^{2}\bar{v},\quad\bar{U}=\bar{M}\bar{v},\label{eq:steady-state}
@@ -421,28 +742,18 @@ where
 
 \end_inset
 
-and 
-\begin_inset Formula $\bar{P}=p_{\text{a}}+\rho_{\text{a}}\bar{D}^{2}$
-\end_inset
-
-, 
-\begin_inset Formula $\bar{H}=e_{\text{a}}+p_{\text{a}}/\rho_{\text{a}}+\bar{D}^{2}/2$
-\end_inset
-
-.
- To obtain the solution in terms of 
+To obtain the solution in terms of 
 \begin_inset Formula $x$
 \end_inset
 
 , the steady-state rate equation 
-\begin_inset Formula 
-\begin{equation}
-\frac{d\bar{\lambda}}{dx}=\frac{\bar{\omega}}{\bar{U}}\label{eq:dlambda_dx}
-\end{equation}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:znd-lambda"
 
 \end_inset
 
-is integrated starting at the shock with the initial condition 
+ is integrated starting at the shock with the initial condition 
 \begin_inset Formula $\bar{\lambda}_{\text{s}}=0$
 \end_inset
 
@@ -475,21 +786,24 @@ For self-sustained detonations with the Arrhenius kinetics
 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:Arrhenius"
+reference "eq:e1d:Arrhenius"
 
 \end_inset
 
- the flow becomes sonic relative to the shock at the end of the reaction
- zone 
+, the flow becomes sonic relative to the shock at the end of the reaction
+ zone where 
 \begin_inset Formula $\lambda=1$
 \end_inset
 
-, which is located at 
-\begin_inset Formula $x\to-\infty$
+.
+ It can be shown (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "Kasimov2004,KasimovStewart2005"
+
 \end_inset
 
-.
- Then 
+) that then 
 \begin_inset Formula $\delta=0$
 \end_inset
 
@@ -497,26 +811,40 @@ reference "eq:Arrhenius"
 \begin_inset Formula $\lambda=1$
 \end_inset
 
- (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "Kasimov2004,KasimovStewart2005"
+, and it follows from Eq.
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:delta"
 
 \end_inset
 
-), and it follows that 
+ that 
 \begin_inset Formula $\bar{D}=D_{\mathrm{CJ}}$
 \end_inset
 
  where 
 \begin_inset Formula 
 \begin{equation}
-D_{\mathrm{CJ}}=\sqrt{c_{\text{a}}^{2}+q}+\sqrt{q},\qquad q=\frac{(\gamma^{2}-1)Q}{2},\qquad c_{\text{a}}^{2}=\frac{\gamma p_{\text{a}}}{\rho_{\text{a}}}.\label{eq:D_CJ}
+D_{\mathrm{CJ}}=\sqrt{c_{\text{a}}^{2}+q}+\sqrt{q},\qquad q=\frac{(\gamma^{2}-1)Q}{2},\qquad c_{\text{a}}^{2}=\frac{\gamma p_{\text{a}}}{\rho_{\text{a}}},\label{eq:D_CJ}
 \end{equation}
 
 \end_inset
 
+and velocity 
+\begin_inset Formula $\DCJ$
+\end_inset
 
+ is called Chapman–Jouguet velocity, or equilibrium detonation velocity,
+ as the sonic condition is satisfied at the point of chemical equilibrium
+ 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -524,11 +852,15 @@ The pre-exponential factor
 \begin_inset Formula $k$
 \end_inset
 
- defines the length scale and is chosen following the standard practice
- such that the half-reaction length is unity: 
+ is defined such that the length scale is the steady-state half-reaction
+ zone, that is, the width of the reaction zone in which 
+\begin_inset Formula $\bar{\lambda}\in[0,1/2]$
+\end_inset
+
+: 
 \begin_inset Formula 
 \begin{equation}
-k=\int_{0}^{1/2}\frac{\bar{U}}{\left(1-\bar{\lambda}\right)\exp\left(-E\bar{\rho}/\bar{p}\right)}\,d\bar{\lambda}.\label{eq:k}
+k=\int_{0}^{1/2}\frac{\bar{U}}{\left(1-\bar{\lambda}\right)\exp\left(-E\bar{\rho}/\bar{p}\right)}\,\dd\bar{\lambda}.\label{eq:k}
 \end{equation}
 
 \end_inset
@@ -537,7 +869,7 @@ k=\int_{0}^{1/2}\frac{\bar{U}}{\left(1-\bar{\lambda}\right)\exp\left(-E\bar{\rho
 \end_layout
 
 \begin_layout Section
-Linearization
+Linear unsteady problem
 \end_layout
 
 \begin_layout Standard
@@ -562,14 +894,14 @@ Next, we introduce the vector of state variables
  Upon linearization of the governing equations (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:mass"
+reference "eq:e1d:mass"
 
 \end_inset
 
 –
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:reaction"
+reference "eq:e1d:reaction"
 
 \end_inset
 
@@ -720,8 +1052,7 @@ ng and the evaluation of ZND quantities on the grid, the linear system is
 \begin_inset Formula $\psi'$
 \end_inset
 
-, and then the time series are post-processed using DMD to extract a stability
- spectrum.
+, and then the time series are postprocessed to extract a stability spectrum.
  Each of these stages is described in detail below.
 \end_layout
 
@@ -729,7 +1060,7 @@ ng and the evaluation of ZND quantities on the grid, the linear system is
 With the rate function 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:Arrhenius"
+reference "eq:e1d:Arrhenius"
 
 \end_inset
 
@@ -1289,7 +1620,7 @@ Simulation proceeds to the final time
  when the flow is not sufficiently unstable.
  The analysis of the resulting time series of the perturbation of detonation
  velocity allows us to extract growth rates and frequencies of unstable
- modes by a post-processing method described below in Subsection 
+ modes by a postprocessing method described below in Subsection 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:algorithm:postproc"
@@ -1428,12 +1759,6 @@ reference "eq:numalg:upwind5-right"
 \end_inset
 
 ) three ghost points are needed.
-\end_layout
-
-\begin_layout Standard
-The algorithm was verified to be fifth order in space and time either by
- measuring the convergence rate to the steady-state solution (in stable
- cases) or by a self-convergence test (in unstable cases).
 \end_layout
 
 \begin_layout Subsection
@@ -1631,7 +1956,7 @@ reference "eq:algorithm:postproc:input-matrices"
 
 \end_inset
 
-, the DMD algorithm proceeds as follows: 
+, the DMD algorithm proceeds as follows:
 \end_layout
 
 \begin_layout Enumerate
@@ -1969,7 +2294,7 @@ al growth or decay, but not oscillations.
 \begin_inset Formula $Z$
 \end_inset
 
-: 
+:
 \begin_inset Formula 
 \begin{equation}
 Z=\begin{bmatrix}\psi'_{0} & \cdots & \psi'_{n-L}\\
@@ -2297,11 +2622,11 @@ y_{1}(t)=A\exp(\alpha_{\text{re}}t)\sin(\alpha_{\text{im}}t),\label{eq:algorithm
 \end_inset
 
 where 
-\begin_inset Formula $\alpha=\alpha_{\text{re}}+i\alpha_{\text{im}}=3+2i,$
+\begin_inset Formula $\alpha=\alpha_{\text{re}}+\ii\alpha_{\text{im}}=\num{3+2i},$
 \end_inset
 
  
-\begin_inset Formula $i$
+\begin_inset Formula $\ii$
 \end_inset
 
  being imaginary unit, 
@@ -2327,7 +2652,7 @@ y_{2}(t)=\sum_{i=0}^{4}A\exp(\alpha_{\text{re},i}t)\sin(\alpha_{\text{im},i}t),\
 \end_inset
 
 where 
-\begin_inset Formula $\alpha\in\{0.7+0.1i,0.8+1.57i,0.6+2.76i,0.5+3.88i,0.01+15.62i\}$
+\begin_inset Formula $\alpha\in\{\num{0.7+0.1i},\,\num{0.8+1.57i},\,\num{0.6+2.76i},\,\num{0.5+3.88i},\,\num{0.01+15.62i}\}$
 \end_inset
 
 , 
@@ -2335,8 +2660,8 @@ where
 \end_inset
 
 .
- For both time series, the amplitude of each mode is taken as 
-\begin_inset Formula $A=10^{-10}$
+ For both time series, the amplitude of each mode is taken to be 
+\begin_inset Formula $10^{-10}$
 \end_inset
 
 , and the time step is 
@@ -2349,7 +2674,7 @@ where
 \begin_inset Formula $10^{-13}$
 \end_inset
 
-, mean zero, and variance one such that the noise is proportional to the
+, mean zero, and variance unity such that the noise is proportional to the
  signal: 
 \begin_inset Formula 
 \begin{equation}
@@ -2432,7 +2757,7 @@ reference "tab:algorithm:postproc:dmd-synthetic-data"
 ), albeit with a larger relative error than for the other modes, even though
  the growth rate of this mode is 80 times smaller that the growth rate of
  the dominant mode 
-\begin_inset Formula $\alpha=0.8+1.57i$
+\begin_inset Formula $\alpha=\num{0.8+1.57i}$
 \end_inset
 
 .
@@ -2628,13 +2953,22 @@ name "sec:e1d:results"
 \end_layout
 
 \begin_layout Standard
-The reaction rate is given by the Arrhenius form, 
-\begin_inset Formula $\omega=k\left(1-\lambda\right)\exp\left(-E/RT\right)$
+The stability of the steady-state self-sustained solutions for the model
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:mass-1"
+
 \end_inset
 
-.
- The stability of the steady-state self-sustained solutions for this model
- depends on the values of 
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:reaction-1"
+
+\end_inset
+
+) depends on the values of 
 \begin_inset Formula $E$
 \end_inset
 
@@ -2692,14 +3026,14 @@ Steady-state solutions, eigenfunctions and eigenvalues
 The steady-state traveling-wave solutions of (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:mass"
+reference "eq:e1d:mass"
 
 \end_inset
 
 -
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:reaction"
+reference "eq:e1d:reaction"
 
 \end_inset
 
@@ -2804,8 +3138,11 @@ The steady solution with fixed
 
  - solid with stars.
  Density, pressure, velocity in the laboratory frame, and temperature are
- normalized by their respective values at the von Neumann (shock) state;
- the reaction rate is normalized by its maximum value.
+ normalized by their respective values at the von
+\begin_inset space ~
+\end_inset
+
+Neumann (shock) state; the reaction rate is normalized by its maximum value.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:results:simple:znd-solutions"
@@ -3613,11 +3950,7 @@ Neutral stability curves
 \begin_layout Standard
 Next, we use the present method to generate neutral stability curves in
  
-\begin_inset Formula $E$
-\end_inset
-
-–
-\begin_inset Formula $Q$
+\begin_inset Formula $\left(E,Q\right)$
 \end_inset
 
  plane for various 
@@ -4084,6 +4417,47 @@ reference "fig:neutral-curves-gamma=00003D1.1"
 \end_inset
 
  was not mentioned before in the literature, to the best of our knowledge.
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Standard
+In this chapter, we have introduced a novel method for linear stability
+ analysis of detonation waves and applied it to the detonation model based
+ on the reactive Euler equations with one-step chemistry.
+ The method consists of two parts.
+ First is a numerical solution of the time-dependent system linearized about
+ base ZND solution by a shock-fitting numerical algorithm of high order
+ of accuracy.
+ The result of such numerical calculation is a time series of the perturbation
+ of detonation velocity for the linear problem.
+ This solution is obtained only over relatively short time intervals which
+ is computationally inexpensive.
+ The second part of the method is an analysis of the obtained time series
+ by using dynamic mode decomposition.
+ As a result, we are able to calculate detailed stability properties of
+ the model and compare our results to the normal-mode results obtaining
+ excellent agreement, thus, validating the correctness of the method.
+\end_layout
+
+\begin_layout Standard
+Being confident in the validity of the method, we extend the knowledge about
+ the linear stability properties of the model by computing neutral stability
+ boundaries for several values of specific-heats ratio 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and determined that the neutral stability boundary for 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ is determined by the composition of the first two modes, while for 
+\begin_inset Formula $\gamma=\{1.2,1.3,1.4\}$
+\end_inset
+
+ it is determined only by the fundamental mode.
 \end_layout
 
 \end_body
