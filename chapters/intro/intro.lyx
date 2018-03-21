@@ -220,7 +220,7 @@ However, new physical experiments conducted to confirm the ZND theory found
  discrepancy between measurements and the theory 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "White1961,Voytsekhovskiy1963"
+key "White1961,VoytsekhovskiyEtAl1963"
 
 \end_inset
 
@@ -570,7 +570,7 @@ b
  wave must be sonic:
 \begin_inset Formula 
 \[
-u_{\mathrm{\text{b}}}-D=c_{\text{b}},
+u_{\mathrm{\text{b}}}-D=-c_{\text{b}},
 \]
 
 \end_inset
@@ -597,7 +597,36 @@ eqref{eq:intro:cj-znd:cj:conservation}
 
 \end_inset
 
- allows to compute the burned state and detonation velocity.
+ and with an explicit equation of state of the calorically perfect gas
+\begin_inset Formula 
+\[
+e_{\text{b}}=\frac{p}{\left(\gamma-1\right)\rho}-Q,
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the ratio of specific heats, 
+\begin_inset Formula $Q$
+\end_inset
+
+ the heat release of the reaction, allows to compute Chapman–Jouguet detonation
+ velocity of steady reaction 
+\begin_inset Formula $D=\DCJ$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\DCJ=\sqrt{c_{\text{a}}^{2}+\frac{\gamma^{2}-1}{2}Q}+\sqrt{\frac{\gamma^{2}-1}{2}Q},
+\]
+
+\end_inset
+
+and hence, compute the burned state.
 \end_layout
 
 \begin_layout Subsection
@@ -700,20 +729,28 @@ So, in ZND theory, detonation wave is considered as a complex consisting
 
 following reaction zone.
  To continue with a concrete example, we, as previously, consider calorically
- perfect gas, in which one forward unimolecular reaction 
+ perfect gas, in which one irreversible unimolecular reaction 
 \begin_inset Quotes eld
 \end_inset
 
 
-\begin_inset Formula $\text{reactant}\to\text{product}$
+\begin_inset Formula $\text{A}\to\text{B}$
 \end_inset
 
 
 \begin_inset Quotes erd
 \end_inset
 
- occurs; the degree of completeness of the reaction is denoted by reaction
- progress variable
+ occurs with the ratio of specific heats of 
+\begin_inset Formula $\text{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\text{B}$
+\end_inset
+
+ being the same; the degree of completeness of the reaction is denoted by
+ the reaction progress variable
 \begin_inset space ~
 \end_inset
 
@@ -729,13 +766,13 @@ following reaction zone.
 \begin_inset Formula $\lambda=1$
 \end_inset
 
- in the end of the reaction zone.
+ in the end of the reaction zone where chemical equilibrium is attained.
  The state right behind the shock (in the point known as von
 \begin_inset space ~
 \end_inset
 
 Neumann point in the ZND theory) is still unreacted and connected to the
- ambient state by Rankine–Hugoniot conditions
+ ambient state by the Rankine–Hugoniot conditions
 \begin_inset Formula 
 \begin{align*}
 \rho_{\text{s}}\left(u_{\text{s}}-D\right) & =-\rho_{\text{a}}D,\\
@@ -810,7 +847,7 @@ label{eq:intro:cj-znd:znd:steady-euler-ode}
 \od{\left(\rho\left(u-D\right)\right)}x & =0,\label{eq:intro:cj-znd:znd:steady-euler-ode-continuity}\\
 \od{\left(\rho\left(u-D\right)^{2}+p\right)}x & =0,\\
 \od{\left(\rho\left(u-D\right)\left(e+\frac{p}{\rho}+\frac{u^{2}}{2}\right)\right)}x & =0,\\
-\od{\left(\rho\left(u-D\right)\lambda\right)}x & =\omega\left(p,\rho,\lambda\right),
+\od{\left(\rho\left(u-D\right)\lambda\right)}x & =\rho\omega\left(p,\rho,\lambda\right),
 \end{align}
 
 \end_inset
@@ -864,9 +901,9 @@ label{eq:intro:cj-znd:znd:euler}
 
 \begin_inset Formula 
 \begin{eqnarray}
-\rho\left(u-D\right) & = & \mbox{const}_{1},\label{eq:intro:cj-znd:euler-mass}\\
-\rho\left(u-D\right)^{2}+p & = & \mbox{const}_{2},\\
-e+\frac{p}{\rho}+\frac{u^{2}}{2} & = & \mbox{const}_{3},\\
+\rho\left(u-D\right) & = & \mbox{const}_{1},\label{eq:intro:cj-znd:znd-mass}\\
+\rho\left(u-D\right)^{2}+p & = & \mbox{const}_{2},\label{eq:intro:cj-znd:znd-momentum}\\
+e+\frac{p}{\rho}+\frac{u^{2}}{2} & = & \mbox{const}_{3},\label{eq:intro:cj-znd:znd-energy}\\
 \od{\lambda}x & = & \frac{\omega\left(p,\rho,\lambda\right)}{u-D},
 \end{eqnarray}
 
@@ -890,20 +927,21 @@ which can be integrated, and the flow state can be found once we know the
 \end_layout
 
 \begin_layout Standard
-The first two equations from 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-eqref{eq:intro:cj-znd:znd:euler}
-\end_layout
+Equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:intro:cj-znd:znd-mass"
 
 \end_inset
 
- can be manipulated to get an equation of the Rayleigh–Michelson line:
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:intro:cj-znd:znd-momentum"
+
+\end_inset
+
+) can be manipulated to get an equation of the Rayleigh–Michelson line:
 \begin_inset Formula 
 \begin{equation}
 p-p_{\text{a}}=\rho_{\text{a}}^{2}D^{2}\left(v_{\text{a}}-v\right),\label{eq:intro:cj-znd:znd:rayleigh-line}
@@ -933,24 +971,25 @@ where
 \end_inset
 
 .
- Consequently, first three equations of the system
+ Consequently, equations
 \begin_inset space ~
 \end_inset
 
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-eqref{intro:cj-znd:znd:euler}
-\end_layout
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:intro:cj-znd:znd-mass"
 
 \end_inset
 
- can be manipulated to exclude velocity 
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:intro:cj-znd:znd-energy"
+
+\end_inset
+
+) can be manipulated to exclude velocity 
 \begin_inset Formula $u$
 \end_inset
 
@@ -1016,7 +1055,7 @@ reference "fig:intro:cj-znd:znd:znd-v-p-diagram"
 
 \end_inset
 
-, we can notice that the Rankine–Michelson line and equilibrium Hugoniot
+, we can notice that the Rayleigh–Michelson line and equilibrium Hugoniot
  curve has two possibilities to intersect:
 \end_layout
 
@@ -1110,12 +1149,24 @@ What is the significance of the case
  relatively to the detonation front:
 \begin_inset Formula 
 \begin{equation}
-u_{\text{CJ}}-D_{\text{CJ}}=c_{\text{CJ}}.\label{eq:intro:cj-znd:znd:cj-condition}
+u_{\text{CJ}}-D_{\text{CJ}}=-c_{\text{CJ}},\label{eq:intro:cj-znd:znd:cj-condition}
 \end{equation}
 
 \end_inset
 
-The end of the reaction zone is called Chapman–Jouguet plane (point 
+which in terms of the characteristics of the system mean that the velocity
+ 
+\begin_inset Formula $u+c$
+\end_inset
+
+ of the characteristic emanating from the end of the reaction zone and travellin
+g towards the shock is the same as the lead shock velocity 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ The end of the reaction zone is called Chapman–Jouguet, or sonic, plane
+ (point 
 \begin_inset Formula $\text{CJ}$
 \end_inset
 
@@ -1945,7 +1996,7 @@ Postprocess the solution to extract the growth rates and frequencies of
 \end_layout
 
 \begin_layout Standard
-This approach has several advantages over pure linear stability analysis
+This approach has several advantages over normal-mode linear stability analysis
  or direct numerical simulations:
 \end_layout
 
@@ -2024,7 +2075,7 @@ reference "chap:e1deig"
 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:fsm"
+reference "chap:fm"
 
 \end_inset
 
