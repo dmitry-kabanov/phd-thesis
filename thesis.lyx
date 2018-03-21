@@ -1160,7 +1160,7 @@ centerline{REFERENCES}}
 
  
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1213,6 +1213,10 @@ end{onehalfspacing}
 \end_inset
 
 
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1250,7 +1254,7 @@ begingroup
 
  
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1271,7 +1275,7 @@ relax
 \begin_layout Standard
 \align center
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1307,13 +1311,6 @@ addcontentsline{toc}{chapter}{Appendices}
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Appendix_A"
-
-\end_inset
-
- 
 \begin_inset ERT
 status collapsed
 
@@ -1327,12 +1324,36 @@ endgroup
 \end_inset
 
 
+\begin_inset CommandInset include
+LatexCommand include
+filename "Appendix_A"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Appendix_B"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "Appendix_B"
+filename "chapters/app-lin/app-lin.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "chapters/app-scales/app-scales.lyx"
 
 \end_inset
 
