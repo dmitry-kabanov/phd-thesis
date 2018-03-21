@@ -349,7 +349,7 @@ where
 \end_inset
 
  varies from zero in nonreacted state to unity in the fully reacted state).
- The specific energy is 
+ The specific total energy is 
 \begin_inset Formula $e=e_{\text{i}}+u^{2}/2$
 \end_inset
 
@@ -362,10 +362,14 @@ e_{\text{i}}=\frac{pv}{\gamma-1}-Q\lambda,\qquad pv=RT,\label{eq:e1d:e_i}
 \end_inset
 
 where 
+\begin_inset Formula $e_{\text{i}}$
+\end_inset
+
+ is specific internal energy, 
 \begin_inset Formula $\gamma$
 \end_inset
 
- is the ratio of specific heats, 
+ the ratio of specific heats, 
 \begin_inset Formula $v=1/\rho$
 \end_inset
 
@@ -891,6 +895,18 @@ Next, we introduce the vector of state variables
 
 , the bar denoting the steady-state, and the prime denoting the perturbation
  amplitudes.
+ The reader can find all the details of the linearization in Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:app-lin"
+
+\end_inset
+
+.
  Upon linearization of the governing equations (
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -905,7 +921,7 @@ reference "eq:e1d:reaction"
 
 \end_inset
 
-), we obtain 
+), we obtain
 \begin_inset Formula 
 \begin{equation}
 z'_{t}+A(\bar{z})z'_{x}+B(\bar{z})z'-\frac{d\bar{z}}{dx}\psi'=0,\label{linearized-system}
@@ -945,7 +961,16 @@ C(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}) & \frac{d\bar{p}}{dx} & \gamma\fra
 \begin_inset Formula $\lambda$
 \end_inset
 
- denote partial derivatives.
+ denote partial derivatives with respect to the corresponding steady quantities,
+ with these derivatives being
+\begin_inset Formula 
+\begin{equation}
+\bar{\omega}_{\rho}=k\left(1-\lambdaZnd\right)\exp\left(-\frac{E}{\bar{p}}\right),\quad\bar{\omega}_{p}=\frac{kE\bar{\rho}}{\bar{p}^{2}}\left(1-\bar{\lambda}\right)\exp\left(-\frac{E\bar{\rho}}{\bar{p}}\right),\quad\bar{\omega}_{\lambda}=-k\exp\left(-\frac{E\bar{\rho}}{\bar{p}}\right).\label{eq:e1d:rate-derivs}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -985,7 +1010,7 @@ A_{0}'=\frac{2}{\gamma+1}\frac{3v_{\text{a}}\bar{M}^{2}-\gamma p_{\text{a}}}{\ba
 
 \begin_inset Formula 
 \begin{equation}
-A_{\text{s}}'=\left.\left[\rho\frac{d\bar{u}}{dx}\left(\gamma\left(\bar{p}v'+\bar{v}p'\right)-2\bar{U}U'\right)+\left(\bar{c}^{2}-\bar{U}^{2}\right)\frac{d\bar{u}}{dx}\rho'+\bar{\rho}\left(\bar{c}^{2}-\bar{U}^{2}\right)u'_{x}\right]\right|_{\text{s}}
+A_{\text{s}}'=\left.\left[\bar{\rho}\frac{d\bar{u}}{dx}\left(\gamma\left(\bar{p}v'+\bar{v}p'\right)-2\bar{U}U'\right)+\left(\bar{c}^{2}-\bar{U}^{2}\right)\frac{d\bar{u}}{dx}\rho'+\bar{\rho}\left(\bar{c}^{2}-\bar{U}^{2}\right)u'_{x}\right]\right|_{\text{s}}
 \end{equation}
 
 \end_inset
@@ -1289,7 +1314,7 @@ reference "shock-evolution-equation"
 \end_inset
 
 where 
-\begin_inset Formula $\widehat{L}(\bar{z},z',z'_{x})$
+\begin_inset Formula $\widehat{L}(\bar{z},z')$
 \end_inset
 
  and 
@@ -1346,8 +1371,8 @@ The spatial derivatives are calculated in the following four steps.
  based on the upwind method of fifth order: 
 \begin_inset Formula 
 \begin{align}
-\left.z_{x}^{-}\right|_{i} & =\frac{-2z_{i-3}+15u_{i-2}-60z_{i-1}+20z_{i}+30z_{i+1}-3z_{i+2}}{60\DeltaX},\label{eq:numal:upwind5-left}\\
-\left.z_{x}^{+}\right|_{i} & =\frac{3z_{i-2}-30z_{i-1}-20z_{i}+60z_{i+1}-15z_{i+2}+2z_{i+3}}{60\DeltaX},\label{eq:numalg:upwind5-right}
+\left.z_{x}'^{-}\right|_{i} & =\frac{-2z_{i-3}'+15z_{i-2}'-60z_{i-1}'+20z_{i}'+30z_{i+1}'-3z_{i+2}'}{60\DeltaX},\label{eq:numal:upwind5-left}\\
+\left.z_{x}'^{+}\right|_{i} & =\frac{3z_{i-2}'-30z_{i-1}'-20z_{i}'+60z_{i+1}'-15z_{i+2}'+2z_{i+3}'}{60\DeltaX},\label{eq:numalg:upwind5-right}
 \end{align}
 
 \end_inset
@@ -1472,13 +1497,13 @@ Once the spatial derivatives are approximated,
  is found using the global Lax–Friedrichs flux: 
 \begin_inset Formula 
 \begin{equation}
-\widehat{L}(\bar{z},z')=L\left(\bar{z},z',\frac{z_{x}^{'-}+z_{x}^{'+}}{2}\right)-\alpha\frac{z_{x}^{'+}-z_{x}^{'-}}{2},\label{eq:algorithm:lf-flux}
+\widehat{L}(\bar{z},z')=L\left(\bar{z},z',\frac{z_{x}'^{-}+z_{x}'^{+}}{2}\right)-\alpha\frac{z_{x}'^{+}-z_{x}'^{-}}{2},\label{eq:algorithm:lf-flux}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $z_{x}^{'-}=z_{x}^{'+}=z'_{x}$
+\begin_inset Formula $z_{x}'^{-}=z_{x}'^{+}=z'_{x}$
 \end_inset
 
  for grid points 
@@ -1493,10 +1518,18 @@ where
 \begin_inset Formula $A\left(\bar{z}\right)$
 \end_inset
 
- over the numerical grid, 
+ Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:AB"
+
+\end_inset
+
+ over the numerical grid:
 \begin_inset Formula 
 \begin{equation}
-\alpha=\max_{i=0,\ldots,N}\{\bar{u}-\bar{c},\bar{u},\bar{u}+\bar{c}\}|_{x=x_{i}}.
+\alpha=\max_{i=0,\ldots,N}\{\bar{u}-\bar{c}-\DZnd,\bar{u}-\DZnd,\bar{u}+\bar{c}-\DZnd\}|_{x=x_{i}}.
 \end{equation}
 
 \end_inset
@@ -1515,7 +1548,7 @@ reference "eq:algorithm:lf-flux"
 
 .
  After evaluation of 
-\begin_inset Formula $L$
+\begin_inset Formula $\widehat{L}$
 \end_inset
 
 , 
@@ -1822,7 +1855,19 @@ key "Schmid2010"
 
  is at the heart of our postprocessing.
  We note however, that the DMD algorithm does not necessarily answer the
- question of what the rank of low-dimensional approximation should be.
+ question of what the rank of low-dimensional approximation should be, which
+ is to date is an unsolved problem
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ZhangEtAl2017"
+
+\end_inset
+
+.
  Hence, we need a way to determine the best approximation with the ultimate
  goal being to find all modes that can also be found by normal-mode analysis.
 \end_layout
@@ -3475,6 +3520,10 @@ reference "fig:results:pert-profiles-vs-x"
 
 \end_inset
 
+ sampled at time 
+\begin_inset Formula $t=10$
+\end_inset
+
  at 
 \begin_inset Formula $E=30$
 \end_inset
@@ -3498,7 +3547,60 @@ reference "fig:results:pert-profiles-vs-x"
 \end_inset
 
  (weakly unstable).
- 
+ Formulas to compute the perturbations of temperature and reaction rate
+ are:
+\begin_inset Formula 
+\begin{align*}
+T' & =\TZnd_{\rho}\rho'+\TZnd_{p}p',\\
+\omega' & =\bar{\omega}_{\rho}\rho'+\bar{\omega}_{p}p'+\bar{\omega}_{\lambda}\lambda',
+\end{align*}
+
+\end_inset
+
+where partial derivatives with respect to 
+\begin_inset Formula $\rho$
+\end_inset
+
+, 
+\begin_inset Formula $p$
+\end_inset
+
+, and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ are
+\begin_inset Formula 
+\[
+\bar{T}_{\rho}=-\frac{\bar{p}}{\bar{\rho}^{2}},\quad\bar{T}_{p}=\frac{1}{\bar{\rho}},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\bar{\omega}_{\rho}$
+\end_inset
+
+, 
+\begin_inset Formula $\bar{\omega}_{p}$
+\end_inset
+
+, and 
+\begin_inset Formula $\bar{\omega}_{\lambda}$
+\end_inset
+
+ are given by formulae
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1d:rate-derivs"
+
+\end_inset
+
+.
 \begin_inset Float figure
 wide false
 sideways false
@@ -3564,8 +3666,11 @@ Perturbation profiles versus
 \end_inset
 
  (dash-dotted).
- These solutions are plotted at a particular time, hence the scales are
- arbitrary.
+ These profiles are plotted at 
+\begin_inset Formula $t=10$
+\end_inset
+
+.
  
 \end_layout
 
@@ -3662,8 +3767,8 @@ key "LeeStewart1990"
  The conversion factors are as follows.
  Conversion factor from the scales of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "sharpe1997linear"
+LatexCommand citet
+key "Sharpe1997"
 
 \end_inset
 
@@ -3671,7 +3776,11 @@ key "sharpe1997linear"
 \begin_inset Formula $\bar{D}$
 \end_inset
 
- in the Erpenbeck scales, which is 6.809475 for 
+ in the Erpenbeck scales, which is 
+\begin_inset Formula $\num{6.809475}$
+\end_inset
+
+ for 
 \begin_inset Formula $\gamma=1.2$
 \end_inset
 
@@ -3682,8 +3791,8 @@ key "sharpe1997linear"
 .
  In 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "LeeStewart90"
+LatexCommand citet
+key "LeeStewart1990"
 
 \end_inset
 
@@ -3693,8 +3802,8 @@ key "LeeStewart90"
 
  is given in scales of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "AbouseifToong82"
+LatexCommand citet
+key "AbouseifToong1982"
 
 \end_inset
 
@@ -3720,8 +3829,8 @@ reference "eq:k"
 , and the integral in the denominator is the nondimensional Arrhenius rate
  constant in the scales of 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "AbouseifToong82"
+LatexCommand citet
+key "AbouseifToong1982"
 
 \end_inset
 
@@ -3738,7 +3847,11 @@ key "AbouseifToong82"
 \begin_inset Formula $E=50$
 \end_inset
 
-, the numerical value of this factor is 0.938749.
+, the numerical value of this factor is 
+\begin_inset Formula $\num{0.938749}$
+\end_inset
+
+.
  Conversion of the results of 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -3748,6 +3861,19 @@ key "HenrickEtAl2006"
 
  is not needed because they provide the stability spectrum in the same scales
  as ours.
+ The details of the conversion between different scales are provided in
+ Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:app-scales"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4078,11 +4204,7 @@ reference "fig:neutral-boundary-var-gamma"
 \end_inset
 
 (a), the neutral stability curves of mode 0 in 
-\begin_inset Formula $E$
-\end_inset
-
-–
-\begin_inset Formula $Q$
+\begin_inset Formula $\left(E,Q\right)$
 \end_inset
 
  plane are shown for various 
