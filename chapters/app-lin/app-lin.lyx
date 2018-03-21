@@ -1,0 +1,453 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+\input{../preamble-child.tex}
+\end_preamble
+\use_default_options true
+\master ../../thesis.lyx
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "utopia" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing double
+\use_hyperref true
+\pdf_title "Fickett model"
+\pdf_author "Dmitry Kabanov kabanovdmitry@gmail.com"
+\pdf_keywords "detonation; linear stability; numerics"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, linkcolor=blue"
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Details of obtaining linearized unsteady problems
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:app-lin"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this appendix, we give the details of the linearization of the governing
+ equations for the model considered in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1d"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Nonconservative form.
+
+\series default
+ For the linearization purposes it is more convenient to use the nonconservative
+ form of the equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:reaction"
+
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align}
+\rho_{t}+\left(u-D\right)u_{x}+\rho u_{x} & =0,\label{eq:app-lin:euler-mass}\\
+u_{t}+\left(u-D\right)u_{x}+\frac{1}{\rho}p_{x} & =0,\nonumber \\
+e_{t}+\left(u-D\right)e_{x}+p\left\{ \left(\frac{1}{\rho}\right)_{t}+\left(u-D\right)\left(\frac{1}{\rho}\right)_{x}\right\}  & =0,\label{eq:app-lin:euler-energy}\\
+\lambda_{t}+\left(u-D\right)\lambda_{x} & =\omega.\label{eq:app-lin:euler-reaction}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By using Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1d:e_i"
+
+\end_inset
+
+ for 
+\begin_inset Formula $e_{\text{i}}$
+\end_inset
+
+ with 
+\begin_inset Formula $e=e_{\text{i}}+u^{2}/2$
+\end_inset
+
+ and using Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:app-lin:euler-mass"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:app-lin:euler-reaction"
+
+\end_inset
+
+, we simplify system (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:app-lin:euler-mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:app-lin:euler-reaction"
+
+\end_inset
+
+) to the following form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\rho_{t}+\left(u-D\right)u_{x}+\rho u_{x} & =0,\label{eq:app-lin:euler-mass-1}\\
+u_{t}+\left(u-D\right)u_{x}+\frac{1}{\rho}p_{x} & =0,\label{eq:app-lin:euler-momentum-1}\\
+p_{t}+\left(u-D\right)p_{x}+\gamma pu_{x} & =Q(\gamma-1)\rho\omega,\label{eq:app-lin:euler-energy-1}\\
+\lambda_{t}+\left(u-D\right)\lambda_{x} & =\omega.\label{eq:app-lin:euler-reaction-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Linearization
+\end_layout
+
+\begin_layout Standard
+We expand all dependent variables about the ZND solution:
+\begin_inset Formula 
+\begin{align*}
+D(t) & =\bar{D}+\epsilon\psi'(t),\\
+\rho(x,t) & =\bar{\rho}(x)+\epsilon\rho'(x,t),\\
+u(x,t) & =\bar{u}(x)+\epsilon u'(x,t),\\
+p(x,t) & =\bar{p}(x)+\epsilon p'(x,t),\\
+\lambda(x,t) & =\bar{\lambda}(x)+\epsilon\lambda'(x,t),
+\end{align*}
+
+\end_inset
+
+and dependent function 
+\begin_inset Formula $\omega=\omega(\rho,p,\lambda)$
+\end_inset
+
+ is expanded as 
+\begin_inset Formula $\bar{\omega}+\epsilon\omega'=\bar{\omega}+\epsilon\left(\bar{\omega}_{\rho}\rho'+\bar{\omega}_{p}p'+\bar{\omega}_{\lambda}\lambda'\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To linearize, we substitute expansions into the equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:app-lin:euler-mass-1"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:app-lin:euler-reaction-1"
+
+\end_inset
+
+) and leave only 
+\begin_inset Formula $\bigO(\epsilon)$
+\end_inset
+
+ terms.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Continuity equation.
+
+\series default
+ Linearized equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:app-lin:euler-mass-1"
+
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\rho'_{t}+\left(\bar{u}-\bar{D}\right)\rho'_{x}+\bar{\rho}u_{x}'+\od{\bar{u}}x\rho'+\od{\bar{\rho}}x(u'-\psi')=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Momentum equation.
+
+\series default
+ Linearized equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:app-lin:euler-momentum-1"
+
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+u'_{t}+\left(\bar{u}-\bar{D}\right)u'_{x}+\frac{1}{\bar{\rho}}p'_{x}-\frac{1}{\bar{\rho}^{2}}\od{\bar{p}}x\rho'+\od{\bar{u}}x(u'-\psi')=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Energy equation.
+
+\series default
+ Linearized equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:app-lin:euler-energy-1"
+
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+p'_{t}+\gamma\bar{p}u'_{x}+\left(\bar{u}-\bar{D}\right)p'_{x}-C\left(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}\right)\rho'+\left(\gamma\od{\bar{u}}x-C\bar{\rho}\bar{\omega}_{p}\right)p'-C\bar{\rho}\bar{\omega}_{\lambda}\lambda'+\od{\bar{p}}x(u'-\psi')=0,
+\]
+
+\end_inset
+
+where we introduced 
+\begin_inset Formula $C=Q(\gamma-1)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Reaction equation.
+
+\series default
+ Linearized equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:app-lin:euler-reaction-1"
+
+\end_inset
+
+ is
+\begin_inset Formula 
+\[
+\lambda'_{t}+\left(\bar{u}-\bar{D}\right)\lambda'_{x}-\bar{r}_{\rho}\rho'-\bar{r}_{p}p'-\bar{r}_{\lambda}\lambda'+\od{\bar{\lambda}}x(u'-\psi')=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then the vector form 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "linearized-system"
+
+\end_inset
+
+ of these linearized equation is easily obtained.
+\end_layout
+
+\begin_layout Standard
+Adding expansion for the mass flux: 
+\begin_inset Formula $M(t)=\bar{M}+\epsilon M'(t)$
+\end_inset
+
+, we obtain the following linearized Rankine–Hugoniot conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "RH-conditions"
+
+\end_inset
+
+ through Taylor-series expansion:
+\begin_inset Formula 
+\begin{align*}
+\pS' & =\frac{4\vA\bar{M}}{\gamma+1}M',\quad U_{\shk}'=-\frac{4\gamma\pA}{\left(\gamma+1\right)\bar{M}^{3}}M',\quad v_{\shk}'=\bar{M}v_{\shk}'+\bar{v}_{\shk}M'.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, expanding 
+\begin_inset Formula $\rho=1/v$
+\end_inset
+
+ in Taylor series, we obtain:
+\begin_inset Formula 
+\[
+\rhoS'=-\frac{v_{\shk}'}{\bar{v}_{\shk}^{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Perturbation of the detonation velocity 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ is related to the perturbation of mass flux 
+\begin_inset Formula $M'$
+\end_inset
+
+ by 
+\begin_inset Formula $\psi'=-v_{\text{a}}M'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ we have: 
+\begin_inset Formula $\bar{\lambda}+\epsilon\lambda'=0$
+\end_inset
+
+, thus, 
+\begin_inset Formula $\lambda'=0$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document
