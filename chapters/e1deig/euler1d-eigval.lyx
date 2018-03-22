@@ -103,27 +103,85 @@ name "chap:e1deig"
 
 \end_layout
 
-\begin_layout Standard
-In this chapter, we apply our approach to the detonation model based on
- the reactive Euler equations with two-step reaction mechanism.
-\end_layout
-
 \begin_layout Section
-Governing equations
+Introduction
 \end_layout
 
 \begin_layout Standard
-The two-step model that we consider here consists of two consecutive reactions:
+In this chapter, we extend our work in Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1d"
+
+\end_inset
+
+ by applying the developed method for linear stability analysis to the detonatio
+n model based on the reactive Euler equations with two-step reaction mechanism.
+ The two-step model that we consider here consists of two consecutive reactions:
  
 \begin_inset Formula 
 \begin{equation}
-\text{A}\overset{k_{1}}{\to}\text{B}\overset{k_{2}}{\to}\text{C},
+\text{A}\overset{}{\to}\text{B}\overset{}{\to}\text{C},\label{eq:e1deig:reactions}
 \end{equation}
 
 \end_inset
 
-where the first reaction is exothermic and the second endothermic.
- This is often referred to as the case of a 
+where the first reaction is exothermic and the second endothermic, and again
+ we assume that specific heats are the same for all species and there is
+ no mole change in the mixture such that all species have the same molar
+ mass, and hence, gas constants.
+ The reader might think that this model is a simple extension of the one-step
+ model of Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1d"
+
+\end_inset
+
+ by adding an extra reaction, and would be right to think so if both reactions
+ were exothermic.
+ However, endothermicity in this model leads to qualitative changes of travellin
+g-wave solutions comparing to the solutions of the one-step model, as their
+ existence is determined by the presence of the 
+\emph on
+embedded
+\emph default
+ sonic point inside the reaction zone (in contrast with the one-step model,
+ where the sonic point is at the end of the reaction zone).
+ The zone between the shock and the sonic point is determined uniquely,
+ however, the flow between the sonic point and the equilibrium point is
+ not and it can be subsonic or supersonic, that is, steady reaction zone
+ is not actually steady.
+\end_layout
+
+\begin_layout Standard
+Detonation of Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1d"
+
+\end_inset
+
+, is called equilibrium detonation (or CJ detonation) because the steady
+ detonation velocity is determined through algebraic relations at the point
+ of chemical equilibrium by the condition of the sonicity at that point
+ and thus, it does not depend on the reaction rate but only on the overall
+ heat release, which is maximum heat release due to the irreversible exothermic
+ reaction.
+ In contrast, the model considered in this chapter is often referred to
+ as the case of a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -131,6 +189,10 @@ pathological
 \begin_inset Quotes erd
 \end_inset
 
+ detonation or 
+\emph on
+eigenvalue
+\emph default
  detonation 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -139,17 +201,116 @@ key "FickettDavis2000"
 \end_inset
 
 .
- The unfortunate name comes from the fact that the detonation in this case
- propagates faster than expected, the expectation based on the (wrong) thinking
- that it is the overall heat release that controls the detonation speed.
- In reality, it is not the overall but rather the maximum heat release—which
- is larger—that controls the wave speed.
- This should become clear from the analysis of the steady-state structure
- that follows.
+ It is quite different from the equilibrium detonation in a sense that the
+ steady detonation velocity is determined by the reaction rates of both
+ reactions and the maximum heat release obtained at the sonic point, that
+ is, detonation velocity is an eigenvalue of a boundary-value problem for
+ a system of ordinary differential equations with boundary conditions determined
+ by the Rankine–Hugoniot conditions and the sonic-point conditions.
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+pathological detonation
+\begin_inset Quotes erd
+\end_inset
+
+ (for a different model but with the same features) was coined by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Neumann1942"
+
+\end_inset
+
+ and is based on the expectation that the detonation velocity is determined
+ by the equilibrium heat release 
+\begin_inset Formula $Q_{\text{e}}$
+\end_inset
+
+, while it is actually determined by the maximum heat release 
+\begin_inset Formula $Q_{\text{max}}$
+\end_inset
+
+ at the sonic point, hence, observed detonation velocity is larger than
+ expected as 
+\begin_inset Formula $Q_{\text{e}}<Q_{\text{max}}$
+\end_inset
+
+ due to endothermicity.
 \end_layout
 
 \begin_layout Standard
-Let the reactions have rate constants 
+Due to the embedded sonic point, normal-mode analysis of this model is quite
+ intricate
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sharpe1999"
+
+\end_inset
+
+ as it relies on the asymptotic expansions in the neighborhood of the sonic
+ point to obtain the initial values for the integration with the shooting
+ method towards the shock and towards the end of the reaction zone from
+ the sonic point.
+ Presence of the embedded sonic point, thus, makes normal-mode analysis
+ difficult for this model.
+\end_layout
+
+\begin_layout Standard
+So, our aim in this chapter is to apply the method to this model and investigate
+ how the method performs when the base steady state contains an embedded
+ sonic point.
+ We investigate both types of the ZND solutions (subsonic-subsonic and subsonic-
+supersonic) possible for this model and compare our results qualitatively
+ to the results of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sharpe1999"
+
+\end_inset
+
+ for the subsonic-supersonic case.
+ We also check the hypothesis that the stability properties are determined
+ only by the region between the sonic point and the shock, albeit this analysis
+ is challenging numerically as the subsonic-subsonic steady-state solutions
+ are continuous but not differentiable at the sonic point, which leads to
+ the linear hyperbolic system with discontinuous coefficients, hence, the
+ perturbations develop discontinuities as well and fine grid resolution
+ is required for the simulations.
+ In spite of these difficulties, we find that our method is capable to handle
+ linear stability analysis of this model without any special treatment of
+ the sonic point.
+ Application of this method to this model is an important step in the assessment
+ of the performance of the method for the detonation models with large kinetic
+ mechanisms with possible nonmonotonic distribution of heat release in the
+ reaction zone.
+\end_layout
+
+\begin_layout Section
+Governing equations
+\end_layout
+
+\begin_layout Standard
+Let the reactions
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:reactions"
+
+\end_inset
+
+ have rate constants 
 \begin_inset Formula $k_{1}$
 \end_inset
 
@@ -183,47 +344,50 @@ Let the reactions have rate constants
 
 ), reactions, respectively.
  Then, if 
-\begin_inset Formula $X_{A}$
+\begin_inset Formula $X_{\text{A}}$
 \end_inset
 
 , 
-\begin_inset Formula $X_{B}$
+\begin_inset Formula $X_{\text{B}}$
 \end_inset
 
 , and 
-\begin_inset Formula $X_{C}$
+\begin_inset Formula $X_{\text{C}}$
 \end_inset
 
  denote the mass fractions of the species, the kinetic equations for the
- reactions are 
+ reactions follow the Arrhenius law: 
 \begin_inset Formula 
-\begin{eqnarray}
-\dot{X}_{A} & = & -k_{1}X_{A}e^{-E_{1}/RT},\\
-\dot{X}_{B} & = & k_{1}X_{A}e^{-E_{1}/RT}-k_{2}X_{B}e^{-E_{2}/RT},\\
-\dot{X}_{C} & = & k_{2}X_{B}e^{-E_{2}/RT}.
-\end{eqnarray}
+\begin{align}
+\od{X_{\text{A}}}t & =-k_{1}X_{\text{A}}\exp\left(-\frac{E_{1}}{RT}\right),\\
+\od{X_{\text{B}}}t & =\phantom{-}k_{1}X_{\text{A}}\exp\left(-\frac{E_{1}}{RT}\right)-k_{2}X_{\text{B}}\exp\left(-\frac{E_{2}}{RT}\right),\\
+\od{X_{\text{C}}}t & =\phantom{-}k_{2}X_{\text{B}}\exp\left(-\frac{E_{2}}{RT}\right),
+\end{align}
 
 \end_inset
 
-Adding these equations and noting that initially 
-\begin_inset Formula $X_{A}=1$
-\end_inset
-
-, 
-\begin_inset Formula $X_{B}=X_{C}=0$
-\end_inset
-
-, we find that 
+describing evolution of the mass fractions of the species in the absence
+ of flow.
+ Obviously, sum of the mass fractions is unity: 
 \begin_inset Formula $X_{A}+X_{B}+X_{C}=1$
 \end_inset
 
+ with initial mass fractions being 
+\begin_inset Formula $X_{\text{A}}=1$
+\end_inset
+
+, 
+\begin_inset Formula $X_{\text{B}}=X_{\text{C}}=0$
+\end_inset
+
 .
- We introduce the reaction progress variables for each reaction as 
-\begin_inset Formula $\lambda_{1}=1-X_{A}$
+ Instead of considering three equations for each species, we introduce the
+ reaction progress variables for each reaction as 
+\begin_inset Formula $\lambda_{1}=1-X_{\text{A}}$
 \end_inset
 
  and 
-\begin_inset Formula $\lambda_{2}=X_{C}$
+\begin_inset Formula $\lambda_{2}=X_{\text{C}}$
 \end_inset
 
  with 
@@ -234,36 +398,45 @@ Adding these equations and noting that initially
 \begin_inset Formula $\lambda_{2}$
 \end_inset
 
- varying from 0 at the shock to 1 at the end of the reaction.
+ varying from zero at the shock to unity at the end of the reaction zone
+ with the reaction rates
+\begin_inset Formula 
+\begin{equation}
+\omega_{1}=k_{1}\left(1-\lambda_{1}\right)\exp\left(-\frac{E_{1}}{RT}\right),\quad\omega_{2}=k_{2}\left(\lambda_{1}-\lambda_{2}\right)\exp\left(-\frac{E_{2}}{RT}\right).\label{eq:e1deig:reaction-rates}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Then the full system of the governing equations in the shock-attached frame
  is
 \begin_inset Formula 
-\begin{align*}
-\rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\\
-\left(\rho u\right)_{t}+\left(\rho u\left(u-D\right)+p\right)_{x} & =0,\\
-\left(\rho e\right)_{t}+\left(\rho\left(u-D\right)e+pu\right)_{x} & =0,\\
-\left(\rho\lambda_{1}\right)_{t}+\left(\rho(u-D)\lambda_{1}\right)_{x} & =\rho\omega_{1},\\
-\left(\rho\lambda_{2}\right)_{t}+\left(\rho(u-D)\lambda_{2}\right)_{x} & =\rho\omega_{2},
-\end{align*}
+\begin{align}
+\rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:e1deig:mass}\\
+\left(\rho u\right)_{t}+\left(\rho u\left(u-D\right)+p\right)_{x} & =0,\nonumber \\
+\left(\rho e\right)_{t}+\left(\rho\left(u-D\right)e+pu\right)_{x} & =0,\nonumber \\
+\left(\rho\lambda_{1}\right)_{t}+\left(\rho(u-D)\lambda_{1}\right)_{x} & =\rho\omega_{1},\nonumber \\
+\left(\rho\lambda_{2}\right)_{t}+\left(\rho(u-D)\lambda_{2}\right)_{x} & =\rho\omega_{2},\label{eq:e1deig:reaction-2}
+\end{align}
 
 \end_inset
 
 with 
-\begin_inset Formula $\omega_{1}=k_{1}\left(1-\lambda_{1}\right)e^{-E_{1}/RT}$
+\begin_inset Formula $e=e_{\text{i}}+u^{2}/2$
 \end_inset
 
- and 
-\begin_inset Formula $\omega_{2}=k_{2}\left(\lambda_{1}-\lambda_{2}\right)e^{-E_{2}/RT}$
-\end_inset
-
-, and 
+ being the specific total energy, and 
 \begin_inset Formula $e_{i}=pv/\left(\gamma-1\right)-\left(Q_{1}\lambda_{1}+Q_{2}\lambda_{2}\right)$
 \end_inset
 
- being the specific internal energy.
+ being the specific internal energy, 
+\begin_inset Formula $v=1/\rho$
+\end_inset
+
+ being the specific volume.
 \end_layout
 
 \begin_layout Section
@@ -271,19 +444,38 @@ ZND solutions
 \end_layout
 
 \begin_layout Standard
-ZND solution is defined by the following differential-algebraic system
-\begin_inset Formula 
-\begin{align*}
--\rhoA\DZnd & =\rhoZnd\UZnd,\\
-\pA+\rhoA\DZnd^{2} & =\pZnd+\rhoZnd\UZnd^{2},\\
-\eA+\pA\vA+\frac{\DZnd^{2}}{2} & =\eZnd+\pZnd\vZnd+\frac{\UZnd^{2}}{2},\\
-\od{\bar{\lambda}_{1}}x & =\frac{\rZnd_{1}}{\UZnd}=\frac{k_{1}(1-\lambdaZnd_{1})\exp\left(-\rhoZnd E_{1}/\pZnd\right)}{\UZnd},\\
-\od{\lambdaZnd_{2}}x & =\frac{\rZnd_{2}}{\UZnd}=\frac{k_{2}(\lambdaZnd_{1}-\lambdaZnd_{2})\exp\left(-\rhoZnd E_{2}/\pZnd\right)}{\UZnd}.
-\end{align*}
+ZND solution is defined by assuming steady state solution of the system
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:mass"
 
 \end_inset
 
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:reaction-2"
 
+\end_inset
+
+) which leads to the differential-algebraic system
+\begin_inset Formula 
+\begin{align}
+\rhoZnd\UZnd & =-\rhoA\DZnd,\label{eq:e1deig:znd-mass}\\
+\pZnd+\rhoZnd\UZnd^{2} & =\pA+\rhoA\DZnd^{2},\nonumber \\
+\eZnd+\pZnd\vZnd+\frac{\UZnd^{2}}{2} & =\eA+\pA\vA+\frac{\DZnd^{2}}{2},\nonumber \\
+\od{\bar{\lambda}_{1}}x & =\frac{\bar{\omega}_{1}}{\UZnd}=\frac{k_{1}(1-\lambdaZnd_{1})\exp\left(-\rhoZnd E_{1}/\pZnd\right)}{\UZnd},\label{eq:e1deig:znd-reaction-1}\\
+\od{\lambdaZnd_{2}}x & =\frac{\bar{\omega}_{2}}{\UZnd}=\frac{k_{2}(\lambdaZnd_{1}-\lambdaZnd_{2})\exp\left(-\rhoZnd E_{2}/\pZnd\right)}{\UZnd}\label{eq:e1deig:znd-reaction-2}
+\end{align}
+
+\end_inset
+
+with constant detonation velocity 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ being the parameter to be determined.
 \end_layout
 
 \begin_layout Standard
@@ -319,7 +511,7 @@ big
 \begin_inset Formula $\vZnd$
 \end_inset
 
- and these big quantities:
+:
 \begin_inset Formula 
 \[
 \UZnd=\bar{M}\vZnd,\quad\pZnd=\bar{P}-\bar{M}^{2}\vZnd,
@@ -341,9 +533,9 @@ and arrive at the quadratic equation for
 
 where
 \begin_inset Formula 
-\[
-\delta=\pm\sqrt{1-\frac{h\bar{M}^{2}}{\bar{P}^{2}}\left(\bar{H}+\bar{Q}\right)},\quad h=\frac{2(\gamma^{2}-1)}{\gamma^{2}},\quad\bar{Q}=Q_{1}\lambdaZnd_{1}+Q_{2}\lambdaZnd_{2}.
-\]
+\begin{equation}
+\delta=\pm\sqrt{1-\frac{h\bar{M}^{2}}{\bar{P}^{2}}\left(\bar{H}+\bar{Q}\right)},\quad h=\frac{2(\gamma^{2}-1)}{\gamma^{2}},\quad\bar{Q}=Q_{1}\lambdaZnd_{1}+Q_{2}\lambdaZnd_{2}.\label{eq:e1deig:delta}
+\end{equation}
 
 \end_inset
 
@@ -351,7 +543,14 @@ where
 \end_layout
 
 \begin_layout Standard
-Also, it is important to note that
+Also, it can be shown 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "KasimovStewart2005"
+
+\end_inset
+
+ that
 \begin_inset Formula 
 \[
 \delta^{2}=\left(\frac{1-\MachZnd^{2}}{1+\gamma\MachZnd^{2}}\right)^{2},
@@ -368,64 +567,182 @@ where
 \begin_inset Formula $\delta$
 \end_inset
 
- is determined by whether we want to get a subsonic or supersonic flow.
+ is determined by whether the flow is subsonic or supersonic.
  Also, 
 \begin_inset Formula $\delta=0$
 \end_inset
 
- when the flow is sonic 
-\begin_inset Formula $\UZnd=-\cZnd$
-\end_inset
-
-.
+ when the flow is sonic.
 \end_layout
 
 \begin_layout Standard
-Generally, the sonic state and the detonation speed are calculated as follows.
- For a chosen 
+Regularity condition for the ZND solution to be continuous is determined
+ by the boundedness of the derivative of 
+\begin_inset Formula $\delta$
+\end_inset
+
+, hence
+\begin_inset Formula 
+\[
+\od{\delta}x=\mp\frac{h\bar{M}^{2}}{\bar{P}^{2}\delta}\od Qx\text{ is finite}
+\]
+
+\end_inset
+
+when at the sonic point maximum heat release is obtained:
+\begin_inset Formula 
+\begin{equation}
+\delta^{*}=0\text{ and \od{Q^{*}}x=0}\label{eq:e1deig:sonicity}
+\end{equation}
+
+\end_inset
+
+for some 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ being the location of the sonic point.
+ From the second of conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:sonicity"
+
+\end_inset
+
+ it follows using Eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:znd-reaction-1"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:znd-reaction-2"
+
+\end_inset
+
+) that
+\begin_inset Formula 
+\begin{equation}
+\delta^{*}=0\text{ and }Q_{1}\bar{\omega}_{1}^{*}+Q_{2}\bar{\omega}_{2}^{*}=0,\label{eq:e1deig:sonicity-2}
+\end{equation}
+
+\end_inset
+
+which is known as generalized Chapman–Jouguet condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kirkwood1954"
+
+\end_inset
+
+, that is, the detonation velocity is determined by the conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:sonicity-2"
+
+\end_inset
+
+ and generally calculated as follows
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Lee2008,Higgins2012"
+
+\end_inset
+
+.
+ For a guess 
 \begin_inset Formula $\bar{D}$
 \end_inset
 
 , one solves steady reaction equations from the shock to the sonic point,
  
-\begin_inset Formula $x_{*}$
+\begin_inset Formula $x^{*}$
 \end_inset
 
-, where the sonic conditions 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:D-2step"
-
-\end_inset
-
- and must be satisfied.
+.
  For arbitrary 
 \begin_inset Formula $\bar{D}$
 \end_inset
 
-, these conditions will not be satisfied, and instead the steady-state solution
- will blow up.
+, conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:sonicity-2"
+
+\end_inset
+
+ will not be satisfied, and instead the steady-state solution will blow
+ up.
  But for special 
 \begin_inset Formula $\bar{D}$
 \end_inset
 
- (one or more), the solution will pass continuously (however, not necessarily
- smoothly) through 
-\begin_inset Formula $x_{*}$
+, the solution will pass continuously (however, not necessarily smoothly)
+ through 
+\begin_inset Formula $x^{*}$
 \end_inset
 
  to the equilibrium state at 
 \begin_inset Formula $x\to-\infty$
 \end_inset
 
-.
- This is a general numerical procedure that can be followed to determine
- the detonation speed 
+, that is 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+ is computed by shooting and determines the solution of the boundary-value
+ problem for system (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:znd-mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:znd-reaction-2"
+
+\end_inset
+
+) with shock conditions and conditions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:sonicity-2"
+
+\end_inset
+
+ at the boundaries, hence the name 
+\begin_inset Quotes eld
+\end_inset
+
+eigenvalue detonation
+\begin_inset Quotes erd
+\end_inset
+
+ for this model.
+\end_layout
+
+\begin_layout Standard
+General numerical procedure outlined above can be followed to determine
+ 
 \begin_inset Formula $\bar{D}$
 \end_inset
 
 .
- We however restrict our attention in this work to the case 
+ We, however, restrict our attention in this work to the case 
 \begin_inset Formula $E_{1}=E_{2}$
 \end_inset
 
@@ -433,12 +750,23 @@ reference "eq:D-2step"
 \begin_inset Formula $k_{1}=k_{2}$
 \end_inset
 
-.
-\end_layout
+, for which equations simplify and detonation velocity can be found analytically.
+ Considering only the reaction equations (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:znd-reaction-1"
 
-\begin_layout Standard
-Now, considering only reaction equations and dividing the second-reaction
- equation by the first-reaction equation, we arrive at
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1deig:znd-reaction-2"
+
+\end_inset
+
+) and dividing the second-reaction equation by the first-reaction equation,
+ we arrive at
 \begin_inset Formula 
 \[
 \od{\lambdaZnd_{2}}{\lambdaZnd_{1}}=\frac{\lambdaZnd_{1}-\lambdaZnd_{2}}{1-\lambdaZnd_{1}},
@@ -446,7 +774,7 @@ Now, considering only reaction equations and dividing the second-reaction
 
 \end_inset
 
-which is solved as follows: denote 
+which is solved as follows: denoting 
 \begin_inset Formula $\psi=\lambdaZnd_{2}-\lambdaZnd_{1}$
 \end_inset
 
@@ -454,24 +782,36 @@ which is solved as follows: denote
 \begin_inset Formula $\xi=\lambdaZnd_{1}$
 \end_inset
 
- to obtain
+ we obtain
 \begin_inset Formula 
 \[
-\od{\lambdaZnd_{2}}{\lambdaZnd_{1}}=\od{\left(\xi+\psi\right)}{\xi}=1+\od{\psi}{\xi}=\frac{-\psi}{1-\xi}\quad\Rightarrow\od{\psi}{\xi}+\frac{\psi}{1-\xi}+1=0,
+\od{\lambdaZnd_{2}}{\lambdaZnd_{1}}=\od{\left(\xi+\psi\right)}{\xi}=1+\od{\psi}{\xi}=\frac{-\psi}{1-\xi},
 \]
 
 \end_inset
 
-which is a linear ODE of the first order with the solution 
+which gives linear ODE of the first order for 
+\begin_inset Formula $\psi:$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\od{\psi}{\xi}+\frac{\psi}{1-\xi}+1=0
+\]
+
+\end_inset
+
+with the solution 
 \begin_inset Formula $\psi=\left(1-\xi\right)\,\ln\left(1-\xi\right)$
 \end_inset
 
 .
- Hence,
+ Transforming variables back, we obtain
 \begin_inset Formula 
-\[
-\lambdaZnd_{2}=\lambdaZnd_{1}+(1-\lambdaZnd_{1})\,\ln\left(1-\lambdaZnd_{1}\right),
-\]
+\begin{equation}
+\lambdaZnd_{2}=\lambdaZnd_{1}+(1-\lambdaZnd_{1})\,\ln\left(1-\lambdaZnd_{1}\right),\label{eq:e1deig:lambda_2}
+\end{equation}
 
 \end_inset
 
@@ -479,7 +819,7 @@ and therefore,
 \begin_inset Formula $\lambdaZnd_{2}\leq\lambdaZnd_{1}$
 \end_inset
 
- (natural logarithm yields negative values for 
+ (natural logarithm yields negative values when 
 \begin_inset Formula $0\leq\lambdaZnd_{1}\leq1$
 \end_inset
 
@@ -492,7 +832,7 @@ and therefore,
 \end_inset
 
 .
- It has the following consequence: both 
+ This observation has the following consequence: both 
 \begin_inset Formula $\lambdaZnd_{1}$
 \end_inset
 
@@ -500,92 +840,24 @@ and therefore,
 \begin_inset Formula $\lambdaZnd_{2}$
 \end_inset
 
- monotonically increase as 
-\begin_inset Formula $x\to-\infty$
+ monotonically increase towards the ends of the reaction zone, which follows
+ from the reaction rate expressions 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:reaction-rates"
+
 \end_inset
 
-.
- Hence, equilibriuim 
-\begin_inset Formula $Q=Q_{1}+Q_{2}$
+ evaluate for the steady state.
+ Hence, equilibrium heat release 
+\begin_inset Formula $Q_{\text{e}}=Q_{1}+Q_{2}$
 \end_inset
 
  is not a maximum value of 
 \begin_inset Formula $Q$
 \end_inset
 
- in the reaction zone.
-\end_layout
-
-\begin_layout Standard
-Regularity condition for the solution to be continuous are determined by
- finiteness of the derivative of 
-\begin_inset Formula $\delta$
-\end_inset
-
-, hence
-\begin_inset Formula 
-\[
-\od{\delta}x\text{ is finite, when }\delta=0\text{ and \od Qx=0}
-\]
-
-\end_inset
-
-simultaneously.
- From condition 
-\begin_inset Formula $\delta=0$
-\end_inset
-
- it follows that it is satisfied for a maximum value of 
-\begin_inset Formula $Q$
-\end_inset
-
-.
- From the second condition,
-\begin_inset Formula 
-\[
-Q_{1}\od{\lambdaZnd_{1}}x+Q_{2}\od{\lambdaZnd_{2}}x=0,\quad\Rightarrow Q_{1}\rZnd_{1}+Q_{2}\rZnd_{2}=0,
-\]
-
-\end_inset
-
-from which it follows that
-\begin_inset Formula 
-\[
-Q_{1}(1-\lambdaZnd_{1})-Q_{2}(1-\lambdaZnd_{1})\,\ln\left(1-\lambdaZnd_{1}\right)=0,
-\]
-
-\end_inset
-
-so either 
-\begin_inset Formula $\lambdaZnd_{1}=1$
-\end_inset
-
- or 
-\begin_inset Formula $\lambdaZnd=1-\exp\left(Q_{1}/Q_{2}\right)$
-\end_inset
-
-.
- However, case 
-\begin_inset Formula $\lambdaZnd_{1}=1$
-\end_inset
-
- must be discarded as it does not correspond to the condition 
-\begin_inset Formula $\delta=0$
-\end_inset
-
- (because 
-\begin_inset Formula $Q$
-\end_inset
-
- is not maximal for 
-\begin_inset Formula $\lambdaZnd_{1}=1$
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-Figure
+ in the reaction zone, which is illustrated on Figure
 \begin_inset space ~
 \end_inset
 
@@ -596,20 +868,81 @@ reference "fig:e1deig:znd-solution-Q-vs-lambda1"
 
 \end_inset
 
- shows how 
-\begin_inset Formula $Q$
+.
+\end_layout
+
+\begin_layout Standard
+Now having the relation between 
+\begin_inset Formula $\bar{\lambda}_{2}$
 \end_inset
 
- changes as 
-\begin_inset Formula $\lambdaZnd_{1}$
+ and 
+\begin_inset Formula $\bar{\lambda}_{1}$
 \end_inset
 
- goes from 0 to 1.
- In agreement with the above analysis, 
-\begin_inset Formula $Q$
+, we substitute them into 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:e1deig:sonicity-2"
+
 \end_inset
 
- has a maximum value inside the reaction zone.
+ to obtain
+\begin_inset Formula 
+\[
+Q_{1}(1-\lambdaZnd_{1}^{*})-Q_{2}(1-\lambdaZnd_{1}^{*})\,\ln\left(1-\lambdaZnd_{1}^{*}\right)=0,
+\]
+
+\end_inset
+
+so either 
+\begin_inset Formula $\lambdaZnd_{1}^{*}=1$
+\end_inset
+
+ (which leads to equilibrium solution as for one-step model of Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:e1d"
+
+\end_inset
+
+ or 
+\begin_inset Formula $\lambdaZnd_{1}^{*}=1-\exp\left(Q_{1}/Q_{2}\right)$
+\end_inset
+
+.
+ Both of these cases are considered below.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Equilibrium solution.
+
+\series default
+ Case 
+\begin_inset Formula $\lambdaZnd_{1}^{*}=1$
+\end_inset
+
+ must be discarded as it does not correspond to the condition 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+, moreover, detonation velocity determined from 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ for this case will be imaginary due to the negativity of the square-root
+ expression for 
+\begin_inset Formula $\delta$
+\end_inset
+
+.
+ Therefore, equilibrium solutions are impossible for this model.
 \end_layout
 
 \begin_layout Standard
@@ -636,16 +969,16 @@ Total heat release
 \begin_inset Formula $\bar{Q}$
 \end_inset
 
- versus 
+ versus steady reaction progress variable 
 \begin_inset Formula $\lambdaZnd_{1}$
 \end_inset
 
 .
- Notice that the maximum of 
-\begin_inset Formula $\bar{Q}$
+ Notice that the maximum heat release 
+\begin_inset Formula $\bar{Q}_{\text{max}}$
 \end_inset
 
- is inside of the reaction zone.
+ is attained inside of the reaction zone.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:e1deig:znd-solution-Q-vs-lambda1"
@@ -666,7 +999,16 @@ name "fig:e1deig:znd-solution-Q-vs-lambda1"
 \end_layout
 
 \begin_layout Standard
-The second case gives an embedded sonic locus.
+
+\series bold
+Solution with embedded sonic point.
+
+\series default
+ Sonic point is defined by condition 
+\begin_inset Formula $\lambdaZnd_{1}^{*}=1-\exp\left(Q_{1}/Q_{2}\right)$
+\end_inset
+
+.
  The flow is divided then by the sonic point into two parts.
  Between the shock and the sonic point, the flow is always subsonic relative
  to the shock.
@@ -674,68 +1016,79 @@ The second case gives an embedded sonic locus.
  or supersonic: flow is supersonic if expression 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq:delta-2step"
+reference "eq:e1deig:delta"
 
 \end_inset
 
- is used as is, while subsonic if the sign of the right-hand side of 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:delta-2step"
-
+ for 
+\begin_inset Formula $\delta$
 \end_inset
 
- is changed to negative 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Kasimov2004"
+ is used with 
+\begin_inset Quotes eld
+\end_inset
 
+plus
+\begin_inset Quotes erd
+\end_inset
+
+ sign, while subsonic if the sign is 
+\begin_inset Quotes eld
+\end_inset
+
+minus
+\begin_inset Quotes erd
 \end_inset
 
 .
- Thus we obtain two steady-state solutions with the embedded sonic locus.
+ Thus two steady-state solutions with the embedded sonic point are possible
+ for this model.
  Stability of both will be investigated below.
 \end_layout
 
 \begin_layout Standard
-The solution of 
+Having determined the state 
+\begin_inset Formula $\left(\bar{\lambda}_{1}^{*},\bar{\lambda}_{2}^{*}\right)$
+\end_inset
+
+ at the sonic point, we solve 
 \begin_inset Formula $\delta=0$
 \end_inset
 
- yields the same result for steady detonation velocity 
+, which yields the similar result for steady detonation velocity 
 \begin_inset Formula $\bar{D}$
 \end_inset
 
- as before: 
+ as in the case of the one-step model: 
 \begin_inset Formula 
 \begin{equation}
-\bar{D}=\sqrt{c_{\text{a}}^{2}+\frac{\gamma^{2}-1}{2}\left(Q_{1}\bar{\lambda}_{1}^{*}+Q_{2}\bar{\lambda}_{2}^{*}\right)}+\sqrt{\frac{\gamma^{2}-1}{2}\left(Q_{1}\bar{\lambda}_{1}^{*}+Q_{2}\bar{\lambda}_{2}^{*}\right)}\label{eq:D-2step}
+\bar{D}=\sqrt{c_{\text{a}}^{2}+\frac{\gamma^{2}-1}{2}\left(Q_{1}\bar{\lambda}_{1}^{*}+Q_{2}\bar{\lambda}_{2}^{*}\right)}+\sqrt{\frac{\gamma^{2}-1}{2}\left(Q_{1}\bar{\lambda}_{1}^{*}+Q_{2}\bar{\lambda}_{2}^{*}\right)}.\label{eq:D-2step}
 \end{equation}
 
 \end_inset
 
-with star denoting the sonic locus.
+
 \end_layout
 
 \begin_layout Section
-Linearized problem
+Linear unsteady problem
 \end_layout
 
 \begin_layout Standard
 The linearized perturbation system is the same as it was in the previous
- chapter, but with 
+ chapter (see Eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "linearized-system"
+
+\end_inset
+
+), but with 
 \begin_inset Formula $z=(\rho,u,p,\lambda_{1},\lambda_{2})^{\mathrm{T}}$
 \end_inset
 
- and with the following new matrices of coefficients (with 
-\begin_inset Formula $C_{i}=-(\gamma-1)Q_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $i=1,2$
-\end_inset
-
-): 
+ and with the coefficients matrices being redefined:
 \begin_inset Formula 
 \begin{align}
 A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0 & 0\\
@@ -743,24 +1096,40 @@ A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0 & 0\\
 0 & \gamma\bar{p} & \bar{U} & 0 & 0\\
 0 & 0 & 0 & \bar{U} & 0\\
 0 & 0 & 0 & 0 & \bar{U}
-\end{bmatrix},\quad & B=\begin{bmatrix}\frac{d\bar{u}}{dx} & \frac{d\bar{\rho}}{dx} & 0 & 0 & 0\\[0.3em]
--\frac{1}{\bar{\rho}^{2}}\frac{d\bar{p}}{dx} & \frac{d\bar{u}}{dx} & 0 & 0 & 0\\[0.3em]
-\sum_{i}C_{i}(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}) & \frac{d\bar{p}}{dx} & \gamma\frac{d\bar{u}}{dx}+\bar{\rho}\sum_{i}C_{i}\bar{\omega}_{ip} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{1}} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{2}}\\[0.3em]
--\bar{\omega}_{1\rho} & \frac{d\bar{\lambda}_{1}}{dx} & -\bar{\omega}_{1p} & -\bar{\omega}_{1\lambda_{1}} & -\bar{\omega}_{1\lambda_{2}}\\
--\bar{\omega}_{2\rho} & \frac{d\bar{\lambda}_{2}}{dx} & -\bar{\omega}_{2p} & -\bar{\omega}_{2\lambda_{1}} & -\bar{\omega}_{2\lambda_{2}}
-\end{bmatrix}.\label{eq:AB-2reaction}
+\end{bmatrix},\label{eq:e1deig:A}
 \end{align}
 
 \end_inset
 
 
+\begin_inset Formula 
+\begin{equation}
+B=\begin{bmatrix}\frac{d\bar{u}}{dx} & \frac{d\bar{\rho}}{dx} & 0 & 0 & 0\\[0.3em]
+-\frac{1}{\bar{\rho}^{2}}\frac{d\bar{p}}{dx} & \frac{d\bar{u}}{dx} & 0 & 0 & 0\\[0.3em]
+\sum_{i}C_{i}(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}) & \frac{d\bar{p}}{dx} & \gamma\frac{d\bar{u}}{dx}+\bar{\rho}\sum_{i}C_{i}\bar{\omega}_{ip} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{1}} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{2}}\\[0.3em]
+-\bar{\omega}_{1\rho} & \frac{d\bar{\lambda}_{1}}{dx} & -\bar{\omega}_{1p} & -\bar{\omega}_{1\lambda_{1}} & -\bar{\omega}_{1\lambda_{2}}\\
+-\bar{\omega}_{2\rho} & \frac{d\bar{\lambda}_{2}}{dx} & -\bar{\omega}_{2p} & -\bar{\omega}_{2\lambda_{1}} & -\bar{\omega}_{2\lambda_{2}}
+\end{bmatrix}\label{eq:e1deig:B}
+\end{equation}
+
+\end_inset
+
+with 
+\begin_inset Formula $C_{i}=-(\gamma-1)Q_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 For the shock evolution equation we obtain 
 \begin_inset Formula 
 \begin{eqnarray}
-\bar{R}_{\text{s}} & = & (\gamma-1)\rho_{\text{s}}\sum_{i}Q_{i}\bar{\omega}_{i\text{s}},\\
+\bar{R}_{\text{s}} & = & (\gamma-1)\bar{\rho}_{\text{s}}\sum_{i}Q_{i}\bar{\omega}_{i\text{s}},\\
 R_{\text{s}}' & = & (\gamma-1)\sum_{i}Q_{i}\left.\left[\left(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}\right)\rho'+\bar{\rho}\bar{\omega}_{ip}p'\right]\right|_{\text{s}}.
 \end{eqnarray}
 
@@ -770,8 +1139,7 @@ All the other expressions remain as before.
 \end_layout
 
 \begin_layout Standard
-The equations are rescaled using the so-called Erpenbeck scales such that
- 
+The equations are rescaled using the Erpenbeck scales such that 
 \begin_inset Formula $\rho_{\text{a}}=p_{\text{a}}=1$
 \end_inset
 
@@ -784,6 +1152,22 @@ The equations are rescaled using the so-called Erpenbeck scales such that
  Activation energy and heat release are rescaled by the ambient temperature
  multiplied by 
 \begin_inset Formula $R$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Numerical solution of this problem and postprocessing are done as described
+ in Subsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:e1d:algo"
+
 \end_inset
 
 .
@@ -806,8 +1190,8 @@ The model with two reactions represents an example of complex chemistry
  Following prior research on the role of sonic points in unsteady detonation
  dynamics 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "kasimov2004dynamics,StewartKasimovSIAP05"
+LatexCommand citealt
+key "KasimovStewart2004,StewartKasimov2005"
 
 \end_inset
 
@@ -2157,6 +2541,31 @@ reference "fig:eigval-neutral-curve"
  this influence on the changes in the local state in the reaction zone,
  the stronger sensitivity implying more instability.
  This is a qualitative arguments explaining the shift of the stability boundary.
+\end_layout
+
+\begin_layout Section
+Conclusions
+\end_layout
+
+\begin_layout Standard
+In this chapter we applied the method developed in this work for linear
+ stability analysis to the detonation model based on the reactive Euler
+ equations with two-step kinetic mechanism with one reaction being endothermic
+ which gives rise to the equilibrium detonations with embedded sonic point.
+ We demonstrated that the method is capable of analysis of this model without
+ any special treatment for the sonic point, although numerical solution
+ of the linear unsteady problem for this model is challenging when the underlyin
+g base steady-state solution is of subsonic-subsonic type as the linearized
+ system has discontinuous solutions in this case, hence, fine grid resolution
+ is required for the extraction of stability information from the perturbations
+ of detonation velocity.
+ We also compared migration of linear spectrum when endothermicity is varied
+ and found that the both steady-state solution possess the same spectrum
+ with minor differences in less energetic modes due to the numerical noise
+ generated around the discontinuity in the solution.
+ Nevertheless, we demonstrated that the linear spectrum (and hence detonation
+ dynamics) is determined by the region of the reaction zone between the
+ sonic point and the shock, at least in the linear case.
 \end_layout
 
 \end_body
