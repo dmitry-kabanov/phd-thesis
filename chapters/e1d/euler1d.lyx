@@ -1237,10 +1237,10 @@ reference "eq:steady-state"
 
 \end_inset
 
--
+–
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:dlambda_dx"
+reference "eq:delta"
 
 \end_inset
 
@@ -1251,7 +1251,7 @@ key "Brown1989"
 
 \end_inset
 
- with the BDF method of fifth order with absolute and relative tolerances
+ with the BDF method of the fifth order with absolute and relative tolerances
  set to 
 \begin_inset Formula $10^{-15}$
 \end_inset
