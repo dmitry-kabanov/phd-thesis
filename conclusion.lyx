@@ -119,15 +119,19 @@ In this thesis, we developed and implemented a new approach to study stability
  Our approach is based on the linearization of the governing equations written
  in a shock-attached frame and numerical solution of the linearized problem.
  Resultant time series of detonation velocity are postprocessed using novel
- technique of dynamic mode decomposition, which is a novel technique aimed
- at identification of modes of the system that grow or decay exponentially
- in time with fixed frequencies, and these modes are identical to the normal
- modes in linearized systems.
+ technique of dynamic mode decomposition, which is aimed at identification
+ of modes of the system that grow or decay exponentially in time with fixed
+ frequencies, and these modes are identical to the normal modes in linearized
+ systems.
 \end_layout
 
 \begin_layout Standard
-We implement and test our algorithm using commonly used detonation model
- based on the reactive Euler equations with one irreversible reaction.
+We implement and test our algorithm using a
+\begin_inset space ~
+\end_inset
+
+detonation model based on the reactive Euler equations with one irreversible
+ reaction.
  Comparing our stability results with the results of linear stability analysis
  via normal-mode approach, which are widely present in the literature for
  this model, we have found excellent agreement both for growth rates and
@@ -145,7 +149,7 @@ We implement and test our algorithm using commonly used detonation model
 \begin_inset Formula $\gamma=1.2$
 \end_inset
 
- also have showed an agreement with the results of normal-mode approach.
+ also have an agreement with the results of normal-mode approach.
  Additionally, we have studied neutral stability boundaries for other values
  of 
 \begin_inset Formula $\gamma$
@@ -171,7 +175,7 @@ We implement and test our algorithm using commonly used detonation model
 \begin_inset Formula $E$
 \end_inset
 
- increases as 
+ increase as 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -239,10 +243,10 @@ Having developed and well-tested approach to linear stability analysis,
  We have studied the effects of endothermicity on stability and have shown
  that as endothermicity increases, more and more unstable modes are excited
  in the stability spectrum, hence, rendering base ZND flow unstable.
- We have also showed that stability spectrum is independent of the underlying
- ZND solution, which serves as a demonstration of the postulate that intrinsic
- stability of detonations is determined solely by flow between the sonic
- locus and the detonation front.
+ We have also shown that stability spectrum is independent of the postsonic
+ part of the ZND solution, which serves as a demonstration of the postulate
+ that intrinsic stability of detonations is determined solely by flow between
+ the sonic locus and the detonation front.
 \end_layout
 
 \begin_layout Standard
@@ -261,26 +265,76 @@ Future Research Work
 The work presented in this thesis can be extended in the following directions.
 \end_layout
 
-\begin_layout Standard
-Extension of the present approach to linear stability analysis to more complicat
-ed models based on reactive Euler equations coupled with thermodynamic relations
- of calorically perfect gases with multistep reaction mechanisms.
+\begin_layout Enumerate
+Extension of the present method of linear stability analysis to more complicated
+ models based on reactive Euler equations coupled with thermodynamic relations
+ of calorically perfect gases with multistep reaction mechanisms 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Short1996,ShortSharpe:2003:Two-step,Gorchkov2007"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Standard
-Extension of the present approach to linear stability analysis to more complicat
-ed models based on reactive Euler equations coupled with thermodynamic relations
- of ideal, but not calorically perfect, gases with multistep reaction mechanisms.
+\begin_layout Enumerate
+Extension of the method to more complicated models based on reactive Euler
+ equations coupled with thermodynamic relations of ideal, but not calorically
+ perfect, gases with multistep reaction mechanisms 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Aslam2009,Romick2012"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
+Extension of the method to detonation models with losses 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Semenko2013,Sow2015"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Extension of the method to include perturbations in the direction transverse
+ to the lead shock 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ShortStewart1998,Stewart2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
 Thorough investigation of the nonlinear dynamics of the Fickett's model
  with reaction-rate expression that gives rich nonlinear dynamics by using
  different numerical schemes for approximation of spatial derivatives (including
  characteristic decomposition) and different time integrators (strong-stability-
-preserving Runge–Kutta schemes and implicit-explicit Runge–Kutta schemes)
- to analyze sensitivity of the nonlinear dynamics to numerical methods and
- to determine which schemes are the most robust in terms of preservation
+preserving Runge–Kutta schemes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ketcheson2005,Gottlieb2008,Hadjimichael2013,BrestenEtAl2016"
+
+\end_inset
+
+ and implicit-explicit Runge–Kutta schemes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pareschi2005,ZharovskyEtAl2015,BoscarinoPareschi2017"
+
+\end_inset
+
+) to analyze sensitivity of the nonlinear dynamics to numerical methods
+ and to determine which schemes are the most robust in terms of preservation
  of the solutions invariants 
 \begin_inset Formula $(u>0$
 \end_inset
