@@ -148,7 +148,7 @@ name "sec:fm:intro"
 \end_layout
 
 \begin_layout Standard
-In this chapter we consider a model that is much simpler that conventional
+In this chapter we consider a model that is much simpler than conventional
  detonation models are, yet it is able to reproduce the unsteady dynamics
  of these models in terms of the possibility of stable and unstable ZND
  solutions.
@@ -183,8 +183,18 @@ key "Kasimov2013"
 
 .
  However, Majda's model contains diffusive term as it is based on the viscous
- Burgers' equation, and thus the model is not hyperbolic, and the model
- by
+ Burgers' equation
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Burgers1948"
+
+\end_inset
+
+, and thus the model is not hyperbolic, and the model by
 \begin_inset space ~
 \end_inset
 
@@ -195,8 +205,11 @@ key "Kasimov2013"
 
 \end_inset
 
- contains nonlocal source term, which is very unusual feature for the convention
-al detonation models.
+ contains nonlocal source term, which is a
+\begin_inset space ~
+\end_inset
+
+very unusual feature for the conventional detonation models.
  Therefore, we choose Fickett's model (called Fickett's detonation analog
  in the following text) as it most closely resembles mathematically hyperbolic
  systems considered in the previous chapters.
@@ -244,7 +257,7 @@ It is perhaps best regarded as a mathematical construct, invented to act
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Fickett1984"
 
 \end_inset
@@ -278,7 +291,11 @@ key "Fickett1979"
 \begin_inset Formula $\rho$
 \end_inset
 
- is used); 
+ is used, we use 
+\begin_inset Formula $u$
+\end_inset
+
+ to emphasize that it is a one-dimensional vector); 
 \begin_inset Formula $\lambda$
 \end_inset
 
@@ -314,13 +331,13 @@ key "Fickett1985Introduction"
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Clarke1993"
+key "Clarke1989,Clarke1993"
 
 \end_inset
 
  Fickett's model with very simple reaction rate expression and analytic
- stable solution was used for assessment of numerical methods applied to
- reactive flows.
+ stable solution was used for assessment of numerical methods applicable
+ for reactive flows.
  It was understood that the instability in this model can be obtained by
  changing chemistry.
  
@@ -340,29 +357,32 @@ key "Radulescu2011"
 \end_layout
 
 \begin_layout Standard
-Here, we choose to use one-step chemistry with an expression for reaction
- rate appearing in the derivation of the asymptotic model by
+We choose to use one-step chemistry with an expression for reaction rate
+ appearing in the derivation of the asymptotic model of the reactive Euler
+ equations by
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Faria2015Theory"
+key "Faria2014,FariaEtAl2015"
 
 \end_inset
 
 .
- It was noted by them that their expression for reaction rate being supplied
- to the Fickett's detonation analog gives rise to the spectrum of the solutions
- including stable and unstable ZND solutions similar to observed in the
- detonation models with one-step chemistry based on Euler equations.
- So, in this chapter we aim to study linear and nonlinear stability properties
- of this model.
+ It was noted by them that their expression for the reaction rate being
+ supplied to the Fickett's detonation analog gives rise to the spectrum
+ of the solutions including stable and unstable ZND solutions similar to
+ observed in the detonation models with one-step chemistry based on Euler
+ equations.
+ So, in this chapter we aim to study linear stability properties of this
+ model using the method developed in this work and also nonlinear stability
+ properties of this model.
 \end_layout
 
 \begin_layout Section
-Mathematical model
+Governing equations
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:fm:math-model"
@@ -378,7 +398,7 @@ In this section we define the governing equations, ambient and Rankine–Hugonio
 \end_layout
 
 \begin_layout Subsection
-Governing equations
+Equations in a laboratory and shock-attached frames
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:fm:math-model:gov-eqn-lab"
@@ -482,7 +502,7 @@ key "Faria2015Theory"
 
 \begin_inset Formula 
 \begin{equation}
-\omega(u,\lambda)=k(1-\lambda)\exp\left(\theta\left(u+q\lambda\right)\right),\label{eq:fm:math-model:gov-eqn-lab:production-rate}
+\omega(u,\lambda)=k(1-\lambda)\exp\left(\theta\left(\sqrt{q}u+q\lambda\right)\right),\label{eq:fm:math-model:gov-eqn-lab:production-rate}
 \end{equation}
 
 \end_inset
@@ -570,10 +590,6 @@ end{subequations}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 and in nonconservative form, which will be more convenient for linearization
  in Section
 \begin_inset space ~
@@ -685,7 +701,7 @@ To derive Rankine–Hugoniot condition for
 
 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "eq:fm:math-model:gov-eqn-saf:eqn-of-motion"
 
 \end_inset
@@ -1075,7 +1091,7 @@ eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
  reduce to
 \begin_inset Formula 
 \begin{align}
-\od{}{}\left(\frac{\bar{u}^{2}}{2}-\bar{D}\bar{u}+\frac{q}{2}\bar{\lambda}\right) & =0,\label{eq:fm:znd:eqn-of-motion}\\
+\od{}x\left(\frac{\bar{u}^{2}}{2}-\bar{D}\bar{u}+\frac{q}{2}\bar{\lambda}\right) & =0,\label{eq:fm:znd:eqn-of-motion}\\
 \od{\bar{\lambda}}x & =-\frac{\bar{\omega}}{\bar{D}}.\label{eq:fm:znd:eqn-of-reaction}
 \end{align}
 
@@ -1220,18 +1236,10 @@ We define preexponent
 \begin_inset Formula $l_{1/2}$
 \end_inset
 
- of steady reaction zone, that is, 
-\begin_inset Formula $x=1$
-\end_inset
-
- when 
-\begin_inset Formula $\lambda=1/2$
-\end_inset
-
-:
+ of steady reaction zone:
 \begin_inset Formula 
 \[
-\int_{0}^{1/2}\frac{\bar{D}}{k\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda}=\int_{0}^{l_{1/2}}\,\dd x=1,
+\int_{0}^{1/2}\frac{\bar{D}}{\bar{\omega}}\,\dd\bar{\lambda}=\int_{0}^{l_{1/2}}\,\dd x=1,
 \]
 
 \end_inset
@@ -1239,7 +1247,7 @@ We define preexponent
 therefore,
 \begin_inset Formula 
 \begin{equation}
-k=\int_{0}^{1/2}\frac{\bar{D}}{\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda},\label{eq:fm:znd:k}
+k=\int_{0}^{1/2}\frac{\bar{D}}{\left(1-\bar{\lambda}\right)\exp\left(\theta\left(\sqrt{q}\bar{u}+q\bar{\lambda}\right)\right)}\,\dd\bar{\lambda},\label{eq:fm:znd:k}
 \end{equation}
 
 \end_inset
@@ -1299,7 +1307,7 @@ status open
 
 
 \backslash
-ref{eq:fm:math-model:gov-eqn-saf:system}
+eqref{eq:fm:math-model:gov-eqn-saf:system}
 \end_layout
 
 \end_inset
@@ -1357,8 +1365,9 @@ A=\begin{bmatrix}\bar{u}-\bar{D} & \sigma\\
 
 \end_inset
 
-in which the steady quantities are known with 
-\begin_inset Formula $\bar{\omega}_{u}=\theta\bar{\omega}$
+in which the steady quantities are known with partial derivatives of the
+ reaction rate being 
+\begin_inset Formula $\bar{\omega}_{u}=\theta\sqrt{q}\bar{\omega}$
 \end_inset
 
 , 
@@ -1517,7 +1526,7 @@ reference "eq:algo:znd:partial-length"
 \end_inset
 
 .
- Once these parameter are computed, all steady-state quantities are computed
+ Once these parameters are computed, all steady-state quantities are computed
  on the grid.
 \end_layout
 
@@ -1559,7 +1568,7 @@ reference "sec:e1d:algo"
 \end_layout
 
 \begin_layout Section
-Algorithm for nonlinear simulations
+Nonlinear simulations by Godunov method
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:fm:nonlin-algo"
@@ -1567,6 +1576,10 @@ name "sec:fm:nonlin-algo"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Description of the method
 \end_layout
 
 \begin_layout Standard
@@ -1583,7 +1596,7 @@ eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 
 \end_inset
 
-, we use second-order Godunov-type method with MUSCLE flux limiter
+, we use second-order Godunov-type method with MUSCL flux limiter
 \begin_inset space ~
 \end_inset
 
@@ -1663,12 +1676,12 @@ For the model under consideration, solution
 \begin_inset Formula $U_{i+1/2}$
 \end_inset
 
- corresponds to some state 
+ of the Riemann problem corresponds to some state 
 \begin_inset Formula $\left(u_{i+1/2},\lambda_{i+1/2}\right)^{\T}$
 \end_inset
 
 , which is found by analysis of the waves that can occur in the Riemann
- problem.
+ problem and is given in the next subsection.
  This solution propagates along the line 
 \begin_inset Formula $\left(x_{i+1/2},t\right)^{\T}$
 \end_inset
@@ -1683,30 +1696,77 @@ For the model under consideration, solution
 \end_inset
 
  in a local reference frame, than this solution is time-independent.
+\end_layout
+
+\begin_layout Standard
+Once all the local Riemann problem is solved over the whole grid, fluxes
+ at the edges 
+\begin_inset Formula $x_{i+1/2}$
+\end_inset
+
+ can be computed.
+ On the left part of the domain we introduce a ghost point with extrapolation
  
+\begin_inset Formula $u_{-1}=u_{0}$
+\end_inset
+
+ such that the left-most flux 
+\begin_inset Formula $F_{-1/2}$
+\end_inset
+
+ could be computed.
+ On the right boundary the right-most flux 
+\begin_inset Formula $F_{N+1/2}$
+\end_inset
+
+ is computed by means of the Rankine–Hugoniot conditions 
+\begin_inset Formula $u_{N+1/2}=2D$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{N+1/2}=0$
+\end_inset
+
+, which leads to the fluxes 
+\begin_inset Formula $F_{N+1/2}=0$
+\end_inset
+
+ both for 
+\begin_inset Formula $u$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Riemann problem for the Fickett's model
 \end_layout
 
 \begin_layout Standard
 Below we provide the solution of the Riemann problem for our system, which
  in the characteristic form is
 \begin_inset Formula 
-\begin{alignat*}{2}
-\frac{dp}{dt} & =0 & \quad\text{on }\frac{dx}{dt} & =u-D,\\
-\frac{d\lambda}{dt} & =0 & \quad\text{on }\frac{d\lambda}{dt} & =-D,
-\end{alignat*}
+\begin{alignat}{2}
+\od pt & =0 & \quad\text{on  }\od xt & =u-D,\label{eq:fm:char-1}\\
+\od{\lambda}t & =0 & \quad\text{on  }\od xt & =-D,\label{eq:fm:char-2}
+\end{alignat}
 
 \end_inset
 
-where 
-\begin_inset Formula $p$
+where
+\begin_inset Formula 
+\[
+p=\frac{1}{2}\left(\left(u-2D\right)u+q\lambda\right)
+\]
+
 \end_inset
 
- = 
-\begin_inset Formula $\frac{1}{2}\left(\left(u-2D\right)u+q\lambda\right)$
-\end_inset
-
- and from the characteristic equations themselves we can see that the first
- wave is nonlinear as it depends on 
+is the flux and from the characteristic equations themselves we can see
+ that the first wave is nonlinear as it depends on 
 \begin_inset Formula $u$
 \end_inset
 
@@ -1762,17 +1822,17 @@ Case 1.
 
  must jump also:
 \begin_inset Formula 
-\[
-p_{M}=p_{L}\quad\Rightarrow\frac{1}{2}\left(u_{M}^{2}+q\lambda_{M}\right)=\frac{1}{2}\left(u_{L}^{2}+q\lambda_{L}\right),
-\]
+\begin{equation}
+p_{M}=p_{L}\quad\Rightarrow\frac{1}{2}\left(u_{M}^{2}+q\lambda_{M}\right)=\frac{1}{2}\left(u_{L}^{2}+q\lambda_{L}\right),\label{eq:fm:pM}
+\end{equation}
 
 \end_inset
 
 from which it follows
 \begin_inset Formula 
-\[
-u_{M}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{M})}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{R})}<u_{L}<u_{R}.
-\]
+\begin{equation}
+u_{M}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{M})}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{R})}<u_{L}<u_{R}.\label{eq:fm:uM}
+\end{equation}
 
 \end_inset
 
@@ -1975,7 +2035,7 @@ To illustrate the complete solutions to the Riemann problem and characterstic
 \begin_inset Formula $D=\sqrt{q}=3$
 \end_inset
 
-,
+, 
 \begin_inset Formula $\lambda_{L}=1.0$
 \end_inset
 
@@ -1999,7 +2059,7 @@ reference "fig:solution-contact-shock"
 
 \end_inset
 
- shows solution of the Riemann problem for 
+ shows the solution of the Riemann problem for 
 \begin_inset Formula $u_{L}=4$
 \end_inset
 
@@ -2008,8 +2068,8 @@ reference "fig:solution-contact-shock"
 \end_inset
 
 , along with the characteristic plane.
- As can be seen, solution consists of three distinct regions: in the region
- to the left of the contact discontinuity is 
+ As can be seen, the solution consists of three distinct regions: in the
+ region to the left of the contact discontinuity is 
 \begin_inset Formula $\left(u_{L},\lambda_{L}\right)$
 \end_inset
 
@@ -2026,7 +2086,7 @@ reference "fig:solution-contact-shock"
 \begin_inset Formula $u_{R}=D$
 \end_inset
 
-, the characteristic equations in the rightmost region are vertical.
+, the characteristics in the rightmost region are vertical.
  The shock speed in this case is 
 \begin_inset Formula $s=0.5$
 \end_inset
@@ -2223,59 +2283,18 @@ name "fig:solution-contact-rarefaction"
 
 \end_layout
 
+\begin_layout Subsection
+Computation of detonation velocity
+\end_layout
+
 \begin_layout Standard
-Once all the local Riemann problem is solved over the whole grid, fluxes
- at the edges 
-\begin_inset Formula $x_{i+1/2}$
-\end_inset
-
- can be computed.
- On the left part of the domain we introduce a ghost point with extrapolation
- 
-\begin_inset Formula $u_{-1}=u_{0}$
-\end_inset
-
- such that the left-most flux 
-\begin_inset Formula $F_{-1/2}$
-\end_inset
-
- could be computed.
- On the right boundary the right-most flux 
-\begin_inset Formula $F_{N+1/2}$
-\end_inset
-
- is computed by the means of the Rankine–Hugoniot conditions 
-\begin_inset Formula $u_{N+1/2}=2D$
-\end_inset
-
-, 
-\begin_inset Formula $\lambda_{N+1/2}=0$
-\end_inset
-
-, which leads to the fluxes 
-\begin_inset Formula $F_{N+1/2}=0$
-\end_inset
-
- both for 
-\begin_inset Formula $u$
-\end_inset
-
- and 
-\begin_inset Formula $\lambda$
-\end_inset
-
-.
- Notice, that we need to update 
+Notice, that we need to update 
 \begin_inset Formula $D$
 \end_inset
 
  in the beginning of the time step to carry out the solution of the Riemann
  problems and the boundary conditions.
- The details of this update are described below.
-\end_layout
-
-\begin_layout Standard
-To update detonation velocity 
+ To update detonation velocity 
 \begin_inset Formula $D$
 \end_inset
 
@@ -2539,7 +2558,42 @@ key "HairerEtAl1993"
 
 \end_inset
 
- as used for linear unsteady simulations.
+ as was used for linear unsteady simulations.
+ The reader may object that strong-stability-preserving Runge–Kutta integrators
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gottlieb2008"
+
+\end_inset
+
+are more appropriate for the problem at hand as we expect internal shock
+ being generated inside the reaction zone.
+ However, for the reactive flow adaptive step size is a crucial component
+ of the time integrator, as one cannot rely on the Courant–Friedrichs–Lewy
+ condition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Courant1928"
+
+\end_inset
+
+ in computations of time step due to the presence of the chemical reactions.
+ Presence of the adaptive-step DOPRI5 integrator in the numerical environment
+ that we use, hence, determined the choice of the time integrator.
+ We set relative tolerance to 
+\begin_inset Formula $10^{-8}$
+\end_inset
+
+ and absolute tolerance to 
+\begin_inset Formula $10^{-6}$
+\end_inset
+
+ of the DOPRI5 integrator for the nonlinear simulations.
 \end_layout
 
 \begin_layout Section
@@ -3009,7 +3063,7 @@ name "subsec:fm:results:comparison"
 In this subsection, we compare the solutions of the linear and nonlinear
  problems for verification purposes.
  If parameters of the problem are such that the ZND solution is unstable
- and he initial amplitude of the perturbation of the ZND solution is small
+ and the initial amplitude of the perturbation of the ZND solution is small
  relative to the ZND solution itself, then for early times both linear and
  nonlinear solutions should agree with each other.
 \end_layout
@@ -3163,7 +3217,11 @@ reference "fig:linear-spectrum"
 
 \end_inset
 
- shows how the linear spectrum changes as activation energy 
+ shows how the linear spectrum changes for 
+\begin_inset Formula $q=4$
+\end_inset
+
+ as activation energy 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -3176,7 +3234,7 @@ reference "fig:linear-spectrum"
 \end_inset
 
 .
- Only one mode in the spectrum was found, and its behavior is the following.
+ Only one mode in the spectrum was found, and its behavior is as follows.
  Growth rate increases from 
 \begin_inset Formula $-0.081$
 \end_inset
@@ -3234,7 +3292,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Migration of the linear spectrum as activation energy 
+Migration of the linear spectrum for 
+\begin_inset Formula $q=4$
+\end_inset
+
+ as activation energy 
 \begin_inset Formula $\theta$
 \end_inset
 
@@ -3282,7 +3344,7 @@ Now we turn our attention to the determination of the neutral stability
 \end_layout
 
 \begin_layout Standard
-We generate 256 values linearly spaced values of 
+We generate 256 linearly spaced values of 
 \begin_inset Formula $q$
 \end_inset
 
@@ -3878,7 +3940,14 @@ eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 \begin_inset space ~
 \end_inset
 
-???.
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:fm:nonlin-algo"
+
+\end_inset
+
+.
  We aim to study the different nonlinear regimes that this model is capable
  of and plot the bifurcation diagram for this model.
 \end_layout
@@ -3949,7 +4018,7 @@ reference "fig:fm:results:bif-diag-fine"
 
 \end_inset
 
- (top) shows bifurcations diagrams plotted over each other for resolutions
+ (top) shows bifurcation diagrams plotted over each other for resolutions
  
 \begin_inset Formula $\Nhrz=320$
 \end_inset
@@ -3977,7 +4046,7 @@ reference "fig:fm:results:bif-diag-fine"
 \begin_inset Formula $\theta=1.10$
 \end_inset
 
-, while it is occurs only for 
+, while it occurs only for 
 \begin_inset Formula $\theta=1.088$
 \end_inset
 
@@ -5180,9 +5249,9 @@ We run simulations for
 
  with several grid resolutions and compute relative errors:
 \begin_inset Formula 
-\[
-E_{i}=\frac{\norm{\psi'_{i}-\psi'_{i-1}}}{\norm{\psi'_{i}}},\quad i=2,\dots N,
-\]
+\begin{equation}
+E_{i}=\frac{\norm{\psi'_{i}-\psi'_{i-1}}}{\norm{\psi'_{i}}},\quad i=2,\dots N,\label{eq:fm:rel-errors}
+\end{equation}
 
 \end_inset
 
@@ -5278,35 +5347,30 @@ Convergence study for the linear solver with the Fickett's model and parameters
 \end_inset
 
 .
- Subscripts 
-\begin_inset Quotes eld
+ 
+\begin_inset Formula $\Nhrz$
 \end_inset
 
-1
-\begin_inset Quotes erd
+ is the resolution per half-reaction zone, 
+\begin_inset Formula $E_{1}$
 \end_inset
 
 , 
-\begin_inset Quotes eld
+\begin_inset Formula $E_{2}$
 \end_inset
 
-2
-\begin_inset Quotes erd
+, 
+\begin_inset Formula $E_{\infty}$
 \end_inset
 
-, and 
-\begin_inset Quotes eld
+are relative errors computed by 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fm:rel-errors"
+
 \end_inset
 
-
-\begin_inset Formula $\infty$
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
- refer to the 
+ in 
 \begin_inset Formula $L_{1}$
 \end_inset
 
@@ -5318,7 +5382,22 @@ Convergence study for the linear solver with the Fickett's model and parameters
 \begin_inset Formula $L_{\infty}$
 \end_inset
 
- norms, respectively.
+ norms, respectively; 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $r_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $r_{\infty}$
+\end_inset
+
+ are corresponding observed order of accuracy.
+ Negative values for orders of accuracy are due to the domination of the
+ round-off error of floating-point arithmetic over truncation error of numerical
+ methods used.
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:12-2018-03-17:convergence"
@@ -5433,12 +5512,13 @@ In summary, the application of our approach to the Fickett's detonation
 
 advantage of using highly accurate numerical method to the solution of linearize
 d system.
- Besides, this model has qualitatively different nonlinear solutions for
- different parameters, and can be used as an example of the simple 
-\begin_inset Formula $2x2$
+ Besides, this model possesses a rich set of qualitatively different nonlinear
+ solutions, and can be used as an example of the simple 
+\begin_inset Formula $2\times2$
 \end_inset
 
- hyperbolic system of balance laws with unstable steady-state solutions.
+ hyperbolic system of balance laws with unstable steady-state solutions
+ and also for verification of numerical solvers.
 \end_layout
 
 \end_body
