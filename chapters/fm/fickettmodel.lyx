@@ -4399,15 +4399,7 @@ lly choosing the left values of
 \end_inset
 
  in the neighborhoods of bifurcation points.
- As step of 
-\begin_inset Formula $\theta$
-\end_inset
-
- is 
-\begin_inset Formula $0.001$
-\end_inset
-
-, then the uncertainty of 
+ The uncertainty of 
 \begin_inset Formula $\theta_{n}$
 \end_inset
 
@@ -4415,7 +4407,7 @@ lly choosing the left values of
 \begin_inset Formula $0.001$
 \end_inset
 
- as well.
+.
  It is difficult to determine 
 \begin_inset Formula $\theta_{n}$
 \end_inset
