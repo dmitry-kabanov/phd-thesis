@@ -156,6 +156,10 @@ citet{Lee2008}}
 
 \end_layout
 
+\begin_layout Section
+Introduction
+\end_layout
+
 \begin_layout Standard
 In this chapter we consider linear stability of a detonation model which
  is based on the one-dimensional reactive Euler equations for a perfect
@@ -1230,7 +1234,15 @@ name "fig:algorithm:grid"
 \end_layout
 
 \begin_layout Standard
-The steady-state ZND profiles are computed on the grid using (
+The steady-state ZND profiles are computed on the grid by integrating ordinary
+ differential equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:znd-lambda"
+
+\end_inset
+
+) with auxiliary relations (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:steady-state"
@@ -1795,7 +1807,7 @@ reference "eq:numalg:upwind5-right"
 \end_layout
 
 \begin_layout Subsection
-DMD analysis of the numerical results
+Postprocessing via dynamic mode decomposition
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:algorithm:postproc"
@@ -1846,15 +1858,200 @@ where
 \begin_layout Standard
 To process such a time series, an efficient and robust algorithm is required
  such that the stability spectrum is computed as accurately as possible.
- The DMD algorithm 
+ The dynamic mode decomposition (DMD) is at the heart of our postprocessing
+ algorithm, which was developed in recent years in the fluid dynamic community
+ for analysis of the flows in numerical simulations and physical experiments.
+ The DMD is a powerful method that is able to extract spectral information
+ from complex data coming from different fluid-dynamic systems.
+ It was introduced in 
 \begin_inset CommandInset citation
-LatexCommand citet
-key "Schmid2010"
+LatexCommand citep
+key "SchmidSesterhenn2008,RowleyEtAl2009,Schmid2010"
 
 \end_inset
 
- is at the heart of our postprocessing.
- We note however, that the DMD algorithm does not necessarily answer the
+.
+ The basic introduction to DMD as well as several examples of its use in
+ different fields can be found in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "KutzEtAl2016"
+
+\end_inset
+
+.
+ In contrast with other methods for extraction of low-dimensional information
+ from high-dimensional data, DMD modes, although not orthogonal like, for
+ example, modes in proper orthogonal decomposition
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "RowleyDawson2017"
+
+\end_inset
+
+, carry information about a single frequency, similar to normal modes.
+ One of the important features of the method is that although DMD was developed
+ and used originally for fluid flows, the method is data-driven and is not
+ coupled to the governing equations of fluid mechanics.
+ As such, it finds applications in many other fields besides fluid mechanics
+ and can be used in an equation-free manner.
+ Modern applications of these method include numerous fields that rely heavily
+ on data analysis such as atmospheric research
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "KutzEtAl2016"
+
+\end_inset
+
+, computational biology 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "KunertEtAl2017"
+
+\end_inset
+
+,neuroscience, finances and many others.
+\end_layout
+
+\begin_layout Standard
+Some of the recent developments of the method and its various applications
+ can be found in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SchmidEtAl2011,TuEtAl2014,Jovanovic2014,HematiWilliamsRowley2014,Williams_2015,Proctor2016,ZhangEtAl2017"
+
+\end_inset
+
+.
+ A modification of DMD was recently used to characterize chaotic systems
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BruntonEtAl2017"
+
+\end_inset
+
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Wynn2013"
+
+\end_inset
+
+, the authors generalized DMD to optimal mode decomposition and showed that
+ for noise-free linear systems, DMD correctly identifies system eigenvalues
+ and hence is analogous to normal-mode analysis.
+ Tu with co-authors in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "TuEtAl2014"
+
+\end_inset
+
+ gave a relatively simple description of the algorithm and showed that input
+ data for DMD do not have to be sequential time series with a uniform time
+ step between data snapshots.
+ They also pointed out that snapshots must be sufficiently 
+\begin_inset Quotes eld
+\end_inset
+
+rich
+\begin_inset Quotes erd
+\end_inset
+
+ for the DMD to extract dynamic modes correctly.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Jovanovic2014"
+
+\end_inset
+
+, a sparsity-promoting version of DMD algorithm is proposed to achieve a
+ balance between the quality of the extracted dynamics and the number of
+ modes required to represent the dynamics.
+ Several researchers considered sensitivity of DMD to the noise in input
+ data.
+ Duke with co-authors 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DukeEtAl2011"
+
+\end_inset
+
+ considered synthetic wave shapes and carried out a detailed study of errors
+ in growth rates and frequencies under varying parameters.
+ The paper 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bagheri_2014"
+
+\end_inset
+
+ demonstrated that output DMD eigenvalues are damped in the presence of
+ noise, while 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Dawson2016"
+
+\end_inset
+
+ proposed four modifications for the DMD algorithm that alleviate noise
+ effect.
+ In 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "KouZhang2017,ZhangEtAl2017"
+
+\end_inset
+
+, criteria for choosing the rank of a low-order approximation are proposed,
+ with 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "KouZhang2017"
+
+\end_inset
+
+ suggesting to determine relevant modes through its time-dependent amplitude,
+ while 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ZhangEtAl2017"
+
+\end_inset
+
+ proposing to choose mode eigenfunctions on the basis of how good they approxima
+te the eigenfuncation of the corresponding Koopman operator 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Koopman1931,BudisicEtAl2012,Mezic2013,Williams_2015"
+
+\end_inset
+
+, which is an infinite-dimensional linear operator that can be posed for
+ a nonlinear dynamical system and whose eigenspectrum serves as an analog
+ of normal modes of linear systems 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Mezic2005"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We note however, that the DMD algorithm does not necessarily answer the
  question of what the rank of low-dimensional approximation should be, which
  is to date is an unsolved problem
 \begin_inset space ~
