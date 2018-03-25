@@ -1,0 +1,742 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass report
+\begin_preamble
+\input{../preamble-child.tex}
+\end_preamble
+\use_default_options true
+\master ../../thesis.lyx
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "utopia" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing double
+\use_hyperref true
+\pdf_title "Fickett model"
+\pdf_author "Dmitry Kabanov kabanovdmitry@gmail.com"
+\pdf_keywords "detonation; linear stability; numerics"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=blue, linkcolor=blue"
+\papersize letterpaper
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Details of the normal-mode analysis for the Fickett's detonation analogue
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:ffmnm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Linearization with normal-modes
+\end_layout
+
+\begin_layout Standard
+We linearize the Fickett's detonation analog using normal-modes expansions
+\begin_inset Formula 
+\begin{align*}
+x_{s}^{\ell} & =\bar{D}t+\psi(t),\\
+D(t) & =\bar{D}+\dot{\psi}(t),\\
+u(x,t) & =\bar{u}(x)+u'(x)\exp\left(\alpha t\right),\\
+\lambda(x,t) & =\bar{\lambda}(x)+\lambda'(x)\exp(\alpha t),\\
+\psi(t) & =\exp(\alpha t),\\
+\dot{\psi}(t) & =\alpha\exp(\alpha t),
+\end{align*}
+
+\end_inset
+
+which leads to the system of equations
+\begin_inset Formula 
+\begin{equation}
+\alpha\vec{z}'+\bar{\mat A}\od{\vec{z}'}x+\bar{\mat C}\vec{z}'-\alpha\bar{\vec{b}}=0,\label{eq:fsmnm:form1:system}
+\end{equation}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\vec{z}'=\begin{bmatrix}u'\\
+\lambda'
+\end{bmatrix},\quad\bar{\mat A}=\begin{bmatrix}\bar{u}-\bar{D} & \sigma\\
+0 & -\bar{D}
+\end{bmatrix},\quad\bar{\mat C}=\begin{bmatrix}\od{\bar{u}}x & 0\\
+-\bar{\omega}_{u} & -\bar{\omega}_{\lambda}
+\end{bmatrix},\quad\bar{\vec{b}}=\begin{bmatrix}\od{\bar{u}}x\\
+\od{\bar{\lambda}}x
+\end{bmatrix}
+\]
+
+\end_inset
+
+and it is understood that matrices 
+\begin_inset Formula $\mat A$
+\end_inset
+
+ and 
+\begin_inset Formula $\mat C$
+\end_inset
+
+ as well as vector 
+\begin_inset Formula $\vec{b}$
+\end_inset
+
+ implicitly depend on spatial coordinate 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then the system can be written in the conventional form for the system of
+ first-order ODEs:
+\begin_inset Formula 
+\begin{equation}
+\od{\vec{z}'}x=\bar{\mat A}^{-1}\left[-\left(\alpha\mat I+\bar{\mat C}\right)\vec{z}'+\alpha\bar{\vec{b}}\right],\label{eq:fsmnm:matrix-form:standard-form}
+\end{equation}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\bar{\mat A}^{-1}=\frac{1}{\bar{D}^{2}-\bar{u}\bar{D}}\begin{bmatrix}-\bar{D} & -\sigma\\
+0 & \bar{u}-\bar{D}
+\end{bmatrix}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Linearized Rankine–Hugoniot conditions are:
+\begin_inset Formula 
+\begin{equation}
+u'=2\alpha,\quad\lambda'=0.\label{eq:fsmnm:stab:rh-cond}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsmnm:matrix-form:standard-form"
+
+\end_inset
+
+ must be integrated using initial value
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:fsmnm:stab:rh-cond"
+
+\end_inset
+
+ towards the equilibrium of the reaction zone where condition derived in
+ Section
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ffmnm:deriv-bound"
+
+\end_inset
+
+ is imposed.
+ This condition is called boundedness condition and it can be satisfied
+ only for special values of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ As parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in the system is not known in advance, we must take a guess on it and then
+ iterate until the boundedness condition is satisfied.
+ That is, the problem is a boundary-value problem for a complex-valued eigenvalu
+e 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, and the method of the solution described above, is a shooting method.
+\end_layout
+
+\begin_layout Section
+Formulation of stability problem in steady reaction progress variable
+\end_layout
+
+\begin_layout Standard
+Formulation described in previous section is not very useful if one wants
+ to apply adaptive ODE solver to the problem, otherwise ZND solution must
+ be integrated from the shock for each internal step of the ODE solver.
+ Here, we transform spatial coordinate to the coordinate of reaction progress
+ variable 
+\begin_inset Formula $s=\bar{\lambda}(x)$
+\end_inset
+
+ of the ZND solution.
+ Then ZND solution in this case is reduced to evaluation of several algebraic
+ expressions entering the matrices 
+\begin_inset Formula $\mat A$
+\end_inset
+
+ and 
+\begin_inset Formula $\mat C$
+\end_inset
+
+ as well as vector 
+\begin_inset Formula $\vec{b}$
+\end_inset
+
+.
+ Precisely, by using transformation
+\begin_inset Formula 
+\[
+\od sx=-\frac{\bar{\omega}}{\bar{D}}\quad\Rightarrow\od{}x=-\frac{\bar{\omega}}{\bar{D}}\od{}s,
+\]
+
+\end_inset
+
+we have
+\begin_inset Formula 
+\[
+\od{\vec{z'}}s=-\frac{\bar{D}}{\bar{\omega}}\od{}x,
+\]
+
+\end_inset
+
+and hence
+\begin_inset Formula 
+\[
+\bar{\mat A}\od{\vec{z}'}s=-\frac{\bar{D}}{\bar{\omega}}\bar{\mat A}\od{\vec{z}'}x=-\frac{\bar{D}}{\bar{\omega}}\left[-\left(\alpha\mat I+\bar{\mat C}\right)\vec{z}'+\alpha\bar{\vec{b}}\right]
+\]
+
+\end_inset
+
+and then system
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:fsmnm:matrix-form:standard-form"
+
+\end_inset
+
+ becomes
+\begin_inset Formula 
+\begin{equation}
+\od{\vec{z}'}s=-\frac{\bar{D}}{\bar{\omega}}\bar{\mat A}^{-1}\left[-\left(\alpha\mat I+\bar{\mat C}\right)\vec{z}'+\alpha\bar{\vec{b}}\right].\label{eq:fsmnm:matrix-form:standard-form-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Derivation of the boundedness condition
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ffmnm:deriv-bound"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stewart2005"
+
+\end_inset
+
+ the method of derivation of the boundedness condition is provided which
+ is simpler than the method of
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet*
+key "LeeStewart1990"
+
+\end_inset
+
+.
+ We apply this method of derivation here to derive the boundedness condition
+ for normal-mode analysis of the Fickett's detonation analog.
+\end_layout
+
+\begin_layout Standard
+Precisely, we take the governing equations:
+\begin_inset Formula 
+\begin{align*}
+u_{t}+uu_{x}+\sigma\lambda_{x} & =0,\\
+\lambda_{t} & =\omega,
+\end{align*}
+
+\end_inset
+
+and, multiplying the second equation by 
+\begin_inset Formula $\sigma/u$
+\end_inset
+
+, we add these equations to obtain the characteristic equations:
+\begin_inset Formula 
+\begin{align*}
+\left(u_{t}+uu_{x}\right)+\frac{\sigma}{u}\left(\lambda_{t}+u\lambda_{x}\right) & =\frac{\sigma}{u}\omega,\\
+\lambda_{t} & =\omega,
+\end{align*}
+
+\end_inset
+
+that is
+\begin_inset Formula 
+\begin{alignat*}{3}
+\od ut+\frac{\sigma}{u}\od{\lambda}t & =\frac{\sigma}{u}\omega & \quad & \mbox{on }\od xt &  & =u,\\
+\od{\lambda}t & =\omega &  & \mbox{on }\od xt &  & =0.
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These equation can be simplified by multiplying the first equation by 
+\begin_inset Formula $u$
+\end_inset
+
+:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:rad-from-cplus:char-form}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{alignat}{3}
+u\od ut+\sigma\od{\lambda}t & =\sigma\omega & \quad & \mbox{on }\od xt &  & =u,\label{eq:rad-from-cplus:cplus-eqn}\\
+\od{\lambda}t & =\omega & \quad & \mbox{on }\od xt &  & =0.\nonumber 
+\end{alignat}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Boundedness condition can be derived from the first characteristic equation
+ by linearizing it.
+ We consider that the flow at the point of chemical equilibrium can be represent
+ed as a small perturbation of ZND flow with parameter 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ defining the magnitude of the perturbation:
+\begin_inset Formula 
+\begin{align*}
+x_{*} & =\bar{x}_{*}+\epsilon x'(t),\\
+\vec{z}_{*} & =\bar{\vec{z}}(x_{*})+\epsilon\vec{z}'(x_{*},t),
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Quotes eld
+\end_inset
+
+overbar
+\begin_inset Quotes erd
+\end_inset
+
+ denotes ZND quantities and 
+\begin_inset Quotes eld
+\end_inset
+
+prime
+\begin_inset Quotes erd
+\end_inset
+
+ denotes perturbations, subscript 
+\begin_inset Quotes eld
+\end_inset
+
+*
+\begin_inset Quotes erd
+\end_inset
+
+ denotes evaluation at the point of chemical equilibrium.
+ Due to the perturbation of the location of the equilibrium point, 
+\begin_inset Formula $\bar{\vec{z}}(x_{*})$
+\end_inset
+
+ can be expanded into the 
+\begin_inset Formula $\bigO(1)$
+\end_inset
+
+ and 
+\begin_inset Formula $\bigO(\epsilon)$
+\end_inset
+
+ parts:
+\begin_inset Formula 
+\[
+\bar{\vec{z}}\left(x_{*}\right)=\bar{\vec{z}}\left(\bar{x}_{*}+\epsilon x'(t)\right)=\bar{\vec{z}}(\bar{x}_{*})+\epsilon\left.\od{\bar{\vec{z}}}x\right|_{x=\bar{x}_{*}}x'(t).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we linearize the first characteristic equation keeping only 
+\begin_inset Formula $\bigO(\epsilon)$
+\end_inset
+
+ terms:
+\begin_inset Formula 
+\[
+\bar{u}\od{u'}t+\sigma\od{\lambda'}t+\left(\bar{u}\od{\bar{u}}x+\sigma\od{\bar{\lambda}}x\right)\od{x'}t=\sigma\left(\bar{\omega}_{u}u'+\bar{\omega}_{\lambda}\lambda'\right),
+\]
+
+\end_inset
+
+where all quantities are evaluated at the point 
+\begin_inset Formula $\bar{x}_{*}$
+\end_inset
+
+.
+ Now recall that due to the expression for 
+\begin_inset Formula $\omega$
+\end_inset
+
+, it follows that
+\begin_inset Formula 
+\[
+\bar{\omega}_{u},\od{\bar{u}}x,\od{\bar{\lambda}}x\mbox{ go to zero as }x\to\bar{x}_{*}.
+\]
+
+\end_inset
+
+ Therefore, linearized equation simplifies to
+\begin_inset Formula 
+\[
+\bar{u}\od{u'}t+\sigma\od{\lambda'}t=\sigma\bar{\omega}_{\lambda}\lambda',
+\]
+
+\end_inset
+
+and, finally, we assume normal-modes form of the perturbations
+\begin_inset Formula 
+\[
+\vec{z}'=\tilde{\vec{z}}(x)\exp\left(\alpha t\right),
+\]
+
+\end_inset
+
+to obtain the boundedness condition
+\begin_inset Formula 
+\[
+\alpha\left(\bar{u}\tilde{u}+\sigma\tilde{\lambda}\right)-\sigma\bar{\omega}_{\lambda}\tilde{\lambda}=0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Formulation of the stability problem
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ffmnm:form"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Combining material described in the previous sections of this Appendix together,
+ we formulate the full stability problem for the Fickett's detonation analog.
+ The full problem is a boundary-value problem for complex-valued unknowns
+ 
+\begin_inset Formula $\vec{z}'$
+\end_inset
+
+ and eigenvalue 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ for the system of ODEs:
+\begin_inset Formula 
+\begin{equation}
+\od{\vec{z}'}s=-\frac{\bar{D}}{\bar{\omega}}\bar{\mat A}^{-1}\left[-\left(\alpha\mat I+\bar{\mat C}\right)\vec{z}'+\alpha\bar{\vec{b}}\right]\text{ for }0\leq s<1,\label{eq:ffmnm:form:system}
+\end{equation}
+
+\end_inset
+
+subject to the shock boundary conditions
+\begin_inset Formula 
+\begin{equation}
+\vec{z}'=\begin{bmatrix}2\alpha\\
+0
+\end{bmatrix}\text{ at }s=0\label{eq:ffmnm:form:rh-cond}
+\end{equation}
+
+\end_inset
+
+and the boundedness boundary conditions
+\begin_inset Formula 
+\begin{equation}
+H(\alpha)=\alpha\left(\bar{u}\,z_{1}'+\sigma\,z_{2}'\right)-\sigma\bar{\omega}_{\lambda}z_{2}'\to0\text{ as }s\to1.\label{eq:ffmnm:form:bound-cond}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To solve the problem numerically we use the shooting method.
+ We define the computational domain as 
+\begin_inset Formula $[0;1-\text{tol}_{s}]$
+\end_inset
+
+, where 
+\begin_inset Formula $\text{tol}_{s}$
+\end_inset
+
+ is a tolerance determining how close to the chemical equilibrium reaction
+ is.
+\end_layout
+
+\begin_layout Standard
+As 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is not known in advance, for any given set of problem parameters 
+\begin_inset Formula $q$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ we specify a grid of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in some range and solve initial-value problem
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:ffmnm:form:system"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:ffmnm:form:rh-cond"
+
+\end_inset
+
+ and compute 
+\begin_inset Formula $H(\alpha)$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:ffmnm:form:bound-cond"
+
+\end_inset
+
+.
+ By plotting resulting values of 
+\begin_inset Formula $\log\left(1+\abs{H(\alpha)}\right)$
+\end_inset
+
+ on this grid, we can find approximate location 
+\begin_inset Formula $\alpha_{*}$
+\end_inset
+
+ of the minimum of 
+\begin_inset Formula $H(\alpha)$
+\end_inset
+
+.
+ Then using 
+\begin_inset Formula $\alpha_{*}$
+\end_inset
+
+ as an initial guess, we solve optimization problem aiming to zero 
+\begin_inset Formula $\abs{H(\alpha)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We implement the computations using MATLAB which allows us to separate real
+ and imaginary parts of complex-valued expressions automatically.
+ We use solver 
+\family typewriter
+ode45
+\family default
+ with relative and absolute tolerances set to 
+\begin_inset Formula $10^{-10}$
+\end_inset
+
+ to solve initial-value problem for system of ODEs and 
+\family typewriter
+fsolve
+\family default
+ with tolerance 
+\begin_inset Formula $10^{-15}$
+\end_inset
+
+ on the optimization step to find roots of 
+\begin_inset Formula $|H(\alpha)|$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

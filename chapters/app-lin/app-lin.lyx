@@ -93,7 +93,7 @@
 \begin_body
 
 \begin_layout Chapter
-Details of obtaining linearized unsteady problems
+Details of the linearization of the reactive Euler equations
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:app-lin"

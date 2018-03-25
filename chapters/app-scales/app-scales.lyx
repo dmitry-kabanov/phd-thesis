@@ -255,6 +255,16 @@ name "tab:app-scales:scales"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Scales used in the detonation stability research
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1014,6 +1024,16 @@ key "LeeStewart1990"
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:30-2017-03-01:conversion-factors"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Conversion factors for conversion between different scales
+\end_layout
 
 \end_inset
 
