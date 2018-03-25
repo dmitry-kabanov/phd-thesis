@@ -1858,8 +1858,8 @@ where
 \begin_layout Standard
 To process such a time series, an efficient and robust algorithm is required
  such that the stability spectrum is computed as accurately as possible.
- The dynamic mode decomposition (DMD) is at the heart of our postprocessing
- algorithm, which was developed in recent years in the fluid dynamic community
+ At the heart of our postprocessing algorithm is the dynamic mode decomposition
+ (DMD), which was developed in recent years in the fluid-dynamics community
  for analysis of the flows in numerical simulations and physical experiments.
  The DMD is a powerful method that is able to extract spectral information
  from complex data coming from different fluid-dynamic systems.
@@ -1872,10 +1872,10 @@ key "SchmidSesterhenn2008,RowleyEtAl2009,Schmid2010"
 
 .
  The basic introduction to DMD as well as several examples of its use in
- different fields can be found in 
+ different fields can be found in the book by 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "KutzEtAl2016"
+LatexCommand citet
+key "KutzEtAl2016Book"
 
 \end_inset
 
@@ -1888,15 +1888,15 @@ key "KutzEtAl2016"
 
 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "RowleyDawson2017"
 
 \end_inset
 
 , carry information about a single frequency, similar to normal modes.
  One of the important features of the method is that although DMD was developed
- and used originally for fluid flows, the method is data-driven and is not
- coupled to the governing equations of fluid mechanics.
+ and used originally by fluid dynamicists, the method is data-driven and
+ is not coupled to the equations governing fluid flows.
  As such, it finds applications in many other fields besides fluid mechanics
  and can be used in an equation-free manner.
  Modern applications of these method include numerous fields that rely heavily
@@ -1906,40 +1906,62 @@ key "RowleyDawson2017"
 
 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "KutzEtAl2016"
 
 \end_inset
 
-, computational biology 
+, neuroscience 
 \begin_inset CommandInset citation
-LatexCommand citet
-key "KunertEtAl2017"
+LatexCommand citep
+key "BruntonEtAl2016JNM"
 
 \end_inset
 
-,neuroscience, finances and many others.
+, motion detection 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ErichsonDonovan2016"
+
+\end_inset
+
+, biology 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Proctor2016,KunertEtAl2017"
+
+\end_inset
+
+, computational and experimental fluid mechanics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Schmid2011,SchmidEtAl2011,TissotCordierBenardNoack2014,NoackEtAl2016,StankiewiczEtal2016"
+
+\end_inset
+
+, and many others.
+ One can find also an application of DMD to detonation analysis 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MassaEtAl2012"
+
+\end_inset
+
+, although in contrast with the present results, they did the analysis of
+ nonlinear time series.
 \end_layout
 
 \begin_layout Standard
-Some of the recent developments of the method and its various applications
- can be found in 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "SchmidEtAl2011,TuEtAl2014,Jovanovic2014,HematiWilliamsRowley2014,Williams_2015,Proctor2016,ZhangEtAl2017"
-
-\end_inset
-
-.
- A modification of DMD was recently used to characterize chaotic systems
+There were also many attempts to analyze and extend DMD.
  
 \begin_inset CommandInset citation
-LatexCommand citep
-key "BruntonEtAl2017"
+LatexCommand citet
+key "ChenEtAl2012"
 
 \end_inset
 
-.
+ provided a comparison between DMD and Fourier analysis and showed that
+ DMD of any data is unique.
  In 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1948,8 +1970,8 @@ key "Wynn2013"
 \end_inset
 
 , the authors generalized DMD to optimal mode decomposition and showed that
- for noise-free linear systems, DMD correctly identifies system eigenvalues
- and hence is analogous to normal-mode analysis.
+ for a noise-free linear system DMD correctly identifies system eigenvalues
+ and, hence, is analogous to normal-mode analysis.
  Tu with co-authors in 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1979,11 +2001,48 @@ key "Jovanovic2014"
 , a sparsity-promoting version of DMD algorithm is proposed to achieve a
  balance between the quality of the extracted dynamics and the number of
  modes required to represent the dynamics.
- Several researchers considered sensitivity of DMD to the noise in input
- data.
- Duke with co-authors 
+ 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
+key "HematiWilliamsRowley2014"
+
+\end_inset
+
+ proposed a method to apply DMD 
+\begin_inset Quotes eld
+\end_inset
+
+on-the-fly
+\begin_inset Quotes erd
+\end_inset
+
+ for large set of streaming data.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "SayadiSchmidRichecoeurDurox2015"
+
+\end_inset
+
+ developed a modification of DMD for the parameter-driven bifurcation analysis
+ of thermoacoustically unstable systems.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "BruntonEtAl2017"
+
+\end_inset
+
+ developed a variation of DMD algorithm to characterize chaotic dynamical
+ systems.
+\end_layout
+
+\begin_layout Standard
+Several researchers considered sensitivity of DMD to the noise in input
+ data.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
 key "DukeEtAl2011"
 
 \end_inset
@@ -2022,7 +2081,7 @@ key "KouZhang2017"
 
 \end_inset
 
- suggesting to determine relevant modes through its time-dependent amplitude,
+ suggesting to determine relevant modes using time-dependent amplitudes,
  while 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -2040,10 +2099,11 @@ key "Koopman1931,BudisicEtAl2012,Mezic2013,Williams_2015"
 
 , which is an infinite-dimensional linear operator that can be posed for
  a nonlinear dynamical system and whose eigenspectrum serves as an analog
- of normal modes of linear systems 
+ of normal modes of linear systems and, hence, is similar to DMD spectrum.
+ 
 \begin_inset CommandInset citation
-LatexCommand citet
-key "Mezic2005"
+LatexCommand citep
+key "Mezic2005,RowleyEtAl2009"
 
 \end_inset
 
@@ -2064,7 +2124,7 @@ key "ZhangEtAl2017"
 
 \end_inset
 
-.
+, especially when input data are contaminated with noise.
  Hence, we need a way to determine the best approximation with the ultimate
  goal being to find all modes that can also be found by normal-mode analysis.
 \end_layout
