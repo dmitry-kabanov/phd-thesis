@@ -93,7 +93,7 @@
 \begin_body
 
 \begin_layout Chapter
-Software used and developed
+Software and computational environment
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:software"
@@ -101,6 +101,173 @@ name "chap:software"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Most of the computational work in this thesis was conducted using the foundation
+al scientific libraries for the Python
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://www.python.org/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ programming language, which are NumPy
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.numpy.org/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, SciPy
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.scipy.org/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, and Matplotlib
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://matplotlib.org"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ For both linear and nonlinear solvers, subroutines doing heavy number-crunching
+ such as finite-difference computations and Riemann-problem solutions, were
+ written in C and wrapped by Cython using GNU C compiler
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://gcc.gnu.org/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ for compilation.
+ It was crucial to use a distribution for scientific Python which was compiled
+ against high-performant linear-algebra libraries, such as Intel Math Kernel
+ Library
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://software.intel.com/en-us/mkl"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, because our postprocessing algorithm relies on the linear-algebra subroutines.
+ Our distribution was Anaconda Python Distribution
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://www.anaconda.com/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ of versions 4.2 and 5.0.
+\end_layout
+
+\begin_layout Standard
+Normal-mode analysis for the Fickett's model was conducted using MATLAB
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://www.mathworks.com/products/matlab.html"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+As a computational environment, we used workstations working under Ubuntu
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://www.ubuntu.com/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 14.04 and 16.04.
+ Multiparametric studies, such as computation of neutral stability boundaries,
+ were conducted using Shaheen 2 supercomputer of the KAUST Supercomputing
+ Lab.
 \end_layout
 
 \end_body
