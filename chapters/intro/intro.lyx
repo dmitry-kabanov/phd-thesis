@@ -110,7 +110,7 @@ The goal of the present work is to study the stability of ZND solutions
  Detonation model usually consist of a system of conservation laws of fluid
  mechanics complemented by the relations connecting hydrodynamics to thermodynam
 ics and chemistry.
- Mathematically, such a system admits ZND solution—solution which is a
+ Mathematically, such a system admits a ZND solution—solution which is a
 \begin_inset space ~
 \end_inset
 
@@ -959,7 +959,20 @@ reference "eq:intro:cj-znd:znd-momentum"
 
 \end_inset
 
-) can be manipulated to get an equation of the Rayleigh–Michelson line:
+) can be manipulated to get an equation of the Rayleigh–Michel
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+-
+\end_layout
+
+\end_inset
+
+son line:
 \begin_inset Formula 
 \begin{equation}
 p-p_{\text{a}}=\rho_{\text{a}}^{2}D^{2}\left(v_{\text{a}}-v\right),\label{eq:intro:cj-znd:znd:rayleigh-line}
@@ -1503,7 +1516,20 @@ carpet search
 \begin_inset Quotes eld
 \end_inset
 
-heat release–overdrive factor
+heat release vs.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+overdrive factor
 \begin_inset Quotes erd
 \end_inset
 
@@ -1590,8 +1616,8 @@ key "Short1996"
 
 \end_inset
 
- consider detonation in perfect gas with three-step chain-branching kinetics,
- while 
+ considered detonation in a perfect gas with three-step chain-branching
+ kinetics, while 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Gorchkov2007"
@@ -1623,7 +1649,7 @@ key "Kasimov2002,Kasimov2004"
  
 \begin_inset CommandInset citation
 LatexCommand citet*
-key "Stewart2005"
+key "StewartKasimov2005"
 
 \end_inset
 
@@ -1737,7 +1763,8 @@ key "Bourlioux1991"
 
 \end_inset
 
- developed numerical method combining third-order piecewise-parabolic method
+ developed a numerical method that combines the third-order piecewise-parabolic
+ method
 \begin_inset space ~
 \end_inset
 
@@ -1748,7 +1775,7 @@ key "Colella1984"
 
 \end_inset
 
- with shock tracking and adaptive mesh refinement and applied it to the
+ with adaptive mesh refinement and shock tracking and applied it to the
  Erpenbeck–Fickett–Wood problem
 \begin_inset space ~
 \end_inset
@@ -2064,9 +2091,35 @@ reference "eq:intro:system"
 \end_inset
 
  about the ZND solution.
- Linearize the Rankine–Hugoniot conditions.
- The result is a linear system in which unknowns are the perturbations of
- the ZND solution:
+ Linearize the Rankine–Hu
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+-
+\end_layout
+
+\end_inset
+
+go
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+-
+\end_layout
+
+\end_inset
+
+niot conditions.
+ This results in an linear unsteady system in which unknowns are the perturbatio
+ns of the ZND solution:
 \begin_inset Formula 
 \[
 \vec z'_{t}+\mat A(\vec{\bar{z}})z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'=0,
@@ -2141,9 +2194,9 @@ es.
 
 \begin_layout Standard
 Finally, this thesis was saved by discovering that in the fluid dynamic
- community there was developed an approach to extract stability spectrum
- from the time series recorded in numerical simulation or physical experiments.
- The method is called dynamic mode decomposition and was developed in
+ community a new method was developed to extract stability spectra from
+ the time series recorded in numerical simulation or physical experiments.
+ The method is called dynamic mode decomposition
 \begin_inset space ~
 \end_inset
 
