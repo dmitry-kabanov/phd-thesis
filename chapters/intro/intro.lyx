@@ -134,13 +134,23 @@ Why is it important to study detonation stability? During detonation, chemical
 Detonation phenomenon gained attention of the researchers at the end of
  nineteenth century after the series of explosions happened in coal mines
  in France.
- Berthelot, Vieille, Mallard and Le
-\begin_inset space ~
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "MallardChatelier1881"
+
 \end_inset
 
-Chatelier studied the detonation in glass tubes and found that detonation
- distinguishes from combustion in that the speed of propagation is supersonic
- with respect to the initial gaseous mixture.
+ and independently 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BerthelotVieille1882"
+
+\end_inset
+
+ studied the detonation in glass tubes and found that detonation distinguishes
+ from combustion in that the speed of propagation is supersonic with respect
+ to the initial gaseous mixture.
 \end_layout
 
 \begin_layout Standard
@@ -213,6 +223,14 @@ key "Doering1943"
  zone.
  The end of the reaction zone moves at the same speed as the detonation
  front, so that the thickness of the reaction zone is constant.
+ ZND theory is discussed in detail in 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CourantFriedrichs1948,ZeldovichKompaneets1960"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1946,36 +1964,129 @@ name "sec:intro:overview"
 \end_layout
 
 \begin_layout Standard
-In the present work we aim to study the stability of ZND solutions—steady,
- one-dimensional solutions—of different detonation models varying from Fickett's
- detonation analog to models based on reactive Euler equations with one-
- and two-step reaction mechanisms.
- The approach we use to reach our goal is based on combination of the features
- of linear stability analysis via normal modes with direct numerical simulations.
+In the present work we develop a novel method for linear stability analysis
+ of detonations, namely, the stability of steady travelling-wave solutions
+ (to which we refer as ZND solutions in this work) of different detonation
+ models varying from the models based on reactive Euler equations with one-
+ and two-step reaction mechanisms to the Fickett's detonation analog.
+ Here we give an overview of the method.
 \end_layout
 
 \begin_layout Standard
-The high-level description of the method for linear stability analysis that
- we develop in this work is the following:
-\end_layout
-
-\begin_layout Enumerate
-Compute the ZND solution for the given model.
- This step includes the problem of finding the CJ detonation velocity.
-\end_layout
-
-\begin_layout Enumerate
-Linearize the system about the ZND solution.
- Linearize the Rankine–Hugoniot conditions.
- The result is a linear system in which unknowns are the perturbations of
- the ZND solution.
-\begin_inset CommandInset label
-LatexCommand label
-name "enu:intro:overview:linearize"
+We consider one-dimensional flow of a gas which is ignited by a detonation
+ shock with consequent chemical reaction or reactions.
+ Gas is assumed to be inviscid such that the flow is described by a system
+ of hyperbolic balance laws:
+\begin_inset Formula 
+\[
+\vec z_{t}+\vec f(\vec z)_{x}=\vec s(\vec z),
+\]
 
 \end_inset
 
+where 
+\begin_inset Formula $\vec z\in\R^{n}$
+\end_inset
 
+ is a system state, 
+\begin_inset Formula $\vec f\in\R^{n}$
+\end_inset
+
+ the flux function, 
+\begin_inset Formula $\vec s\in\R^{n}$
+\end_inset
+
+ the source term.
+ Rankine–Hugoniot conditions connect the state ahead of the shock with the
+ postshock state.
+ The method is the following:
+\end_layout
+
+\begin_layout Enumerate
+Switch to the system moving with the detonation wave and write equations
+ in a nonconservative form:
+\begin_inset Formula 
+\begin{equation}
+\vec z_{t}+\left(\mat A(\vec{z})-D\mat I\right)\vec z{}_{x}=\vec s(\vec z),\label{eq:intro:system}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $D$
+\end_inset
+
+ is the detonation-wave velocity, 
+\begin_inset Formula $\vec{\mat A}\in\R^{n\times n}$
+\end_inset
+
+ is the Jacobian of 
+\begin_inset Formula $\vec f$
+\end_inset
+
+, 
+\begin_inset Formula $\mat I\in\R^{n}$
+\end_inset
+
+ the identity matrix.
+ Now Rankine–Hugoniot conditions become boundary conditions.
+\end_layout
+
+\begin_layout Enumerate
+Compute the ZND solution for the given model by omitting time dependence:
+\begin_inset Formula 
+\begin{equation}
+\left(\mat A(\vec{\bar{z}})-\bar{D}\mat I\right)\vec{\bar{z}}_{x}=\vec s(\vec{\bar{z}}),\label{eq:intro:eigenvalue}
+\end{equation}
+
+\end_inset
+
+which involves finding speed 
+\begin_inset Formula $\bar{D}$
+\end_inset
+
+, which is an eigenvalue of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:intro:eigenvalue"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Linearize the system 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:intro:system"
+
+\end_inset
+
+ about the ZND solution.
+ Linearize the Rankine–Hugoniot conditions.
+ The result is a linear system in which unknowns are the perturbations of
+ the ZND solution:
+\begin_inset Formula 
+\[
+\vec z'_{t}+\mat A(\vec{\bar{z}})z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'=0,
+\]
+
+\end_inset
+
+where 
+\begin_inset Quotes eld
+\end_inset
+
+prime
+\begin_inset Quotes erd
+\end_inset
+
+ denotes perturbations with 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ being the perturbations of detonation velocity.
 \end_layout
 
 \begin_layout Enumerate
@@ -1988,22 +2099,26 @@ Pose the linear unsteady problem consisting of the linear system along with
 
 \begin_layout Enumerate
 Solve the obtained linear linear unsteady problem numerically recording
- the time series of the perturbations of detonation velocity.
+ the time series of the perturbation of detonation velocity 
+\begin_inset Formula $\psi'$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
-Postprocess the resultant time series to extract the growth rates and frequencie
-s of the perturbations.
+Finally, postprocess the resultant time series to extract the growth rates
+ and frequencies (stability spectrum).
 \end_layout
 
 \begin_layout Standard
 It is crucial that the last step (postprocessing) is done as efficiently
  as possible.
  In the early stages of this work we planned to achieve this goal using
- nonlinear least-squares (NLS) method, however, in the case when the time
- series of the perturbation of detonation velocity contain multiple modes
- growing and decaying at different rates, it is become difficult to choose
- an initial guess required by the NLS method.
+ nonlinear least-squares method, however, in the case when the time series
+ of the perturbation of detonation velocity contain multiple modes growing
+ and decaying at different rates, it is become difficult to choose an initial
+ guess required by the nonlinear method.
  Further research of the methods applicable for extracting of the growth
  rates and frequencies led us to the Prony's method
 \begin_inset space ~
@@ -2012,21 +2127,22 @@ It is crucial that the last step (postprocessing) is done as efficiently
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "WeissMcDonough1963"
+key "Hildebrand1987"
 
 \end_inset
 
-, which is the method (actually predating the invention of the Fourier method)
- for decomposition of the time series into the linear combination of complex-val
-ued exponential functions (with parameters of exponentials being modes).
- However, its application in our work did not yield much success as it was
- not capable of extracting multiple exponentials.
+, which is the method (actually predating the Fourier method) for decomposition
+ of the time series into the linear combination of complex-valued exponential
+ functions.
+ However, its application in our work did not yield much success as we were
+ not able to extract multiple exponential functions due to numerical instabiliti
+es.
 \end_layout
 
 \begin_layout Standard
-Finally, we discovered that in the fluid dynamic community there was developed
- an approach to extract stability spectrum from the time series recorded
- in numerical simulation or physical experiments.
+Finally, this thesis was saved by discovering that in the fluid dynamic
+ community there was developed an approach to extract stability spectrum
+ from the time series recorded in numerical simulation or physical experiments.
  The method is called dynamic mode decomposition and was developed in
 \begin_inset space ~
 \end_inset
@@ -2039,12 +2155,9 @@ key "Schmid2010"
 \end_inset
 
 .
- This is the method that is at the core of our postprocessing algorithm.
-\end_layout
-
-\begin_layout Standard
-We give full details of the method for linear stability analysis developed
- in the present work in Chapter
+ This is the method that is at the core of our postprocessing algorithm
+ and is described in full details along with the solution of a linear unsteady
+ problem in Chapter
 \begin_inset space ~
 \end_inset
 
@@ -2131,6 +2244,52 @@ reference "chap:conclusions"
 \end_inset
 
  we summarize the most significant results achieved in this work.
+\end_layout
+
+\begin_layout Standard
+A set of appendices contains details augmenting the main body of the thesis.
+ Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:app-lin"
+
+\end_inset
+
+ contains the details of the linearization of the reactive Euler equations.
+ Appendix
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:app-scales"
+
+\end_inset
+
+ contains the details of conversion between different scales used by researchers
+ for analysis of detonation stability.
+ Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:ffmnm"
+
+\end_inset
+
+ contains the details of the algorithm used for normal-mode analysis of
+ the Fickett's model.
+ Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:software"
+
+\end_inset
+
+ describes software used to implement the present work.
 \end_layout
 
 \end_body
