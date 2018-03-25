@@ -1751,8 +1751,8 @@ Below we provide the solution of the Riemann problem for our system, which
  in the characteristic form is
 \begin_inset Formula 
 \begin{alignat}{2}
-\od pt & =0 & \quad\text{on  }\od xt & =u-D,\label{eq:fm:char-1}\\
-\od{\lambda}t & =0 & \quad\text{on  }\od xt & =-D,\label{eq:fm:char-2}
+\od pt & =0 & \quad\text{on }\od xt & =u-D,\label{eq:fm:char-1}\\
+\od{\lambda}t & =0 & \quad\text{on }\od xt & =-D,\label{eq:fm:char-2}
 \end{alignat}
 
 \end_inset
@@ -5516,7 +5516,7 @@ To confirm the correctness of the obtained results, we verify the solvers
  It is widely accepted 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Salari2000,Roy2005"
+key "SalariKnupp2000,Roy2005"
 
 \end_inset
 

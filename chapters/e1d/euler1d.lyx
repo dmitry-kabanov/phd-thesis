@@ -4971,7 +4971,7 @@ reference "sec:e1d:algo"
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Roy2004,Roy2005,Salari2000"
+key "SalariKnupp2000,Roy2004,Roy2005"
 
 \end_inset
 
