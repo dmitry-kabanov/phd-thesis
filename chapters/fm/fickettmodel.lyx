@@ -59,7 +59,7 @@
 \use_package stmaryrd 1
 \use_package undertilde 1
 \cite_engine natbib
-\cite_engine_type numerical
+\cite_engine_type authoryear
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -128,7 +128,7 @@ epigraph{A toy problem can be useful in~learning about a~complicated property
 \backslash
  G.~
 \backslash
-citet{Drazin2002}}
+citet[p.~12]{Drazin2002}}
 \end_layout
 
 \end_inset
@@ -331,7 +331,7 @@ key "Fickett1985Introduction"
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Clarke1989,Clarke1993"
+key "ClarkeEtAl1993JCP,ClarkeEtAl1993JEM"
 
 \end_inset
 
@@ -495,7 +495,7 @@ where
 Reaction rate is defined by expression 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Faria2015Theory"
+key "Faria2014,FariaEtAl2015"
 
 \end_inset
 
