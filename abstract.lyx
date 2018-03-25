@@ -197,6 +197,19 @@ status open
 
 
 \backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 addcontentsline{toc}{chapter}{Abstract}
 \end_layout
 

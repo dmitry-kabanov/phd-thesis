@@ -100,6 +100,35 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Acknowledgements}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \align center
 
 \series bold
@@ -143,7 +172,7 @@ uppercase
 
 
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -174,22 +203,6 @@ status collapsed
 \end_inset
 
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{Acknowledgements}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard

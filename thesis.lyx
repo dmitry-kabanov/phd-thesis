@@ -58,7 +58,7 @@
 \usepackage{epigraph}
 % I added (end).
 
-
+\usepackage[all]{hypcap}
 
 
 % Changing chapters' headings and subheadings to size 14
@@ -522,6 +522,39 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Examination Committee Page}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \align center
 \begin_inset ERT
 status open
@@ -565,24 +598,11 @@ status collapsed
 \noindent
 The thesis/dissertation of Your Full Name is approved by the examination
  committee: 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{Examination Committee Page}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -735,8 +755,27 @@ end{center}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
-status collapsed
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -910,6 +949,21 @@ status collapsed
 \end_inset
 
 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection 
+\backslash
+addcontentsline{toc}{chapter}{Table of contents}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -917,7 +971,7 @@ status collapsed
 \newcommand{\contentsname}{\centerline{\textbf{{\large TABLE OF CONTENTS}}}}
 \end_inset
 
- 
+
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
@@ -966,7 +1020,20 @@ status open
 
 
 \begin_inset ERT
-status collapsed
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -979,7 +1046,10 @@ listfigurename}
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1010,7 +1080,20 @@ centerline{LIST OF FIGURES}}
 
 
 \begin_inset ERT
-status collapsed
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -1277,6 +1360,26 @@ filename "chapters/app-lin/app-lin.lyx"
 \begin_inset CommandInset include
 LatexCommand include
 filename "chapters/app-scales/app-scales.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "chapters/app-fmnm/fickettmodelnormalmodes.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "chapters/app-software/software.lyx"
 
 \end_inset
 
