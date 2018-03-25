@@ -163,7 +163,7 @@
 \pdf_colorlinks true
 \pdf_backref section
 \pdf_pdfusetitle false
-\pdf_quoted_options "linkcolor=blue,citecolor=blue"
+\pdf_quoted_options "linkcolor=blue,citecolor=blue,urlcolor=blue"
 \papersize letterpaper
 \use_geometry true
 \use_package amsmath 2
