@@ -4738,6 +4738,175 @@ reference "fig:neutral-curves-gamma=00003D1.1"
  was not mentioned before in the literature, to the best of our knowledge.
 \end_layout
 
+\begin_layout Subsection
+Code verification by convergence study
+\end_layout
+
+\begin_layout Standard
+We verify the correctness of the unsteady linear solver described in Section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:e1d:algo"
+
+\end_inset
+
+ by studying self-convergence of the time series of 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ under grid refinement as the agreement of the observed order of accuracy
+ with the theoretical order of accuracy for solvers for partial differential
+ equations is considered as a demonstration of the correctness of the solver
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Roy2004,Roy2005,Salari2000"
+
+\end_inset
+
+.
+ For this purpose, we run simulations with parameters 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, 
+\begin_inset Formula $E=50$
+\end_inset
+
+, and 
+\begin_inset Formula $\TFinal=20$
+\end_inset
+
+ collecting the sequence of time series 
+\begin_inset Formula $\{\psi'\}_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=1,\dots,8$
+\end_inset
+
+ corresponding to resolutions 
+\begin_inset Formula $\Nhrz$
+\end_inset
+
+ from 20 to 2560 with the refinement factor 2.
+ Then we measure relative errors between the time series
+\begin_inset Formula 
+\[
+E_{i}=\frac{\norm{\psi'_{i}-\psi'_{i-1}}_{\infty}}{\norm{\psi'_{i}}_{\infty}},\quad\text{for }i=2,\dots8,
+\]
+
+\end_inset
+
+and the observed order of accuracy 
+\begin_inset Formula $r_{\text{acc}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{\text{acc},i}=\frac{\log\left(E_{i-1}/E_{i}\right)}{\log2}\quad\text{for }i=3,\dots,8.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:results:verification"
+
+\end_inset
+
+ displays the obtained results where one can see that the observed order
+ of accuracy  
+\begin_inset Formula $r_{\text{acc}}$
+\end_inset
+
+ is indeed five as expected.
+ The last line of the table (for 
+\begin_inset Formula $\Nhrz=2560$
+\end_inset
+
+) shows that 
+\begin_inset Formula $r_{\text{acc}}$
+\end_inset
+
+ decreases due to the accumulation of round-off errors.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verification of the unsteady linear solver by studying self-convergence
+ of the time series of detonation velocity 
+\begin_inset Formula $\psi'$
+\end_inset
+
+ computed for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, 
+\begin_inset Formula $E=50$
+\end_inset
+
+, 
+\begin_inset Formula $\TFinal=20$
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:results:verification"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand input
+filename "figures/verification.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Conclusions
 \end_layout
