@@ -986,6 +986,16 @@ name "fig:e1deig:znd-solution-Q-vs-lambda1"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Total heat release versus steady reaction progress variable
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1372,6 +1382,16 @@ name "fig:eigval-znd-solutions-sub-super"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+ZND subsonic-supersonic profiles
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1493,6 +1513,16 @@ ZND subsonic-subsonic profiles of density
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:fig:eigval-znd-solutions-sub-sub"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+ZND subsonic-subsonic profiles
+\end_layout
 
 \end_inset
 
@@ -1701,6 +1731,16 @@ name "fig:eigval-pert"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Perturbation profiles for the subsonic-supersonic case
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1784,6 +1824,16 @@ Perturbation profiles for the subsonic-subsonic case for
 
 -axes are taken to be 5 for clarity and are much smaller than the reaction
  lengths.
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Perturbation profiles for the subsonic-subsonic case
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2012,6 +2062,17 @@ name "fig:eigval-migration-sub-super"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Growth rate and frequency versus endothermicity for subsonic-supersonic
+ case
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2073,6 +2134,16 @@ Growth rate versus
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:eigval-re-alpha-vs-q_2-together"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Growth rate versus endothermicity for subsonic-subsonic case
+\end_layout
 
 \end_inset
 
@@ -2392,6 +2463,16 @@ name "fig:eigval-neutral-curve"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Neutral stability curves for two-step model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2447,6 +2528,16 @@ Thermicity profiles for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:eigval-themicity"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Thermicity profiles for two-step model
+\end_layout
 
 \end_inset
 

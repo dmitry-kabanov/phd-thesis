@@ -3107,6 +3107,16 @@ name "tab:algorithm:postproc:dmd-synthetic-data"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Results of applying the postprocessing algorithm to synthetic data
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3204,6 +3214,16 @@ reference "eq:algorithm:postproc:example-2"
 \end_inset
 
 ) and DMD (markers).
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of FFT and DMD algorithms for analysis of time series .
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3452,6 +3472,16 @@ name "fig:results:simple:znd-solutions"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Steady solutions for the one-step Euler model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3665,6 +3695,32 @@ name "tab:51-2017-04-09:raw-data-modes"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Unstable spectra for 
+\begin_inset Formula $\gamma=1.2$
+\end_inset
+
+, 
+\begin_inset Formula $Q=50$
+\end_inset
+
+, and 
+\begin_inset Formula $E=35$
+\end_inset
+
+ or 
+\begin_inset Formula $E=40$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3733,6 +3789,16 @@ Computed time series of the perturbation of detonation velocity
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:51-2017-04-09:raw-data-examples"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Computed time series of the perturbation of detonation velocity
+\end_layout
 
 \end_inset
 
@@ -3929,6 +3995,16 @@ Perturbation profiles versus
 
 .
  
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Perturbation profiles for the one-step Euler model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4307,6 +4383,25 @@ name "tab:results:comparison-with-normal-modes"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of the unstable spectra between the present work and the normal-mode
+ results for 
+\begin_inset Formula $\theta=1.2$
+\end_inset
+
+ and 
+\begin_inset Formula $Q=50$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4413,6 +4508,16 @@ key "LeeStewart1990"
 \end_inset
 
  (square markers).
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of neutral stability boundary with normal-mode results
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4577,6 +4682,16 @@ name "fig:neutral-boundary-var-gamma"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Neutral stability for the fundamental mode
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4641,6 +4756,20 @@ name "fig:time-series-for-gamma=00003D1.1"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example time series, in which mode 0 is neutrally stable while mode
+\begin_inset space ~
+\end_inset
+
+1 is unstable
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4693,6 +4822,24 @@ Neutral stability curves for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:neutral-curves-gamma=00003D1.1"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Neutral stability curves for for modes
+\begin_inset space ~
+\end_inset
+
+0 and
+\begin_inset space ~
+\end_inset
+
+1 
+\end_layout
 
 \end_inset
 
@@ -4944,6 +5091,16 @@ Verification of the unsteady linear solver by studying self-convergence
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:results:verification"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Verification of the unsteady linear solver for the one-step Euler model
+\end_layout
 
 \end_inset
 

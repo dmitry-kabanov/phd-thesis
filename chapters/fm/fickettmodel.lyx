@@ -2150,6 +2150,16 @@ name "fig:solution-contact-shock"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Solution of the Riemann problem, shock wave case
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2267,6 +2277,16 @@ Solution of the Riemann problem and characteristics trajectories for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:solution-contact-rarefaction"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Solution of the Riemann problem, rarefaction wave case
+\end_layout
 
 \end_inset
 
@@ -2787,6 +2807,16 @@ name "fig:fm:results:znd:lambda-vs-theta"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+ZND profiles for the Fickett's model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2971,6 +3001,17 @@ name "fig:fm:results:demo:bifurcation"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Time series of the perturbation of detonation velocity for the Fickett's
+ model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3032,6 +3073,16 @@ Perturbation profiles for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:fm:results:linear-pert"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Perturbation profiles for the Fickett's model
+\end_layout
 
 \end_inset
 
@@ -3189,6 +3240,16 @@ name "fig:comparison"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of solutions of linearized and nonlinear problems
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3306,6 +3367,16 @@ Migration of the linear spectrum for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:linear-spectrum"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Migration of the linear spectrum for the Fickett's model
+\end_layout
 
 \end_inset
 
@@ -3545,6 +3616,16 @@ name "fig:neutral-stability"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Neutral stability for the Fickett's model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3572,7 +3653,7 @@ Critical values of activation energy
 \begin_inset Formula $\theta_{\text{crit}}$
 \end_inset
 
- and the frequency of oscillaltion 
+ and the frequency of oscillation 
 \begin_inset Formula $\alpha_{\text{im}}$
 \end_inset
 
@@ -3584,6 +3665,17 @@ Critical values of activation energy
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:fm:results:neutral-stability"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Critical values of activation energy and the frequency of oscillation on
+ the neutral stability boundary for the Fickett's model
+\end_layout
 
 \end_inset
 
@@ -3607,29 +3699,20 @@ filename "figures/neutral-stability-table.tex"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-x
-\end_layout
-
 \begin_layout Subsection
-Comparison of unsteady linear analysis with normal-mode analysis
+Comparison with normal-mode analysis
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:fm:results:comp-nm"
+name "subsec:fm:results:comp-nm-1-1"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 In this subsection we compare the results obtained by unsteady linear analysis
- with the algorithm described above, with the results obtained with normal-mode
- analysis.
+ with the results obtained with normal-mode analysis.
  We conduct normal-mode analysis using approach by 
 \begin_inset CommandInset citation
 LatexCommand citet*
@@ -3674,14 +3757,14 @@ reference "chap:ffmnm"
 .
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 We apply the normal-mode analysis for the problem with parameters: heat
  release 
-\begin_inset Formula $q=1.7$
+\begin_inset Formula $q=4$
 \end_inset
 
  and activation energy 
-\begin_inset Formula $\theta=2.4$
+\begin_inset Formula $\theta=0.95$
 \end_inset
 
 , which is known from unsteady linear computations described above to be
@@ -3701,15 +3784,15 @@ carpet search
 .
  First, we plot the carpet by sampling the boundedness function in a range
  
-\begin_inset Formula $\Re\alpha$
+\begin_inset Formula $\alpha_{\text{re}}\in[0,0.5]$
 \end_inset
 
- 0.03–0.04, 
-\begin_inset Formula $\Im\alpha$
+, 
+\begin_inset Formula $\alpha_{\text{im}}\in[0,1]$
 \end_inset
 
- 0.6–0.7 with resolution 
-\begin_inset Formula $100$
+ with resolution 
+\begin_inset Formula $101$
 \end_inset
 
  points along each axes.
@@ -3725,19 +3808,15 @@ reference "fig:fm:results:comp-nm:carpet"
 \end_inset
 
 .
- As can be seen from the contour plot, there is a well-defined minimum of
- the carpet with coordinates 
-\begin_inset Formula $\alpha_{r}\approx0.03272$
-\end_inset
-
-, 
-\begin_inset Formula $\alpha_{i}\approx0.6626$
+ As can be seen from the contour plot, there is a minimum in the neighborhood
+ of 
+\begin_inset Formula $\alpha=\num{0.03+0.85i}$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -3746,7 +3825,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename results/normal-modes/carpet-contour-fine.pdf
+	filename figures/carpet.eps
 
 \end_inset
 
@@ -3757,7 +3836,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Carpet plot shown approximate location of the eigenvalue 
+Carpet plot showing an approximate location of the eigenvalue 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -3769,43 +3848,49 @@ name "fig:fm:results:comp-nm:carpet"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
+\begin_inset Argument 1
+status open
 
 \begin_layout Plain Layout
-Using the found values of 
-\begin_inset Formula $\alpha_{r}$
+Carpet plot
+\end_layout
+
 \end_inset
 
-, 
-\begin_inset Formula $\alpha_{i}$
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the found values of 
+\begin_inset Formula $\alpha$
 \end_inset
 
  as an initial guess, we now solve the boundary value problem using Newton
  method for the system of equations
 \begin_inset Formula 
 \[
-H_{r}\left(\alpha_{r},\alpha_{i}\right)=0,\quad H_{i}\left(\alpha_{r},\alpha_{i}\right)=0
+H_{\text{re}}\left(\alpha\right)=0,\quad H_{\text{im}}\left(\alpha\right)=0
 \]
 
 \end_inset
 
 on the domain 
-\begin_inset Formula $[0;1-10^{-5}]$
+\begin_inset Formula $[0;1-10^{-3}]$
 \end_inset
 
 .
  We also tried to work on the domain 
-\begin_inset Formula $[0;1-10^{-6}]$
+\begin_inset Formula $[0;1-10^{-4}]$
 \end_inset
 
  with no success because integration from the shock towards the equilibrium
@@ -3827,7 +3912,7 @@ key "Sharpe1997"
 .
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Figure
 \begin_inset space ~
 \end_inset
@@ -3851,26 +3936,26 @@ reference "fig:fm:results:comp-nm:nm-profiles"
  (perturbation of reaction progress variable).
  Figure shows that the eigenfunctions are very smooth, which is expected
  as activation energy 
-\begin_inset Formula $\theta=2.4$
+\begin_inset Formula $\theta=0.95$
 \end_inset
 
  is only slightly larger than critical value 
-\begin_inset Formula $\theta_{\textrm{crit}}=2.35$
+\begin_inset Formula $\theta_{\textrm{crit}}=0.937$
 \end_inset
 
- and there is only one unstable mode, and vanish as the equilibrium part
- of the reaction zone is approached, similarly to what is found in the analysis
- of the reactive Euler equations (
+ and vanish as the equilibrium part of the reaction zone is approached,
+ similarly to what is found in the analysis of the reactive Euler equations
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "LeeStewart1990,Short1998,Sharpe1997"
+key "LeeStewart1990,Sharpe1997,ShortStewart1998"
 
 \end_inset
 
-).
+.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -3879,7 +3964,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename results/normal-modes/normal-modes-profiles.pdf
+	filename figures/pert.eps
 
 \end_inset
 
@@ -3892,11 +3977,11 @@ status open
 \begin_layout Plain Layout
 ZND solution and perturbations obtained via normal-mode analysis with parameters
  
-\begin_inset Formula $q=1.7$
+\begin_inset Formula $q=4$
 \end_inset
 
 , 
-\begin_inset Formula $\theta=2.4$
+\begin_inset Formula $\theta=0.95$
 \end_inset
 
 .
@@ -3907,19 +3992,29 @@ name "fig:fm:results:comp-nm:nm-profiles"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
+\begin_inset Argument 1
+status open
 
 \begin_layout Plain Layout
+ZND solution and perturbations obtained via normal-mode analysis
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Table
 \begin_inset space ~
 \end_inset
@@ -3933,11 +4028,12 @@ reference "tab:fm:results:comp-nm:alpha"
 
  shows the comparison of growth rates and frequencies of perturbations obtained
  via unsteady linear computations and normal-mode computations.
- Results of two different approaches match to five significant digits, which
- verifies the correctness of unsteady linear computations.
+ Results of two different approaches match to two significant digits for
+ growth rates and to three digits for frequencies, which verifies the correctnes
+s of linear unsteady computations.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Float table
 wide false
 sideways false
@@ -3947,7 +4043,7 @@ status open
 \align center
 \begin_inset CommandInset include
 LatexCommand input
-filename "results/normal-modes/unsteady-solver-vs-normal-modes.tex"
+filename "figures/unsteady-solver-vs-normal-modes.tex"
 
 \end_inset
 
@@ -3959,7 +4055,15 @@ filename "results/normal-modes/unsteady-solver-vs-normal-modes.tex"
 
 \begin_layout Plain Layout
 Comparison of the growth rates and frequencies of perturbations obtained
- via unsteady linear computations and normal-mode computations.
+ via unsteady linear computations and normal-mode computations for 
+\begin_inset Formula $q=4$
+\end_inset
+
+, 
+\begin_inset Formula $\theta=0.95$
+\end_inset
+
+.
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:fm:results:comp-nm:alpha"
@@ -3967,6 +4071,13 @@ name "tab:fm:results:comp-nm:alpha"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of the growth rates and frequencies of perturbations obtained
+ via unsteady linear computations and normal-mode computations for the Fickett's
+ model
 \end_layout
 
 \end_inset
@@ -4278,6 +4389,16 @@ name "fig:fm:results:bif-diag-fine"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Bifurcation diagrams for the Fickett's model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4448,6 +4569,17 @@ Bifurcation points and corresponding approximations of the first Feigenbaum
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:feig-const"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Bifurcation points and corresponding approximations of the first Feigenbaum
+ constant
+\end_layout
 
 \end_inset
 
@@ -4921,6 +5053,20 @@ name "fig:fm:results:analysis-theta=0.950"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Analysis of nonlinear dynamics for 
+\begin_inset Formula $\theta=0.95$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4987,6 +5133,20 @@ Analysis of nonlinear dynamics for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:fm:results:analysis-for-theta=1.000"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Analysis of nonlinear dynamics for 
+\begin_inset Formula $\theta=1$
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -5061,6 +5221,20 @@ name "fig:fm:results:analysis-theta=1.005"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Analysis of nonlinear dynamics for 
+\begin_inset Formula $\theta=1.004$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5127,6 +5301,20 @@ Analysis of nonlinear dynamics for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:fm:results:analysis-theta=1.055"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Analysis of nonlinear dynamics for 
+\begin_inset Formula $\theta=1.055$
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -5201,6 +5389,20 @@ name "fig:fm:results:analysis-theta=1.065"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Analysis of nonlinear dynamics for 
+\begin_inset Formula $\theta=1.065$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5267,6 +5469,20 @@ Analysis of nonlinear dynamics for
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:fm:results:analysis-theta=1.089"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Analysis of nonlinear dynamics for 
+\begin_inset Formula $\theta=1.089$
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -5475,6 +5691,16 @@ name "tab:12-2018-03-17:convergence"
 \end_inset
 
 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Convergence study for the linear solver with the Fickett's model
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5543,21 +5769,10 @@ linear stability analysis of detonations to the Fickett's detonation analog
  found that both linear and nonlinear solutions agree with each other for
  early times, when the amplitude of perturbation is small relative to the
  ZND solution.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Also, we compare the growth rates and frequencies of perturbations obtained
+ Also, we compare the growth rates and frequencies of perturbations obtained
  from the results of unsteady linear computations with the results of more
- conventional normal-mode analysis and find agreement to five significant
- digits.
+ conventional normal-mode analysis and find an agreement between two results.
  
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
