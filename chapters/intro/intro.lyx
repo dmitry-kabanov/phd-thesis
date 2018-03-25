@@ -1619,7 +1619,7 @@ on of the boundedness condition of the linear stability theory.
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Tumin2007Stability,Tumin2007Multidomain,Tumin2007IVP"
+key "Tumin2007IVP,Tumin2007Multidomain,Tumin2007Stability"
 
 \end_inset
 
