@@ -33,9 +33,7 @@
 \usepackage{etoolbox}
 \usepackage{sectsty}
 
-% I added (begin).
-%\usepackage{mathptmx}
-
+% Begin (my additions).
 % Font.
 \usepackage{fourier}
 
@@ -58,7 +56,15 @@
 \usepackage{epigraph}
 % I added (end).
 
+% Hyperlinks to the float objects, not to their captions.
 \usepackage[all]{hypcap}
+
+% Better typography.
+\usepackage{microtype}
+
+% End (my additions).
+
+
 
 
 % Changing chapters' headings and subheadings to size 14
@@ -161,7 +167,7 @@
 \pdf_breaklinks false
 \pdf_pdfborder true
 \pdf_colorlinks true
-\pdf_backref section
+\pdf_backref false
 \pdf_pdfusetitle false
 \pdf_quoted_options "linkcolor=blue,citecolor=blue,urlcolor=blue"
 \papersize letterpaper
@@ -596,8 +602,8 @@ status collapsed
 
 \begin_layout Standard
 \noindent
-The thesis/dissertation of Your Full Name is approved by the examination
- committee: 
+The thesis/dissertation of Dmitry Kabanov is approved by the examination
+ committee:
 \end_layout
 
 \begin_layout Standard
@@ -910,6 +916,48 @@ filename "acknowledgment.lyx"
 \end_inset
 
 
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{plain}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+par
+\backslash
+vspace*{.35
+\backslash
+textheight}%
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\backslash
+centering 
+\backslash
+emph{Dedicated to my parents}
+\backslash
+par}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -924,7 +972,14 @@ filename "macros.lyx"
 
 \begin_layout Standard
 \begin_inset ERT
-status collapsed
+status open
+
+\begin_layout Plain Layout
+
+%To make the table of contents, figures, and tables single spaced, as required
+ by the formatting guidelines, pg.
+ 24.
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -936,29 +991,38 @@ begin{onehalfspacing}
 \end_inset
 
 
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-%To make the table of contents, figures, and tables single spaced, as required
- by the formatting guidelines, pg.
- 24.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
-phantomsection 
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+%
 \backslash
 addcontentsline{toc}{chapter}{Table of contents}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pdfbookmark{Table of Contents}{Table of contents}
 \end_layout
 
 \end_inset
@@ -990,23 +1054,62 @@ status open
 
 \begin_layout Plain Layout
 
-%[type=,style=long3col, title=LIST OF ABBREVIATIONS, toctitle=List of Abbreviati
-ons, nonumberlist=true]
+
+\backslash
+printglossary[type=
+\backslash
+acronymtype,
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
-%[type=symbols,style=long3col, title=LIST OF SYMBOLS, toctitle=List of Symbols,
- nonumberlist=true]
+		       style=long3col,
+\end_layout
+
+\begin_layout Plain Layout
+
+               title=
+\backslash
+centerline{LIST OF ABBREVIATIONS},
+\end_layout
+
+\begin_layout Plain Layout
+
+               toctitle=List of Abbreviations,
+\end_layout
+
+\begin_layout Plain Layout
+
+               nonumberlist=true]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+printglossary[type=symbols,
+\end_layout
+
+\begin_layout Plain Layout
+
+style=long3col,
+\end_layout
+
+\begin_layout Plain Layout
+
+title=
+\backslash
+centerline{LIST OF SYMBOLS},
+\end_layout
+
+\begin_layout Plain Layout
+
+toctitle=List of Symbols,
+\end_layout
+
+\begin_layout Plain Layout
+
+nonumberlist=true] 
 \end_layout
 
 \end_inset
@@ -1225,7 +1328,7 @@ status open
 \end_inset
 
 
-\begin_inset Newpage newpage
+\begin_inset Newpage cleardoublepage
 \end_inset
 
 
@@ -1289,8 +1392,6 @@ status open
 
 \begin_layout Plain Layout
 
-\series bold
-\size large
 
 \backslash
 chapter*{
@@ -1304,8 +1405,6 @@ status open
 
 \begin_layout Plain Layout
 
-\series bold
-\size large
 }
 \end_layout
 
@@ -1387,23 +1486,13 @@ filename "chapters/app-software/software.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
+\begin_inset Newpage cleardoublepage
 \end_inset
 
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{onehalfspacing}
 \end_layout
 
-\end_inset
-
- 
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1411,60 +1500,72 @@ status open
 
 
 \backslash
-renewcommand*{
+begin{onehalfspacing} 
 \backslash
-bibname}{
+renewcommand*
+\backslash
+bibname{
 \backslash
 centerline{REFERENCES}}
 \end_layout
 
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset FormulaMacro
-\newcommand{\BIBdecl}{\setlength{\itemsep}{0pt}}
-\end_inset
-
-
-\begin_inset ERT
-status open
-
 \begin_layout Plain Layout
 
-%To control space between bibliography entries
+
+\backslash
+phantomsection
 \end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
- 
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "/home/kabanod/Documents/References/main"
-options "abbrvnat"
-
-\end_inset
-
-
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
 
 \backslash
-addcontentsline{toc}{chapter}{References}
+addcontentsline{toc}{chapter}{References} 
+\backslash
+newcommand{
+\backslash
+BIBdecl}{
+\backslash
+setlength{
+\backslash
+itemsep}{0pt}}%To control space between bibliography entries
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand*{
+\backslash
+doi}[1]{
+\backslash
+href{https://doi.org/
+\backslash
+detokenize{#1}}{doi: 
+\backslash
+detokenize{#1}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+bibliographystyle{mythesis}
 \end_layout
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "main"
+
+\end_inset
+
+
 \begin_inset ERT
 status open
 
