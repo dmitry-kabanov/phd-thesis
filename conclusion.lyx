@@ -114,8 +114,8 @@ Summary
 \end_layout
 
 \begin_layout Standard
-In this thesis, we developed and implemented a new approach to study stability
- of steady-state solutions of detonation models.
+In this thesis, we developed and implemented a new method to study stability
+ of steady solutions of detonation models.
  Our approach is based on the linearization of the governing equations written
  in a shock-attached frame and numerical solution of the linearized problem.
  Resultant time series of detonation velocity are postprocessed using novel
@@ -292,8 +292,8 @@ key "Aslam2009,Romick2012"
 \end_layout
 
 \begin_layout Enumerate
-Application of the method to detonation models with nonideal equation of
- state
+Application of the method to detonation models for explosives with non-ideal
+ equation of state
 \begin_inset space ~
 \end_inset
 
@@ -343,8 +343,8 @@ key "ShortStewart1998,Stewart2006"
 \end_layout
 
 \begin_layout Enumerate
-Thorough investigation of the nonlinear dynamics of the Fickett's model
- with reaction-rate expression
+Thorough investigation of nonlinear dynamics of the Fickett's model with
+ reaction-rate expression
 \begin_inset space ~
 \end_inset
 

@@ -1616,8 +1616,8 @@ key "Short1996"
 
 \end_inset
 
- considered detonation in a perfect gas with three-step chain-branching
- kinetics, while 
+ considered detonation in a calorically perfect gas with three-step chain-branch
+ing kinetics, while 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Gorchkov2007"
@@ -2051,7 +2051,7 @@ where
 \begin_inset Formula $\vec{f}$
 \end_inset
 
-, 
+, and 
 \begin_inset Formula $\mat I\in\R^{n}$
 \end_inset
 
@@ -2063,7 +2063,7 @@ where
 Compute the ZND solution for the given model by omitting time dependence:
 \begin_inset Formula 
 \begin{equation}
-\left(\mat A(\vec{\bar{z}})-\bar{D}\mat I\right)\vec{\bar{z}}_{x}=\vec{s}(\vec{\bar{z}}),\label{eq:intro:eigenvalue}
+\left(\mat A(\vec{\bar{z}})-\bar{D}\mat I\right)\od{\vec{\bar{z}}}x=\vec{s}(\vec{\bar{z}}),\label{eq:intro:eigenvalue}
 \end{equation}
 
 \end_inset
@@ -2187,9 +2187,8 @@ key "Hildebrand1987"
 , which is the method (actually predating the Fourier method) for decomposition
  of the time series into the linear combination of complex-valued exponential
  functions.
- However, its application in our work did not yield much success as we were
- not able to extract multiple exponential functions due to numerical instabiliti
-es.
+ However, its application did not yield much success as we were not able
+ to extract multiple exponential functions due to numerical instabilities.
 \end_layout
 
 \begin_layout Standard
@@ -2208,9 +2207,8 @@ key "Schmid2010"
 \end_inset
 
 .
- This is the method that is at the core of our postprocessing algorithm
- and is described in full details along with the solution of a linear unsteady
- problem in Chapter
+ It is at the core of our postprocessing algorithm and is described in details
+ along with the solution of a linear unsteady problem in Chapter
 \begin_inset space ~
 \end_inset
 

@@ -1035,7 +1035,7 @@ name "sec:fm:znd"
 \end_layout
 
 \begin_layout Standard
-Equations
+System
 \begin_inset space ~
 \end_inset
 
@@ -1147,8 +1147,7 @@ quadratic equation for
 
 \end_inset
 
-and we take the largest root (in absolute value) to satisfy Rankine–Hugoniot
- conditions
+and we take the root that satisfies Rankine–Hugoniot conditions
 \begin_inset space ~
 \end_inset
 
@@ -1596,7 +1595,7 @@ eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 
 \end_inset
 
-, we use second-order Godunov-type method with MUSCL flux limiter
+, we use second-order Godunov-type method with the MUSCL flux limiter
 \begin_inset space ~
 \end_inset
 
@@ -1715,7 +1714,7 @@ Once all the local Riemann problem is solved over the whole grid, fluxes
 \end_inset
 
  could be computed.
- On the right boundary the right-most flux 
+ On the right boundary the flux 
 \begin_inset Formula $F_{N+1/2}$
 \end_inset
 
@@ -2206,11 +2205,11 @@ reference "fig:solution-contact-rarefaction"
 \begin_inset Formula $\left(u_{M}=5,\lambda_{R}\right)$
 \end_inset
 
-, inside the rarefaction wave 
+, inside the rarefaction wave it is 
 \begin_inset Formula $\left(u=x/t+D,\lambda_{R}\right)$
 \end_inset
 
-, and to the right of the head of the rarefaction solution is 
+, and to the right of the head of the rarefaction solution solution is 
 \begin_inset Formula $\left(u_{R},\lambda_{R}\right)$
 \end_inset
 
@@ -3929,11 +3928,11 @@ reference "fig:fm:results:comp-nm:nm-profiles"
 \begin_inset Formula $u'$
 \end_inset
 
- (perturbation of velocity) and 
+ and 
 \begin_inset Formula $\lambda'$
 \end_inset
 
- (perturbation of reaction progress variable).
+.
  Figure shows that the eigenfunctions are very smooth, which is expected
  as activation energy 
 \begin_inset Formula $\theta=0.95$
@@ -5788,10 +5787,10 @@ Also, we verified the computations by convergence study and found an agreement
 \end_layout
 
 \begin_layout Standard
-In summary, the application of our approach to the Fickett's detonation
- analog shows that it is a viable alternative to the analysis by normal
- modes that allows to avoid imposing radiation condition on the downstream
- boundary of the reaction zone, while giving an
+In summary, the application of our approach to the Fickett's model shows
+ that it is a viable alternative to the analysis by normal modes that allows
+ to avoid imposing radiation condition on the downstream boundary of the
+ reaction zone, while giving an
 \begin_inset space ~
 \end_inset
 

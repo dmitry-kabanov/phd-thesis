@@ -170,9 +170,10 @@ target "https://matplotlib.org"
 \end_inset
 
 .
- For both linear and nonlinear solvers, subroutines doing heavy number-crunching
- such as finite-difference computations and Riemann-problem solutions, were
- written in C and wrapped by Cython using GNU C compiler
+ For both linear and nonlinear solvers subroutines approximating spatial
+ derivatives and subroutines solving Riemann problem for the Fickett's model
+ for nonlinear solver, were written in C and wrapped by Cython using GNU
+ C compiler
 \begin_inset Foot
 status open
 
@@ -264,7 +265,7 @@ target "https://www.ubuntu.com/"
 
 \end_inset
 
- 14.04 and 16.04.
+ operating system.
  Multiparametric studies, such as computation of neutral stability boundaries,
  were conducted using Shaheen 2 supercomputer of the KAUST Supercomputing
  Lab.

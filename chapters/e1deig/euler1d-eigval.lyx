@@ -840,15 +840,17 @@ and therefore,
 \begin_inset Formula $\lambdaZnd_{2}$
 \end_inset
 
- monotonically increase towards the ends of the reaction zone, which follows
- from the reaction rate expressions 
+ monotonically increase towards the end of the reaction zone, as reaction-rate
+ expression of the first reaction is nonnegative, and rate of the second
+ reaction is nonnengative as well as can be seen from the reaction-rate
+ expressions 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:e1deig:reaction-rates"
 
 \end_inset
 
- evaluate for the steady state.
+ evaluated for the steady state.
  Hence, equilibrium heat release 
 \begin_inset Formula $Q_{\text{e}}=Q_{1}+Q_{2}$
 \end_inset
@@ -955,6 +957,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../../../euler1d-eigval/tasks/04-2017-09-01-impossibility-of-equilibrium-solution/_assets/Q-vs-lambda_1.pdf
+	width 4in
 
 \end_inset
 
@@ -2210,7 +2213,7 @@ n shock.
 \begin_layout Standard
 As a final note on this section, we give the reader an idea of the computational
  requirements for these calculations.
- For both subsonic-supersonic and subsonic-subsonic cases, the number of
+ For both cases, subsonic-supersonic and subsonic-subsonic, the number of
  values of 
 \begin_inset Formula $Q_{2}$
 \end_inset
@@ -2619,15 +2622,16 @@ reference "fig:eigval-neutral-curve"
  Thus, a possible reason for the increased instability is this sharper profile
  of the thermicity function that makes for a more effective resonant cavity
  for the perturbations between the shock and the sonic point.
- Recall that the thermicity is a source term in the equation for the forward
- characteristics, 
+ Recall that the thermicity is a source term in the equation for the right-going
+ characteristics 
 \begin_inset Formula $\dot{p}+\rho c\dot{u}=\rho c^{2}\left(\sigma_{1}\omega_{1}+\sigma_{2}\omega_{2}\right)$
 \end_inset
 
 .
  As such it could be looked at as a measure of how the chemical reactions
- amplify the forward compression waves that influence the lead shock.
- The larger the magnitude of thermicity, the stronger the effect.
+ amplify the compression waves that influence the lead shock.
+ The larger the magnitude of thermicity, the stronger the amplification
+ effect.
  The sharpness of the thermicity function reflects in the sensitivity of
  this influence on the changes in the local state in the reaction zone,
  the stronger sensitivity implying more instability.

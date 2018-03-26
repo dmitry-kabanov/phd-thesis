@@ -553,7 +553,11 @@ a
 \end_inset
 
  the ambient (upstream) state.
- Note that in (
+ Note that in Eq.
+\begin_inset space ~
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:s-A0"
@@ -978,16 +982,18 @@ C(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}) & \frac{d\bar{p}}{dx} & \gamma\fra
 \end_layout
 
 \begin_layout Standard
-The linearization of the Rankine–Hugoniot conditions and the shock-evolution
- equation yields: 
-\begin_inset Formula 
-\begin{equation}
-p'_{\text{s}}=\frac{4v_{\text{a}}\bar{M}}{\gamma+1}M',\quad v'_{\text{s}}=-\frac{4\gamma p_{\text{a}}}{\left(\gamma+1\right)\bar{M}^{3}}M',\quad U'_{\text{s}}=\bar{M}v_{\text{s}}'+\bar{v}_{\text{s}}M',\quad\rho_{\text{s}}'=-\frac{v'_{\text{s}}}{\bar{v}_{\text{s}}^{2}},\quad\lambda_{\text{s}}'=0,\label{RH-conditions-linearized}
-\end{equation}
-
+The linearization of the shock-evolution equation
+\begin_inset space ~
 \end_inset
 
 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:shock-change"
+
+\end_inset
+
+ yields: 
 \begin_inset Formula 
 \begin{equation}
 \frac{dM'}{dt}=s',\label{shock-evolution-equation}
@@ -1027,7 +1033,27 @@ with all the spatially-dependent quantities on the right-hand sides of
 \begin_inset Formula $A'_{\text{s}}$
 \end_inset
 
- evaluated at the shock.
+ evaluated at the shock, and the linearization of the Rankine–Hugoniot condition
+s
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "RH-conditions"
+
+\end_inset
+
+ results in following relations:
+\begin_inset Formula 
+\begin{equation}
+p'_{\text{s}}=\frac{4v_{\text{a}}\bar{M}}{\gamma+1}M',\quad v'_{\text{s}}=-\frac{4\gamma p_{\text{a}}}{\left(\gamma+1\right)\bar{M}^{3}}M',\quad U'_{\text{s}}=\bar{M}v_{\text{s}}'+\bar{v}_{\text{s}}M',\quad\rho_{\text{s}}'=-\frac{v'_{\text{s}}}{\bar{v}_{\text{s}}^{2}},\quad\lambda_{\text{s}}'=0.\label{RH-conditions-linearized}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1502,7 +1528,7 @@ key "HenrickEtAl2006"
 \end_layout
 
 \begin_layout Standard
-Once the spatial derivatives are approximated, 
+Once the spatial derivatives are approximated over the grid, 
 \begin_inset Formula $\widehat{L}$
 \end_inset
 
@@ -1590,7 +1616,7 @@ Once
 \begin_inset Formula $\widehat{s}(\bar{z},z')$
 \end_inset
 
- are evaluated on the whole grid, system (
+ are evaluated on the whole grid, the system (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:numalg:gov"
@@ -2131,8 +2157,7 @@ key "ZhangEtAl2017"
 
 \begin_layout Standard
 The remainder of this section proceeds as follows.
- First, for completeness, we present a brief generic description of the
- DMD algorithm.
+ First, for completeness, we give a brief generic description of DMD.
  Then, we describe how we form input data for the DMD algorithm from the
  time series 
 \begin_inset CommandInset ref
