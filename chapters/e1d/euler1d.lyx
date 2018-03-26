@@ -447,7 +447,7 @@ reference "eq:e1d:reaction-1"
  Then the transformation to the shock-attached frame is defined by equations
 \begin_inset Formula 
 \begin{align*}
-x & =x^{\ell}-x_{\mathrm{s}}^{\ell}=x^{\ell}-\int_{0}^{t^{\ell}}D(\tau)\,d\tau,\\
+x & =x^{\ell}-x_{\mathrm{s}}^{\ell}=x^{\ell}-\int_{0}^{t^{\ell}}D(\tau)\,\dd\tau,\\
 t & =t^{\ell},
 \end{align*}
 
@@ -506,7 +506,7 @@ key "TaylorKasimovStewart2009"
  by specializing it to one dimension: 
 \begin_inset Formula 
 \begin{equation}
-\frac{dM}{dt}=s,\label{eq:shock-change}
+\od Mt=s,\label{eq:shock-change}
 \end{equation}
 
 \end_inset
@@ -886,11 +886,11 @@ Linear unsteady problem
 
 \begin_layout Standard
 Next, we introduce the vector of state variables 
-\begin_inset Formula $z=(\rho,u,p,\lambda)^{\mathrm{T}}$
+\begin_inset Formula $\vec z=(\rho,u,p,\lambda)^{\mathrm{T}}$
 \end_inset
 
  and linearize it as well as the shock speed as 
-\begin_inset Formula $z(x,t)=\bar{z}(x)+\epsilon z'(x,t)$
+\begin_inset Formula $\vec z(x,t)=\vec{\bar{z}}(x)+\epsilon\vec z'(x,t)$
 \end_inset
 
 , 
@@ -932,7 +932,7 @@ reference "eq:e1d:reaction"
 ), we obtain
 \begin_inset Formula 
 \begin{equation}
-z'_{t}+A(\bar{z})z'_{x}+B(\bar{z})z'-\frac{d\bar{z}}{dx}\psi'=0,\label{linearized-system}
+\vec z'_{t}+\mat A(\bar{z})\vec z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'=0,\label{linearized-system}
 \end{equation}
 
 \end_inset
@@ -944,10 +944,10 @@ A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0\\
 0 & \bar{U} & 1/\bar{\rho} & 0\\
 0 & \gamma\bar{p} & \bar{U} & 0\\
 0 & 0 & 0 & \bar{U}
-\end{bmatrix},\quad B=\begin{bmatrix}\frac{d\bar{u}}{dx} & \frac{d\bar{\rho}}{dx} & 0 & 0\\[0.3em]
--\frac{1}{\bar{\rho}^{2}}\frac{d\bar{p}}{dx} & \frac{d\bar{u}}{dx} & 0 & 0\\[0.3em]
-C(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}) & \frac{d\bar{p}}{dx} & \gamma\frac{d\bar{u}}{dx}+C\bar{\rho}\bar{\omega}_{p} & C\bar{\rho}\bar{\omega}_{\lambda}\\[0.3em]
--\bar{\omega}_{\rho} & \frac{d\bar{\lambda}}{dx} & -\bar{\omega}_{p} & -\bar{\omega}_{\lambda}
+\end{bmatrix},\quad B=\begin{bmatrix}\od{\bar{u}}x & \od{\bar{\rho}}x & 0 & 0\\[0.3em]
+-\frac{1}{\bar{\rho}^{2}}\od{\bar{p}}x & \od{\bar{u}}x & 0 & 0\\[0.3em]
+C(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}) & \od{\bar{p}}x & \gamma\od{\bar{u}}x+C\bar{\rho}\bar{\omega}_{p} & C\bar{\rho}\bar{\omega}_{\lambda}\\[0.3em]
+-\bar{\omega}_{\rho} & \od{\bar{\lambda}}x & -\bar{\omega}_{p} & -\bar{\omega}_{\lambda}
 \end{bmatrix},\label{eq:AB}
 \end{equation}
 
@@ -996,7 +996,7 @@ reference "eq:shock-change"
  yields: 
 \begin_inset Formula 
 \begin{equation}
-\frac{dM'}{dt}=s',\label{shock-evolution-equation}
+\od{M'}t=s',\label{shock-evolution-equation}
 \end{equation}
 
 \end_inset
@@ -1020,7 +1020,7 @@ A_{0}'=\frac{2}{\gamma+1}\frac{3v_{\text{a}}\bar{M}^{2}-\gamma p_{\text{a}}}{\ba
 
 \begin_inset Formula 
 \begin{equation}
-A_{\text{s}}'=\left.\left[\bar{\rho}\frac{d\bar{u}}{dx}\left(\gamma\left(\bar{p}v'+\bar{v}p'\right)-2\bar{U}U'\right)+\left(\bar{c}^{2}-\bar{U}^{2}\right)\frac{d\bar{u}}{dx}\rho'+\bar{\rho}\left(\bar{c}^{2}-\bar{U}^{2}\right)u'_{x}\right]\right|_{\text{s}}
+A_{\text{s}}'=\left.\left[\bar{\rho}\od{\bar{u}}x\left(\gamma\left(\bar{p}v'+\bar{v}p'\right)-2\bar{U}U'\right)+\left(\bar{c}^{2}-\bar{U}^{2}\right)\od{\bar{u}}x\rho'+\bar{\rho}\left(\bar{c}^{2}-\bar{U}^{2}\right)u'_{x}\right]\right|_{\text{s}}
 \end{equation}
 
 \end_inset
@@ -1152,7 +1152,7 @@ reference "eq:e1d:Arrhenius"
  using 
 \begin_inset Formula 
 \begin{equation}
-\mathcal{L}=\lceil I\rceil\text{ with }I=\int_{0}^{1-\tolLambda}\frac{\UZnd}{k\left(1-\lambdaZnd\right)\exp\left(-\rhoZnd E/\pZnd\right)}\dd\lambdaZnd,
+\mathcal{L}=\lceil I\rceil\text{ with }I=\int_{0}^{1-\tolLambda}\frac{\UZnd}{k\left(1-\lambdaZnd\right)\exp\left(-\rhoZnd E/\pZnd\right)}\,\dd\lambdaZnd,
 \end{equation}
 
 \end_inset
@@ -1345,22 +1345,22 @@ reference "shock-evolution-equation"
 ) to a system of ODEs: 
 \begin_inset Formula 
 \begin{align}
-\frac{dz'_{i}}{dt} & =-\widehat{L}(\bar{z},z'),\quad i=1,\dots,N-1,\label{eq:numalg:gov}\\
-\frac{dM'}{dt} & =\widehat{s}\left(\bar{z},z'\right),\label{eq:numalg:sheveq}
+\od{z'_{i}}t & =-\widehat{L}(\vec{\bar{z}},\vec z'),\quad i=1,\dots,N-1,\label{eq:numalg:gov}\\
+\od{M'}t & =\widehat{s}\left(\vec{\bar{z}},\vec z'\right),\label{eq:numalg:sheveq}
 \end{align}
 
 \end_inset
 
 where 
-\begin_inset Formula $\widehat{L}(\bar{z},z')$
+\begin_inset Formula $\widehat{L}(\vec{\bar{z}},\vec z')$
 \end_inset
 
  and 
-\begin_inset Formula $\widehat{s}(\bar{z},z')$
+\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec z')$
 \end_inset
 
  are approximations of 
-\begin_inset Formula $L(\bar{z},z',z'_{x})=A(\bar{z})z'_{x}+B(\bar{z})z'-\frac{d\bar{z}}{dx}\psi'$
+\begin_inset Formula $L(\vec{\bar{z}},\vec z',\vec z'_{x})=\mat A(\bar{\vec z})\vec z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'$
 \end_inset
 
  from 
@@ -1371,7 +1371,7 @@ reference "linearized-system"
 \end_inset
 
  and 
-\begin_inset Formula $s(\bar{z},z',z'_{x})$
+\begin_inset Formula $s(\vec{\bar{z}},\vec z',\vec z'_{x})$
 \end_inset
 
  from 
@@ -1535,7 +1535,7 @@ Once the spatial derivatives are approximated over the grid,
  is found using the global Lax–Friedrichs flux: 
 \begin_inset Formula 
 \begin{equation}
-\widehat{L}(\bar{z},z')=L\left(\bar{z},z',\frac{z_{x}'^{-}+z_{x}'^{+}}{2}\right)-\alpha\frac{z_{x}'^{+}-z_{x}'^{-}}{2},\label{eq:algorithm:lf-flux}
+\widehat{L}(\vec{\bar{z}},\vec z')=L\left(\vec{\bar{z}},\vec z',\frac{\vec z_{x}'^{-}+\vec z_{x}'^{+}}{2}\right)-\alpha\frac{\vec z_{x}'^{+}-\vec z_{x}'^{-}}{2},\label{eq:algorithm:lf-flux}
 \end{equation}
 
 \end_inset
@@ -1553,10 +1553,14 @@ where
 \end_inset
 
  is the largest eigenvalue of 
-\begin_inset Formula $A\left(\bar{z}\right)$
+\begin_inset Formula $\mat A\left(\vec{\bar{z}}\right)$
 \end_inset
 
- Eq.
+ in
+\begin_inset space ~
+\end_inset
+
+Eq.
  
 \begin_inset CommandInset ref
 LatexCommand eqref
@@ -1590,7 +1594,7 @@ reference "eq:algorithm:lf-flux"
 \end_inset
 
 , 
-\begin_inset Formula $\widehat{s}(\bar{z},z')$
+\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec z')$
 \end_inset
 
  is found using the approximation of 
@@ -1609,11 +1613,11 @@ reference "eq:numalg:z_x-N"
 
 \begin_layout Standard
 Once 
-\begin_inset Formula $\widehat{L}(\bar{z},z')$
+\begin_inset Formula $\widehat{L}(\vec{\bar{z}},\vec z')$
 \end_inset
 
  and 
-\begin_inset Formula $\widehat{s}(\bar{z},z')$
+\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec z')$
 \end_inset
 
  are evaluated on the whole grid, the system (
@@ -1703,7 +1707,7 @@ reference "subsec:algorithm:postproc"
 
 \begin_layout Standard
 We also need to provide initial conditions for 
-\begin_inset Formula $z'$
+\begin_inset Formula $\vec z'$
 \end_inset
 
  and 
@@ -2020,7 +2024,7 @@ rich
  In 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Jovanovic2014"
+key "JovanovicEtAl2014"
 
 \end_inset
 
@@ -2179,13 +2183,13 @@ Suppose that we have a time series of the snapshots of the state of some
  dynamical system: 
 \begin_inset Formula 
 \begin{equation}
-x=[x_{0},\dots,x_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
+[\vec x_{0},\dots,\vec x_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $x_{i}\in\R^{m}$
+\begin_inset Formula $\vec x_{i}\in\R^{m}$
 \end_inset
 
  for all 
@@ -2193,7 +2197,7 @@ where
 \end_inset
 
 , and 
-\begin_inset Formula $x_{i}$
+\begin_inset Formula $\vec x_{i}$
 \end_inset
 
  being a snapshot of the system state.
@@ -2203,13 +2207,13 @@ where
 
 .
  Our purpose is to find an eigendecomposition of a linear operator 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
  such that 
 \begin_inset Formula 
 \[
-x_{k}=Ax_{k-1}
+\vec x_{k}=\mat A\vec x_{k-1}
 \]
 
 \end_inset
@@ -2220,7 +2224,7 @@ for all
 
  at least in the least-squares sense.
  The eigenvalues of 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
  contain the information on the growth/decay rates and frequencies of oscillatio
@@ -2231,35 +2235,35 @@ ns that, when combined, represent the time evolution of the dynamical system.
 To proceed, we define matrices 
 \begin_inset Formula 
 \begin{equation}
-X=[x_{0},\dots,x_{n-1}]^{\T},\quad Y=[x_{1},\dots,x_{n}]^{\T}\label{eq:algorithm:postproc:input-matrices}
+\mat X=[x_{0},\dots,x_{n-1}]^{\T},\quad\mat Y=[x_{1},\dots,x_{n}]^{\T}\label{eq:algorithm:postproc:input-matrices}
 \end{equation}
 
 \end_inset
 
 such that 
-\begin_inset Formula $Y=AX$
+\begin_inset Formula $\mat Y=\mat A\mat X$
 \end_inset
 
  and thus 
-\begin_inset Formula $A=YX^{\dagger}$
+\begin_inset Formula $\mat A=\mat Y\mat X^{\dagger}$
 \end_inset
 
 , where 
-\begin_inset Formula $X^{\dagger}$
+\begin_inset Formula $\mat X^{\dagger}$
 \end_inset
 
  is a Moore–Penrose pseudoinverse of 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
 .
  Although the problem is formally solved now, we cannot just do the eigendecompo
 sition of 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
  because 
-\begin_inset Formula $A\in\R^{m\times m}$
+\begin_inset Formula $\mat A\in\R^{m\times m}$
 \end_inset
 
  with 
@@ -2268,7 +2272,7 @@ sition of
 
  generally being large.
  Instead, a low-rank approximation matrix 
-\begin_inset Formula $\tilde{A}$
+\begin_inset Formula $\tilde{\mat A}$
 \end_inset
 
  and its eigendecomposition are found.
@@ -2288,27 +2292,27 @@ reference "eq:algorithm:postproc:input-matrices"
 
 \begin_layout Enumerate
 Compute reduced singular value decomposition (SVD) of 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
 : 
 \begin_inset Formula 
 \begin{equation}
-X=U\Sigma V^{\T},\label{eq:algorithm:postproc:svd}
+\mat X=\mat U\mat{\Sigma}\mat V^{\T},\label{eq:algorithm:postproc:svd}
 \end{equation}
 
 \end_inset
 
 with matrices 
-\begin_inset Formula $U$
+\begin_inset Formula $\mat U$
 \end_inset
 
  and 
-\begin_inset Formula $V$
+\begin_inset Formula $\mat V$
 \end_inset
 
  having orthonormal columns and 
-\begin_inset Formula $\Sigma$
+\begin_inset Formula $\mat{\Sigma}$
 \end_inset
 
  being diagonal with singular values 
@@ -2325,15 +2329,15 @@ with matrices
 
 \begin_layout Enumerate
 Truncate 
-\begin_inset Formula $U$
+\begin_inset Formula $\mat U$
 \end_inset
 
 , 
-\begin_inset Formula $\Sigma$
+\begin_inset Formula $\mat{\Sigma}$
 \end_inset
 
 , and 
-\begin_inset Formula $V$
+\begin_inset Formula $\mat V$
 \end_inset
 
  to rank 
@@ -2341,15 +2345,15 @@ Truncate
 \end_inset
 
 , which yields matrices 
-\begin_inset Formula $U_{r}$
+\begin_inset Formula $\mat U_{r}$
 \end_inset
 
 , 
-\begin_inset Formula $\Sigma_{r}$
+\begin_inset Formula $\mat{\Sigma}_{r}$
 \end_inset
 
 , and 
-\begin_inset Formula $V_{r}$
+\begin_inset Formula $\mat V_{r}$
 \end_inset
 
 .
@@ -2358,7 +2362,7 @@ Truncate
 \end_inset
 
  in 
-\begin_inset Formula $\Sigma$
+\begin_inset Formula $\mat{\Sigma}$
 \end_inset
 
  with 
@@ -2366,7 +2370,7 @@ Truncate
 \end_inset
 
  are due to the noise in matrix 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
 .
@@ -2375,13 +2379,13 @@ Truncate
 
 \begin_layout Enumerate
 Compute auxiliary matrix 
-\begin_inset Formula $\tilde{A}\in\R^{r\times r}$
+\begin_inset Formula $\tilde{\mat A}\in\R^{r\times r}$
 \end_inset
 
 : 
 \begin_inset Formula 
 \[
-\tilde{A}=U_{r}^{\T}AU_{r}=U_{r}^{\T}YX^{\dagger}U_{r}=U_{r}^{\T}YV_{r}\Sigma_{r}^{-1}U_{r}^{\T}U_{r}=U_{r}^{\T}YV_{r}\Sigma_{r}^{-1}.
+\tilde{\mat A}=\mat U_{r}^{\T}\mat A\mat U_{r}=\mat U_{r}^{\T}\mat Y\mat X^{\dagger}\mat U_{r}=\mat U_{r}^{\T}\mat Y\mat V_{r}\mat{\Sigma}_{r}^{-1}\mat U_{r}^{\T}\mat U_{r}=\mat U_{r}^{\T}\mat Y\mat V_{r}\mat{\Sigma}_{r}^{-1}.
 \]
 
 \end_inset
@@ -2391,23 +2395,23 @@ Compute auxiliary matrix
 
 \begin_layout Enumerate
 Find eigendecomposition of 
-\begin_inset Formula $\tilde{A}$
+\begin_inset Formula $\tilde{\mat A}$
 \end_inset
 
 : 
 \begin_inset Formula 
 \[
-\tilde{A}W=W\Lambda,
+\tilde{\mat A}\mat W=\mat W\mat{\Lambda},
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $\Lambda=\diag(\lambda_{1},\dots,\lambda_{r})$
+\begin_inset Formula $\mat{\Lambda}=\diag(\lambda_{1},\dots,\lambda_{r})$
 \end_inset
 
  is the matrix of eigenvalues, 
-\begin_inset Formula $W$
+\begin_inset Formula $\mat W$
 \end_inset
 
  the matrix of eigenvectors.
@@ -2416,24 +2420,24 @@ where
 
 \begin_layout Enumerate
 Find truncated eigendecomposition of 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
 .
  All eigenvalues of 
-\begin_inset Formula $\tilde{A}$
+\begin_inset Formula $\tilde{\mat A}$
 \end_inset
 
  are the eigenvalues of 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
  as well (the opposite is not necessarily true as 
-\begin_inset Formula $\tilde{A}\in\R^{r\times r}$
+\begin_inset Formula $\tilde{\mat A}\in\R^{r\times r}$
 \end_inset
 
  while 
-\begin_inset Formula $A\in\R^{m\times m}$
+\begin_inset Formula $\mat A\in\R^{m\times m}$
 \end_inset
 
  with 
@@ -2442,23 +2446,23 @@ Find truncated eigendecomposition of
 
 ).
  Matrix of eigenvectors 
-\begin_inset Formula $\Phi$
+\begin_inset Formula $\mat{\Phi}$
 \end_inset
 
  of 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
  can be found using 
 \begin_inset Formula 
 \[
-\Phi=YV_{r}\Sigma_{r}^{-1}W\Lambda^{-1},
+\mat{\Phi}=\mat Y\mat V_{r}\mat{\Sigma}_{r}^{-1}\mat W\mat{\Lambda}^{-1},
 \]
 
 \end_inset
 
 with 
-\begin_inset Formula $\Phi$
+\begin_inset Formula $\mat{\Phi}$
 \end_inset
 
  being a rectangular matrix containing exact DMD modes as was introduced
@@ -2474,15 +2478,15 @@ key "TuEtAl2014"
 
 \begin_layout Standard
 Knowing the eigenvalues 
-\begin_inset Formula $\Lambda$
+\begin_inset Formula $\mat{\Lambda}$
 \end_inset
 
  and eigenvectors 
-\begin_inset Formula $\Phi$
+\begin_inset Formula $\mat{\Phi}$
 \end_inset
 
  of 
-\begin_inset Formula $A$
+\begin_inset Formula $\mat A$
 \end_inset
 
 , we can reconstruct the time series 
@@ -2495,13 +2499,13 @@ reference "eq:algorithm:postproc:given-time-series"
 : 
 \begin_inset Formula 
 \begin{equation}
-\widehat{x}_{k}=Ax_{k-1}=A^{k}x_{0}=\Phi\Lambda^{k}b,\label{eq:algorithm:postproc:reconstr}
+\widehat{\vec x}_{k}=\mat A\vec x_{k-1}=\mat A^{k}\vec x_{0}=\mat{\Phi}\mat{\Lambda}^{k}\vec b,\label{eq:algorithm:postproc:reconstr}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $b=\Phi^{\dagger}x_{0}$
+\begin_inset Formula $\vec b=\mat{\Phi}^{\dagger}\vec x_{0}$
 \end_inset
 
  is the vector of the initial amplitudes of DMD modes.
@@ -2607,7 +2611,7 @@ key "TuEtAl2014"
 \end_inset
 
 , one-dimensional time series yields the matrix 
-\begin_inset Formula $\tilde{A}$
+\begin_inset Formula $\tilde{\mat A}$
 \end_inset
 
  which is 
@@ -2618,13 +2622,13 @@ key "TuEtAl2014"
 al growth or decay, but not oscillations.
  To overcome this rank-deficiency problem, we build an input Hankel matrix
  
-\begin_inset Formula $Z$
+\begin_inset Formula $\mat Z$
 \end_inset
 
 :
 \begin_inset Formula 
 \begin{equation}
-Z=\begin{bmatrix}\psi'_{0} & \cdots & \psi'_{n-L}\\
+\mat Z=\begin{bmatrix}\psi'_{0} & \cdots & \psi'_{n-L}\\
 \psi'_{1} & \cdots & \psi'_{n-L+1}\\
 \vdots & \vdots & \vdots\\
 \psi'_{L-1} & \cdots & \psi'_{n}
@@ -2666,11 +2670,11 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 
  is used.
  Then, the input matrices 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
  and 
-\begin_inset Formula $Y$
+\begin_inset Formula $\mat Y$
 \end_inset
 
  
@@ -2681,11 +2685,11 @@ reference "eq:algorithm:postproc:input-matrices"
 \end_inset
 
  are built from 
-\begin_inset Formula $Z$
+\begin_inset Formula $\mat Z$
 \end_inset
 
  by excluding the last and first columns of 
-\begin_inset Formula $Z$
+\begin_inset Formula $\mat Z$
 \end_inset
 
 , respectively.
@@ -2698,15 +2702,15 @@ As time series of
 
  inevitably contains noise induced by truncation and rounding errors of
  the numerical computations, truncation of matrices 
-\begin_inset Formula $U,$
+\begin_inset Formula $\mat U,$
 \end_inset
 
  
-\begin_inset Formula $\Sigma$
+\begin_inset Formula $\mat{\Sigma}$
 \end_inset
 
 , and 
-\begin_inset Formula $V$
+\begin_inset Formula $\mat V$
 \end_inset
 
  from 
@@ -2721,7 +2725,7 @@ reference "eq:algorithm:postproc:svd"
 \end_inset
 
  will yield a matrix 
-\begin_inset Formula $\tilde{A}\in\R^{r\times r}$
+\begin_inset Formula $\tilde{\mat A}\in\R^{r\times r}$
 \end_inset
 
  whose eigenvalues are all physical only if 
@@ -2803,16 +2807,16 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \end_inset
 
  is built and separated into 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
  and 
-\begin_inset Formula $Y$
+\begin_inset Formula $\mat Y$
 \end_inset
 
 .
  After that, candidates for a possible rank of 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
  are determined by the following procedure.
@@ -2825,7 +2829,7 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \end_inset
 
  of 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
  normalized by 
@@ -2956,7 +2960,7 @@ where
 \begin_inset Formula $\ii$
 \end_inset
 
- being imaginary unit, 
+ being imaginary unity, 
 \begin_inset Formula $t\in[0;51]$
 \end_inset
 
@@ -3266,7 +3270,7 @@ The algorithm for extracting growth rates and frequencies of unstable modes
  presented in this section requires multiple application of DMD to find
  the best low-rank approximation.
  However, the most expensive operation in the algorithm (SVD of 
-\begin_inset Formula $X$
+\begin_inset Formula $\mat X$
 \end_inset
 
 ) is carried out only once.
