@@ -93,7 +93,7 @@
 \begin_body
 
 \begin_layout Chapter
-Details of the normal-mode analysis for the Fickett's detonation analogue
+Details of the normal-mode analysis for the Fickett's detonation analog
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:ffmnm"
@@ -348,7 +348,7 @@ In
 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Stewart2005"
+key "StewartKasimov2005"
 
 \end_inset
 
