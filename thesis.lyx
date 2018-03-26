@@ -62,6 +62,11 @@
 % Better typography.
 \usepackage{microtype}
 
+% Table of contents - remove bold fonts.
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+
 % End (my additions).
 
 
@@ -107,14 +112,15 @@
 
 
 % ### Nomenclature, List of Abbreviations and List of Symbols 
-   \usepackage{ifthen}
-\usepackage{xkeyval}\usepackage{xfor}\usepackage{amsgen}\usepackage[acronym,toc, nogroupskip]{glossaries}
-\newglossary[slg]{symbols}{syi}{sbl}{List of Symbols}
- 
-   \makeglossaries
-   
-   \include{Lists}
-   % Run the following three lines in the command line to get the lists
+\usepackage{ifthen}
+\usepackage{xkeyval}
+\usepackage{xfor}
+\usepackage{amsgen}
+%\usepackage[acronym,automake,nogroupskip,toc]{glossaries}
+%\newglossary[slg]{symbols}{syi}{sbl}{List of Symbols}
+%\makeglossaries
+%\include{lists}
+% Run the following three lines in the command line to get the lists
 %makeindex -s Thesis.ist -t Thesis.alg -o Thesis.acr Thesis.acn
 %makeindex -s Thesis.ist -t Thesis.slg -o Thesis.syi Thesis.sbl
 %makeindex -s Thesis.ist -t Thesis.glg -o Thesis.gls Thesis.glo
@@ -950,7 +956,7 @@ textheight}%
 \backslash
 centering 
 \backslash
-emph{Dedicated to my parents}
+emph{To my parents}
 \backslash
 par}
 \end_layout
@@ -999,27 +1005,6 @@ status open
 
 \begin_layout Plain Layout
 
-%
-\backslash
-phantomsection
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\backslash
-phantomsection
-\end_layout
-
-\begin_layout Plain Layout
-
-%
-\backslash
-addcontentsline{toc}{chapter}{Table of contents}
-\end_layout
-
-\begin_layout Plain Layout
-
 
 \backslash
 pdfbookmark{Table of Contents}{Table of contents}
@@ -1054,7 +1039,14 @@ status open
 
 \begin_layout Plain Layout
 
+%
+\backslash
+include{Lists}
+\end_layout
 
+\begin_layout Plain Layout
+
+%
 \backslash
 printglossary[type=
 \backslash
@@ -1063,54 +1055,64 @@ acronymtype,
 
 \begin_layout Plain Layout
 
-		       style=long3col,
+%		       style=long3col,
 \end_layout
 
 \begin_layout Plain Layout
 
-               title=
+%               title=
 \backslash
 centerline{LIST OF ABBREVIATIONS},
 \end_layout
 
 \begin_layout Plain Layout
 
-               toctitle=List of Abbreviations,
+%               toctitle=List of Abbreviations,
 \end_layout
 
 \begin_layout Plain Layout
 
-               nonumberlist=true]
+%               nonumberlist=true]
 \end_layout
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 printglossary[type=symbols,
 \end_layout
 
 \begin_layout Plain Layout
 
-style=long3col,
+%style=long3col,
 \end_layout
 
 \begin_layout Plain Layout
 
-title=
+%title=
 \backslash
 centerline{LIST OF SYMBOLS},
 \end_layout
 
 \begin_layout Plain Layout
 
-toctitle=List of Symbols,
+%toctitle=List of Symbols,
 \end_layout
 
 \begin_layout Plain Layout
 
-nonumberlist=true] 
+%nonumberlist=true]
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "nomenclature.lyx"
 
 \end_inset
 
@@ -1132,12 +1134,6 @@ status open
 phantomsection
 \end_layout
 
-\end_inset
-
-
-\begin_inset ERT
-status open
-
 \begin_layout Plain Layout
 
 
@@ -1147,15 +1143,6 @@ addcontentsline{toc}{chapter}{
 listfigurename}
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
 \begin_layout Plain Layout
 
 
@@ -1164,12 +1151,19 @@ renewcommand*{
 \backslash
 listfigurename}{
 \backslash
+fontsize{14pt}{14.5pt}
+\backslash
+selectfont
+\backslash
 centerline{LIST OF FIGURES}}
 \end_layout
 
 \end_inset
 
- 
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset FloatList figure
 
 \end_inset
@@ -1192,12 +1186,6 @@ status open
 phantomsection
 \end_layout
 
-\end_inset
-
-
-\begin_inset ERT
-status open
-
 \begin_layout Plain Layout
 
 
@@ -1207,12 +1195,6 @@ addcontentsline{toc}{chapter}{
 listtablename}
 \end_layout
 
-\end_inset
-
- 
-\begin_inset ERT
-status open
-
 \begin_layout Plain Layout
 
 
@@ -1220,6 +1202,10 @@ status open
 renewcommand*{
 \backslash
 listtablename}{
+\backslash
+fontsize{14pt}{14.5pt}
+\backslash
+selectfont
 \backslash
 centerline{LIST OF TABLES}}
 \end_layout
@@ -1328,7 +1314,7 @@ status open
 \end_inset
 
 
-\begin_inset Newpage cleardoublepage
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -1376,9 +1362,32 @@ status open
 
 
 \backslash
-vspace*{2
+thispagestyle{plain}
+\end_layout
+
+\begin_layout Plain Layout
+
+
 \backslash
-baselineskip}
+par
+\backslash
+vspace*{.35
+\backslash
+textheight}%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Appendices}
 \end_layout
 
 \end_inset
@@ -1392,9 +1401,7 @@ status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-chapter*{
+{
 \end_layout
 
 \end_inset
@@ -1414,19 +1421,6 @@ status open
 \series default
 \size default
  
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{Appendices}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
