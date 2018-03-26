@@ -88,6 +88,25 @@
 \begin_layout Standard
 \align center
 \begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+phantomsection
+\backslash
+addcontentsline{toc}{chapter}{Abstract}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset ERT
 status collapsed
 
 \begin_layout Plain Layout
@@ -190,32 +209,6 @@ doublespacing
 \end_inset
 
  
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-phantomsection
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{Abstract}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
