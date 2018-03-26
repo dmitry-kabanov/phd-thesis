@@ -143,12 +143,12 @@ key "MallardChatelier1881"
 
  and independently 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "BerthelotVieille1882"
+LatexCommand citet
+key "BerthelotVieille1881"
 
 \end_inset
 
- studied the detonation in glass tubes and found that detonation distinguishes
+ studied detonations in glass tubes and found that detonation distinguishes
  from combustion in that the speed of propagation is supersonic with respect
  to the initial gaseous mixture.
 \end_layout
@@ -226,7 +226,7 @@ key "Doering1943"
  ZND theory is discussed in detail in 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "CourantFriedrichs1948,ZeldovichKompaneets1960"
+key "CourantFriedrichs1948,ZeldovichKompaneets1955"
 
 \end_inset
 
@@ -2006,21 +2006,21 @@ We consider one-dimensional flow of a gas which is ignited by a detonation
  of hyperbolic balance laws:
 \begin_inset Formula 
 \[
-\vec z_{t}+\vec f(\vec z)_{x}=\vec s(\vec z),
+\vec{z}_{t}+\vec{f}(\vec{z})_{x}=\vec{s}(\vec{z}),
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $\vec z\in\R^{n}$
+\begin_inset Formula $\vec{z}\in\R^{n}$
 \end_inset
 
  is a system state, 
-\begin_inset Formula $\vec f\in\R^{n}$
+\begin_inset Formula $\vec{f}\in\R^{n}$
 \end_inset
 
  the flux function, 
-\begin_inset Formula $\vec s\in\R^{n}$
+\begin_inset Formula $\vec{s}\in\R^{n}$
 \end_inset
 
  the source term.
@@ -2034,7 +2034,7 @@ Switch to the system moving with the detonation wave and write equations
  in a nonconservative form:
 \begin_inset Formula 
 \begin{equation}
-\vec z_{t}+\left(\mat A(\vec{z})-D\mat I\right)\vec z{}_{x}=\vec s(\vec z),\label{eq:intro:system}
+\vec{z}_{t}+\left(\mat A(\vec{z})-D\mat I\right)\vec{z}{}_{x}=\vec{s}(\vec{z}),\label{eq:intro:system}
 \end{equation}
 
 \end_inset
@@ -2048,7 +2048,7 @@ where
 \end_inset
 
  is the Jacobian of 
-\begin_inset Formula $\vec f$
+\begin_inset Formula $\vec{f}$
 \end_inset
 
 , 
@@ -2063,7 +2063,7 @@ where
 Compute the ZND solution for the given model by omitting time dependence:
 \begin_inset Formula 
 \begin{equation}
-\left(\mat A(\vec{\bar{z}})-\bar{D}\mat I\right)\vec{\bar{z}}_{x}=\vec s(\vec{\bar{z}}),\label{eq:intro:eigenvalue}
+\left(\mat A(\vec{\bar{z}})-\bar{D}\mat I\right)\vec{\bar{z}}_{x}=\vec{s}(\vec{\bar{z}}),\label{eq:intro:eigenvalue}
 \end{equation}
 
 \end_inset
@@ -2122,7 +2122,7 @@ niot conditions.
 ns of the ZND solution:
 \begin_inset Formula 
 \[
-\vec z'_{t}+\mat A(\vec{\bar{z}})z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'=0,
+\vec{z}'_{t}+\mat A(\vec{\bar{z}})z'_{x}+\mat B(\vec{\bar{z}})\vec{z}'-\od{\vec{\bar{z}}}x\psi'=0,
 \]
 
 \end_inset
