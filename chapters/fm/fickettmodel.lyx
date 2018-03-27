@@ -639,7 +639,7 @@ end{subequations}
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Subsection
@@ -1324,12 +1324,12 @@ reference "sec:fm:znd"
 
 .
  Let 
-\begin_inset Formula $z=\left(u,\lambda\right)^{\T}$
+\begin_inset Formula $\vec z=\left(u,\lambda\right)^{\T}$
 \end_inset
 
  denote vector of state variables.
  Then, expanding 
-\begin_inset Formula $z$
+\begin_inset Formula $\vec z$
 \end_inset
 
  and 
@@ -1337,7 +1337,7 @@ reference "sec:fm:znd"
 \end_inset
 
  about steady state: 
-\begin_inset Formula $z=\bar{z}(x)+z'(x,t)$
+\begin_inset Formula $\vec z=\bar{\vec z}(x)+\vec z'(x,t)$
 \end_inset
 
 , 
@@ -1347,7 +1347,7 @@ reference "sec:fm:znd"
 , we arrive at the linearized governing equations
 \begin_inset Formula 
 \begin{equation}
-z'_{t}=-A(\bar{z})z'_{x}-B(\bar{z})z'+\frac{d\bar{z}}{dx}\psi',\label{eq:lin:algo:gov-eq}
+\vec z'_{t}=-\mat A(\vec{\bar{z}})\vec z'_{x}-\mat B(\vec{\bar{z}})\vec z'+\od{\vec{\bar{z}}}x\psi',\label{eq:lin:algo:gov-eq}
 \end{equation}
 
 \end_inset
@@ -1355,9 +1355,9 @@ z'_{t}=-A(\bar{z})z'_{x}-B(\bar{z})z'+\frac{d\bar{z}}{dx}\psi',\label{eq:lin:alg
 where
 \begin_inset Formula 
 \[
-A=\begin{bmatrix}\bar{u}-\bar{D} & \sigma\\
+\mat A=\begin{bmatrix}\bar{u}-\bar{D} & \sigma\\
 0 & \bar{u}-\bar{D}
-\end{bmatrix},\quad B=\begin{bmatrix}\frac{d\bar{u}}{dx} & 0\\
+\end{bmatrix},\quad\mat B=\begin{bmatrix}\od{\bar{u}}x & 0\\
 -\omega_{u} & -\omega_{\lambda}
 \end{bmatrix},
 \]
@@ -1451,7 +1451,7 @@ reference "eq:fm:znd:eqn-of-reaction"
 : 
 \begin_inset Formula 
 \begin{equation}
-\mathcal{L}\left(\lambda^{*}\right)=\int_{0}^{\lambda^{*}}\frac{\bar{D}}{\bar{\omega}\left(\bar{u},\bar{\lambda}\right)}\,d\bar{\lambda},\label{eq:algo:znd:partial-length}
+\mathcal{L}\left(\lambda^{*}\right)=\int_{0}^{\lambda^{*}}\frac{\bar{D}}{\bar{\omega}\left(\bar{u},\bar{\lambda}\right)}\,\dd\bar{\lambda},\label{eq:algo:znd:partial-length}
 \end{equation}
 
 \end_inset
@@ -1615,33 +1615,33 @@ Godunov-type methods are conservative numerical methods which for the hyperbolic
  system
 \begin_inset Formula 
 \[
-u_{t}+f(u)_{x}=0
+\vec z_{t}+\vec f(\vec u)_{x}=0
 \]
 
 \end_inset
 
 with vector of unknowns 
-\begin_inset Formula $u\in\R^{n}$
+\begin_inset Formula $\vec u\in\R^{n}$
 \end_inset
 
  and flux function 
-\begin_inset Formula $f:\R^{n}\to\R^{n}$
+\begin_inset Formula $\vec f:\R^{n}\to\R^{n}$
 \end_inset
 
  lead to a semidiscretized scheme:
 \begin_inset Formula 
 \[
-\frac{dU_{i}}{dt}=-\frac{\DeltaT}{\DeltaX}\left(F_{i+1/2}-F_{i-1/2}\right),
+\frac{d\vec Z_{i}}{dt}=-\frac{\DeltaT}{\DeltaX}\left(\vec F_{i+1/2}-\vec F_{i-1/2}\right),
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $U_{i}$
+\begin_inset Formula $\vec Z_{i}$
 \end_inset
 
  is an average of 
-\begin_inset Formula $u$
+\begin_inset Formula $\vec z$
 \end_inset
 
  for the computational cell centered at 
@@ -1649,19 +1649,19 @@ where
 \end_inset
 
  and fluxes at the cell boundaries 
-\begin_inset Formula $F_{i+1/2}$
+\begin_inset Formula $\vec F_{i+1/2}$
 \end_inset
 
  are computed after finding 
-\begin_inset Formula $U_{i+1/2}$
+\begin_inset Formula $\vec U_{i+1/2}$
 \end_inset
 
  through the solution of the Riemann problem with initial conditions
 \begin_inset Formula 
 \[
-U_{i+1/2}=\begin{cases}
-U_{L}=U_{i}, & x<x_{i+1/2},\\
-U_{R}=U_{i+1}, & x>x_{i+1/2.}
+\vec Z_{i+1/2}=\begin{cases}
+\vec Z_{L}=\vec Z_{i}, & x<x_{i+1/2},\\
+\vec Z_{R}=\vec Z_{i+1}, & x>x_{i+1/2.}
 \end{cases}
 \]
 
@@ -1672,7 +1672,7 @@ U_{R}=U_{i+1}, & x>x_{i+1/2.}
 
 \begin_layout Standard
 For the model under consideration, solution 
-\begin_inset Formula $U_{i+1/2}$
+\begin_inset Formula $\vec Z_{i+1/2}$
 \end_inset
 
  of the Riemann problem corresponds to some state 
@@ -1710,12 +1710,12 @@ Once all the local Riemann problem is solved over the whole grid, fluxes
 \end_inset
 
  such that the left-most flux 
-\begin_inset Formula $F_{-1/2}$
+\begin_inset Formula $\vec F_{-1/2}$
 \end_inset
 
  could be computed.
  On the right boundary the flux 
-\begin_inset Formula $F_{N+1/2}$
+\begin_inset Formula $\vec F_{N+1/2}$
 \end_inset
 
  is computed by means of the Rankine–Hugoniot conditions 
@@ -1727,7 +1727,7 @@ Once all the local Riemann problem is solved over the whole grid, fluxes
 \end_inset
 
 , which leads to the fluxes 
-\begin_inset Formula $F_{N+1/2}=0$
+\begin_inset Formula $\vec F_{N+1/2}=0$
 \end_inset
 
  both for 
@@ -1784,11 +1784,11 @@ is the flux and from the characteristic equations themselves we can see
 \begin_layout Standard
 Case 1.
  
-\begin_inset Formula $u_{L}<u_{R}$
+\begin_inset Formula $u_{\text{L}}<u_{\text{R}}$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{L}<\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{L}}<\lambda_{\text{R}}$
 \end_inset
 
 .
@@ -1802,12 +1802,8 @@ Case 1.
 
 , hence this line is the trajectory of the contact discontinuity moving
  to the left.
- Then, for 
-\begin_inset Formula $M$
-\end_inset
-
--region, which is to the right of the contact, we have 
-\begin_inset Formula $\lambda_{M}=\lambda_{R}$
+ Then, for M-region, which is to the right of the contact, we have 
+\begin_inset Formula $\lambda_{\text{M}}=\lambda_{\text{R}}$
 \end_inset
 
 .
@@ -1822,7 +1818,7 @@ Case 1.
  must jump also:
 \begin_inset Formula 
 \begin{equation}
-p_{M}=p_{L}\quad\Rightarrow\frac{1}{2}\left(u_{M}^{2}+q\lambda_{M}\right)=\frac{1}{2}\left(u_{L}^{2}+q\lambda_{L}\right),\label{eq:fm:pM}
+p_{\text{M}}=p_{\text{L}}\quad\Rightarrow\frac{1}{2}\left(u_{\text{M}}^{2}+q\lambda_{\text{M}}\right)=\frac{1}{2}\left(u_{\text{L}}^{2}+q\lambda_{\text{L}}\right),\label{eq:fm:pM}
 \end{equation}
 
 \end_inset
@@ -1830,7 +1826,7 @@ p_{M}=p_{L}\quad\Rightarrow\frac{1}{2}\left(u_{M}^{2}+q\lambda_{M}\right)=\frac{
 from which it follows
 \begin_inset Formula 
 \begin{equation}
-u_{M}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{M})}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{R})}<u_{L}<u_{R}.\label{eq:fm:uM}
+u_{\text{M}}=\sqrt{u_{\text{L}}^{2}+q(\lambda_{\text{L}}-\lambda_{\text{M}})}=\sqrt{u_{\text{L}}^{2}+q(\lambda_{\text{L}}-\lambda_{\text{R}})}<u_{\text{L}}<u_{\text{R}}.\label{eq:fm:uM}
 \end{equation}
 
 \end_inset
@@ -1840,14 +1836,14 @@ u_{M}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{M})}=\sqrt{u_{L}^{2}+q(\lambda_{L}-
 
 \begin_layout Standard
 Now, as 
-\begin_inset Formula $u_{M}<u_{R}$
+\begin_inset Formula $u_{\text{M}}<u_{\text{R}}$
 \end_inset
 
 , then it follows that the first characteristic equation leads to the centered
  rarefaction wave, with constraining characteristics
 \begin_inset Formula 
 \[
-x_{\text{HEAD}}=\left(u_{R}-D\right)t,\quad x_{\text{TAIL}}=\left(u_{M}-D\right)t,
+x_{\text{HEAD}}=\left(u_{\text{R}}-D\right)t,\quad x_{\text{TAIL}}=\left(u_{\text{M}}-D\right)t,
 \]
 
 \end_inset
@@ -1871,24 +1867,24 @@ with the solution inside the rarefaction wave being
 \begin_layout Standard
 Case 2.
  
-\begin_inset Formula $u_{L}<u_{R}$
+\begin_inset Formula $u_{\text{L}}<u_{\text{R}}$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{L}\geq\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{L}}\geq\lambda_{\text{R}}$
 \end_inset
 
 .
  In this case 
-\begin_inset Formula $\lambda_{M}=\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{M}}=\lambda_{\text{R}}$
 \end_inset
 
  and 
-\begin_inset Formula $u_{M}$
+\begin_inset Formula $u_{\text{M}}$
 \end_inset
 
  is found exactly as before but now 
-\begin_inset Formula $u_{L}\leq u_{M}<u_{R}$
+\begin_inset Formula $u_{\text{L}}\leq u_{\text{M}}<u_{\text{R}}$
 \end_inset
 
 .
@@ -1899,22 +1895,22 @@ Case 2.
 \begin_layout Standard
 Case 3.
  
-\begin_inset Formula $u_{L}\geq u_{R}$
+\begin_inset Formula $u_{\text{L}}\geq u_{\text{R}}$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{L}\geq\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{L}}\geq\lambda_{\text{R}}$
 \end_inset
 
 .
  In this case 
-\begin_inset Formula $\lambda_{M}=\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{M}}=\lambda_{\text{R}}$
 \end_inset
 
  again and
 \begin_inset Formula 
 \[
-u_{M}=\sqrt{u_{L}^{2}+q(\lambda_{L}-\lambda_{R})}\geq\lambda_{L}\geq\lambda_{R},
+u_{\text{M}}=\sqrt{u_{\text{L}}^{2}+q\left(\lambda_{\text{L}}-\lambda_{\text{R}}\right)}\geq\lambda_{\text{L}}\geq\lambda_{\text{R}},
 \]
 
 \end_inset
@@ -1923,18 +1919,11 @@ that is,
 \begin_inset Formula $C_{+}$
 \end_inset
 
--characteristics from 
-\begin_inset Formula $M$
-\end_inset
-
-- and 
-\begin_inset Formula $R$
-\end_inset
-
--regions collide and form the shock wave that moves with the speed
+-characteristics from M- and R-regions collide and form the shock wave that
+ moves with the speed
 \begin_inset Formula 
 \[
-s=\frac{u_{R}+u_{M}}{2}-D.
+s=\frac{u_{\text{R}}+u_{\text{M}}}{2}-D.
 \]
 
 \end_inset
@@ -1945,30 +1934,30 @@ s=\frac{u_{R}+u_{M}}{2}-D.
 \begin_layout Standard
 Case 4.
  
-\begin_inset Formula $u_{L}\geq u_{R}$
+\begin_inset Formula $u_{\text{L}}\geq u_{\text{R}}$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{L}<\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{L}}<\lambda_{\text{R}}$
 \end_inset
 
 .
  In this case 
-\begin_inset Formula $\lambda_{M}=\lambda_{R}$
+\begin_inset Formula $\lambda_{\text{M}}=\lambda_{\text{R}}$
 \end_inset
 
  and 
-\begin_inset Formula $u_{M}$
+\begin_inset Formula $u_{\text{M}}$
 \end_inset
 
  is found according to the above formula.
  Then the first wave is either centered rarefaction or shock wave depending
  on whether 
-\begin_inset Formula $u_{M}<u_{R}$
+\begin_inset Formula $u_{\text{M}}<u_{\text{R}}$
 \end_inset
 
  or 
-\begin_inset Formula $u_{M}\geq u_{R}$
+\begin_inset Formula $u_{\text{M}}\geq u_{\text{R}}$
 \end_inset
 
  and the properties of these waves a found according to the above formulas.
@@ -1982,31 +1971,31 @@ For the Godunov method, we are interested in the solution of the Riemann
 
  only.
  Summarizing the cases considered above, we can conclude that if 
-\begin_inset Formula $u_{R}>D$
+\begin_inset Formula $u_{\text{R}}>D$
 \end_inset
 
  (subsonic flow), then 
-\begin_inset Formula $U_{i+1/2}=u_{M}$
+\begin_inset Formula $u_{i+1/2}=u_{\text{M}}$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{i+1/2}=\lambda_{M}$
+\begin_inset Formula $\lambda_{i+1/2}=\lambda_{\text{M}}$
 \end_inset
 
 .
  However, while developing nonlinear unsteady solver it was noticed that
  sometimes during a simulation the flow becomes supersonic with 
-\begin_inset Formula $u_{R}<D$
+\begin_inset Formula $u_{\text{R}}<D$
 \end_inset
 
 , particularly near the left boundary, and then not only contact moves to
  the left but rarefaction or shock wave as well.
  In these cases the solution of the Riemann problem is taken to be 
-\begin_inset Formula $U_{i+1/2}=u_{R}$
+\begin_inset Formula $z_{i+1/2}=u_{\text{R}}$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{i+1/2}=\lambda_{R}$
+\begin_inset Formula $\lambda_{i+1/2}=\lambda_{\text{R}}$
 \end_inset
 
 .
@@ -2035,11 +2024,11 @@ To illustrate the complete solutions to the Riemann problem and characterstic
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{L}=1.0$
+\begin_inset Formula $\lambda_{\text{L}}=1.0$
 \end_inset
 
 , 
-\begin_inset Formula $\lambda_{R}=0.0$
+\begin_inset Formula $\lambda_{\text{R}}=0.0$
 \end_inset
 
 , and final time 
@@ -2059,30 +2048,30 @@ reference "fig:solution-contact-shock"
 \end_inset
 
  shows the solution of the Riemann problem for 
-\begin_inset Formula $u_{L}=4$
+\begin_inset Formula $u_{\text{L}}=4$
 \end_inset
 
 , 
-\begin_inset Formula $u_{R}=3$
+\begin_inset Formula $u_{\text{R}}=3$
 \end_inset
 
 , along with the characteristic plane.
  As can be seen, the solution consists of three distinct regions: in the
  region to the left of the contact discontinuity is 
-\begin_inset Formula $\left(u_{L},\lambda_{L}\right)$
+\begin_inset Formula $\left(u_{\text{L}},\lambda_{\text{L}}\right)$
 \end_inset
 
 , between the contact and the shock 
-\begin_inset Formula $\left(u_{M}=5,\lambda_{R}\right)$
+\begin_inset Formula $\left(u_{\text{M}}=5,\lambda_{\text{R}}\right)$
 \end_inset
 
 , and to the right of the shock 
-\begin_inset Formula $\left(u_{R},\lambda_{R}\right)$
+\begin_inset Formula $\left(u_{\text{R}},\lambda_{\text{R}}\right)$
 \end_inset
 
 .
  As 
-\begin_inset Formula $u_{R}=D$
+\begin_inset Formula $u_{\text{R}}=D$
 \end_inset
 
 , the characteristics in the rightmost region are vertical.
@@ -2122,11 +2111,11 @@ Solution of the Riemann problem and characteristics trajectories for
 \end_inset
 
 , 
-\begin_inset Formula $\left(u_{L},\lambda_{L}\right)=\left(4,1\right)$
+\begin_inset Formula $\left(u_{\text{L}},\lambda_{\text{L}}\right)=\left(4,1\right)$
 \end_inset
 
 , 
-\begin_inset Formula $\left(u_{R},\lambda_{R}\right)=\left(3,0\right)$
+\begin_inset Formula $\left(u_{\text{R}},\lambda_{\text{R}}\right)=\left(3,0\right)$
 \end_inset
 
  up to the final time 
@@ -2184,11 +2173,11 @@ reference "fig:solution-contact-rarefaction"
 \end_inset
 
  shows solution of the Riemann problem for 
-\begin_inset Formula $u_{L}=4$
+\begin_inset Formula $u_{\text{L}}=4$
 \end_inset
 
 , 
-\begin_inset Formula $u_{R}=6$
+\begin_inset Formula $u_{\text{R}}=6$
 \end_inset
 
 , along with the characteristic plane.
@@ -2198,28 +2187,28 @@ reference "fig:solution-contact-rarefaction"
 \end_inset
 
  solution is 
-\begin_inset Formula $\left(u_{L},\lambda_{L}\right)$
+\begin_inset Formula $\left(u_{\text{L}},\lambda_{\text{L}}\right)$
 \end_inset
 
 , between the contact and the tail of the rarefaction wave solution is 
-\begin_inset Formula $\left(u_{M}=5,\lambda_{R}\right)$
+\begin_inset Formula $\left(u_{\text{M}}=5,\lambda_{\text{R}}\right)$
 \end_inset
 
 , inside the rarefaction wave it is 
-\begin_inset Formula $\left(u=x/t+D,\lambda_{R}\right)$
+\begin_inset Formula $\left(u=x/t+D,\lambda_{\text{R}}\right)$
 \end_inset
 
 , and to the right of the head of the rarefaction solution solution is 
-\begin_inset Formula $\left(u_{R},\lambda_{R}\right)$
+\begin_inset Formula $\left(u_{\text{R}},\lambda_{\text{R}}\right)$
 \end_inset
 
 .
  Head and tail of the rarefaction are determined by the lines 
-\begin_inset Formula $x=\left(u_{R}-D\right)t$
+\begin_inset Formula $x=\left(u_{\text{R}}-D\right)t$
 \end_inset
 
  and 
-\begin_inset Formula $x=\left(u_{M}-D\right)t$
+\begin_inset Formula $x=\left(u_{\text{M}}-D\right)t$
 \end_inset
 
 , respectively.
@@ -2254,11 +2243,11 @@ Solution of the Riemann problem and characteristics trajectories for
 \end_inset
 
 , 
-\begin_inset Formula $\left(u_{L},\lambda_{L}\right)=\left(4,1\right)$
+\begin_inset Formula $\left(u_{\text{L}},\lambda_{\text{L}}\right)=\left(4,1\right)$
 \end_inset
 
 , 
-\begin_inset Formula $\left(u_{R},\lambda_{R}\right)=\left(6,0\right)$
+\begin_inset Formula $\left(u_{\text{R}},\lambda_{\text{R}}\right)=\left(6,0\right)$
 \end_inset
 
  up to the final time 
@@ -2357,7 +2346,7 @@ Equation of the
 -characteristic is
 \begin_inset Formula 
 \[
-u\frac{du}{dt}+\sigma\frac{d\lambda}{dt}-\sigma\omega(u,\lambda)=0\text{ on }\frac{dx}{dt}=u-D.
+u\od ut+\sigma\od{\lambda}t-\sigma\omega(u,\lambda)=0\text{ on }\od xt=u-D.
 \]
 
 \end_inset
@@ -2524,7 +2513,7 @@ and by substituting expression for
 can be computed explicitly:
 \begin_inset Formula 
 \[
-x_{*}^{j}=\frac{D^{j}\Delta T}{-1-\frac{2\left(u_{\shk}^{j}-u_{N}^{j}\right)}{\DeltaX}}.
+x_{*}^{j}=\frac{D^{j}\DeltaT}{-1-\frac{2\left(u_{\shk}^{j}-u_{N}^{j}\right)}{\DeltaX}}.
 \]
 
 \end_inset
