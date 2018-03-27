@@ -1098,13 +1098,13 @@ reference "linearized-system"
 \end_inset
 
 ), but with 
-\begin_inset Formula $z=(\rho,u,p,\lambda_{1},\lambda_{2})^{\mathrm{T}}$
+\begin_inset Formula $\vec z=(\rho,u,p,\lambda_{1},\lambda_{2})^{\mathrm{T}}$
 \end_inset
 
  and with the coefficients matrices being redefined:
 \begin_inset Formula 
 \begin{align}
-A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0 & 0\\
+\mat A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0 & 0\\
 0 & \bar{U} & 1/\bar{\rho} & 0 & 0\\
 0 & \gamma\bar{p} & \bar{U} & 0 & 0\\
 0 & 0 & 0 & \bar{U} & 0\\
@@ -1117,11 +1117,11 @@ A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0 & 0\\
 
 \begin_inset Formula 
 \begin{equation}
-B=\begin{bmatrix}\frac{d\bar{u}}{dx} & \frac{d\bar{\rho}}{dx} & 0 & 0 & 0\\[0.3em]
--\frac{1}{\bar{\rho}^{2}}\frac{d\bar{p}}{dx} & \frac{d\bar{u}}{dx} & 0 & 0 & 0\\[0.3em]
-\sum_{i}C_{i}(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}) & \frac{d\bar{p}}{dx} & \gamma\frac{d\bar{u}}{dx}+\bar{\rho}\sum_{i}C_{i}\bar{\omega}_{ip} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{1}} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{2}}\\[0.3em]
--\bar{\omega}_{1\rho} & \frac{d\bar{\lambda}_{1}}{dx} & -\bar{\omega}_{1p} & -\bar{\omega}_{1\lambda_{1}} & -\bar{\omega}_{1\lambda_{2}}\\
--\bar{\omega}_{2\rho} & \frac{d\bar{\lambda}_{2}}{dx} & -\bar{\omega}_{2p} & -\bar{\omega}_{2\lambda_{1}} & -\bar{\omega}_{2\lambda_{2}}
+\mat B=\begin{bmatrix}\od{\bar{u}}x & \od{\bar{\rho}}x & 0 & 0 & 0\\[0.3em]
+-\frac{1}{\bar{\rho}^{2}}\od{\bar{p}}x & \od{\bar{u}}x & 0 & 0 & 0\\[0.3em]
+\sum_{i}C_{i}(\bar{\rho}\bar{\omega}_{i\rho}+\bar{\omega}_{i}) & \od{\bar{p}}x & \gamma\od{\bar{u}}x+\bar{\rho}\sum_{i}C_{i}\bar{\omega}_{ip} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{1}} & \bar{\rho}\sum_{i}C_{i}\bar{\omega}_{i\lambda_{2}}\\[0.3em]
+-\bar{\omega}_{1\rho} & \od{\bar{\lambda}_{1}}x & -\bar{\omega}_{1p} & -\bar{\omega}_{1\lambda_{1}} & -\bar{\omega}_{1\lambda_{2}}\\
+-\bar{\omega}_{2\rho} & \od{\bar{\lambda}_{2}}x & -\bar{\omega}_{2p} & -\bar{\omega}_{2\lambda_{1}} & -\bar{\omega}_{2\lambda_{2}}
 \end{bmatrix}\label{eq:e1deig:B}
 \end{equation}
 
