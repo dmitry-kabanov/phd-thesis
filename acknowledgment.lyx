@@ -122,7 +122,7 @@ addcontentsline{toc}{chapter}{Acknowledgements}
 
 \series bold
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -135,7 +135,7 @@ fontsize{14pt}{14.5pt}
 
 
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -148,7 +148,7 @@ selectfont
 
  
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -195,26 +195,45 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
-
-\shape italic
-Please insert brief and professional acknowledgements here.
- They should be no more than one page.
-
-\shape default
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%Please remove this code taking particular care to remove the 
-\backslash
-textit command which makes use of italic font.
+First and foremost, I would like to thank my supervisor, Prof.
+ Aslan Kasimov, for advising me and suggesting ideas for projects and numerical
+ experiments throughout my research.
+ He created a friendly atmosphere governed by freedom and scientific curiosity
+ in his research group which helped me to do my PhD studies, and I am truly
+ grateful for that.
 \end_layout
 
-\end_inset
+\begin_layout Standard
+I would also like to thank my co-supervisor, Prof.
+ Athanasios Tzavaras, who supported and encouraged me during late stages
+ of my PhD work.
+\end_layout
 
+\begin_layout Standard
+I would also like to thank the Committee members, Profs.
+ Ravi Samtaney, David Ketcheson, and Ruben Rodolfo Rosales, for helpful
+ suggestions and comments.
+ I would like also to thank everybody in the Department of Applied Mathematics
+ and Computational Sciences, for all the enjoyment that I had while studying
+ here and taking a lot of excellent classes on numerical methods, fluid
+ dynamics, and high-performance computing.
+\end_layout
 
+\begin_layout Standard
+I would also like to thank all my friends in KAUST, specially, without any
+ particular order: Vera Solovyeva, Slava Korneev, Naeemullah Khan, Sultan
+ Albarakati, Dasha Bolbot, Yana Ukhova, and Alena Denisova.
+\end_layout
+
+\begin_layout Standard
+For everybody else who I know in KAUST and not mention here explicitly,
+ I thank you too.
+\end_layout
+
+\begin_layout Standard
+Last, but not the least, I am deeply grateful to King Abdullah University
+ of Science and Technology for an opportunity to study here, in this amazing
+ place on a shore of the Red Sea, combining research institute with a resort.
 \end_layout
 
 \end_body
