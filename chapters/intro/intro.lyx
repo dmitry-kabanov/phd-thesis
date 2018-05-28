@@ -251,7 +251,8 @@ key "White1961,VoytsekhovskiyEtAl1963"
 \end_layout
 
 \begin_layout Standard
-In Section
+The outline of this chapter is the following.
+ In Section
 \begin_inset space ~
 \end_inset
 
@@ -483,9 +484,9 @@ label{eq:intro:cj-znd:cj:conservation}
 
 \begin_inset Formula 
 \begin{align}
-\rho_{\text{b}}\left(u_{\text{b}}-D\right) & =-\rho_{\textrm{\text{\text{b}}}}D,\\
+\rho_{\text{b}}\left(u_{\text{b}}-D\right) & =-\rho_{\textrm{\text{\text{a}}}}D,\\
 p_{\text{b}}+\rho_{\text{b}}\left(u_{\text{b}}-D\right)^{2} & =p_{\text{a}}+\rho_{\text{a}}D^{2},\\
-e_{\text{b}}+\frac{p_{\text{b}}}{\rho_{\text{b}}}+\frac{\left(u_{\text{b}}-D\right)^{2}}{2} & =e_{\textrm{b}}+\frac{p_{\textrm{b}}}{\rho_{\textrm{b}}}+\frac{D^{2}}{2},
+e_{\text{b}}+\frac{p_{\text{b}}}{\rho_{\text{b}}}+\frac{\left(u_{\text{b}}-D\right)^{2}}{2} & =e_{\textrm{a}}+\frac{p_{\textrm{a}}}{\rho_{\textrm{a}}}+\frac{D^{2}}{2},
 \end{align}
 
 \end_inset
@@ -795,8 +796,8 @@ Neumann point in the ZND theory) is still unreacted and connected to the
 \begin{align*}
 \rho_{\text{s}}\left(u_{\text{s}}-D\right) & =-\rho_{\text{a}}D,\\
 p_{\text{s}}+\rho_{\text{s}}\left(u_{\text{s}}-D\right)^{2} & =p_{\text{a}}+\rho_{\text{a}}D^{2},\\
-e_{\textsc{s}}+\frac{p_{\textsc{s}}}{\rho_{\textsc{s}}}+\frac{\left(u_{\textsc{s}}-D\right)^{2}}{2} & =e_{\text{a}}+\frac{p_{\text{a}}}{\rho_{\textsc{\text{a}}}}+\frac{D^{2}}{2},\\
-\lambda_{\textsc{s}} & =0,
+e_{\text{s}}+\frac{p_{\text{s}}}{\rho_{\text{s}}}+\frac{\left(u_{\text{s}}-D\right)^{2}}{2} & =e_{\text{a}}+\frac{p_{\text{a}}}{\rho_{\text{a}}}+\frac{D^{2}}{2},\\
+\lambda_{\text{s}} & =0,
 \end{align*}
 
 \end_inset
