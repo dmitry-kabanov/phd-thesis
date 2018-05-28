@@ -1324,12 +1324,12 @@ reference "sec:fm:znd"
 
 .
  Let 
-\begin_inset Formula $\vec z=\left(u,\lambda\right)^{\T}$
+\begin_inset Formula $\vec{z}=\left(u,\lambda\right)^{\T}$
 \end_inset
 
  denote vector of state variables.
  Then, expanding 
-\begin_inset Formula $\vec z$
+\begin_inset Formula $\vec{z}$
 \end_inset
 
  and 
@@ -1337,7 +1337,7 @@ reference "sec:fm:znd"
 \end_inset
 
  about steady state: 
-\begin_inset Formula $\vec z=\bar{\vec z}(x)+\vec z'(x,t)$
+\begin_inset Formula $\vec{z}=\bar{\vec{z}}(x)+\vec{z}'(x,t)$
 \end_inset
 
 , 
@@ -1347,7 +1347,7 @@ reference "sec:fm:znd"
 , we arrive at the linearized governing equations
 \begin_inset Formula 
 \begin{equation}
-\vec z'_{t}=-\mat A(\vec{\bar{z}})\vec z'_{x}-\mat B(\vec{\bar{z}})\vec z'+\od{\vec{\bar{z}}}x\psi',\label{eq:lin:algo:gov-eq}
+\vec{z}'_{t}=-\mat A(\vec{\bar{z}})\vec{z}'_{x}-\mat B(\vec{\bar{z}})\vec{z}'+\od{\vec{\bar{z}}}x\psi',\label{eq:lin:algo:gov-eq}
 \end{equation}
 
 \end_inset
@@ -1615,33 +1615,33 @@ Godunov-type methods are conservative numerical methods which for the hyperbolic
  system
 \begin_inset Formula 
 \[
-\vec z_{t}+\vec f(\vec u)_{x}=0
+\vec{z}_{t}+\vec{f}(\vec{u})_{x}=0
 \]
 
 \end_inset
 
 with vector of unknowns 
-\begin_inset Formula $\vec u\in\R^{n}$
+\begin_inset Formula $\vec{u}\in\R^{n}$
 \end_inset
 
  and flux function 
-\begin_inset Formula $\vec f:\R^{n}\to\R^{n}$
+\begin_inset Formula $\vec{f}:\R^{n}\to\R^{n}$
 \end_inset
 
  lead to a semidiscretized scheme:
 \begin_inset Formula 
 \[
-\frac{d\vec Z_{i}}{dt}=-\frac{\DeltaT}{\DeltaX}\left(\vec F_{i+1/2}-\vec F_{i-1/2}\right),
+\frac{d\vec{Z}_{i}}{dt}=-\frac{\DeltaT}{\DeltaX}\left(\vec{F}_{i+1/2}-\vec{F}_{i-1/2}\right),
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $\vec Z_{i}$
+\begin_inset Formula $\vec{Z}_{i}$
 \end_inset
 
  is an average of 
-\begin_inset Formula $\vec z$
+\begin_inset Formula $\vec{z}$
 \end_inset
 
  for the computational cell centered at 
@@ -1649,19 +1649,19 @@ where
 \end_inset
 
  and fluxes at the cell boundaries 
-\begin_inset Formula $\vec F_{i+1/2}$
+\begin_inset Formula $\vec{F}_{i+1/2}$
 \end_inset
 
  are computed after finding 
-\begin_inset Formula $\vec U_{i+1/2}$
+\begin_inset Formula $\vec{U}_{i+1/2}$
 \end_inset
 
  through the solution of the Riemann problem with initial conditions
 \begin_inset Formula 
 \[
-\vec Z_{i+1/2}=\begin{cases}
-\vec Z_{L}=\vec Z_{i}, & x<x_{i+1/2},\\
-\vec Z_{R}=\vec Z_{i+1}, & x>x_{i+1/2.}
+\vec{Z}_{i+1/2}=\begin{cases}
+\vec{Z}_{L}=\vec{Z}_{i}, & x<x_{i+1/2},\\
+\vec{Z}_{R}=\vec{Z}_{i+1}, & x>x_{i+1/2.}
 \end{cases}
 \]
 
@@ -1672,7 +1672,7 @@ where
 
 \begin_layout Standard
 For the model under consideration, solution 
-\begin_inset Formula $\vec Z_{i+1/2}$
+\begin_inset Formula $\vec{Z}_{i+1/2}$
 \end_inset
 
  of the Riemann problem corresponds to some state 
@@ -1710,12 +1710,12 @@ Once all the local Riemann problem is solved over the whole grid, fluxes
 \end_inset
 
  such that the left-most flux 
-\begin_inset Formula $\vec F_{-1/2}$
+\begin_inset Formula $\vec{F}_{-1/2}$
 \end_inset
 
  could be computed.
  On the right boundary the flux 
-\begin_inset Formula $\vec F_{N+1/2}$
+\begin_inset Formula $\vec{F}_{N+1/2}$
 \end_inset
 
  is computed by means of the Rankine–Hugoniot conditions 
@@ -1727,7 +1727,7 @@ Once all the local Riemann problem is solved over the whole grid, fluxes
 \end_inset
 
 , which leads to the fluxes 
-\begin_inset Formula $\vec F_{N+1/2}=0$
+\begin_inset Formula $\vec{F}_{N+1/2}=0$
 \end_inset
 
  both for 
