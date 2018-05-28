@@ -1444,7 +1444,7 @@ where subscripts
  At this grid point, the Taylor expansion gives a fifth-order formula 
 \begin_inset Formula 
 \begin{equation}
-\left.z'_{x}\right|_{N-2}=\frac{-2z_{N-5}+15z_{N-4}-60z_{N-3}+20z_{N-2}+30z_{N-1}-3z_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N-2}
+\left.z'_{x}\right|_{N-2}=\frac{-2z'_{N-5}+15z'_{N-4}-60z'_{N-3}+20z'_{N-2}+30z'_{N-1}-3z'_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N-2}
 \end{equation}
 
 \end_inset
@@ -1463,7 +1463,7 @@ where subscripts
  formula 
 \begin_inset Formula 
 \begin{equation}
-\left.z'_{x}\right|_{N-1}=\frac{-z_{N-4}+6z_{N-3}-18z_{N-2}+10z_{N-1}+3z_{N}}{12\DeltaX}.\label{eq:numalg:z_x-N-1}
+\left.z'_{x}\right|_{N-1}=\frac{-z'_{N-4}+6z'_{N-3}-18z'_{N-2}+10z'_{N-1}+3z'_{N}}{12\DeltaX}.\label{eq:numalg:z_x-N-1}
 \end{equation}
 
 \end_inset
@@ -1494,7 +1494,7 @@ reference "eq:numalg:sheveq"
  The approximation formula is 
 \begin_inset Formula 
 \begin{equation}
-\left.u'_{x}\right|_{N}=\frac{-12u_{N-5}+75u_{N-4}-200u_{N-3}+300u_{N-2}-300u_{N-1}+137u_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N}
+\left.u'_{x}\right|_{N}=\frac{-12u'_{N-5}+75u'_{N-4}-200u'_{N-3}+300u'_{N-2}-300u'_{N-1}+137u'_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N}
 \end{equation}
 
 \end_inset
