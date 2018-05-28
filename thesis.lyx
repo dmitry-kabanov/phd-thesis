@@ -37,6 +37,81 @@
 % Font.
 \usepackage{fourier}
 
+% --- Fix Fourier font scaling.
+% From: https://tex.stackexchange.com/questions/142725/using-10pt-fonts-with-the-fourier-package-actually-gives-me-9-17pt
+% from T1futs.fd
+\DeclareFontFamily{T1}{futs}{\providecommand {\SetFourierSpace }{}}
+
+% Note:
+% m  = medium
+% n  = normal
+% b  = bold
+% it = italic
+% sc = small caps
+% sl = slant
+
+\DeclareFontShape{T1}{futs}{m}{n}{
+        <-> s * [1.0905] futr8t  % <-- note the explicit scale to '0.75'
+  }{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{m}{it}{
+   <-> s * [1.0905] futri8t      % <-- regular italics scaled to '1.5'
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{b}{n}{
+   <-> futb8t
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{b}{it}{
+   <-> futbi8t
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{m}{sc}{
+   <-> futrc8t
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{b}{sc}{
+   <-> futbc8t
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{m}{sl}{
+   <-> futro8t
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{b}{sl}{
+   <-> futbo8t
+}{\SetFourierSpace}
+
+\DeclareFontShape{T1}{futs}{bx}{n}{<->ssub * futs/b/n}{}
+\DeclareFontShape{T1}{futs}{bx}{it}{<->ssub * futs/b/it}{}
+\DeclareFontShape{T1}{futs}{bx}{sc}{<->ssub * futs/b/sc}{}
+\DeclareFontShape{T1}{futs}{bx}{sl}{<->ssub * futs/b/sl}{}
+% --- Fix Fourier scaling (end).
+
+% --- Fix citation links: link only years, not authors.
+\usepackage{etoolbox}
+
+% Patch case where name and year are separated by aysep
+\patchcmd{\NAT@citex}
+  {\@citea\NAT@hyper@{%
+     \NAT@nmfmt{\NAT@nm}%
+     \hyper@natlinkbreak{\NAT@aysep\NAT@spacechar}{\@citeb\@extra@b@citeb}%
+     \NAT@date}}
+  {\@citea\NAT@nmfmt{\NAT@nm}%
+   \NAT@aysep\NAT@spacechar\NAT@hyper@{\NAT@date}}{}{}
+
+% Patch case where name and year are separated by opening bracket
+\patchcmd{\NAT@citex}
+  {\@citea\NAT@hyper@{%
+     \NAT@nmfmt{\NAT@nm}%
+     \hyper@natlinkbreak{\NAT@spacechar\NAT@@open\if*#1*\else#1\NAT@spacechar\fi}%
+       {\@citeb\@extra@b@citeb}%
+     \NAT@date}}
+  {\@citea\NAT@nmfmt{\NAT@nm}%
+   \NAT@spacechar\NAT@@open\if*#1*\else#1\NAT@spacechar\fi\NAT@hyper@{\NAT@date}}
+  {}{}
+% --- Fix citation links: link only years, not authors.
+
 % Textwidth-wide tables.
 \usepackage{tabularx}
 
@@ -139,11 +214,14 @@
 \end_preamble
 \options doublespace,fullpage
 \use_default_options false
+\begin_modules
+fixltx2e
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package none
 \inputencoding auto
-\fontencoding default
+\fontencoding global
 \font_roman "default" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
@@ -175,7 +253,7 @@
 \pdf_colorlinks true
 \pdf_backref false
 \pdf_pdfusetitle false
-\pdf_quoted_options "linkcolor=blue,citecolor=blue,urlcolor=blue"
+\pdf_quoted_options "linkcolor=blue,citecolor=blue,urlcolor=blue,linktocpage=true"
 \papersize letterpaper
 \use_geometry true
 \use_package amsmath 2
@@ -271,7 +349,7 @@ status collapsed
 
 \series bold
 \size large
-Numerical computation of detonation stability
+Numerical Computation of Detonation Stability
 \series default
 \size default
 
@@ -445,7 +523,7 @@ status collapsed
 
 \end_inset
 
- 
+
 \begin_inset VSpace vfill
 \end_inset
 
@@ -608,8 +686,7 @@ status collapsed
 
 \begin_layout Standard
 \noindent
-The thesis/dissertation of Dmitry Kabanov is approved by the examination
- committee:
+The dissertation of Dmitry Kabanov is approved by the examination committee:
 \end_layout
 
 \begin_layout Standard
