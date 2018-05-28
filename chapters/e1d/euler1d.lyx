@@ -1588,7 +1588,7 @@ reference "eq:algorithm:lf-flux"
 
 \end_inset
 
-.
+ that adds numerical diffusion, which stabilizes computations.
  After evaluation of 
 \begin_inset Formula $\widehat{L}$
 \end_inset
@@ -1761,8 +1761,8 @@ We also need to provide initial conditions for
 
 As can be seen from these formulas, the initial conditions for perturbations
  are specified as a multiple of the ZND solution.
- We found that such an initial condition minimizes the transient behavior
- in the time series of 
+ We found that such an initial condition minimizes the nonnormal transient
+ behavior in the time series of 
 \begin_inset Formula $\psi'$
 \end_inset
 
@@ -2357,7 +2357,7 @@ Truncate
 \end_inset
 
 .
- Truncation is necessary, for example, because all singular values 
+ Truncation is necessary, for example, if all singular values 
 \begin_inset Formula $\sigma_{i}$
 \end_inset
 
@@ -2374,7 +2374,11 @@ Truncate
 \end_inset
 
 .
- 
+ Later on we explain how 
+\begin_inset Formula $r$
+\end_inset
+
+ is chosen in this work.
 \end_layout
 
 \begin_layout Enumerate
@@ -2743,9 +2747,15 @@ a priori
 \end_inset
 
  will be larger than the rank of the ideal low-rank approximation, hence,
- the spurious eigenvalues will be present in the output of DMD (with even
- more severe consequences if, for example, instead of a complex-conjugate
- pair of eigenvalues only one real eigenvalue would be found).
+ the spurious eigenvalues will be present in the output of DMD.
+ The other possibility, with even more severe consequences, if, 
+\begin_inset Formula $r$
+\end_inset
+
+ is smaller than the ideal rank, then, instead of a complex-conjugate pair
+ of eigenvalues only one real eigenvalue could be found, which means, for
+ a real-valued input, that instead of having oscillatory exponential mode,
+ DMD finds purely exponentially growing or decaying mode.
  As we aim to apply DMD in Section
 \begin_inset space ~
 \end_inset
@@ -2789,7 +2799,15 @@ reference "eq:algorithm:ic"
 \begin_inset Formula $\TFinal=10$
 \end_inset
 
-, however they can be prolonged as described in section 
+, however, the solver can automatically increase 
+\begin_inset Formula $\TFinal$
+\end_inset
+
+ to 100 as described in Section
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:linearized-system"
@@ -2797,9 +2815,33 @@ reference "subsec:linearized-system"
 \end_inset
 
 .
- If the final time of the time series is larger than 10, then the cutoff
- time is 10, otherwise it is 1.
- Then, the input matrix 
+ If the final time of the time series is larger than 10, which occurs when
+ the solution is not strongly unstable, then the cutoff time is 10.
+ This time was chosen empirically during experiments on obtaining the neutral
+ stability curve for 
+\begin_inset Formula $\gamma=1.1$
+\end_inset
+
+ (see Subsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:results:neutral-curves"
+
+\end_inset
+
+).
+ If the final time is 
+\begin_inset Formula $10$
+\end_inset
+
+ or less, which happens for strongly unstable flows, then the cutoff time
+ is chosen to be unity, also empirically, to exclude initial nonnormal behavior
+ of the time series but to preserve less energetic modes.
+ Once the cutoff time is chosen, the input matrix 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:postproc:input-hankel-matrix"
@@ -2846,6 +2888,19 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 
 .
  Then if 
+\begin_inset Formula $0.95\leq\sigma_{k+1}/\sigma_{k}\leq1$
+\end_inset
+
+, then it is a strong indicator that 
+\begin_inset Formula $\sigma_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{k+1}$
+\end_inset
+
+ correspond to the complex-conjugate pair of eigenvalues.
+ Otherwise, if 
 \begin_inset Formula $\sigma_{k+1}/\sigma_{k}<0.95$
 \end_inset
 
@@ -2870,7 +2925,7 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \begin_inset Formula $\sigma_{k+1}$
 \end_inset
 
- is a spurious singular value.
+ might be a spurious singular value due to noise in the input data.
  For each rank from the list of all possible ranks we determine DMD decompositio
 n and compute the fit and residual errors 
 \begin_inset CommandInset ref
@@ -2901,14 +2956,32 @@ d the best.
 \end_inset
 
 .
- Once the best-rank DMD is determined, its eigenvalues that have the real
+ Once the best-rank DMD is determined, DMD eigenvalues that have the real
  part larger than 
 \begin_inset Formula $-1$
 \end_inset
 
  and positive imaginary part are saved as an output of the postprocessing
- algorithm sorted by the frequency and real part, so that the enumeration
- of modes is the same as in the normal-mode analysis.
+ algorithm sorted by the increasing frequency and real part, so that the
+ enumeration of modes is the same as in the normal-mode analysis.
+ Saving eigenvalues with real parts between 
+\begin_inset Formula $-1$
+\end_inset
+
+ and 0 is necessary to find neutral stability curves, particularly, in the
+ cases when the fundamental mode is less unstable than other modes.
+ For an example of a case like this, see Subsection
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:results:neutral-curves"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3033,7 +3106,9 @@ reference "eq:algorithm:postproc:example-2"
 \end_inset
 
 ).
- The added noise is to mimic the noise due to numerical simulation errors.
+ The added noise is to mimic the noise due to numerical simulation errors,
+ where we assume that a simulation error is dominated by truncation error
+ while round-off error is small.
 \end_layout
 
 \begin_layout Standard
@@ -3230,7 +3305,11 @@ name "fig:Comparison-of-FFT-DMD"
 
 \end_inset
 
-Comparison of FFT and DMD algorithms for analysis of time series 
+Comparison of FFT and DMD algorithms for the analysis of time series
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:postproc:example-2"
@@ -3247,7 +3326,7 @@ reference "eq:algorithm:postproc:example-2"
 status open
 
 \begin_layout Plain Layout
-Comparison of FFT and DMD algorithms for analysis of time series .
+Comparison of FFT and DMD algorithms for the analysis of time series.
 \end_layout
 
 \end_inset
@@ -3280,6 +3359,31 @@ The algorithm for extracting growth rates and frequencies of unstable modes
  of the length of the time series and the number of possible ranks.
  The typical time on a workstation with a Xeon processor is on the order
  of a minute.
+ A reader familiar with the DMD may question why we apply the algorithm
+ to the long time series
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:algorithm:postproc:time-series"
+
+\end_inset
+
+ while we could save the full solution on a grid at each time step and use
+ much shorter time series with tall and skinny input matrices 
+\begin_inset Formula $\mat X$
+\end_inset
+
+ and 
+\begin_inset Formula $\mat Y$
+\end_inset
+
+.
+ However, doing so does not alleviate the problems of choosing the best
+ low-rank approximation and deciding on the appropriate time length of the
+ input data to properly capture low-frequency modes.
  Besides, as we process only one-dimensional time series 
 \begin_inset CommandInset ref
 LatexCommand eqref
@@ -3556,7 +3660,8 @@ key "Sharpe1997"
 
 ) predicts that both of these cases have several unstable modes.
  In addition, the fundamental mode for the second case is purely exponential
- and has two branches.
+ and has two branches (namely, there are two eigenvalues with zero imaginary
+ parts).
 \end_layout
 
 \begin_layout Standard
@@ -4452,6 +4557,13 @@ filename "figures/comparison-with-normal-modes.tex"
 
 \begin_layout Subsection
 Neutral stability curves
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:results:neutral-curves"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
