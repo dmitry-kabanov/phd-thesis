@@ -886,11 +886,11 @@ Linear unsteady problem
 
 \begin_layout Standard
 Next, we introduce the vector of state variables 
-\begin_inset Formula $\vec z=(\rho,u,p,\lambda)^{\mathrm{T}}$
+\begin_inset Formula $\vec{z}=(\rho,u,p,\lambda)^{\mathrm{T}}$
 \end_inset
 
  and linearize it as well as the shock speed as 
-\begin_inset Formula $\vec z(x,t)=\vec{\bar{z}}(x)+\epsilon\vec z'(x,t)$
+\begin_inset Formula $\vec{z}(x,t)=\vec{\bar{z}}(x)+\epsilon\vec{z}'(x,t)$
 \end_inset
 
 , 
@@ -932,7 +932,7 @@ reference "eq:e1d:reaction"
 ), we obtain
 \begin_inset Formula 
 \begin{equation}
-\vec z'_{t}+\mat A(\bar{z})\vec z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'=0,\label{linearized-system}
+\vec{z}'_{t}+\mat A(\bar{z})\vec{z}'_{x}+\mat B(\vec{\bar{z}})\vec{z}'-\od{\vec{\bar{z}}}x\psi'=0,\label{linearized-system}
 \end{equation}
 
 \end_inset
@@ -1345,22 +1345,22 @@ reference "shock-evolution-equation"
 ) to a system of ODEs: 
 \begin_inset Formula 
 \begin{align}
-\od{z'_{i}}t & =-\widehat{L}(\vec{\bar{z}},\vec z'),\quad i=1,\dots,N-1,\label{eq:numalg:gov}\\
-\od{M'}t & =\widehat{s}\left(\vec{\bar{z}},\vec z'\right),\label{eq:numalg:sheveq}
+\od{z'_{i}}t & =-\widehat{L}(\vec{\bar{z}},\vec{z}'),\quad i=1,\dots,N-1,\label{eq:numalg:gov}\\
+\od{M'}t & =\widehat{s}\left(\vec{\bar{z}},\vec{z}'\right),\label{eq:numalg:sheveq}
 \end{align}
 
 \end_inset
 
 where 
-\begin_inset Formula $\widehat{L}(\vec{\bar{z}},\vec z')$
+\begin_inset Formula $\widehat{L}(\vec{\bar{z}},\vec{z}')$
 \end_inset
 
  and 
-\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec z')$
+\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec{z}')$
 \end_inset
 
  are approximations of 
-\begin_inset Formula $L(\vec{\bar{z}},\vec z',\vec z'_{x})=\mat A(\bar{\vec z})\vec z'_{x}+\mat B(\vec{\bar{z}})\vec z'-\od{\vec{\bar{z}}}x\psi'$
+\begin_inset Formula $L(\vec{\bar{z}},\vec{z}',\vec{z}'_{x})=\mat A(\bar{\vec{z}})\vec{z}'_{x}+\mat B(\vec{\bar{z}})\vec{z}'-\od{\vec{\bar{z}}}x\psi'$
 \end_inset
 
  from 
@@ -1371,7 +1371,7 @@ reference "linearized-system"
 \end_inset
 
  and 
-\begin_inset Formula $s(\vec{\bar{z}},\vec z',\vec z'_{x})$
+\begin_inset Formula $s(\vec{\bar{z}},\vec{z}',\vec{z}'_{x})$
 \end_inset
 
  from 
@@ -1535,7 +1535,7 @@ Once the spatial derivatives are approximated over the grid,
  is found using the global Lax–Friedrichs flux: 
 \begin_inset Formula 
 \begin{equation}
-\widehat{L}(\vec{\bar{z}},\vec z')=L\left(\vec{\bar{z}},\vec z',\frac{\vec z_{x}'^{-}+\vec z_{x}'^{+}}{2}\right)-\alpha\frac{\vec z_{x}'^{+}-\vec z_{x}'^{-}}{2},\label{eq:algorithm:lf-flux}
+\widehat{L}(\vec{\bar{z}},\vec{z}')=L\left(\vec{\bar{z}},\vec{z}',\frac{\vec{z}_{x}'^{-}+\vec{z}_{x}'^{+}}{2}\right)-\alpha\frac{\vec{z}_{x}'^{+}-\vec{z}_{x}'^{-}}{2},\label{eq:algorithm:lf-flux}
 \end{equation}
 
 \end_inset
@@ -1594,7 +1594,7 @@ reference "eq:algorithm:lf-flux"
 \end_inset
 
 , 
-\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec z')$
+\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec{z}')$
 \end_inset
 
  is found using the approximation of 
@@ -1613,11 +1613,11 @@ reference "eq:numalg:z_x-N"
 
 \begin_layout Standard
 Once 
-\begin_inset Formula $\widehat{L}(\vec{\bar{z}},\vec z')$
+\begin_inset Formula $\widehat{L}(\vec{\bar{z}},\vec{z}')$
 \end_inset
 
  and 
-\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec z')$
+\begin_inset Formula $\widehat{s}(\vec{\bar{z}},\vec{z}')$
 \end_inset
 
  are evaluated on the whole grid, the system (
@@ -1707,7 +1707,7 @@ reference "subsec:algorithm:postproc"
 
 \begin_layout Standard
 We also need to provide initial conditions for 
-\begin_inset Formula $\vec z'$
+\begin_inset Formula $\vec{z}'$
 \end_inset
 
  and 
@@ -2183,13 +2183,14 @@ Suppose that we have a time series of the snapshots of the state of some
  dynamical system: 
 \begin_inset Formula 
 \begin{equation}
+[\vec{x}_{0},\dots,\vec{x}_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
 [\vec x_{0},\dots,\vec x_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $\vec x_{i}\in\R^{m}$
+\begin_inset Formula $\vec{x}_{i}\in\R^{m}$
 \end_inset
 
  for all 
@@ -2197,7 +2198,7 @@ where
 \end_inset
 
 , and 
-\begin_inset Formula $\vec x_{i}$
+\begin_inset Formula $\vec{x}_{i}$
 \end_inset
 
  being a snapshot of the system state.
