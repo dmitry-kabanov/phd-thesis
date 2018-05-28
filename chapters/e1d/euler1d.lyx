@@ -2184,7 +2184,6 @@ Suppose that we have a time series of the snapshots of the state of some
 \begin_inset Formula 
 \begin{equation}
 [\vec{x}_{0},\dots,\vec{x}_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
-[\vec x_{0},\dots,\vec x_{n}]^{\T},\label{eq:algorithm:postproc:given-time-series}
 \end{equation}
 
 \end_inset
@@ -2236,7 +2235,7 @@ ns that, when combined, represent the time evolution of the dynamical system.
 To proceed, we define matrices 
 \begin_inset Formula 
 \begin{equation}
-\mat X=[x_{0},\dots,x_{n-1}]^{\T},\quad\mat Y=[x_{1},\dots,x_{n}]^{\T}\label{eq:algorithm:postproc:input-matrices}
+\mat X=[\vec x_{0},\dots,\vec x_{n-1}]^{\T},\quad\mat Y=[\vec x_{1},\dots,\vec x_{n}]^{\T}\label{eq:algorithm:postproc:input-matrices}
 \end{equation}
 
 \end_inset
@@ -2506,7 +2505,7 @@ reference "eq:algorithm:postproc:given-time-series"
 \end_inset
 
 where 
-\begin_inset Formula $\vec b=\mat{\Phi}^{\dagger}\vec x_{0}$
+\begin_inset Formula $\vec{b}=\mat{\Phi}^{\dagger}\vec{x}_{0}$
 \end_inset
 
  is the vector of the initial amplitudes of DMD modes.
@@ -2530,7 +2529,7 @@ To measure the quality of low-rank approximation, the relative error
  are computed: 
 \begin_inset Formula 
 \begin{equation}
-e_{\text{DMD}}=\frac{\norm{\widehat{x}-x}_{2}}{\norm x_{2}},\quad e_{\text{resid}}=\norm{Y-\Phi\Lambda\Phi^{\dagger}X}_{2}.\label{eq:algorithm:postproc:errors}
+e_{\text{DMD}}=\frac{\norm{\widehat{\vec x}-\vec x}_{2}}{\norm{\vec x}_{2}},\quad e_{\text{resid}}=\norm{\mat Y-\mat{\Phi}\mat{\Lambda}\mat{\Phi}^{\dagger}\mat X}_{2}.\label{eq:algorithm:postproc:errors}
 \end{equation}
 
 \end_inset
