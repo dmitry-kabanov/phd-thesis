@@ -1,0 +1,147 @@
+% ---------------------------------------------------------------
+The English could use some polish; e.g.: English has these things
+known as articles.
+
+I suggest you fix this in introduction or conclusion subsections,
+and do not worry to much in the very technical parts.
+
+% ---------------------------------------------------------------
+Below (2.39) in page 42
+
+ "We found that a simple evaluation of $L$ was not enough to
+  guarantee numerical stability of simulations, hence the use
+  of the LaxÐFriedrichs flux in (2.38)."
+
+A bit more explanation would be useful. Why does (2.38) fix the
+problem? What was the problem?
+Otherwise it sounds a bit too much like cook-book.
+
+% ---------------------------------------------------------------
+Below (2.40) in page 43
+
+ "We found that such an initial condition minimizes the transient
+  behavior in the time series of $\psi^\prime$ at early times."
+
+Do you know why? If so, say it.
+
+% ---------------------------------------------------------------
+Below (2.44) in page 47
+ Item 2
+ "Truncation is necessary, for example, because all singular
+ values $\sigma_i$ in $\Sigma$ with $i > r$ are due to the noise
+ in matrix $X$."
+
+I think that you mean to say:
+ Truncation is necessary, for example, if all the singular
+ values $\sigma_i$ in $\Sigma$ with $i > r$ are due to noise
+ in the matrix $X$.
+
+A related question: but how do you find $r$?
+ At the very least you should say here "later on we will
+ explain how we determine $r$."
+
+... which you do 3 pages later [in page 50]
+
+% ---------------------------------------------------------------
+Page 50, third line from the top and below:
+
+ "with even more severe consequences if, for example, instead
+  of a complex-conjugate pair of eigenvalues only one real
+  eigenvalue would be found"
+
+This is poorly explained. I have no idea of what you are talking
+about. Do not try to put everything into a single sentence. Split
+and then explain a little better.
+
+% ---------------------------------------------------------------
+Page 50, middle of the page
+
+ "If the final time of the time series is larger than 10, then
+  the cutoff time is 10, otherwise it is 1."
+
+Please, explain why this. There must be a reason for this, what
+is it? Even when you do trial and error, there is a reason for
+the final pick.
+
+This keeps happening! You throw threshold numbers without any
+explanation at all. These thresholds are crucial elements in the
+computation. If they are arbitrary [which I assume they are not],
+then the credibility of the final answer is nil. Hence it is rather
+important that you give some argument to justify their choice.
+A little below you argue that
+
+  $\sigma_{k+1}/\sigma_k < 0.95$ provides a sufficient
+  gap between eigenvalues to indicate $\sigma_{k+1}$ is spurious.
+
+To me it sounds like 0.95 is pretty close to one. Why is this a
+large gap? If you are looking at continuum spectrum, and you have
+good resolution, a gap like this could be significant. But if it
+is discrete, why?
+
+Bottom of page
+  "eigenvalues that have the real part larger than $-1$ and
+   positive imaginary part are saved ..."
+
+I understand why only positive imaginary part [they come in
+complex conjugate pairs], but why real part > -1? For instability
+> 0 is what you need. So, ok, you want to see a bit of what is
+hiding on the other side of the imaginary axis. But why -1 and
+not -10, or -pi ... what makes "-1" your choice?
+
+
+% ---------------------------------------------------------------
+Page 51, above (2.50)
+
+   "... such that the noise is proportional to the signal:"
+
+Is this realistic? In a numerical computation I would expect that
+the "noise" is controlled by two things: round-off and truncation.
+
+Here you are assuming that it is all truncation. This is perhaps
+correct, as round-off would become significant closer to the
+machine precision. What are you using?  16 digits?
+Adding a statement saying that you expect the errors to be
+controlled by truncation, and not round off, might be useful.
+
+% ---------------------------------------------------------------
+Page 53, bottom:
+
+   "Besides, as we process only one-dimensional time series
+   (2.41), without having to save the full solution on the
+   numerical grid for each time step, there is a substantial
+   saving in terms of disk space and corresponding input-output
+   operations."
+
+This is a good place for a question I have been meaning to ask:
+
+ Is there any advantage in storing a very long time series for
+ just one variable, as opposed to storing many variables, but
+ for a shorter time period?
+
+ The second would make the needed numerical solve shorter. Thus,
+ in principle, you could do it more accurately and reduce noise.
+
+ I think that you should explain why you decided to keep just
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ one time series, while in fact the method, as presented in (2.42)
+ page 46 and forward, assumes that you keep quite a bit more.
+
+
+% ---------------------------------------------------------------
+Page 56, below table
+
+ "In addition, the fundamental mode for the second case is
+  purely exponential and has two branches."
+
+What do you mean "two branches"? That the eigenvalue corresponds
+to a two dimensional eigenspace?
+Or that there are two different but very close eigenvalues?
+[I think it is the second, but you should explain].
+
+
+% ---------------------------------------------------------------
+Page 141, this link does not work
+
+https://github.com/dmitry-kabanov/euler1d-reproducibility.
+
+
