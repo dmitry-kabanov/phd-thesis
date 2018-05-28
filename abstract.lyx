@@ -321,7 +321,7 @@ Detonation is a supersonic mode of combustion that is modeled by a system
  describing thermodynamic and chemical properties of the fluid.
  Mathematically, these governing equations admit steady-state travelling-wave
  solutions consisting of leading shock wave followed by a reaction zone.
- However, such solutions are often unstable to small perturbations and rarely
+ However, such solutions are often unstable to perturbations and rarely
  observed in laboratory experiments.
 \end_layout
 
