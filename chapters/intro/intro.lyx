@@ -2162,19 +2162,60 @@ Solve the obtained linear linear unsteady problem numerically recording
 
 \begin_layout Enumerate
 Finally, postprocess the resultant time series to extract the growth rates
- and frequencies (stability spectrum).
+ and frequencies (stability spectrum), assuming that the perturbations can
+ be decomposed into a linear decomposition of complex exponential functions:
+\begin_inset Formula 
+\[
+\psi'(t)=\sum_{i=0}^{N}c_{i}\left(\exp\left(\alpha_{i}t\right)+\exp\left(\alpha_{i}^{*}t\right)\right),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{i}$
+\end_inset
+
+ is the amplitude of the 
+\begin_inset Formula $i$
+\end_inset
+
+th mode, 
+\begin_inset Formula $\alpha_{i}\in\mathbb{C}$
+\end_inset
+
+, and 
+\begin_inset Formula $\alpha_{i}^{*}$
+\end_inset
+
+ is the complex-conjugate of 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i=0,\dots,N$
+\end_inset
+
+.
+ Correspondingly the real and imaginary parts of 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ are the growth rates and the frequencies of the linear perturbations.
 \end_layout
 
 \begin_layout Standard
 It is crucial that the last step (postprocessing) is done as efficiently
  as possible.
  In the early stages of this work we planned to achieve this goal using
- nonlinear least-squares method, however, in the case when the time series
- of the perturbation of detonation velocity contain multiple modes growing
- and decaying at different rates, it is become difficult to choose an initial
- guess required by the nonlinear method.
- Further research of the methods applicable for extracting of the growth
- rates and frequencies led us to the Prony's method
+ the nonlinear least-squares (NLS) method.
+ However, in the case when the time series of the perturbation of detonation
+ velocity contain multiple modes growing and decaying at different rates,
+ it is difficult to choose an initial guess required by the NLS method:
+ optimization solver can easily stop at a local minimum far from the global
+ minimum for some particular initial guess.
+ Hence, NLS method was discarded as not robust enough for the present work.
+ Further research of the methods applicable for extracting the growth rates
+ and frequencies led us to the Prony's method
 \begin_inset space ~
 \end_inset
 
@@ -2185,9 +2226,9 @@ key "Hildebrand1987"
 
 \end_inset
 
-, which is the method (actually predating the Fourier method) for decomposition
- of the time series into the linear combination of complex-valued exponential
- functions.
+, which is a special method (actually predating the Fourier method) for
+ decomposition of the time series into a linear combination of complex-valued
+ exponential functions.
  However, its application did not yield much success as we were not able
  to extract multiple exponential functions due to numerical instabilities.
 \end_layout

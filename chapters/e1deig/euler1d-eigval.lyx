@@ -1098,7 +1098,7 @@ reference "linearized-system"
 \end_inset
 
 ), but with 
-\begin_inset Formula $\vec z=(\rho,u,p,\lambda_{1},\lambda_{2})^{\mathrm{T}}$
+\begin_inset Formula $\vec{z}=(\rho,u,p,\lambda_{1},\lambda_{2})^{\mathrm{T}}$
 \end_inset
 
  and with the coefficients matrices being redefined:
@@ -1610,7 +1610,7 @@ reference "eq:numalg:gov"
 
  have jump discontinuities at the sonic point, hence, discontinuous perturbation
 s.
- In addition, we noticed that the upwind method (
+ In addition, we noticed that the fifth-order upwind method (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:numal:upwind5-left"

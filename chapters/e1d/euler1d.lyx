@@ -1649,6 +1649,8 @@ key "HairerEtAl1993"
 \end_inset
 
 .
+ Such strict tolerances were chosen to minimize any influence of the errors
+ due to integration in time on the solution.
 \end_layout
 
 \begin_layout Standard
@@ -1679,7 +1681,11 @@ Simulation proceeds to the final time
 \begin_inset Formula $L_{2}$
 \end_inset
 
--norms of the time series for 
+-norms of 
+\begin_inset Formula $\psi'(t)$
+\end_inset
+
+ for 
 \begin_inset Formula $\TFinal/2\leq t\leq\TFinal$
 \end_inset
 
@@ -1799,9 +1805,9 @@ reference "RH-conditions-linearized"
 \end_inset
 
 .
- At the downstream end, no boundary condition should be specified for the
- system, however, boundary treatment is necessary for the finite-difference
- computations (
+ At the downstream (left) end, no boundary condition should be specified
+ for the system, however, boundary treatment is necessary for the finite-differe
+nce computations (
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Laney1998"
@@ -1834,6 +1840,23 @@ reference "eq:numalg:upwind5-right"
 \end_inset
 
 ) three ghost points are needed.
+ Such a boundary treatment formally is only first-order accurate and introduces
+ spurious waves reflected from the downstream boundary.
+ However, for sufficiently large computational domains, 
+\begin_inset Formula $C_{+}-$
+\end_inset
+
+characteristics moving with speed 
+\begin_inset Formula $\bar{u}-\bar{D}+\bar{c}$
+\end_inset
+
+ are almost vertical near this boundary, and, therefore, this spurious acoustic
+ noise does not reach the shock and does not corrupt the time series of
+ 
+\begin_inset Formula $\psi'$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -3518,7 +3541,7 @@ reference "fig:results:simple:znd-solutions"
 \end_inset
 
 , the case 
-\begin_inset Formula $Q=50$
+\begin_inset Formula $Q=10$
 \end_inset
 
  corresponds to a strongly unstable solution, while all other values of

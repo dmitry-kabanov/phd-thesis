@@ -1595,7 +1595,7 @@ eqref{eq:fm:math-model:gov-eqn-saf:system-conservative}
 
 \end_inset
 
-, we use second-order Godunov-type method with the MUSCL flux limiter
+, we use second-order MUSCL scheme with the minmod flux limiter
 \begin_inset space ~
 \end_inset
 
@@ -1611,57 +1611,141 @@ key "LeVeque2002"
 \end_layout
 
 \begin_layout Standard
-Godunov-type methods are conservative numerical methods which for the hyperbolic
- system
+MUSCL scheme belongs to the family of the Godunov-type methods which are
+ conservative numerical methods for the numerical solution of a hyperbolic
+ system:
 \begin_inset Formula 
 \[
-\vec{z}_{t}+\vec{f}(\vec{u})_{x}=0
+\vec{z}_{t}+\vec{f}(\vec z)_{x}=0
 \]
 
 \end_inset
 
-with vector of unknowns 
-\begin_inset Formula $\vec{u}\in\R^{n}$
+with 
+\begin_inset Formula $\vec z\in\R^{n}$
 \end_inset
 
- and flux function 
-\begin_inset Formula $\vec{f}:\R^{n}\to\R^{n}$
+ being the vector of unknowns and 
+\begin_inset Formula $\vec f:\R^{n}\to\R^{n}$
+\end_inset
+
+ being the flux function.
+ Partitioning computational domain into computational cells 
+\begin_inset Formula $[x_{i-1/2},x_{i+1/2}]$
 \end_inset
 
  lead to a semidiscretized scheme:
 \begin_inset Formula 
 \[
-\frac{d\vec{Z}_{i}}{dt}=-\frac{\DeltaT}{\DeltaX}\left(\vec{F}_{i+1/2}-\vec{F}_{i-1/2}\right),
+\od{\bar{\vec z}_{i}}t=-\frac{\DeltaT}{\DeltaX}\left(\vec{F}_{i+1/2}-\vec{F}_{i-1/2}\right),
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $\vec{Z}_{i}$
+\begin_inset Formula $\bar{\vec z}_{i}$
 \end_inset
 
- is an average of 
-\begin_inset Formula $\vec{z}$
+ is the average value of 
+\begin_inset Formula $\vec z$
 \end_inset
 
  for the computational cell centered at 
 \begin_inset Formula $x_{i}$
 \end_inset
 
- and fluxes at the cell boundaries 
+, and the fluxes at the cell boundaries 
 \begin_inset Formula $\vec{F}_{i+1/2}$
 \end_inset
 
- are computed after finding 
-\begin_inset Formula $\vec{U}_{i+1/2}$
+ are approximated by reconstructing 
+\begin_inset Formula $\vec z_{i+1/2}$
 \end_inset
 
- through the solution of the Riemann problem with initial conditions
+.
+ The reconstruction is done through the solution of the Riemann problem
+ with the initial conditions
 \begin_inset Formula 
 \[
-\vec{Z}_{i+1/2}=\begin{cases}
-\vec{Z}_{L}=\vec{Z}_{i}, & x<x_{i+1/2},\\
-\vec{Z}_{R}=\vec{Z}_{i+1}, & x>x_{i+1/2.}
+\vec z_{i+1/2}=\begin{cases}
+\vec z_{L} & x<x_{i+1/2},\\
+\vec z_{R}, & x>x_{i+1/2},
+\end{cases}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\vec z_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec z_{R}$
+\end_inset
+
+ are given right on the left and the right of 
+\begin_inset Formula $x_{i+1/2}$
+\end_inset
+
+, respectively.
+ For a second-order scheme, they are found by assuming linear distribution
+ of 
+\begin_inset Formula $z_{i}(x)$
+\end_inset
+
+ in the cell 
+\begin_inset Formula $[x_{i-1/2};x_{i+1/2}]$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\vec z_{i}(x)=\bar{\vec z}_{i}+\vec{\sigma}_{i}(x-x_{i}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\vec{\sigma}_{i}$
+\end_inset
+
+ is the slope of the linear reconstruction, therefore,
+\begin_inset Formula 
+\begin{align*}
+\vec z_{L} & =\bar{\vec z}_{i-1}+\vec{\sigma}_{i-1}\frac{\DeltaX}{2},\\
+\vec z_{R} & =\bar{\vec z}_{i}-\vec{\sigma}_{i}\frac{\DeltaX}{2}.
+\end{align*}
+
+\end_inset
+
+For the second-order MUSCL schemes, 
+\begin_inset Formula $\vec{\sigma}_{i}=\vec{\sigma}_{i}\left(\bar{\vec z}_{i}-\bar{\vec z}_{i-1},\bar{\vec z}_{i+1}-\bar{\vec z}_{i}\right)$
+\end_inset
+
+.
+ We compute 
+\begin_inset Formula $\vec{\sigma}_{i}$
+\end_inset
+
+ using the minmod flux limiter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "LeVeque2002"
+
+\end_inset
+
+.
+ The formula for its computation is given componentwise below: 
+\begin_inset Formula 
+\[
+\sigma_{i}(a,b)=\begin{cases}
+\min(a,b)/\DeltaX, & \text{if }a>0,b>0,\\
+\max(a,b)/\DeltaX, & \text{if }a<0,b<0,\\
+0, & \text{if }ab<0.
 \end{cases}
 \]
 
@@ -1672,7 +1756,7 @@ where
 
 \begin_layout Standard
 For the model under consideration, solution 
-\begin_inset Formula $\vec{Z}_{i+1/2}$
+\begin_inset Formula $\vec z_{i+1/2}$
 \end_inset
 
  of the Riemann problem corresponds to some state 
@@ -1699,6 +1783,10 @@ For the model under consideration, solution
 
 \begin_layout Standard
 Once all the local Riemann problem is solved over the whole grid, fluxes
+ 
+\begin_inset Formula $\vec F_{i+1/2}$
+\end_inset
+
  at the edges 
 \begin_inset Formula $x_{i+1/2}$
 \end_inset
@@ -1738,7 +1826,7 @@ Once all the local Riemann problem is solved over the whole grid, fluxes
 \begin_inset Formula $\lambda$
 \end_inset
 
-.
+ for the chosen ambient conditions.
 \end_layout
 
 \begin_layout Subsection
@@ -2577,9 +2665,9 @@ key "Gottlieb2008"
 
 are more appropriate for the problem at hand as we expect internal shock
  being generated inside the reaction zone.
- However, for the reactive flow adaptive step size is a crucial component
- of the time integrator, as one cannot rely on the Courant–Friedrichs–Lewy
- condition
+ However, for the reactive flow error estimation and consequently adaptive
+ choice of a time step are crucial components of a time integrator, as one
+ cannot rely on the Courant–Friedrichs–Lewy condition
 \begin_inset space ~
 \end_inset
 
@@ -2590,7 +2678,8 @@ key "Courant1928"
 
 \end_inset
 
- in computations of time step due to the presence of the chemical reactions.
+ in the computations of the time step due to the presence of the chemical
+ reactions.
  Presence of the adaptive-step DOPRI5 integrator in the numerical environment
  that we use, hence, determined the choice of the time integrator.
  We set relative tolerance to 
