@@ -173,8 +173,8 @@ r irreversible monomolecular reaction
 \end_inset
 
 such that the molar masses of both species are the same.
- This model is ubiquitously used in the research on stability of detonations
- beginning with 
+ This model is ubiquitously used in research on stability of detonations;
+ it was first used by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Erpenbeck1964"
@@ -190,16 +190,16 @@ key "LeeStewart1990,ShortStewart1998,Sharpe1997"
 \end_inset
 
 ) for its linear stability properties.
- However, one should be aware that despite of the simplicity of the model,
+ However, one should be aware that despite the simplicity of the model,
  its analysis via normal modes is complicated: postulation of the normal-mode
  solution of the governing equations linearized about a base steady-state
  solution leads to the two-point boundary-value problem for a system of
  ordinary differential equations (ODEs) with one boundary at the shock state
  and the other boundary in the equilibrium state at the end of the reaction
  zone, in which the system of ODEs becomes singular.
- Besides, due to the first-order of the reaction, the reaction zone length
- is infinite, such that one has to truncate the computational domain at
- some point and formulate an approximate boundary condition at the 
+ Furthermore, due to the first-order of the reaction, the reaction zone
+ length is infinite, such that one must truncate the computational domain
+ at some point and formulate an approximate boundary condition at the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -209,12 +209,12 @@ practical
 
  end of the reaction zone, which demands that perturbations are bounded
  (boundedness condition).
- After that one has to integrate the system numerically as it is with variable
- coefficients due to the nonconstant base steady state and obtain the eigenvalue
-s of the problem (stability spectra) with positive real parts indicating
+ After that one must integrate the system numerically, as it has variable
+ coefficients due to the nonconstant base steady state, and obtain the eigenvalu
+es of the problem (stability spectrum) with positive real parts indicating
  the growth of the amplitude of the perturbations with time and hence, instabili
 ty.
- Finding eigenvalues is done using shooting method
+ The eigenvalues are determined using the shooting method
 \begin_inset space ~
 \end_inset
 
@@ -226,15 +226,22 @@ key "PressEtAl2007"
 \end_inset
 
  and there are two options here: start at the shock and integrate towards
- chemical-equilibrium boundary ensuring that the boundedness condition is
- satisfied (an approach taken by 
+ the chemical-equilibrium boundary ensuring that the boundedness condition
+ is satisfied (an approach taken by 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "LeeStewart1990,ShortStewart1998"
+key "LeeStewart1990"
 
 \end_inset
 
-) or start at the 
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ShortStewart1998"
+
+\end_inset
+
+), or start at the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -243,8 +250,8 @@ practical
 \end_inset
 
  equilibrium boundary using asymptotic expansions to obtain the approximate
- values of state variables as an initial condition for the shooting method
- and integrate towards the shock (approach used by 
+ values of the state variables as an initial condition for the shooting
+ method and integrate towards the shock (approach used by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Sharpe1997"
@@ -252,36 +259,26 @@ key "Sharpe1997"
 \end_inset
 
 ) ensuring that the Rankine–Hugoniot conditions are satisfied at the shock.
- Both approaches are complicated in a sense that they require a special
- treatment of the singularity.
+ Both approaches are complicated as they require a special treatment of
+ the singularity.
 \end_layout
 
 \begin_layout Standard
-Our aim here to develop a new method of linear stability analysis and apply
+Our aim is to develop a new method of linear stability analysis and apply
  it to this model.
- The method avoids dealing with singularity as the linearized equations
- for perturbations are unsteady and nonsingular.
+ One key advantage of the method over the normal-mode approach is that it
+ avoids dealing with singular ODEs—instead, the stability problem is based
+ on the linear nonsingular partial differential equations for the perturbations
+ of the steady-state solutions.
  We fully explain in this chapter the method including the formulation of
  the governing equations in the shock-attached frame, formulation of the
  linear unsteady problem, numerical methods used to solve it, and the method
- of postprocessing via dynamic mode decomposition
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Schmid2010"
-
-\end_inset
-
- the results of computations to extract stability spectra, namely, growth
- rates and frequencies (stability spectra) of the linear perturbations,
- which are solutions of the linear unsteady problem.
+ of postprocessing the results of computations to extract, growth rates
+ and frequencies (stability spectra) of the linear perturbations.
  Particularly, we show that the time series of the perturbation of detonation
- velocity are enough to extract stability spectra without the need to postproces
-s the full solution of the linear unsteady problem.
- Numerous stability results obtained by other researchers using normal-mode
+ velocity are sufficient to extract stability spectra without the need to
+ postprocess the full solution of the linear unsteady problem.
+ Numerous stability results obtained by other researchers using the normal-mode
  approach allow us to verify the method.
 \end_layout
 
@@ -302,10 +299,10 @@ The one-dimensional reactive Euler equations for this system with one-step
  augmented with the balance law for the reaction progress variable:
 \begin_inset Formula 
 \begin{align}
-\rho_{t}+\left(\rho u\right)_{x} & =0,\label{eq:e1d:mass-1}\\
-\left(\rho u\right)_{t}+\left(\rho u^{2}+p\right)_{x} & =0,\label{eq:e1d:momentum-1}\\
-\left(\rho e\right)_{t}+\left(\rho ue+pu\right)_{x} & =0,\label{eq:e1d:energy-1}\\
-\left(\rho\lambda\right)_{t}+\left(\rho u\lambda\right)_{x} & =\rho\omega,\label{eq:e1d:reaction-1}
+\rho_{t^{\ell}}+\left(\rho u\right)_{x^{\ell}} & =0,\label{eq:e1d:mass-1}\\
+\left(\rho u\right)_{t^{\ell}}+\left(\rho u^{2}+p\right)_{x^{\ell}} & =0,\label{eq:e1d:momentum-1}\\
+\left(\rho e\right)_{t^{\ell}}+\left(\rho ue+pu\right)_{x^{\ell}} & =0,\label{eq:e1d:energy-1}\\
+\left(\rho\lambda\right)_{t^{\ell}}+\left(\rho u\lambda\right)_{x^{\ell}} & =\rho\omega,\label{eq:e1d:reaction-1}
 \end{align}
 
 \end_inset
@@ -330,13 +327,17 @@ where
 \begin_inset Formula $\lambda$
 \end_inset
 
-, 
+, and
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset Formula $\omega$
 \end_inset
 
  are density, flow velocity, pressure, total specific energy, reaction progress
  variable, and reaction rate, respectively.
- Reaction progress variable 
+ The reaction progress variable 
 \begin_inset Formula $\lambda$
 \end_inset
 
@@ -352,7 +353,8 @@ where
 \begin_inset Formula $\lambda$
 \end_inset
 
- varies from zero in nonreacted state to unity in the fully reacted state).
+ varies from zero in the nonreacted state to unity in the fully reacted
+ state).
  The specific total energy is 
 \begin_inset Formula $e=e_{\text{i}}+u^{2}/2$
 \end_inset
@@ -431,11 +433,7 @@ reference "eq:e1d:reaction-1"
 \begin_inset Formula $D=D(t^{\ell})>0$
 \end_inset
 
-, where 
-\begin_inset Formula $t^{\ell}$
-\end_inset
-
- is time, from initial position 
+ from the initial position 
 \begin_inset Formula $x_{0}^{\ell}=0$
 \end_inset
 
@@ -444,16 +442,15 @@ reference "eq:e1d:reaction-1"
 \end_inset
 
 .
- Then the transformation to the shock-attached frame is defined by equations
+ Therefore, the transformation to the shock-attached frame is defined by
 \begin_inset Formula 
 \begin{align*}
-x & =x^{\ell}-x_{\mathrm{s}}^{\ell}=x^{\ell}-\int_{0}^{t^{\ell}}D(\tau)\,\dd\tau,\\
-t & =t^{\ell},
+x & =x^{\ell}-x_{\mathrm{s}}^{\ell}=x^{\ell}-\int_{0}^{t^{\ell}}D(\tau)\,\dd\tau,\quad t=t^{\ell},
 \end{align*}
 
 \end_inset
 
-such that position of the shock in the shock-attached frame is 
+such that the position of the shock in the shock-attached frame is 
 \begin_inset Formula $x_{\mathrm{s}}=0$
 \end_inset
 
@@ -462,7 +459,24 @@ such that position of the shock in the shock-attached frame is
 \end_inset
 
 .
- Then the governing equations in the shock-attached frame are
+ Consequently, by applying the chain rule to express partial derivatives
+ with respect to 
+\begin_inset Formula $t^{\ell}$
+\end_inset
+
+ and 
+\begin_inset Formula $x^{\ell}$
+\end_inset
+
+ in terms of the derivatives with respect to 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $x$
+\end_inset
+
+, the governing equations in the shock-attached frame are
 \begin_inset Formula 
 \begin{align}
 \rho_{t}+\left(\rho\left(u-D\right)\right)_{x} & =0,\label{eq:e1d:mass}\\
@@ -495,7 +509,7 @@ reference "eq:e1d:reaction"
 \begin_inset Formula $D$
 \end_inset
 
- which is present explicitly in the equations.
+ as it appears explicitly in the equations.
  For this purpose, we use the equation derived in 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -503,7 +517,7 @@ key "TaylorKasimovStewart2009"
 
 \end_inset
 
- by specializing it to one dimension: 
+ by specializing it to one dimension:
 \begin_inset Formula 
 \begin{equation}
 \od Mt=s,\label{eq:shock-change}
@@ -620,25 +634,25 @@ Ambient state ahead of the shock is given by density
 \end_layout
 
 \begin_layout Standard
-All equations are nondimensionalized using upstream scales, also called
- Erpenbeck scales, namely, density scale is 
+All equations are nondimensionalized using upstream scales (Erpenbeck scales),
+ the density scale is 
 \begin_inset Formula $\rho_{\text{a}}$
 \end_inset
 
-, pressure scale is 
+, the pressure scale is 
 \begin_inset Formula $p_{\text{a}}$
 \end_inset
 
-, velocity scale is 
+, the velocity scale is 
 \begin_inset Formula $\sqrt{p_{\text{a}}/\rho_{\text{a}}}$
 \end_inset
 
-, energy scale is 
+, the energy scale is 
 \begin_inset Formula $RT_{\text{a}}$
 \end_inset
 
-, length scale is the length of the steady-state half-reaction zone, and
- the characteristic time scale is the length scale divided by the velocity
+, the length scale is the length of the steady-state half-reaction zone,
+ and the characteristic time scale is the length scale divided by the velocity
  scale.
  In these scales equations retain their form.
 \end_layout
@@ -648,7 +662,8 @@ ZND solution
 \end_layout
 
 \begin_layout Standard
-The steady-state traveling-wave solution of the equations (
+The ZND solution is the steady-state traveling-wave solution of the equations
+ (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:e1d:mass"
@@ -662,22 +677,13 @@ reference "eq:e1d:reaction"
 
 \end_inset
 
-) is the ZND solution that travels to the right with constant speed 
+) with the detonation wave travelling to the right with constant velocity
+ 
 \begin_inset Formula $\DZnd$
 \end_inset
 
-, which reduces to the algebraic-differential problem:
-\begin_inset Formula 
-\begin{align}
-\rhoZnd\UZnd & =-\rhoA\DZnd,\label{eq:e1d:znd-mass}\\
-\pZnd+\rhoZnd\UZnd^{2} & =\pA+\rhoA\DZnd^{2},\nonumber \\
-\eZnd+\frac{\pZnd}{\rhoZnd}+\frac{\UZnd^{2}}{2} & =\eA+\frac{\pA}{\rhoA}+\frac{\DZnd^{2}}{2},\nonumber \\
-\od{\lambdaZnd}x & =\frac{\bar{\omega}}{\bar{U}},\label{eq:e1d:znd-lambda}
-\end{align}
-
-\end_inset
-
-where we denote steady-state quantities using 
+.
+ In the following, the steady-state quantities are denoted with the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -686,7 +692,36 @@ bar
 \end_inset
 
  symbol.
- The algebraic expressions (
+ Under the assumption of steadiness, the system
+\begin_inset space ~
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:mass"
+
+\end_inset
+
+–
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:e1d:reaction"
+
+\end_inset
+
+) reduces to the algebraic-differential problem:
+\begin_inset Formula 
+\begin{align}
+\rhoZnd\UZnd & =-\rhoA\DZnd,\label{eq:e1d:znd-mass}\\
+\pZnd+\rhoZnd\UZnd^{2} & =\pA+\rhoA\DZnd^{2},\nonumber \\
+\eZnd+\frac{\pZnd}{\rhoZnd}+\frac{\UZnd^{2}}{2} & =\eA+\frac{\pA}{\rhoA}+\frac{\DZnd^{2}}{2},\nonumber \\
+\od{\lambdaZnd}x & =\frac{\bar{\omega}}{\bar{U}}.\label{eq:e1d:znd-lambda}
+\end{align}
+
+\end_inset
+
+The algebraic expressions (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:e1d:znd-mass"
@@ -738,7 +773,7 @@ key "KasimovStewart2005"
 \end_inset
 
 , which are constant in the steady-state wave through the reaction zone,
- the ZND solution is given then by:
+ the ZND solution is given by:
 \begin_inset Formula 
 \begin{equation}
 \bar{v}=\frac{\gamma}{\gamma+1}\frac{\bar{P}}{\bar{M}^{2}}(1-\delta),\quad\bar{p}=\bar{P}-\bar{M}^{2}\bar{v},\quad\bar{U}=\bar{M}\bar{v},\label{eq:steady-state}
@@ -850,7 +885,7 @@ and velocity
 \begin_inset Formula $\DCJ$
 \end_inset
 
- is called Chapman–Jouguet velocity, or equilibrium detonation velocity,
+ is called the Chapman–Jouguet velocity, or equilibrium detonation velocity,
  as the sonic condition is satisfied at the point of chemical equilibrium
  
 \begin_inset Formula $\lambda=1$
@@ -889,21 +924,22 @@ Next, we introduce the vector of state variables
 \begin_inset Formula $\vec{z}=(\rho,u,p,\lambda)^{\mathrm{T}}$
 \end_inset
 
- and linearize it as well as the shock speed as 
-\begin_inset Formula $\vec{z}(x,t)=\vec{\bar{z}}(x)+\epsilon\vec{z}'(x,t)$
+ and linearize it in addition to the detonation velocity as 
+\begin_inset Formula 
+\begin{align*}
+\vec{z}(x,t) & =\vec{\bar{z}}(x)+\epsilon\vec{z}'(x,t),\\
+D(t) & =\bar{D}+\epsilon\psi'(t),
+\end{align*}
+
 \end_inset
 
-, 
-\begin_inset Formula $D(t)=\bar{D}+\epsilon\psi'(t)$
-\end_inset
-
-, with 
+with 
 \begin_inset Formula $0<\epsilon\ll1$
 \end_inset
 
 , the bar denoting the steady-state, and the prime denoting the perturbation
  amplitudes.
- The reader can find all the details of the linearization in Appendix
+ The reader will find all details of the linearization in the Appendix
 \begin_inset space ~
 \end_inset
 
@@ -937,7 +973,7 @@ reference "eq:e1d:reaction"
 
 \end_inset
 
-where 
+with 
 \begin_inset Formula 
 \begin{equation}
 A=\begin{bmatrix}\bar{U} & \bar{\rho} & 0 & 0\\
@@ -953,16 +989,16 @@ C(\bar{\rho}\bar{\omega}_{\rho}+\bar{\omega}) & \od{\bar{p}}x & \gamma\od{\bar{u
 
 \end_inset
 
-
+where 
 \begin_inset Formula $C=-(\gamma-1)Q$
 \end_inset
 
-, and subscripts 
+ and subscripts 
 \begin_inset Formula $\rho$
 \end_inset
 
 , 
-\begin_inset Formula $p$
+\begin_inset Formula $p,$
 \end_inset
 
  and 
@@ -1033,8 +1069,8 @@ with all the spatially-dependent quantities on the right-hand sides of
 \begin_inset Formula $A'_{\text{s}}$
 \end_inset
 
- evaluated at the shock, and the linearization of the Rankine–Hugoniot condition
-s
+ evaluated at the shock.
+ The linearization of the Rankine–Hugoniot conditions
 \begin_inset space ~
 \end_inset
 
@@ -1068,7 +1104,7 @@ name "sec:e1d:algo"
 \end_layout
 
 \begin_layout Subsection
-Computational domain and integration of ZND solution
+Computational domain and integration of the ZND solution
 \end_layout
 
 \begin_layout Standard
@@ -1161,7 +1197,11 @@ where
 \begin_inset Formula $k$
 \end_inset
 
- is computed from 
+ is computed from Eq.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:k"
@@ -1284,7 +1324,7 @@ reference "eq:delta"
 
 ) via the numerical integrator VODE 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "Brown1989"
 
 \end_inset
@@ -1383,8 +1423,8 @@ reference "shock-evolution-equation"
 
 , respectively.
  In these expressions, the spatial derivatives are evaluated using finite-differ
-ence formulas as given below, and then the system is evolved in time over
- one time step 
+ence formulas as given below, and subsequently the system is evolved in
+ time over one time step 
 \begin_inset Formula $\DeltaT$
 \end_inset
 
@@ -1441,7 +1481,8 @@ where subscripts
 \end_inset
 
 .
- At this grid point, the Taylor expansion gives a fifth-order formula 
+ At this grid point, the Taylor expansion gives the fifth-order formula
+ 
 \begin_inset Formula 
 \begin{equation}
 \left.z'_{x}\right|_{N-2}=\frac{-2z'_{N-5}+15z'_{N-4}-60z'_{N-3}+20z'_{N-2}+30z'_{N-1}-3z'_{N}}{60\DeltaX}.\label{eq:numalg:z_x-N-2}
@@ -1524,7 +1565,7 @@ key "HenrickEtAl2006"
 
 \end_inset
 
- in a shock-fitting algorithm.
+ in their shock-fitting algorithm.
 \end_layout
 
 \begin_layout Standard
@@ -1548,7 +1589,7 @@ where
 \begin_inset Formula $i=\{N-2,N-1,N\}$
 \end_inset
 
-, 
+ and 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -1580,8 +1621,8 @@ We found that a simple evaluation of
 \begin_inset Formula $L$
 \end_inset
 
- was not enough to guarantee numerical stability of simulations, hence the
- use of the Lax–Friedrichs flux in 
+ was not sufficient to guarantee numerical stability of simulations, hence
+ the use of the Lax–Friedrichs flux in 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:lf-flux"
@@ -1636,7 +1677,7 @@ reference "eq:numalg:sheveq"
 
 ) is evolved in time using the adaptive-step time integrator DOPRI5 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "HairerEtAl1993"
 
 \end_inset
@@ -1730,7 +1771,7 @@ We also need to provide initial conditions for
 \end_inset
 
  is specified.
- Then, the initial value of 
+ Subsequently, the initial value of 
 \begin_inset Formula $M'$
 \end_inset
 
@@ -1747,7 +1788,7 @@ We also need to provide initial conditions for
 \begin_inset Formula $\uS'$
 \end_inset
 
-, 
+, and 
 \begin_inset Formula $\pS'$
 \end_inset
 
@@ -1792,30 +1833,33 @@ reference "eq:numalg:sheveq"
 
 \end_inset
 
-), boundary conditions are imposed as follows.
- At the shock (grid point 
+), boundary conditions are imposed as follows: at the shock (grid point
+ 
 \begin_inset Formula $i=N$
 \end_inset
 
-), boundary conditions are specified using 
+), boundary conditions are specified using Eq.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "RH-conditions-linearized"
 
 \end_inset
 
-.
- At the downstream (left) end, no boundary condition should be specified
+; at the downstream (left) end, no boundary condition should be specified
  for the system, however, boundary treatment is necessary for the finite-differe
-nce computations (
+nce computations 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "Laney1998"
 
 \end_inset
 
-).
- This is done by the zeroth-order extrapolation: 
+.
+ This is computed by the zeroth-order extrapolation: 
 \begin_inset Formula 
 \[
 z_{i}'=z_{0}'\text{ for }i\in\{-3,-2,-1\},
@@ -1840,23 +1884,27 @@ reference "eq:numalg:upwind5-right"
 \end_inset
 
 ) three ghost points are needed.
- Such a boundary treatment formally is only first-order accurate and introduces
+ This boundary treatment formally is only first-order accurate and introduces
  spurious waves reflected from the downstream boundary.
  However, for sufficiently large computational domains, 
 \begin_inset Formula $C_{+}-$
 \end_inset
 
-characteristics moving with speed 
+characteristics (moving with speed 
 \begin_inset Formula $\bar{u}-\bar{D}+\bar{c}$
 \end_inset
 
- are almost vertical near this boundary, and, therefore, this spurious acoustic
- noise does not reach the shock and does not corrupt the time series of
- 
+) are almost vertical near this boundary, and, therefore, these spurious
+ waves do not reach the shock and, hence, do not corrupt the time series
+ of 
 \begin_inset Formula $\psi'$
 \end_inset
 
-.
+, for the values of 
+\begin_inset Formula $\TFinal$
+\end_inset
+
+ used in the present work.
 \end_layout
 
 \begin_layout Subsection
@@ -1885,7 +1933,7 @@ where
 \begin_inset Formula $n$
 \end_inset
 
- is the index of the last time step and values 
+ is the index of the final time step and values 
 \begin_inset Formula $\psi'_{k}$
 \end_inset
 
@@ -1910,22 +1958,36 @@ where
 
 \begin_layout Standard
 To process such a time series, an efficient and robust algorithm is required
- such that the stability spectrum is computed as accurately as possible.
+ so that the stability spectrum is computed as accurately as possible.
  At the heart of our postprocessing algorithm is the dynamic mode decomposition
  (DMD), which was developed in recent years in the fluid-dynamics community
- for analysis of the flows in numerical simulations and physical experiments.
+ for the analysis of the flows in numerical simulations and physical experiments.
  The DMD is a powerful method that is able to extract spectral information
  from complex data coming from different fluid-dynamic systems.
  It was introduced in 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "SchmidSesterhenn2008,RowleyEtAl2009,Schmid2010"
+LatexCommand citet
+key "SchmidSesterhenn2008"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "RowleyEtAl2009"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schmid2010"
 
 \end_inset
 
 .
- The basic introduction to DMD as well as several examples of its use in
- different fields can be found in the book by 
+ The basic introduction to DMD in addition to several examples of its use
+ in different fields can be found in 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "KutzEtAl2016Book"
@@ -1947,12 +2009,12 @@ key "RowleyDawson2017"
 \end_inset
 
 , carry information about a single frequency, similar to normal modes.
- One of the important features of the method is that although DMD was developed
+ One of the important features of the method is that, although DMD was developed
  and used originally by fluid dynamicists, the method is data-driven and
  is not coupled to the equations governing fluid flows.
  As such, it finds applications in many other fields besides fluid mechanics
  and can be used in an equation-free manner.
- Modern applications of these method include numerous fields that rely heavily
+ Modern applications of this method include numerous fields that rely heavily
  on data analysis such as atmospheric research
 \begin_inset space ~
 \end_inset
@@ -1992,7 +2054,7 @@ key "Schmid2011,SchmidEtAl2011,TissotCordierBenardNoack2014,NoackEtAl2016,Stanki
 
 \end_inset
 
-, and many others.
+, etc.
  One can find also an application of DMD to detonation analysis 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -2017,7 +2079,7 @@ key "ChenEtAl2012"
  DMD of any data is unique.
  In 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Wynn2013"
 
 \end_inset
@@ -2025,9 +2087,9 @@ key "Wynn2013"
 , the authors generalized DMD to optimal mode decomposition and showed that
  for a noise-free linear system DMD correctly identifies system eigenvalues
  and, hence, is analogous to normal-mode analysis.
- Tu with co-authors in 
+ 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "TuEtAl2014"
 
 \end_inset
@@ -2046,14 +2108,14 @@ rich
  for the DMD to extract dynamic modes correctly.
  In 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "JovanovicEtAl2014"
 
 \end_inset
 
-, a sparsity-promoting version of DMD algorithm is proposed to achieve a
- balance between the quality of the extracted dynamics and the number of
- modes required to represent the dynamics.
+, a sparsity-promoting version of the DMD algorithm was proposed to achieve
+ a balance between the quality of the extracted dynamics and the number
+ of modes required to represent the dynamics.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2069,7 +2131,7 @@ on-the-fly
 \begin_inset Quotes erd
 \end_inset
 
- for large set of streaming data.
+ for large sets of streaming data.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2078,8 +2140,7 @@ key "SayadiSchmidRichecoeurDurox2015"
 \end_inset
 
  developed a modification of DMD for the parameter-driven bifurcation analysis
- of thermoacoustically unstable systems.
- 
+ of thermoacoustically unstable systems, while 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "BruntonEtAl2017"
@@ -2102,9 +2163,9 @@ key "DukeEtAl2011"
 
  considered synthetic wave shapes and carried out a detailed study of errors
  in growth rates and frequencies under varying parameters.
- The paper 
+ 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Bagheri_2014"
 
 \end_inset
@@ -2112,7 +2173,7 @@ key "Bagheri_2014"
  demonstrated that output DMD eigenvalues are damped in the presence of
  noise, while 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Dawson2016"
 
 \end_inset
@@ -2121,15 +2182,22 @@ key "Dawson2016"
  effect.
  In 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "KouZhang2017,ZhangEtAl2017"
+LatexCommand citet
+key "KouZhang2017"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ZhangEtAl2017"
 
 \end_inset
 
 , criteria for choosing the rank of a low-order approximation are proposed,
  with 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "KouZhang2017"
 
 \end_inset
@@ -2137,13 +2205,14 @@ key "KouZhang2017"
  suggesting to determine relevant modes using time-dependent amplitudes,
  while 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "ZhangEtAl2017"
 
 \end_inset
 
- proposing to choose mode eigenfunctions on the basis of how good they approxima
-te the eigenfuncation of the corresponding Koopman operator 
+ were proposing to choose the mode eigenfunctions on the basis of how good
+ they approximate the eigenfunctions of the corresponding Koopman operator
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Koopman1931,BudisicEtAl2012,Mezic2013,Williams_2015"
@@ -2152,7 +2221,7 @@ key "Koopman1931,BudisicEtAl2012,Mezic2013,Williams_2015"
 
 , which is an infinite-dimensional linear operator that can be posed for
  a nonlinear dynamical system and whose eigenspectrum serves as an analog
- of normal modes of linear systems and, hence, is similar to DMD spectrum.
+ of normal modes of linear systems and, hence, is similar to the DMD spectrum.
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -2166,13 +2235,13 @@ key "Mezic2005,RowleyEtAl2009"
 \begin_layout Standard
 We note however, that the DMD algorithm does not necessarily answer the
  question of what the rank of low-dimensional approximation should be, which
- is to date is an unsolved problem
+ to date is an unsolved problem
 \begin_inset space ~
 \end_inset
 
 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "ZhangEtAl2017"
 
 \end_inset
@@ -2183,18 +2252,17 @@ key "ZhangEtAl2017"
 \end_layout
 
 \begin_layout Standard
-The remainder of this section proceeds as follows.
- First, for completeness, we give a brief generic description of DMD.
- Then, we describe how we form input data for the DMD algorithm from the
- time series 
+The remainder of this section proceeds as follows: first, for completeness,
+ we give a brief generic description of DMD; then, we describe how we form
+ input data for the DMD algorithm from the time series 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:postproc:time-series"
 
 \end_inset
 
-, and explain how we determine the best low-rank approximation.
- Finally, we apply the algorithm to synthetic data to assess its performance.
+, and explain how we determine the best low-rank approximation; finally,
+ we apply the algorithm to synthetic data to assess its performance.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2223,7 +2291,7 @@ where
 \begin_inset Formula $\vec{x}_{i}$
 \end_inset
 
- being a snapshot of the system state.
+ is a snapshot of the system state.
  Assume also that snapshots are taken at uniform time intervals 
 \begin_inset Formula $\DeltaT$
 \end_inset
@@ -2280,8 +2348,8 @@ such that
 \end_inset
 
 .
- Although the problem is formally solved now, we cannot just do the eigendecompo
-sition of 
+ Although the problem is formally solved now, we cannot simply perform the
+ eigendecomposition of 
 \begin_inset Formula $\mat A$
 \end_inset
 
@@ -2437,12 +2505,11 @@ where
 \begin_inset Formula $\mat{\Lambda}=\diag(\lambda_{1},\dots,\lambda_{r})$
 \end_inset
 
- is the matrix of eigenvalues, 
+ is the matrix of eigenvalues and 
 \begin_inset Formula $\mat W$
 \end_inset
 
  the matrix of eigenvectors.
- 
 \end_layout
 
 \begin_layout Enumerate
@@ -2472,7 +2539,7 @@ Find truncated eigendecomposition of
 \end_inset
 
 ).
- Matrix of eigenvectors 
+ The matrix of eigenvectors 
 \begin_inset Formula $\mat{\Phi}$
 \end_inset
 
@@ -2492,8 +2559,8 @@ with
 \begin_inset Formula $\mat{\Phi}$
 \end_inset
 
- being a rectangular matrix containing exact DMD modes as was introduced
- in 
+ being a rectangular matrix containing exact DMD modes as introduced in
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "TuEtAl2014"
@@ -2598,14 +2665,14 @@ Application of DMD to the time series of detonation velocity
 \end_layout
 
 \begin_layout Standard
-The DMD as it was introduced in 
+The DMD, as introduced in 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Schmid2010"
 
 \end_inset
 
- assumes that each snapshot in a time series is a high-dimensional vector
+, assumes that each snapshot in a time series is a high-dimensional vector
  coming, for example, from a solution variable on a numerical grid at a
  given time step in simulations or from a large number of flow sensors in
  experiments.
@@ -2637,7 +2704,7 @@ key "TuEtAl2014"
 
 \end_inset
 
-, one-dimensional time series yields the matrix 
+, a one-dimensional time series yields the matrix 
 \begin_inset Formula $\tilde{\mat A}$
 \end_inset
 
@@ -2645,8 +2712,8 @@ key "TuEtAl2014"
 \begin_inset Formula $1\times1$
 \end_inset
 
-, therefore it has only one real eigenvalue, which can only capture an exponenti
-al growth or decay, but not oscillations.
+, therefore it has only one real eigenvalue, which can capture exponential
+ growth or decay, but not oscillations.
  To overcome this rank-deficiency problem, we build an input Hankel matrix
  
 \begin_inset Formula $\mat Z$
@@ -2696,7 +2763,7 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \end_inset
 
  is used.
- Then, the input matrices 
+ The input matrices 
 \begin_inset Formula $\mat X$
 \end_inset
 
@@ -2723,7 +2790,7 @@ reference "eq:algorithm:postproc:input-matrices"
 \end_layout
 
 \begin_layout Standard
-As time series of 
+As the time series of 
 \begin_inset Formula $\psi'$
 \end_inset
 
@@ -2740,7 +2807,11 @@ As time series of
 \begin_inset Formula $\mat V$
 \end_inset
 
- from 
+ from Eq.
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:postproc:svd"
@@ -2764,21 +2835,21 @@ reference "eq:algorithm:postproc:svd"
 a priori
 \emph default
 .
- However, if the rank choice is done by a machine, there is always a possibility
- that the value of 
+ However, if the rank choice is performed by a machine, there is always
+ a possibility that the value of 
 \begin_inset Formula $r$
 \end_inset
 
  will be larger than the rank of the ideal low-rank approximation, hence,
- the spurious eigenvalues will be present in the output of DMD.
- The other possibility, with even more severe consequences, if, 
+ spurious eigenvalues will be present in the output of DMD.
+ The other possibility is that 
 \begin_inset Formula $r$
 \end_inset
 
  is smaller than the ideal rank, then, instead of a complex-conjugate pair
  of eigenvalues only one real eigenvalue could be found, which means, for
  a real-valued input, that instead of having oscillatory exponential mode,
- DMD finds purely exponentially growing or decaying mode.
+ DMD finds a purely exponentially growing or decaying mode.
  As we aim to apply DMD in Section
 \begin_inset space ~
 \end_inset
@@ -2808,8 +2879,8 @@ reference "eq:algorithm:postproc:time-series"
 \end_inset
 
  must be cut off as it is necessary to exclude determining DMD modes from
- nonmodal behavior occurring due to the relaxation of the perturbation solution
- from volatile initial conditions 
+ nonnormal behavior occurring due to the relaxation of the perturbation
+ solution from volatile initial conditions 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:ic"
@@ -2818,7 +2889,7 @@ reference "eq:algorithm:ic"
 
  to a superposition of modes.
  This cutoff time depends on the length of the time series.
- Our simulations run by default to final time 
+ Our simulations run by default to a final time 
 \begin_inset Formula $\TFinal=10$
 \end_inset
 
@@ -2884,8 +2955,8 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \begin_inset Formula $\mat X$
 \end_inset
 
- are determined by the following procedure.
- We consider all singular values 
+ are determined by the following procedure: we consider all singular values
+ 
 \begin_inset Formula $\sigma_{k}$
 \end_inset
 
@@ -2909,8 +2980,7 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \begin_inset Formula $\sigma_{K+1}<10^{-10}$
 \end_inset
 
-.
- Then if 
+; then if 
 \begin_inset Formula $0.95\leq\sigma_{k+1}/\sigma_{k}\leq1$
 \end_inset
 
@@ -2948,17 +3018,16 @@ reference "eq:algorithm:postproc:input-hankel-matrix"
 \begin_inset Formula $\sigma_{k+1}$
 \end_inset
 
- might be a spurious singular value due to noise in the input data.
- For each rank from the list of all possible ranks we determine DMD decompositio
-n and compute the fit and residual errors 
+ might be a spurious singular value due to noise in the input data; for
+ each rank from the list of all possible ranks we determine DMD decomposition
+ and compute the fit and residual errors 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "eq:algorithm:postproc:errors"
 
 \end_inset
 
-.
- Then we consider two smallest fit errors 
+; then we consider two smallest fit errors 
 \begin_inset Formula $e_{\text{DMD},1}$
 \end_inset
 
@@ -2972,9 +3041,8 @@ reference "eq:algorithm:postproc:errors"
 
 , then we also take into account corresponding residual errors, so that
  the DMD decomposition corresponding to the smallest residual error is considere
-d the best.
- Otherwise, the best one corresponds to the decomposition with the fit error
- 
+d the best; otherwise, the best one corresponds to the decomposition with
+ the fit error 
 \begin_inset Formula $e_{\text{DMD},1}$
 \end_inset
 
@@ -3012,8 +3080,8 @@ Testing the method with synthetic data
 \end_layout
 
 \begin_layout Standard
-Now we apply the postprocessing algorithm to two synthetic time series chosen
- to represent typical unstable behavior of the solutions of system (
+We apply the postprocessing algorithm to two synthetic time series chosen
+ to represent typical unstable behavior of the solutions of the system (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:numalg:gov"
@@ -3036,7 +3104,7 @@ reference "eq:numalg:sheveq"
 Example 1.
 
 \series default
- Time series has a single exponentially growing and oscillating mode,
+ The time series has a single exponentially growing and oscillating mode,
 \series bold
  
 \series default
@@ -3069,8 +3137,8 @@ where
 Example 2.
 
 \series default
- Time series is a superposition of five exponentially growing and oscillating
- modes of different growth rates and frequencies, 
+ The time series is a superposition of five exponentially growing and oscillatin
+g modes of different growth rates and frequencies, 
 \begin_inset Formula 
 \begin{equation}
 y_{2}(t)=\sum_{i=0}^{4}A\exp(\alpha_{\text{re},i}t)\sin(\alpha_{\text{im},i}t),\label{eq:algorithm:postproc:example-2}
@@ -3087,11 +3155,11 @@ where
 \end_inset
 
 .
- For both time series, the amplitude of each mode is taken to be 
+ For both time series the amplitude of each mode is taken to be 
 \begin_inset Formula $10^{-10}$
 \end_inset
 
-, and the time step is 
+ and the time step is 
 \begin_inset Formula $\DeltaT=0.01$
 \end_inset
 
@@ -3102,7 +3170,7 @@ where
 \end_inset
 
 , mean zero, and variance unity such that the noise is proportional to the
- signal: 
+ signal
 \begin_inset Formula 
 \begin{equation}
 y=y_{\text{clean}}(1+\text{noise}),
@@ -3166,9 +3234,9 @@ reference "tab:algorithm:postproc:dmd-synthetic-data"
 
 \end_inset
 
-, we show the obtained modes along with the relative errors.
- As can be seen, the algorithm was able to recover all the modes present
- in the time series.
+ we show the obtained modes along with the relative errors.
+ Note that the algorithm was able to recover all the modes present in the
+ time series.
  We find that in general 
 \begin_inset Formula $e_{\text{re}}$
 \end_inset
@@ -3178,7 +3246,7 @@ reference "tab:algorithm:postproc:dmd-synthetic-data"
 \end_inset
 
 .
- Nevertheless, the algorithm was able to recover in the Example 2 the slowest
+ Nevertheless, in the Example 2, the algorithm was able to recover the slowest
  growing mode (with growth rate 
 \begin_inset Formula $0.01$
 \end_inset
@@ -3278,9 +3346,10 @@ As the Fourier transform and power spectra are frequently used in analysis
  the present approach.
  Applying the fast Fourier transform (FFT) to the time series, one can determine
  approximate values of frequencies of the modes via the power spectrum and
- then use nonlinear least-squares solver to find growth rates of the modes.
- However note that for exponentially growing or decaying oscillations, FFT
- analysis may be too inaccurate.
+ then use the nonlinear least-squares solver to find growth rates of the
+ modes.
+ However, note that for exponentially growing or decaying oscillations,
+ FFT analysis may be too inaccurate.
  To illustrate, Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3297,9 +3366,8 @@ reference "eq:algorithm:postproc:example-2"
 
  and its power spectra generated via FFT and DMD.
  While the DMD spectrum is sparse and is in excellent agreement with the
- time series, the FFT spectrum is seen to be essentially flat and dense
- in the sense that it is hard to find the particular modes present in the
- time series.
+ time series, the FFT spectrum is essentially flat and dense in the sense
+ that it is hard to find the particular modes present in the time series.
 \end_layout
 
 \begin_layout Standard
@@ -3375,12 +3443,12 @@ The algorithm for extracting growth rates and frequencies of unstable modes
 \begin_inset Formula $\mat X$
 \end_inset
 
-) is carried out only once.
+) is performed only once.
  Our postprocessing code is based on the Intel Math Kernel Library, which
  contains optimized routines for numerical linear algebra.
  The time that it takes to postprocess our data varies as it is a function
  of the length of the time series and the number of possible ranks.
- The typical time on a workstation with a Xeon processor is on the order
+ The typical time on a workstation with a Xeon processor is in the order
  of a minute.
  A reader familiar with the DMD may question why we apply the algorithm
  to the long time series
