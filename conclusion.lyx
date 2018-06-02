@@ -114,12 +114,12 @@ Summary
 \end_layout
 
 \begin_layout Standard
-In this thesis, we developed and implemented a new method to study stability
+In this thesis, we developed and implemented a new method to study the stability
  of steady solutions of detonation models.
  Our approach is based on the linearization of the governing equations written
  in a shock-attached frame and numerical solution of the linearized problem.
- Resultant time series of detonation velocity are postprocessed using novel
- technique of dynamic mode decomposition, which is aimed at identification
+ Resultant time series of detonation velocity are postprocessed using a
+ novel technique of dynamic mode decomposition, which is aimed at identification
  of modes of the system that grow or decay exponentially in time with fixed
  frequencies, and these modes are identical to the normal modes in linearized
  systems.
@@ -149,7 +149,7 @@ detonation model based on the reactive Euler equations with one irreversible
 \begin_inset Formula $\gamma=1.2$
 \end_inset
 
- also have an agreement with the results of normal-mode approach.
+ also have an agreement with the results of the normal-mode approach.
  Additionally, we have studied neutral stability boundaries for other values
  of 
 \begin_inset Formula $\gamma$
@@ -159,7 +159,7 @@ detonation model based on the reactive Euler equations with one irreversible
 \begin_inset Formula $Q$
 \end_inset
 
- critical value of 
+ the critical value of 
 \begin_inset Formula $E$
 \end_inset
 
@@ -167,11 +167,11 @@ detonation model based on the reactive Euler equations with one irreversible
 \begin_inset Formula $\gamma$
 \end_inset
 
- increases, while for large values of 
+ increases, while for, large values of 
 \begin_inset Formula $Q$
 \end_inset
 
- critical values of 
+, the critical values of 
 \begin_inset Formula $E$
 \end_inset
 
@@ -193,11 +193,11 @@ detonation model based on the reactive Euler equations with one irreversible
 \begin_inset Formula $\gamma$
 \end_inset
 
-, while for large values of 
+, while, for large values of 
 \begin_inset Formula $Q$
 \end_inset
 
- frequency increases as 
+, frequency increases as 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -215,34 +215,34 @@ detonation model based on the reactive Euler equations with one irreversible
 \begin_inset Formula $Q$
 \end_inset
 
- first overtone is more unstable than the fundamental mode, hence, neutral
- stability boundary is determined by a union of neutral stability curves
- for these two modes.
+ the first overtone is more unstable than the fundamental mode, hence, the
+ neutral stability boundary is determined by a union of neutral stability
+ curves for these two modes.
 \end_layout
 
 \begin_layout Standard
-The advantage of the present approach over traditional normal-mode approach
+The advantage of the present approach over the traditional normal-mode approach
  is that analytic complications of formulating boundary-value problem, namely,
  formulation of the boundary condition at the end of the reaction zone,
  are replaced by straightforward linearization with simple outflow boundary
  condition.
- However, difficulty arises in postprocessing step as time series of detonation
- velocity inevitably contain noise due to numerical approximation and hence
- it may become challenging to identify all normal modes correctly.
+ However, difficulty arises in the postprocessing step as time series of
+ detonation velocity inevitably contain noise due to numerical approximation,
+ hence, it may become challenging to identify all normal modes correctly.
 \end_layout
 
 \begin_layout Standard
-Having developed and well-tested approach to linear stability analysis,
- we have considered an extension of the model based on reactive Euler equations
- with one-step kinetics, to the model that includes two reactions: one is
- exothermic and another one is endothermic.
+Having developed and tested this approach to linear stability analysis,
+ we have considered an extension of the model based on the reactive Euler
+ equations with one-step kinetics, to the model that includes two reactions:
+ one is exothermic and one is endothermic.
  Analysis of the ZND solutions for this model showed that there are two
- types of the admissible ZND solutions, which are the same for the region
- between the embedded sonic locus and the leading shock, and are different
- between the end of the reaction zone and the sonic locus.
+ types of admissible ZND solutions, which are the same for the region between
+ the embedded sonic locus and the leading shock, and are different between
+ the end of the reaction zone and the sonic locus.
  We have studied the effects of endothermicity on stability and have shown
- that as endothermicity increases, more and more unstable modes are excited
- in the stability spectrum, hence, rendering base ZND flow unstable.
+ that, as endothermicity increases, more and more unstable modes are excited
+ in the stability spectrum, rendering the base ZND flow unstable.
  We have also shown that stability spectrum is independent of the postsonic
  part of the ZND solution, which serves as a demonstration of the postulate
  that intrinsic stability of detonations is determined solely by flow between
@@ -250,9 +250,9 @@ Having developed and well-tested approach to linear stability analysis,
 \end_layout
 
 \begin_layout Standard
-Using particular reaction-rate expression obtained in the asymptotic theory
- of detonations, we analyze the Fickett's detonation analogue both for linear
- and nonlinear stability.
+Using the particular reaction-rate expression obtained in the asymptotic
+ theory of detonations, we analyze the Fickett's detonation analogue both
+ for linear and nonlinear stability.
  We have shown that this model demonstrates rich nonlinear dynamics with
  multiple bifurcations and chaotic behavior.
 \end_layout
@@ -309,7 +309,7 @@ key "ShortEtAl2006"
 
 \begin_layout Enumerate
 Application of the method to analysis of detonation waves in different geometrie
-s such as cylindrical detonations 
+s, such as cylindrical detonations 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "WescottEtAl2004,Kasimov2014"
@@ -344,7 +344,7 @@ key "ShortStewart1998,Stewart2006"
 
 \begin_layout Enumerate
 Thorough investigation of nonlinear dynamics of the Fickett's model with
- reaction-rate expression
+ the reaction-rate expression
 \begin_inset space ~
 \end_inset
 
@@ -373,7 +373,7 @@ key "Pareschi2005,ZharovskyEtAl2015,BoscarinoPareschi2017"
 
 ) to analyze sensitivity of the nonlinear dynamics to numerical methods
  and to determine which schemes are the most robust in terms of preservation
- of the solutions invariants 
+ of the solution invariants 
 \begin_inset Formula $(u>0$
 \end_inset
 
