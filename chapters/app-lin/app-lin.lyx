@@ -234,11 +234,11 @@ p(x,t) & =\bar{p}(x)+\epsilon p'(x,t),\\
 
 \end_inset
 
-and dependent function 
+and the dependent function 
 \begin_inset Formula $\omega=\omega(\rho,p,\lambda)$
 \end_inset
 
- is expanded as 
+ is expanded using Taylor series as 
 \begin_inset Formula $\bar{\omega}+\epsilon\omega'=\bar{\omega}+\epsilon\left(\bar{\omega}_{\rho}\rho'+\bar{\omega}_{p}p'+\bar{\omega}_{\lambda}\lambda'\right)$
 \end_inset
 
@@ -246,7 +246,7 @@ and dependent function
 \end_layout
 
 \begin_layout Standard
-To linearize, we substitute expansions into the equations (
+To linearize, we substitute the expansions into the equations (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:app-lin:euler-mass-1"
@@ -368,7 +368,7 @@ reference "eq:app-lin:euler-reaction-1"
 \end_layout
 
 \begin_layout Standard
-Then the vector form 
+Subsequently the vector form 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "linearized-system"
@@ -390,7 +390,7 @@ reference "RH-conditions"
 
 \end_inset
 
- through Taylor-series expansion:
+ through the Taylor-series expansion:
 \begin_inset Formula 
 \begin{align*}
 \pS' & =\frac{4\vA\bar{M}}{\gamma+1}M',\quad U_{\shk}'=-\frac{4\gamma\pA}{\left(\gamma+1\right)\bar{M}^{3}}M',\quad v_{\shk}'=\bar{M}v_{\shk}'+\bar{v}_{\shk}M'.

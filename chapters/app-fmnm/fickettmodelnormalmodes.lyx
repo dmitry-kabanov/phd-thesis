@@ -153,11 +153,11 @@ and it is understood that matrices
 \begin_inset Formula $\mat C$
 \end_inset
 
- as well as vector 
+, as well as vector 
 \begin_inset Formula $\vec{b}$
 \end_inset
 
- implicitly depend on spatial coordinate 
+, implicitly depend on spatial coordinate 
 \begin_inset Formula $x$
 \end_inset
 
@@ -211,7 +211,7 @@ reference "eq:fsmnm:matrix-form:standard-form"
 
 \end_inset
 
- must be integrated using initial value
+ must be integrated using the initial value
 \begin_inset space ~
 \end_inset
 
@@ -222,8 +222,8 @@ reference "eq:fsmnm:stab:rh-cond"
 
 \end_inset
 
- towards the equilibrium of the reaction zone where condition derived in
- Section
+ towards the equilibrium of the reaction zone where the condition derived
+ in Section
 \begin_inset space ~
 \end_inset
 
@@ -236,7 +236,7 @@ reference "sec:ffmnm:deriv-bound"
 
  is imposed.
  This condition is called boundedness condition and it can be satisfied
- only for special values of 
+ only for specific values of 
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -260,17 +260,17 @@ Formulation of stability problem in steady reaction progress variable
 \end_layout
 
 \begin_layout Standard
-Formulation described in previous section is not very useful if one wants
- to apply adaptive ODE solver to the problem, otherwise ZND solution must
- be integrated from the shock for each internal step of the ODE solver.
- Here, we transform spatial coordinate to the coordinate of reaction progress
- variable 
+The formulation described in previous section is not very useful if one
+ wants to apply adaptive ODE solver to the problem, otherwise the ZND solution
+ must be integrated from the shock for each internal step of the ODE solver.
+ Here, we transform the spatial coordinate to the coordinate of the reaction
+ progress variable 
 \begin_inset Formula $s=\bar{\lambda}(x)$
 \end_inset
 
  of the ZND solution.
- Then ZND solution in this case is reduced to evaluation of several algebraic
- expressions entering the matrices 
+ Then the ZND solution in this case is reduced to the evaluation of several
+ algebraic expressions entering the matrices 
 \begin_inset Formula $\mat A$
 \end_inset
 
@@ -278,7 +278,7 @@ Formulation described in previous section is not very useful if one wants
 \begin_inset Formula $\mat C$
 \end_inset
 
- as well as vector 
+ in addition to vector 
 \begin_inset Formula $\vec{b}$
 \end_inset
 
@@ -347,13 +347,13 @@ In
 
 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "StewartKasimov2005"
 
 \end_inset
 
- the method of derivation of the boundedness condition is provided which
- is simpler than the method of
+ the method of derivation of the boundedness condition which is simpler
+ than the method of
 \begin_inset space ~
 \end_inset
 
@@ -364,9 +364,9 @@ key "LeeStewart1990"
 
 \end_inset
 
-.
+ is provided.
  We apply this method of derivation here to derive the boundedness condition
- for normal-mode analysis of the Fickett's detonation analog.
+ for the normal-mode analysis of the Fickett's detonation analog.
 \end_layout
 
 \begin_layout Standard
@@ -544,7 +544,7 @@ where all quantities are evaluated at the point
 
 \end_inset
 
- Therefore, linearized equation simplifies to
+ Therefore, the linearized equation simplifies to
 \begin_inset Formula 
 \[
 \bar{u}\od{u'}t+\sigma\od{\lambda'}t=\sigma\bar{\omega}_{\lambda}\lambda',
@@ -552,7 +552,7 @@ where all quantities are evaluated at the point
 
 \end_inset
 
-and, finally, we assume normal-modes form of the perturbations
+and, finally, we assume the normal-modes form of the perturbations
 \begin_inset Formula 
 \[
 \vec{z}'=\tilde{\vec{z}}(x)\exp\left(\alpha t\right),
@@ -633,7 +633,7 @@ To solve the problem numerically we use the shooting method.
 \begin_inset Formula $\text{tol}_{s}$
 \end_inset
 
- is a tolerance determining how close to the chemical equilibrium reaction
+ is a tolerance determining how close to the chemical equilibrium the reaction
  is.
 \end_layout
 
@@ -654,7 +654,7 @@ As
 \begin_inset Formula $\alpha$
 \end_inset
 
- in some range and solve initial-value problem
+ in some range, solve the initial-value problem
 \begin_inset space ~
 \end_inset
 
@@ -692,7 +692,7 @@ reference "eq:ffmnm:form:bound-cond"
 \begin_inset Formula $\log\left(1+\abs{H(\alpha)}\right)$
 \end_inset
 
- on this grid, we can find approximate location 
+ on this grid, we can find the approximate location 
 \begin_inset Formula $\alpha_{*}$
 \end_inset
 
@@ -705,7 +705,7 @@ reference "eq:ffmnm:form:bound-cond"
 \begin_inset Formula $\alpha_{*}$
 \end_inset
 
- as an initial guess, we solve optimization problem aiming to zero 
+ as an initial guess, we solve the optimization problem aiming to zero 
 \begin_inset Formula $\abs{H(\alpha)}$
 \end_inset
 
@@ -723,7 +723,7 @@ ode45
 \begin_inset Formula $10^{-10}$
 \end_inset
 
- to solve initial-value problem for system of ODEs and 
+ to solve the initial-value problem for system of ODEs and 
 \family typewriter
 fsolve
 \family default

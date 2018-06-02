@@ -104,8 +104,8 @@ name "chap:app-scales"
 \end_layout
 
 \begin_layout Standard
-Different researchers working in the detonation stability research rescale
- the governing equations in different ways with the most used being the
+Different researchers working in detonation stability research rescale the
+ governing equations in different ways with the most widely used being the
  upstream Erpenbeck scales
 \begin_inset space ~
 \end_inset
@@ -165,7 +165,7 @@ reference "tab:app-scales:scales"
 
  gives the definitions of nondimensional quantities in scales of Erpenbeck,
  Sharpe, and Lee and Stewart.
- In this table we use the following notation: 
+ In this table we use the following notation: the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -182,7 +182,7 @@ a
 \begin_inset Quotes erd
 \end_inset
 
- is a shortcut from 
+ is a short form of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -198,7 +198,7 @@ c
 \begin_inset Quotes erd
 \end_inset
 
- is a shortcut for 
+ is for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -220,12 +220,13 @@ characteristic
 \end_inset
 
  is a gas constant which is given by a ratio of the universal gas constant
- to molar mass of the species 
+ to the molar mass of the species 
 \begin_inset Formula $\text{A}$
 \end_inset
 
- or B (recall that we consider reaction in which molar mass of both species
- is the same, has gas constant is the same); dimensional quantities 
+ or B (recall that we consider a reaction in which the molar mass of both
+ species is the same, has gas constant is the same); dimensional quantities
+ 
 \begin_inset Formula $\tilde{E}_{\text{act}}$
 \end_inset
 
@@ -291,13 +292,7 @@ Quantity
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Erpenbeck1964"
-
-\end_inset
-
-
+Erpenbeck
 \end_layout
 
 \end_inset
@@ -306,13 +301,7 @@ key "Erpenbeck1964"
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Sharpe1997"
-
-\end_inset
-
-
+Sharpe
 \end_layout
 
 \end_inset
@@ -321,13 +310,7 @@ key "Sharpe1997"
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset CommandInset citation
-LatexCommand citet
-key "LeeStewart1990"
-
-\end_inset
-
-
+Lee & Stewart
 \end_layout
 
 \end_inset
@@ -921,7 +904,7 @@ Note on the Erpenbeck scales
 \end_layout
 
 \begin_layout Standard
-Computing quantities in Erpenbeck scales is done as follows.
+Computing quantities in Erpenbeck scales is performed as follows.
  Ambient quantities 
 \begin_inset Formula $\rhoA$
 \end_inset
@@ -1101,7 +1084,7 @@ to Sharpe scales
 \begin_inset Text
 
 \begin_layout Plain Layout
-to Lee&Stewart scales
+to Lee & Stewart scales
 \end_layout
 
 \end_inset
@@ -1413,7 +1396,7 @@ key "LeeStewart1990"
 \end_inset
 
 1 of their paper in these scales.
- As eigenvalues has dimension of 
+ As eigenvalues have dimension of 
 \begin_inset Formula $1/\text{time}$
 \end_inset
 
