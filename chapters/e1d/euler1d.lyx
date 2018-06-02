@@ -3618,16 +3618,18 @@ reference "fig:results:simple:znd-solutions"
 \end_inset
 
  correspond to stable or weakly unstable solutions.
- As can be seen from the steady-state profiles, the strongly unstable case
- occurs for the ZND solution approaching a square-wave shape with a spiky
- heat-release zone, while all the other cases correspond to relatively smooth
- profiles.
+ Note from the steady-state profiles that the strongly unstable case occurs
+ for the ZND solution approaching a square-wave shape with a spiky heat-release
+ zone, while all the other cases correspond to relatively smooth profiles.
  This effect of the steady-state solutions on their stability is well known.
  The limiting case of a true square-wave detonation with instantaneous heat
- release is known to possess a pathological spectrum with infinite number
+ release is known to possess a pathological spectrum with an infinite number
  of unstable eigenvalues with growth rates increasing unboundedly with the
- mode number (or its frequency).
- In other words, the square-wave stability problem is ill-posed.
+ mode number (or its frequency), i.
+\begin_inset space ~
+\end_inset
+
+e., the square-wave stability problem is ill-posed.
  However, with a finite-rate chemistry, the problem remains well-posed even
  though the sharper the heat-release rate the larger the number of unstable
  modes and the larger their growth rates and frequencies.
@@ -3816,7 +3818,7 @@ reference "tab:51-2017-04-09:raw-data-modes"
 \begin_inset Formula $E=40$
 \end_inset
 
-, the number of modes found is the same as shown on figure 6 of 
+, the number of modes found is the same as shown in figure 6 of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Sharpe1997"
@@ -3824,7 +3826,7 @@ key "Sharpe1997"
 \end_inset
 
 .
- The fundamental mode is purely exponential and is split in two branches
+ The fundamental mode is purely exponential and is split into two branches
  in agreement with 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -3832,7 +3834,7 @@ key "Sharpe1997"
 
 \end_inset
 
- where the author notes that the split occurs for 
+, where the author notes that the split occurs for 
 \begin_inset Formula $E\geq35.86$
 \end_inset
 
@@ -4137,7 +4139,7 @@ and
 \begin_inset Formula $\bar{\omega}_{\lambda}$
 \end_inset
 
- are given by formulae
+ are given by formulas
 \begin_inset space ~
 \end_inset
 
@@ -4265,7 +4267,7 @@ s
 \begin_inset Formula $Q=50$
 \end_inset
 
-, we take these parameters as well and vary activation energy 
+, we also take these parameters and vary the activation energy 
 \begin_inset Formula $E$
 \end_inset
 
@@ -4668,8 +4670,8 @@ Next, we use the present method to generate neutral stability curves in
 \end_inset
 
 .
- The corresponding algorithm is as follows.
- Assuming that instability monotonically increases as 
+ The corresponding algorithm is as follows: assuming that instability monotonica
+lly increases as 
 \begin_inset Formula $E$
 \end_inset
 
@@ -4687,7 +4689,7 @@ Next, we use the present method to generate neutral stability curves in
 \end_inset
 
 .
- Initial interval of search for 
+ The initial interval of search for 
 \begin_inset Formula $E$
 \end_inset
 
@@ -4701,7 +4703,6 @@ Next, we use the present method to generate neutral stability curves in
 \end_inset
 
 .
- 
 \begin_inset Float figure
 wide false
 sideways false
@@ -4789,7 +4790,7 @@ key "LeeStewart1990"
 \end_inset
 
 .
- It can be seen that there is a good agreement between the results.
+ It can be seen that there is good agreement between the results.
  In Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4797,7 +4798,7 @@ reference "fig:neutral-boundary-var-gamma"
 
 \end_inset
 
-(a), the neutral stability curves of mode 0 in 
+(a), the neutral stability curves of mode 0 in the 
 \begin_inset Formula $\left(E,Q\right)$
 \end_inset
 
@@ -4864,7 +4865,7 @@ reference "fig:neutral-boundary-var-gamma"
 \begin_inset Formula $Q$
 \end_inset
 
- frequency exhibits nonmonotonic behavior for all 
+, frequency exhibits nonmonotonic behavior for all 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -5122,16 +5123,16 @@ reference "fig:neutral-boundary-var-gamma"
 \begin_inset Formula $\gamma=1.1$
 \end_inset
 
- is more complicated as for 
+ is more complicated as, for 
 \begin_inset Formula $3.7\lessapprox Q\lessapprox36$
 \end_inset
 
- mode 1 is more unstable than the fundamental mode.
+, mode 1 is more unstable than the fundamental mode.
  A typical time series of the perturbation of detonation velocity 
 \begin_inset Formula $\psi'$
 \end_inset
 
- for such situation is shown in Figure 
+ for such a situation is shown in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:time-series-for-gamma=00003D1.1"
@@ -5151,7 +5152,7 @@ reference "fig:time-series-for-gamma=00003D1.1"
 \begin_inset Formula $-10^{-6}$
 \end_inset
 
-) while mode 1 grows with a rate about 
+) while mode 1 grows with a rate of approximately 
 \begin_inset Formula $0.03$
 \end_inset
 
@@ -5174,7 +5175,7 @@ reference "fig:neutral-curves-gamma=00003D1.1"
 \begin_inset Formula $\gamma=1.1$
 \end_inset
 
- was not mentioned before in the literature, to the best of our knowledge.
+ has not been mentioned before in the literature, to the best of our knowledge.
 \end_layout
 
 \begin_layout Subsection
@@ -5194,9 +5195,9 @@ reference "sec:e1d:algo"
 \begin_inset Formula $\psi'$
 \end_inset
 
- under grid refinement as the agreement of the observed order of accuracy
+ under grid refinement, as the agreement of the observed order of accuracy
  with the theoretical order of accuracy for solvers for partial differential
- equations is considered as a demonstration of the correctness of the solver
+ equations is considered a demonstration of the correctness of the solver
 \begin_inset space ~
 \end_inset
 
@@ -5208,7 +5209,7 @@ key "SalariKnupp2000,Roy2004,Roy2005"
 \end_inset
 
 .
- For this purpose, we run simulations with parameters 
+ For this purpose we run simulations with parameters 
 \begin_inset Formula $\gamma=1.2$
 \end_inset
 
@@ -5224,7 +5225,7 @@ key "SalariKnupp2000,Roy2004,Roy2005"
 \begin_inset Formula $\TFinal=20$
 \end_inset
 
- collecting the sequence of time series 
+, collecting the sequence of time series 
 \begin_inset Formula $\{\psi'\}_{i}$
 \end_inset
 
@@ -5237,7 +5238,7 @@ key "SalariKnupp2000,Roy2004,Roy2005"
 \end_inset
 
  from 20 to 2560 with the refinement factor 2.
- Then we measure relative errors between the time series
+ Subsequently we measure the relative errors between the time series
 \begin_inset Formula 
 \[
 E_{i}=\frac{\norm{\psi'_{i}-\psi'_{i-1}}_{\infty}}{\norm{\psi'_{i}}_{\infty}},\quad\text{for }i=2,\dots8,
@@ -5268,13 +5269,13 @@ reference "tab:results:verification"
 
 \end_inset
 
- displays the obtained results where one can see that the observed order
- of accuracy  
+ displays the obtained results; note that the observed order of accuracy
+  
 \begin_inset Formula $r_{\text{acc}}$
 \end_inset
 
- is indeed five as expected.
- The last line of the table (for 
+ is five as expected.
+ The final line of the table (for 
 \begin_inset Formula $\Nhrz=2560$
 \end_inset
 
@@ -5366,7 +5367,7 @@ In this chapter, we have introduced a novel method for linear stability
  on the reactive Euler equations with one-step chemistry.
  The method consists of two parts.
  First is a numerical solution of the time-dependent system linearized about
- base ZND solution by a shock-fitting numerical algorithm of high order
+ the base ZND solution by a shock-fitting numerical algorithm of high order
  of accuracy.
  The result of such numerical calculation is a time series of the perturbation
  of detonation velocity for the linear problem.
@@ -5380,18 +5381,18 @@ In this chapter, we have introduced a novel method for linear stability
 \end_layout
 
 \begin_layout Standard
-Being confident in the validity of the method, we extend the knowledge about
- the linear stability properties of the model by computing neutral stability
+Being confident in the validity of the method, we extended the knowledge
+ of the linear stability properties of the model by computing neutral stability
  boundaries for several values of specific-heats ratio 
 \begin_inset Formula $\gamma$
 \end_inset
 
- and determined that the neutral stability boundary for 
+ and discovered that the neutral stability boundary for 
 \begin_inset Formula $\gamma=1.1$
 \end_inset
 
  is determined by the composition of the first two modes, while for 
-\begin_inset Formula $\gamma=\{1.2,1.3,1.4\}$
+\begin_inset Formula $\gamma\in\{1.2,1.3,1.4\}$
 \end_inset
 
  it is determined only by the fundamental mode.
