@@ -59,7 +59,7 @@
 \use_package stmaryrd 1
 \use_package undertilde 1
 \cite_engine natbib
-\cite_engine_type numerical
+\cite_engine_type authoryear
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -2258,6 +2258,34 @@ key "Schmid2010"
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:e1d"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The main novelty of this work is that we combine together linearization
+ of the governing equations, their numerical solution, and postprocessing
+ via dynamic mode decomposition for analysis of detonation stability.
+ The idea of studying stability of hyperbolic systems via numerical solution
+ of the linearized equations, to the best of our knowledge, was first described
+ by
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Godlewski1999"
+
+\end_inset
+
+ and was applied in other areas of fluid dynamics, for example, in magnetohydrod
+ynamics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Samtaney2009"
 
 \end_inset
 
