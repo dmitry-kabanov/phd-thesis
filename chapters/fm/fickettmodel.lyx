@@ -402,7 +402,7 @@ In this section we define the governing equations, ambient and Rankine–Hugonio
 \end_layout
 
 \begin_layout Subsection
-Equations in a laboratory and shock-attached frames
+Equations in laboratory and shock-attached frames
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:fm:math-model:gov-eqn-lab"
@@ -3377,7 +3377,7 @@ Comparison of solutions of linearized and nonlinear problems
 \end_layout
 
 \begin_layout Subsection
-Migration of the linear spectrum as activation energy is varied
+Migration of linear spectrum as activation energy is varied
 \end_layout
 
 \begin_layout Standard
